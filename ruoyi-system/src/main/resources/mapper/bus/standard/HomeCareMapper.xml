@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bus.mapper.standard.HomeCareMapper">
+
+    <resultMap type="com.ruoyi.bus.domain.standard.HomeCare" id="homeCareResult">
+        <result property="id" column="id"/>
+        <result property="no" column="no"/>
+        <result property="type" column="type"/>
+        <result property="num" column="num"/>
+        <result property="hourPerDay" column="hourPerDay"/>
+        <result property="deposit" column="deposit"/>
+        <result property="money" column="money"/>
+
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectHomeCareVo">
+        select id, `no`, `type`, num, hourPerDay, deposit, money,
+               create_by, create_time, update_by, update_time, remark
+        from standard_home_care
+    </sql>
+
+    <select id="selectHomeCareList" parameterType="com.ruoyi.bus.domain.standard.HomeCare" resultMap="homeCareResult">
+        <include refid="selectHomeCareVo"/>
+        <where>
+        </where>
+    </select>
+
+    <select id="selectHomeCareByNo" parameterType="String" resultMap="homeCareResult">
+        <include refid="selectHomeCareVo"/>
+        where `no` = #{no}
+    </select>
+
+    <select id="selectHomeCareById" parameterType="Long" resultMap="homeCareResult">
+        <include refid="selectHomeCareVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertHomeCare" parameterType="com.ruoyi.bus.domain.standard.HomeCare" useGeneratedKeys="true" keyProperty="id">
+        insert into standard_home_care
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `no`, `type`, num, hourPerDay, deposit, money,
+            create_by, create_time, remark
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{no}, #{type}, #{num}, #{hourPerDay}, #{deposit}, #{money},
+            #{createBy}, sysdate(), #{remark}
+        </trim>
+    </insert>
+
+    <update id="updateHomeCare" parameterType="com.ruoyi.bus.domain.standard.HomeCare">
+        update standard_home_care
+        <trim prefix="SET" suffixOverrides=",">
+            `no` = #{no}, type = #{type}, num = #{num}, hourPerDay = #{hourPerDay},
+            deposit = #{deposit}, money = #{money},
+            update_by = #{updateBy}, update_time = sysdate(), remark = #{remark}
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHomeCareById" parameterType="Long">
+        delete from standard_home_care where id = #{id}
+    </delete>
+
+    <delete id="deleteHomeCareByIds" parameterType="Long">
+        delete from standard_home_care where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

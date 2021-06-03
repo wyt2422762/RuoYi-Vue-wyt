@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bus.mapper.NurseMapper">
+    
+    <resultMap type="com.ruoyi.bus.domain.Nurse" id="nurseResult">
+        <result property="nurseId"    column="nurseId"    />
+        <result property="deptId"    column="deptId"    />
+        <result property="name"    column="name"    />
+        <result property="age"    column="age"    />
+        <result property="sex"    column="sex"    />
+        <result property="phonenumber"    column="phonenumber"    />
+        <result property="workLevel"    column="workLevel"    />
+        <result property="workStatus"    column="workStatus"    />
+        <result property="avatar"    column="avatar"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="delFlag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+
+        <association property="dept"  column="dept_id" javaType="SysDept" resultMap="deptResult" />
+
+    </resultMap>
+
+    <resultMap id="deptResult" type="SysDept">
+        <id     property="deptId"   column="dept_id"     />
+        <result property="parentId" column="parent_id"   />
+        <result property="deptName" column="dept_name"   />
+        <result property="orderNum" column="order_num"   />
+        <result property="leader"   column="leader"      />
+        <result property="status"   column="dept_status" />
+    </resultMap>
+
+    <sql id="selectNurseVo">
+        select n.nurseId, n.deptId, n.`name`, n.age, n.sex, n.phonenumber, n.workLevel,
+               n.workStatus, n.avatar, n.status, n.delFlag, n.create_by, n.create_time,
+               n.update_by, n.update_time, n.remark,
+               d.dept_id, d.parent_id, d.dept_name, d.order_num, d.leader, d.status as dept_status
+        from nurse n
+        left join sys_dept d on n.deptId = d.dept_id
+    </sql>
+
+    <select id="selectNurseList" parameterType="com.ruoyi.bus.domain.Nurse" resultMap="nurseResult">
+        <include refid="selectNurseVo"/>
+        <where>  
+            <if test="deptId != null "> and n.deptId = #{deptId}</if>
+            <if test="name != null  and name != ''"> and n.`name` like concat('%', #{name}, '%')</if>
+            <if test="age != null "> and n.age = #{age}</if>
+            <if test="sex != null  and sex != ''"> and n.sex = #{sex}</if>
+            <if test="phonenumber != null  and phonenumber != ''"> and n.phonenumber = #{phonenumber}</if>
+            <if test="workLevel != null  and workLevel != ''"> and n.workLevel = #{workLevel}</if>
+            <if test="workStatus != null  and workStatus != ''"> and n.workStatus = #{workStatus}</if>
+            <if test="avatar != null  and avatar != ''"> and n.avatar = #{avatar}</if>
+            <if test="status != null  and status != ''"> and n.status = #{status}</if>
+            <if test="delFlag != null  and delFlag != ''"> and n.delFlag = #{delFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectNurseById" parameterType="Long" resultMap="nurseResult">
+        <include refid="selectNurseVo"/>
+        where n.nurseId = #{nurseId}
+    </select>
+
+    <select id="checkPhoneUnique" parameterType="String" resultMap="nurseResult">
+        select consumerId, phonenumber from nurse
+        where phonenumber = #{phonenumber} and delFlag = '0' limit 1
+    </select>
+        
+    <insert id="insertNurse" parameterType="com.ruoyi.bus.domain.Nurse" useGeneratedKeys="true" keyProperty="nurseId">
+        insert into nurse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            deptId, `name`, age, sex, phonenumber, workLevel, workStatus, avatar,
+            status, create_by, create_time, remark,
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{deptId}, #{name}, #{age}, #{sex}, #{phonenumber}, #{workLevel},
+            #{workStatus}, #{avatar}, #{status}, #{delFlag}, #{createBy},
+            sysdate(), #{remark}
+         </trim>
+    </insert>
+
+    <update id="updateNurse" parameterType="com.ruoyi.bus.domain.Nurse">
+        update nurse
+        <trim prefix="SET" suffixOverrides=",">
+            deptId = #{deptId}, `name` = #{name}, age = #{age}, sex = #{sex},
+            phonenumber = #{phonenumber}, workLevel = #{workLevel}, workStatus = #{workStatus},
+            avatar = #{avatar}, status = #{status}, update_by = #{updateBy},
+            update_time = sysdate(), remark = #{remark}
+        </trim>
+        where nurseId = #{nurseId}
+    </update>
+
+    <delete id="deleteNurseById" parameterType="Long">
+        update nurse set delFlag = '2' where nurseId = #{nurseId}
+    </delete>
+
+    <delete id="deleteNurseByIds" parameterType="String">
+        update nurse set delFlag = '2' where nurseId in
+        <foreach item="nurseId" collection="array" open="(" separator="," close=")">
+            #{nurseId}
+        </foreach>
+    </delete>
+
+    <update id="updateNurseStatus" parameterType="com.ruoyi.bus.domain.Nurse">
+        update nurse set `status` = #{status} where nurseId = #{nurseId}
+    </update>
+
+    <update id="updateNurseAvatar" parameterType="com.ruoyi.bus.domain.Nurse">
+        update nurse set avatar = #{avatar} where nurseId = #{nurseId}
+    </update>
+
+</mapper>

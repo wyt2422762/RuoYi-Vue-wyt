@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bus.mapper.ConsumerMapper">
+    <resultMap type="com.ruoyi.bus.domain.Consumer" id="consumerResult">
+        <id property="consumerId" column="consumerId"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="phonenumber" column="phonenumber"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="birth" column="birth"/>
+        <result property="addr" column="addr"/>
+        <result property="emergencyContactName" column="emergencyContactName"/>
+        <result property="emergencyContactPhone" column="emergencyContactPhone"/>
+        <result property="medicalHistoryNow" column="medicalHistoryNow"/>
+        <result property="medicalHistoryHis" column="medicalHistoryHis"/>
+        <result property="delFlag" column="delFlag"/>
+        <result property="status" column="status"/>
+
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectVo">
+        select c.consumerId,
+               c.name,
+               c.email,
+               c.phonenumber,
+               c.sex,
+               c.age,
+               c.birth,
+               c.addr,
+               c.emergencyContactName,
+               c.emergencyContactPhone,
+               c.medicalHistoryNow,
+               c.medicalHistoryHis,
+               c.avatar,
+               c.status,
+               c.delFlag,
+               c.create_by,
+               c.create_time,
+               c.update_by,
+               c.update_time,
+               c.remark
+        from consumer c
+    </sql>
+
+    <select id="selectConsumerList" parameterType="com.ruoyi.bus.domain.Consumer"
+            resultMap="consumerResult">
+        <include refid="selectVo"/>
+        where c.delFlag = '0'
+        <if test="name != null and name != ''">
+            AND c.name like concat('%', #{name}, '%')
+        </if>
+        <if test="status != null and status != ''">
+            AND c.status = #{status}
+        </if>
+        <if test="phonenumber != null and phonenumber != ''">
+            AND c.phonenumber like concat('%', #{phonenumber}, '%')
+        </if>
+        <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+            AND date_format(c.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+        </if>
+        <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+            AND date_format(c.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+        </if>
+    </select>
+
+    <select id="selectConsumerById" parameterType="Long" resultMap="consumerResult">
+        <include refid="selectVo"/>
+        <where>
+            c.consumerId = #{consumerId}
+        </where>
+    </select>
+
+    <select id="checkPhoneUnique" parameterType="String" resultMap="consumerResult">
+        select consumerId, phonenumber from consumer
+        where phonenumber = #{phonenumber} and delFlag = '0'
+        limit 1
+    </select>
+
+    <select id="checkEmailUnique" parameterType="String" resultMap="consumerResult">
+        select consumerId, email from consumer
+        where email = #{email} and delFlag = '0'
+        limit 1
+    </select>
+
+    <insert id="insertConsumer" parameterType="com.ruoyi.bus.domain.Consumer" useGeneratedKeys="true"
+            keyProperty="consumerId">
+        insert into consumer(
+            consumerId, `name`, email, phonenumber, sex, age, birth, addr,
+            emergencyContactName, emergencyContactPhone, medicalHistoryNow,
+            medicalHistoryHis, avatar, `status`, create_by, create_time,
+            remark)
+        values (
+            #{consumerId}, #{name}, #{email}, #{phonenumber}, #{sex}, #{age}, #{birth},
+            #{addr}, #{emergencyContactName}, #{emergencyContactPhone}, #{medicalHistoryNow},
+            #{medicalHistoryHis}, #{avatar}, #{status}, #{createBy},
+            sysdate(), #{remark}
+        )
+    </insert>
+
+    <update id="updateConsumer" parameterType="com.ruoyi.bus.domain.Consumer">
+        update consumer
+        <set>
+            `name` = #{name}, email = #{email}, phonenumber = #{phonenumber},
+            sex = #{sex}, age = #{age}, birth = #{birth}, addr = #{addr},
+            emergencyContactName = #{emergencyContactName}, emergencyContactPhone = #{emergencyContactPhone},
+            medicalHistoryNow = #{medicalHistoryNow}, medicalHistoryHis = #{medicalHistoryHis},
+            avatar = #{avatar}, `status` = #{status},
+            update_by = #{updateBy}, update_time = sysdate(), remark = #{remark}
+        </set>
+        <where>
+            consumerId = #{consumerId}
+        </where>
+    </update>
+
+    <update id="updateConsumerStatus" parameterType="com.ruoyi.bus.domain.Consumer">
+        update consumer set `status` = #{status} where consumerId = #{consumerId}
+    </update>
+
+    <update id="updateConsumerAvatar" parameterType="com.ruoyi.bus.domain.Consumer">
+        update consumer set avatar = #{avatar} where consumerId = #{consumerId}
+    </update>
+
+    <delete id="deleteConsumerById" parameterType="Long">
+        update consumer set delFlag = '2' where consumerId = #{consumerId}
+    </delete>
+
+    <delete id="deleteConsumerByIds" parameterType="Long">
+        update consumer set delFlag = '2' where consumerId in
+        <foreach collection="array" item="consumerId" open="(" separator="," close=")">
+            #{consumerId}
+        </foreach>
+    </delete>
+</mapper>
