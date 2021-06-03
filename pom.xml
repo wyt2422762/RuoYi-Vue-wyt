@@ -33,6 +33,9 @@
         <poi.version>4.1.2</poi.version>
         <velocity.version>1.7</velocity.version>
         <jwt.version>0.9.1</jwt.version>
+        <!-- 微信小程序相关 -->
+        <binarywang.version>4.0.0</binarywang.version>
+
     </properties>
 	
     <!-- 依赖声明 -->
@@ -118,6 +121,13 @@
                 <version>${swagger.version}</version>
             </dependency>
 
+            <!-- 微信小程序封装 -->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>${binarywang.version}</version>
+            </dependency>
+
             <!--io常用工具类 -->
             <dependency>
                 <groupId>commons-io</groupId>
@@ -200,6 +210,11 @@
                 <artifactId>ruoyi-framework</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-framework-wx</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
             <!-- 系统模块-->
             <dependency>
@@ -226,17 +241,11 @@
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
         <module>ruoyi-wx-api</module>
+        <module>ruoyi-framework-wx</module>
     </modules>
     <packaging>pom</packaging>
 
-    <dependencies>
-        <!-- lombok -->
-        <!--<dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>-->
-    </dependencies>
+    <dependencies></dependencies>
 
     <build>
         <plugins>
@@ -261,6 +270,11 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
+        </repository>
+        <repository>
+            <id>mvn</id>
+            <name>https://mvnrepository.com/</name>
+            <url>https://mvnrepository.com/</url>
         </repository>
     </repositories>
 
