@@ -8,6 +8,7 @@ import com.ruoyi.bus.service.IEvaluationService;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 评价Service业务层处理
@@ -62,6 +63,7 @@ public class EvaluationServiceImpl implements IEvaluationService
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertEvaluation(Evaluation evaluation)
     {
         evaluation.setCreateTime(DateUtils.getNowDate());
@@ -75,6 +77,7 @@ public class EvaluationServiceImpl implements IEvaluationService
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateEvaluation(Evaluation evaluation)
     {
         evaluation.setUpdateTime(DateUtils.getNowDate());
@@ -88,6 +91,7 @@ public class EvaluationServiceImpl implements IEvaluationService
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteEvaluationByIds(Long[] evaluationIds)
     {
         return evaluationMapper.deleteEvaluationByIds(evaluationIds);
@@ -100,6 +104,7 @@ public class EvaluationServiceImpl implements IEvaluationService
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteEvaluationById(Long evaluationId)
     {
         return evaluationMapper.deleteEvaluationById(evaluationId);

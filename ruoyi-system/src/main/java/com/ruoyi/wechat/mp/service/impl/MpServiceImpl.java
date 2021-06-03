@@ -5,6 +5,7 @@ import com.ruoyi.wechat.mp.mapper.MpMapper;
 import com.ruoyi.wechat.mp.service.IMpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class MpServiceImpl implements IMpService {
     }
 
     @Override
+    @Transactional
     public int insertLunBoTu(LunBoTu lunBoTu) {
         return mpMapper.insertLunBoTu(lunBoTu);
     }
@@ -41,6 +43,7 @@ public class MpServiceImpl implements IMpService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteLunBoTu(Long id) {
         return mpMapper.deleteLunBoTu(id);
     }
@@ -52,6 +55,7 @@ public class MpServiceImpl implements IMpService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteLunBoTus(Long[] ids) {
         return mpMapper.deleteLunBoTus(ids);
     }
@@ -63,6 +67,7 @@ public class MpServiceImpl implements IMpService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateLunBoTuStatus(LunBoTu lunBoTu) {
         return mpMapper.updateLunBoTuStatus(lunBoTu);
     }

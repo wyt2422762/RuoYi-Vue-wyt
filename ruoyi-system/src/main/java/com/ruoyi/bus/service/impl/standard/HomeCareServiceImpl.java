@@ -5,6 +5,7 @@ import com.ruoyi.bus.mapper.standard.HomeCareMapper;
 import com.ruoyi.bus.service.standard.IHomeCareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -59,6 +60,7 @@ public class HomeCareServiceImpl implements IHomeCareService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertHomeCare(HomeCare homeCare) {
         return homeCareMapper.insertHomeCare(homeCare);
     }
@@ -70,6 +72,7 @@ public class HomeCareServiceImpl implements IHomeCareService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateHomeCare(HomeCare homeCare) {
         return homeCareMapper.updateHomeCare(homeCare);
     }
@@ -81,6 +84,7 @@ public class HomeCareServiceImpl implements IHomeCareService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteHomeCareByIds(Long[] ids) {
         return homeCareMapper.deleteHomeCareByIds(ids);
     }
@@ -92,6 +96,7 @@ public class HomeCareServiceImpl implements IHomeCareService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteHomeCareById(Long id) {
         return homeCareMapper.deleteHomeCareById(id);
     }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.bus.mapper.NurseMapper;
 import com.ruoyi.bus.domain.Nurse;
 import com.ruoyi.bus.service.INurseService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 护工Service业务层处理
@@ -61,6 +62,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertNurse(Nurse nurse) {
         nurse.setCreateTime(DateUtils.getNowDate());
         return nurseMapper.insertNurse(nurse);
@@ -73,6 +75,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateNurse(Nurse nurse) {
         nurse.setUpdateTime(DateUtils.getNowDate());
         return nurseMapper.updateNurse(nurse);
@@ -85,6 +88,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteNurseByIds(Long[] nurseids) {
         return nurseMapper.deleteNurseByIds(nurseids);
     }
@@ -96,6 +100,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteNurseById(Long nurseid) {
         return nurseMapper.deleteNurseById(nurseid);
     }
@@ -108,6 +113,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
+    @Transactional
     public boolean updateNurseAvatar(Long nurseId, String avatar) {
         return nurseMapper.updateNurseAvatar(nurseId, avatar) > 0;
     }
@@ -128,6 +134,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateNurseStatus(Nurse nurse) {
         return nurseMapper.updateNurseStatus(nurse);
     }

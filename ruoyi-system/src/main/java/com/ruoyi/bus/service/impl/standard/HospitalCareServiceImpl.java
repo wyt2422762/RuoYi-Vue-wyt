@@ -7,6 +7,7 @@ import com.ruoyi.bus.mapper.standard.HospitalCareMapper;
 import com.ruoyi.bus.service.standard.IHospitalCareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 收费标准-医院陪护Service业务层处理
@@ -59,6 +60,7 @@ public class HospitalCareServiceImpl implements IHospitalCareService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertHospitalCare(HospitalCare hospitalCare) {
         return hospitalCareMapper.insertHospitalCare(hospitalCare);
     }
@@ -70,6 +72,7 @@ public class HospitalCareServiceImpl implements IHospitalCareService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateHospitalCare(HospitalCare hospitalCare) {
         return hospitalCareMapper.updateHospitalCare(hospitalCare);
     }
@@ -81,6 +84,7 @@ public class HospitalCareServiceImpl implements IHospitalCareService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteHospitalCareByIds(Long[] ids) {
         return hospitalCareMapper.deleteHospitalCareByIds(ids);
     }
@@ -92,6 +96,7 @@ public class HospitalCareServiceImpl implements IHospitalCareService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteHospitalCareById(Long id) {
         return hospitalCareMapper.deleteHospitalCareById(id);
     }

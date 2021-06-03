@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -96,6 +97,7 @@ public class ConsumerServiceImpl implements IConsumerService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertConsumer(Consumer consumer) {
         return consumerMapper.insertConsumer(consumer);
     }
@@ -107,6 +109,7 @@ public class ConsumerServiceImpl implements IConsumerService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateConsumer(Consumer consumer) {
         return consumerMapper.updateConsumer(consumer);
     }
@@ -118,6 +121,7 @@ public class ConsumerServiceImpl implements IConsumerService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateConsumerStatus(Consumer consumer) {
         return consumerMapper.updateConsumerStatus(consumer);
     }
@@ -130,6 +134,7 @@ public class ConsumerServiceImpl implements IConsumerService {
      * @return 结果
      */
     @Override
+    @Transactional
     public boolean updateConsumerAvatar(Long consumerId, String avatar) {
         return consumerMapper.updateConsumerAvatar(consumerId, avatar) > 0;
     }
@@ -141,6 +146,7 @@ public class ConsumerServiceImpl implements IConsumerService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteConsumerById(Long consumerId) {
         return consumerMapper.deleteConsumerById(consumerId);
     }
@@ -152,6 +158,7 @@ public class ConsumerServiceImpl implements IConsumerService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteConsumerByIds(Long[] consumerIds) {
         return consumerMapper.deleteConsumerByIds(consumerIds);
     }

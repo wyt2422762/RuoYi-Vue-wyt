@@ -6,6 +6,7 @@ import com.ruoyi.bus.service.IOrderService;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertOrder(Order order) {
         order.setCreateTime(DateUtils.getNowDate());
         return orderMapper.insertOrder(order);
@@ -61,6 +63,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateOrder(Order order) {
         order.setUpdateTime(DateUtils.getNowDate());
         return orderMapper.updateOrder(order);
@@ -73,6 +76,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteOrderById(Long orderno) {
         return orderMapper.deleteOrderById(orderno);
     }
@@ -84,6 +88,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteOrderByIds(Long[] ordernos) {
         return orderMapper.deleteOrderByIds(ordernos);
     }
