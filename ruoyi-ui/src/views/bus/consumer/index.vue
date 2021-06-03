@@ -63,7 +63,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:consumer:add']"
+          v-hasPermi="['bus:consumer:add']"
         >新增
         </el-button>
       </el-col>
@@ -75,7 +75,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:consumer:edit']"
+          v-hasPermi="['bus:consumer:edit']"
         >修改
         </el-button>
       </el-col>
@@ -87,7 +87,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:consumer:remove']"
+          v-hasPermi="['bus:consumer:remove']"
         >删除
         </el-button>
       </el-col>
@@ -98,7 +98,7 @@
           icon="el-icon-upload2"
           size="mini"
           @click="handleImport"
-          v-hasPermi="['system:consumer:import']"
+          v-hasPermi="['bus:consumer:import']"
         >导入
         </el-button>
       </el-col>
@@ -109,7 +109,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:consumer:export']"
+          v-hasPermi="['bus:consumer:export']"
         >导出
         </el-button>
       </el-col>
@@ -163,7 +163,7 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:consumer:edit']"
+            v-hasPermi="['bus:consumer:edit']"
           >修改
           </el-button>
           <el-button
@@ -171,7 +171,7 @@
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:consumer:remove']"
+            v-hasPermi="['bus:consumer:remove']"
           >删除
           </el-button>
         </template>

@@ -106,7 +106,7 @@
               icon="el-icon-plus"
               size="mini"
               @click="handleAdd"
-              v-hasPermi="['system:nurse:add']"
+              v-hasPermi="['bus:nurse:add']"
             >新增
             </el-button>
           </el-col>
@@ -118,7 +118,7 @@
               size="mini"
               :disabled="single"
               @click="handleUpdate"
-              v-hasPermi="['system:nurse:edit']"
+              v-hasPermi="['bus:nurse:edit']"
             >修改
             </el-button>
           </el-col>
@@ -130,7 +130,7 @@
               size="mini"
               :disabled="multiple"
               @click="handleDelete"
-              v-hasPermi="['system:nurse:remove']"
+              v-hasPermi="['bus:nurse:remove']"
             >删除
             </el-button>
           </el-col>
@@ -141,7 +141,7 @@
               icon="el-icon-download"
               size="mini"
               @click="handleExport"
-              v-hasPermi="['system:nurse:export']"
+              v-hasPermi="['bus:nurse:export']"
             >导出
             </el-button>
           </el-col>
@@ -192,7 +192,7 @@
                 type="text"
                 icon="el-icon-edit"
                 @click="handleUpdate(scope.row)"
-                v-hasPermi="['system:nurse:edit']"
+                v-hasPermi="['bus:nurse:edit']"
               >修改
               </el-button>
               <el-button
@@ -200,7 +200,7 @@
                 type="text"
                 icon="el-icon-delete"
                 @click="handleDelete(scope.row)"
-                v-hasPermi="['system:nurse:remove']"
+                v-hasPermi="['bus:nurse:remove']"
               >删除
               </el-button>
             </template>
