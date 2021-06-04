@@ -66,14 +66,14 @@
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-edit"
+            icon="el-icon-document"
             @click="handleDetail(scope.row)"
             v-hasPermi="['bus:order:detail']"
           >详细</el-button>
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-delete"
+            icon="el-icon-chat-line-square"
             @click="handleEvaluate(scope.row)"
             v-hasPermi="['bus:order:evaluate']"
           >评价</el-button>
@@ -129,7 +129,12 @@
             <div class="grid-content bg-purple">评分: </div>
           </el-col>
           <el-col :span="18">
-            <div class="grid-content bg-purple-light">{{evaluateData.score}}</div>
+            <el-rate
+              v-model="evaluateData.score"
+              disabled="true"
+              :texts="['不满意', '一般', '满意', '很满意', '非常满意']"
+              show-text>
+            </el-rate>
           </el-col>
         </el-row>
         <el-divider></el-divider>

@@ -117,7 +117,7 @@
     </el-row>
     <el-table v-loading="loading" :data="consumerList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center"/>
-      <el-table-column label="客户编号" align="center" key="consumerId" prop="consumerId" v-if="columns[0].visible"/>
+<!--      <el-table-column label="客户编号" align="center" key="consumerId" prop="consumerId" v-if="columns[0].visible"/>-->
       <el-table-column label="客户姓名" align="center" key="name" prop="name" v-if="columns[1].visible"
                        :show-overflow-tooltip="true"/>
       <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[2].visible"

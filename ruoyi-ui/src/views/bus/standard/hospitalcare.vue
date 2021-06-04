@@ -47,7 +47,7 @@
 
     <el-table v-loading="loading" :data="careList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="id" />
+<!--      <el-table-column label="id" align="center" prop="id" />-->
       <el-table-column label="编号" align="center" prop="no" />
       <el-table-column label="服务类型" align="center" prop="type" :formatter="typeFormat" />
       <el-table-column label="每日服务小时数" align="center" prop="hourPerDay" :formatter="hourPerDayFormat" />

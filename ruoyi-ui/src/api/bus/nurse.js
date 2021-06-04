@@ -64,3 +64,15 @@ export function changeNurseStatus(nurseId, status) {
     data: data
   })
 }
+
+// 护工订单
+export function listNurseOrder(nurseId){
+  const data = {
+    'nurseId': nurseId
+  }
+  return request({
+    url: '/bus/order/list',
+    method: 'put',
+    data: data
+  })
+}

@@ -150,7 +150,7 @@
 
         <el-table v-loading="loading" :data="nurseList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55" align="center"/>
-          <el-table-column label="护工编号" align="center" key="nurseId" prop="nurseId" v-if="columns[0].visible"/>
+<!--          <el-table-column label="护工编号" align="center" key="nurseId" prop="nurseId" v-if="columns[0].visible"/>-->
           <el-table-column label="姓名" align="center" key="name" prop="name"/>
           <el-table-column label="部门" align="center" key="deptName" prop="dept.deptName"/>
           <el-table-column label="年龄" align="center" key="age" prop="age"/>
@@ -202,6 +202,14 @@
                 @click="handleDelete(scope.row)"
                 v-hasPermi="['bus:nurse:remove']"
               >删除
+              </el-button>
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-s-order"
+                @click="handleOrder(scope.row)"
+                v-hasPermi="['bus:order:list']"
+              >订单
               </el-button>
             </template>
           </el-table-column>
@@ -309,19 +317,25 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+    <!-- 订单列表弹出框 -->
+    <orderList :nurseId="rowNurseId" :open="orderOpen" :title="orderTitle" @close="closeOrderUp" />
+
   </div>
 </template>
 
 <script>
-import {listNurse, getNurse, delNurse, addNurse, updateNurse, exportNurse, changeNurseStatus} from "@/api/bus/nurse";
-import {getToken} from "@/utils/auth";
+import orderList from "./orderList";
+import {listNurse, getNurse, delNurse, addNurse, updateNurse, exportNurse, changeNurseStatus, listNurseOrder} from "@/api/bus/nurse";
 import {treeselect} from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import NurseOrderList from "@/views/bus/nurse/orderList";
 
 export default {
   name: "Nurse",
   components: {
+    orderList,
     Treeselect,
   },
   data() {
@@ -352,12 +366,16 @@ export default {
       workStatusOptions: [],
       // 服务星级字典
       workLevelOptions: [],
-      // 弹出层标题
+      // 详情弹出层标题
       title: "",
+      // 订单弹出层标题
+      orderTitle: "",
       // 部门树选项
       deptOptions: undefined,
-      // 是否显示弹出层
+      // 是否显示详情弹出层
       open: false,
+      // 是否显示订单弹出层
+      orderOpen: false,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -421,7 +439,9 @@ export default {
       defaultProps: {
         children: "children",
         label: "label"
-      }
+      },
+      // 点击行的nurseId
+      rowNurseId: null
     };
   },
   watch: {
@@ -608,6 +628,19 @@ export default {
         }
       }
     },
+    /** 订单按钮操作 */
+    handleOrder(row) {
+      debugger;
+      const nurseId = row.nurseId;
+      this.orderOpen = true;
+      this.orderTitle = "护工订单";
+      this.rowNurseId = nurseId;
+    },
+    //订单弹窗关闭
+    closeOrderUp(){
+      this.orderOpen = false;
+      this.orderTitle = '';
+    }
   }
 };
 </script>

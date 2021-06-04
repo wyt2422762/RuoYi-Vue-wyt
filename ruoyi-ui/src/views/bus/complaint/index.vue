@@ -50,7 +50,7 @@
 
     <el-table v-loading="loading" :data="complaintList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="id" />
+<!--      <el-table-column label="id" align="center" prop="id" />-->
       <el-table-column label="订单编号" align="center" prop="orderNo" />
       <el-table-column label="客户id" align="center" prop="consumerId" />
       <el-table-column label="客户姓名" align="center" prop="consumerName" />
@@ -62,7 +62,7 @@
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-edit"
+            icon="el-icon-picture-outline"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['bus:complaint:list']"
           >查看凭证</el-button>

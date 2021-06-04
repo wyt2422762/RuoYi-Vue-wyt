@@ -126,7 +126,7 @@
 
     <el-table v-loading="loading" :data="evaluationList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="evaluationid" />
+<!--      <el-table-column label="id" align="center" prop="evaluationid" />-->
       <el-table-column label="订单编号" align="center" prop="orderId" />
       <el-table-column label="客户编号" align="center" prop="consumerId" />
       <el-table-column label="客户姓名" align="center" prop="consumerName" />
