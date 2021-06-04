@@ -62,10 +62,10 @@
         </dependency>
 
         <!-- 定时任务-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-quartz</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- 代码生成-->
         <dependency>
