@@ -68,14 +68,14 @@
             type="text"
             icon="el-icon-document"
             @click="handleDetail(scope.row)"
-            v-hasPermi="['bus:order:detail']"
+            v-hasPermi="['bus:order:query']"
           >详细</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-chat-line-square"
             @click="handleEvaluate(scope.row)"
-            v-hasPermi="['bus:order:evaluate']"
+            v-hasPermi="['bus:evaluation:query']"
           >评价</el-button>
         </template>
       </el-table-column>

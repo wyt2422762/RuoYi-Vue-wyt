@@ -18,7 +18,7 @@
               type="text"
               icon="el-icon-chat-line-square"
               @click="handleEvaluate(scope.row)"
-              v-hasPermi="['bus:order:evaluate']"
+              v-hasPermi="['bus:evaluation:query']"
             >评价</el-button>
           </template>
         </el-table-column>
