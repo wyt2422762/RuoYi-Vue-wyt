@@ -42,7 +42,7 @@ public class Order extends BaseEntity {
      * 金额
      */
     @NotNull(message = "金额不能为空")
-    private long money;
+    private Long money;
 
     /**
      * 客户id
@@ -124,11 +124,11 @@ public class Order extends BaseEntity {
         this.workLevel = workLevel;
     }
 
-    public long getMoney() {
+    public Long getMoney() {
         return money;
     }
 
-    public void setMoney(long money) {
+    public void setMoney(Long money) {
         this.money = money;
     }
 

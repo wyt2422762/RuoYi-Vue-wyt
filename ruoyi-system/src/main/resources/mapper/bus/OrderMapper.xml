@@ -65,9 +65,9 @@
             <if test="workLevel != null  and workLevel != ''">and workLevel = #{workLevel}</if>
             <if test="money != null ">and money = #{money}</if>
             <if test="consumerId != null ">and consumerId = #{consumerId}</if>
-            <if test="consumerId != null ">and consumerName = #{consumerName}</if>
+            <if test="consumerName != null and consumerName != '' ">and consumerName = #{consumerName}</if>
             <if test="nurseId != null ">and nurseId = #{nurseId}</if>
-            <if test="nurseId != null ">and nurseName = #{nurseName}</if>
+            <if test="nurseName != null and nurseName != '' ">and nurseName = #{nurseName}</if>
             <if test="evaluationId != null ">and evaluationId = #{evaluationId}</if>
         </where>
     </select>
@@ -90,10 +90,8 @@
         <trim prefix="SET" suffixOverrides=",">
             orderType = #{orderType}, workTime = #{workTime}, workLevel = #{workLevel},
             money = #{money}, consumerId = #{consumerId}, nurseId = #{nurseId},
-            evaluationId = #{evaluationId},
-            update_by = #{updateBy},
-            update_time = sysdate(),
-            remark = #{remark}
+            evaluationId = #{evaluationId}, update_by = #{updateBy},
+            update_time = sysdate(), remark = #{remark}
         </trim>
         where orderNo = #{orderNo}
     </update>
