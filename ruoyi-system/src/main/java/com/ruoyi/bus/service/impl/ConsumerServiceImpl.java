@@ -227,4 +227,14 @@ public class ConsumerServiceImpl implements IConsumerService {
         }
         return successMsg.toString();
     }
+
+    /**
+     * 根据手机号查询客户(小程序使用)
+     * @param phoneNumber 手机号
+     * @return 结果
+     */
+    @Override
+    public Consumer selectConsumerByPhoneNumber_mp(String phoneNumber) {
+        return consumerMapper.selectConsumerByPhoneNumber_mp(phoneNumber);
+    }
 }

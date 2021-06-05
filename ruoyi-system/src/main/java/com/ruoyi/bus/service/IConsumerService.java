@@ -105,4 +105,11 @@ public interface IConsumerService {
      * @return 结果
      */
     String importConsumer(List<Consumer> consumerList, Boolean isUpdateSupport, String operName);
+
+    /**
+     * 根据手机号查询客户(小程序使用)
+     * @param phoneNumber 手机号
+     * @return 结果
+     */
+    Consumer selectConsumerByPhoneNumber_mp(String phoneNumber);
 }

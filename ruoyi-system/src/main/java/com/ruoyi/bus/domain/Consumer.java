@@ -116,6 +116,11 @@ public class Consumer extends BaseEntity {
     @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
+    /**
+     * openId
+     */
+    private String openId;
+
     public Long getConsumerId() {
         return consumerId;
     }
@@ -242,5 +247,13 @@ public class Consumer extends BaseEntity {
 
     public void setIdNo(String idNo) {
         this.idNo = idNo;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }

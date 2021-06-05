@@ -126,4 +126,13 @@ public class Constants
      * 资源映射路径 前缀
      */
     public static final String RESOURCE_PREFIX = "/profile";
+
+    /**
+     * 小程序token前缀（客户）
+     */
+    public static final String MP_CONSUMER_KEY = "mp_consumer_key";
+    /**
+     * 小程序token前缀（护工）
+     */
+    public static final String MP_NURSE_KEY = "mp_nurse_key";
 }

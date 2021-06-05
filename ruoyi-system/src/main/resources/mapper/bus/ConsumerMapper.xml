@@ -24,6 +24,9 @@
         <result property="updateBy" column="update_by"/>
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
+
+        <result property="openId" column="openId"/>
+
     </resultMap>
 
     <sql id="selectVo">
@@ -46,7 +49,9 @@
                c.create_time,
                c.update_by,
                c.update_time,
-               c.remark
+               c.remark,
+
+               c.openId
         from consumer c
     </sql>
 
@@ -96,12 +101,12 @@
             consumerId, `name`, email, phonenumber, sex, age, birth, addr,
             emergencyContactName, emergencyContactPhone, medicalHistoryNow,
             medicalHistoryHis, avatar, `status`, create_by, create_time,
-            remark)
+            remark, openId)
         values (
             #{consumerId}, #{name}, #{email}, #{phonenumber}, #{sex}, #{age}, #{birth},
             #{addr}, #{emergencyContactName}, #{emergencyContactPhone}, #{medicalHistoryNow},
             #{medicalHistoryHis}, #{avatar}, #{status}, #{createBy},
-            sysdate(), #{remark}
+            sysdate(), #{remark}, #{openId}
         )
     </insert>
 
@@ -113,7 +118,8 @@
             emergencyContactName = #{emergencyContactName}, emergencyContactPhone = #{emergencyContactPhone},
             medicalHistoryNow = #{medicalHistoryNow}, medicalHistoryHis = #{medicalHistoryHis},
             avatar = #{avatar}, `status` = #{status},
-            update_by = #{updateBy}, update_time = sysdate(), remark = #{remark}
+            update_by = #{updateBy}, update_time = sysdate(), remark = #{remark},
+            openId = #{openId}
         </set>
         <where>
             consumerId = #{consumerId}
@@ -138,4 +144,13 @@
             #{consumerId}
         </foreach>
     </delete>
+
+    <!-- 根据手机号查询客户 -->
+    <select id="selectConsumerByPhoneNumber_mp" parameterType="String" resultMap="consumerResult">
+        <include refid="selectVo"/>
+        <where>
+            c.phonenumber = #{phonenumber}
+        </where>
+    </select>
+
 </mapper>
