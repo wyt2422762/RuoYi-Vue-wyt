@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -117,6 +120,13 @@ public class LogAspect
             getControllerMethodDescription(joinPoint, controllerLog, operLog);
             // 保存数据库
             AsyncManager.me().execute(AsyncFactory.recordOper(operLog));
+            //写日志文件
+            if(0 == operLog.getStatus()){
+                log.info(JSONObject.toJSONString(operLog));
+            } else if(1 == operLog.getStatus()){
+                log.error(JSONObject.toJSONString(operLog));
+            }
+
         }
         catch (Exception exp)
         {

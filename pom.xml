@@ -123,6 +123,8 @@
 
             <!-- 微信小程序封装 -->
             <dependency>
+                <!--<groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java-miniapp-spring-boot-starter</artifactId>-->
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-miniapp</artifactId>
                 <version>${binarywang.version}</version>
@@ -230,6 +232,13 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>3.6.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -245,7 +254,13 @@
     </modules>
     <packaging>pom</packaging>
 
-    <dependencies></dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
