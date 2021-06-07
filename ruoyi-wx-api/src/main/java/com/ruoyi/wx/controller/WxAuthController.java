@@ -11,17 +11,21 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.exception.CustomException;
+import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.wx.core.config.WxConfig;
 import com.ruoyi.wx.model.WxReqCommonParam;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -38,6 +42,12 @@ public class WxAuthController extends BaseController {
 
     @Autowired
     private INurseService iNurseService;
+
+    @Resource
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 微信获取openId
@@ -68,7 +78,7 @@ public class WxAuthController extends BaseController {
      * @param iv
      * @return 结果
      */
-    @PreAuthorize("hasAuthority('ttt')")
+    @PreAuthorize("hasAuthority('consumer')")
     @GetMapping("/phone")
     public AjaxResult phone(@PathVariable String appId, @Validated WxReqCommonParam wxRcp, @Validated @NotBlank String encryptedData, @Validated @NotBlank String iv) {
         final WxMaService wxService = WxConfig.getMaService(appId);
@@ -86,17 +96,13 @@ public class WxAuthController extends BaseController {
      * @param appId appId
      * @param wxRcp 基础请求参数
      * @param openId openId
-     * @param phoneNumber
-     * @param type
-     * @return
+     * @param phoneNumber 手机号
+     * @param type 0 客户 1 护工
+     * @return token
      */
     @GetMapping("/getToken")
-    public AjaxResult getToken(@PathVariable String appId, @Validated WxReqCommonParam wxRcp, @Validated @NotBlank String openId, @Validated @NotBlank String phoneNumber, @Validated @NotBlank String type){
+    public AjaxResult getToken(@PathVariable String appId, @Validated @NotBlank String openId, @Validated @NotBlank String phoneNumber, @Validated @NotBlank String type){
         final WxMaService wxService = WxConfig.getMaService(appId);
-        // 用户信息校验
-        if (!wxService.getUserService().checkUserInfo(wxRcp.getSessionKey(), wxRcp.getRawData(), wxRcp.getSignature())) {
-            throw new CustomException("user check failed");
-        }
         //判断是客户还是护工
         switch (type){
             //客户
@@ -105,10 +111,13 @@ public class WxAuthController extends BaseController {
                 if(consumer == null){
                     //这里需不需要注册新客户？
                 } else {
-                    consumer.setOpenId(openId);
-                    consumerService.updateConsumer(consumer);
+                    if(!openId.equals(consumer.getOpenId())){
+                        consumer.setOpenId(openId);
+                        consumerService.updateConsumer(consumer);
+                    }
                     //登陆
-
+                    String token = tokenService.createToken(consumer);
+                    return AjaxResult.success("成功", token);
                 }
                 break;
             //护工

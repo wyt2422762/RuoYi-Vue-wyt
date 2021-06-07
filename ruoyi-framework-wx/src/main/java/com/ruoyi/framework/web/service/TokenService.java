@@ -6,31 +6,32 @@ import com.ruoyi.bus.service.IConsumerService;
 import com.ruoyi.bus.service.INurseService;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.domain.model.LoginUser;
-import com.ruoyi.common.core.redis.RedisCache;
-import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.ip.AddressUtils;
-import com.ruoyi.common.utils.ip.IpUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
-import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * token验证处理
  *
  * @author ruoyi
  */
+@Slf4j
 @Component
 public class TokenService
 {
@@ -39,23 +40,23 @@ public class TokenService
     @Autowired
     private INurseService nurseService;
 
-    // 令牌自定义标识
+    /**
+     * 令牌自定义标识
+     */
     @Value("${token.header}")
     private String header;
 
-    // 令牌秘钥
+    /**
+     * 令牌秘钥
+     */
     @Value("${token.secret}")
     private String secret;
 
-    // 令牌有效期（默认30分钟）
+    /**
+     * 令牌有效期（分钟）
+     */
     @Value("${token.expireTime}")
     private long expireTime;
-
-    protected static final long MILLIS_SECOND = 1000;
-
-    protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
-
-    private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
 
     /**
      * 获取type(0 客户, 1 护工)
@@ -110,20 +111,15 @@ public class TokenService
         return null;
     }
 
-    /**
-     * 创建令牌(客户)
-     *
-     * @param consumer 客户信息
-     * @return 令牌
-     */
-    public String createToken(Consumer consumer)
-    {
-        String token = IdUtils.fastUUID();
-        Map<String, Object> claims = new HashMap<>();
-        claims.put(Constants.MP_CONSUMER_KEY, token);
-        claims.put("consumerId", consumer.getConsumerId());
-        claims.put("type", 0);
-        return createToken(claims);
+    public Authentication getAuthentication(String token) {
+        Claims claims = parseToken(token);
+        Map<String, String> map = claims.get("auth", HashMap.class);
+        Collection<? extends GrantedAuthority> authorities =
+                Arrays.stream(claims.get("authorities", String.class).split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+        User principal = new User(map.get("username"), map.get("password"), authorities);
+        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
     /**
@@ -136,7 +132,6 @@ public class TokenService
     {
         String token = IdUtils.fastUUID();
         loginUser.setToken(token);
-
         Map<String, Object> claims = new HashMap<>();
         claims.put(Constants.LOGIN_USER_KEY, token);
         return createToken(claims);
@@ -154,7 +149,33 @@ public class TokenService
         Map<String, Object> claims = new HashMap<>();
         claims.put(Constants.MP_NURSE_KEY, token);
         claims.put("nurseId", nurse.getNurseId());
-        claims.put("type", 1);
+        claims.put("type", "1");
+        Map<String, String> map = new HashMap<>(2);
+        map.put("username", nurse.getPhonenumber());
+        map.put("password", "");
+        claims.put("auth", map);
+        claims.put("authorities", "nurse");
+        return createToken(claims);
+    }
+
+    /**
+     * 创建令牌(客户)
+     *
+     * @param consumer 客户信息
+     * @return 令牌
+     */
+    public String createToken(Consumer consumer)
+    {
+        String token = IdUtils.fastUUID();
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(Constants.MP_NURSE_KEY, token);
+        claims.put("consumerId", consumer.getConsumerId());
+        claims.put("type", "0");
+        Map<String, String> map = new HashMap<>(2);
+        map.put("username", consumer.getPhonenumber());
+        map.put("password", "");
+        claims.put("auth", map);
+        claims.put("authorities", "consumer");
         return createToken(claims);
     }
 
@@ -166,14 +187,13 @@ public class TokenService
      */
     private String createToken(Map<String, Object> claims)
     {
-        String token = Jwts.builder()
+        return Jwts.builder()
                 .setClaims(claims)
                 //当前时间
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 //过期时间
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * expireTime))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
-        return token;
     }
 
     /**
@@ -193,8 +213,8 @@ public class TokenService
     /**
      * 获取请求token
      *
-     * @param request
-     * @return token
+     * @param request req
+     * @return token token
      */
     public String getToken(HttpServletRequest request)
     {
@@ -204,6 +224,26 @@ public class TokenService
             token = token.replace(Constants.TOKEN_PREFIX, "");
         }
         return token;
+    }
+
+    /**
+     * 验证token是否有效
+     * @param token token
+     * @return 结果
+     */
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            return true;
+        } catch (ExpiredJwtException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+        catch (Exception e) {
+            log.error("JWT token is invalid.");
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

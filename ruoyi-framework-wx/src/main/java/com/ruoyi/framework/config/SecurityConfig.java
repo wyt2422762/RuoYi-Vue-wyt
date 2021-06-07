@@ -26,12 +26,6 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     /**
-     * 自定义用户认证逻辑
-     */
-    @Autowired
-    private UserDetailsService userDetailsService;
-    
-    /**
      * 认证失败处理类
      */
     @Autowired
@@ -90,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/captchaImage", "/wx/*/auth/**").anonymous()
+                .antMatchers("/login", "/captchaImage", "/wx/*/auth/getOpenId", "/wx/*/auth/getToken").anonymous()
                 .antMatchers(
                         HttpMethod.GET,
                         "/*.html",
@@ -114,23 +108,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         // 添加CORS filter
         httpSecurity.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
-    }
-
-    /**
-     * 强散列哈希加密实现
-     */
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder()
-    {
-        return new BCryptPasswordEncoder();
-    }
-
-    /**
-     * 身份认证接口
-     */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception
-    {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 }
