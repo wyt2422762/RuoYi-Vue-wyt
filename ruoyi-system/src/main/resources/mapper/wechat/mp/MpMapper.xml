@@ -52,4 +52,12 @@
             #{id}
         </foreach>
     </delete>
+
+    <!-- 获取轮播图列表(小程序使用) -->
+    <select id="getLunBoTu_mp" resultMap="lunBoTuResult">
+        select id, url, status, create_by, create_time, update_by,
+               update_time, remark
+        from wechat_mp_lunbotu
+        where status = '0'
+    </select>
 </mapper>

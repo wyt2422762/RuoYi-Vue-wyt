@@ -58,4 +58,12 @@ public interface IOrderService {
      */
     public int deleteOrderById(Long orderno);
 
+
+    /**
+     * 查询订单列表(小程序使用)
+     *
+     * @param order 订单
+     * @return 订单集合
+     */
+    public List<Order> selectOrderList_mp(Order order);
 }

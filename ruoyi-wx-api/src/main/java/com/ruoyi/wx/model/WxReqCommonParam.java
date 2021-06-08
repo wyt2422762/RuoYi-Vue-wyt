@@ -16,9 +16,9 @@ public class WxReqCommonParam {
     private String appId;
     @NotBlank(message = "sessionKey不能为空")
     private String sessionKey;
-    @NotBlank(message = "signature不能为空")
+    //@NotBlank(message = "signature不能为空")
     private String signature;
-    @NotBlank(message = "rawData不能为空")
+    //@NotBlank(message = "rawData不能为空")
     private String rawData;
 
 }

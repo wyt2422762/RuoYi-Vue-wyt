@@ -92,4 +92,15 @@ public class OrderServiceImpl implements IOrderService {
     public int deleteOrderByIds(Long[] ordernos) {
         return orderMapper.deleteOrderByIds(ordernos);
     }
+
+    /**
+     * 查询订单列表(小程序使用)
+     *
+     * @param order 订单
+     * @return 订单集合
+     */
+    public List<Order> selectOrderList_mp(Order order){
+        return orderMapper.selectOrderList_mp(order);
+    }
+
 }

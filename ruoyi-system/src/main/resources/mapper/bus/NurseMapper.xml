@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="checkPhoneUnique" parameterType="String" resultMap="nurseResult">
-        select consumerId, phonenumber from nurse
+        select nurseId, phonenumber from nurse
         where phonenumber = #{phonenumber} and delFlag = '0' limit 1
     </select>
         
@@ -112,5 +112,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateNurseAvatar" parameterType="com.ruoyi.bus.domain.Nurse">
         update nurse set avatar = #{avatar} where nurseId = #{nurseId}
     </update>
+
+    <!-- 根据手机号查询客户 -->
+    <select id="selectNurseByPhoneNumber_mp" parameterType="String" resultMap="nurseResult">
+        <include refid="selectNurseVo"/>
+        <where>
+            n.phonenumber = #{phonenumber}
+            and n.delFlag = '0'
+            and n.status = '0'
+        </where>
+    </select>
+
+    <select id="selectNurseList_mp" parameterType="com.ruoyi.bus.domain.Nurse" resultMap="nurseResult">
+        <include refid="selectNurseVo"/>
+        <where>
+            <if test="deptId != null "> and n.deptId = #{deptId}</if>
+            <if test="name != null  and name != ''"> and n.`name` like concat('%', #{name}, '%')</if>
+            <if test="age != null "> and n.age = #{age}</if>
+            <if test="sex != null  and sex != ''"> and n.sex = #{sex}</if>
+            <if test="phonenumber != null  and phonenumber != ''"> and n.phonenumber = #{phonenumber}</if>
+            <if test="workLevel != null  and workLevel != ''"> and n.workLevel = #{workLevel}</if>
+            <if test="workStatus != null  and workStatus != ''"> and n.workStatus = #{workStatus}</if>
+            <if test="avatar != null  and avatar != ''"> and n.avatar = #{avatar}</if>
+            <if test="status != null  and status != ''"> and n.status = #{status}</if>
+            <if test="delFlag != null  and delFlag != ''"> and n.delFlag = #{delFlag}</if>
+        </where>
+    </select>
 
 </mapper>

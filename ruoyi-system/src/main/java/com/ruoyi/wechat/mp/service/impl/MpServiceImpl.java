@@ -71,4 +71,14 @@ public class MpServiceImpl implements IMpService {
     public int updateLunBoTuStatus(LunBoTu lunBoTu) {
         return mpMapper.updateLunBoTuStatus(lunBoTu);
     }
+
+
+    /**
+     * 获取轮播图(小程序使用)
+     *
+     * @return 结果
+     */
+    public List<LunBoTu> getLunBoTu_mp(){
+        return mpMapper.getLunBoTu_mp();
+    }
 }

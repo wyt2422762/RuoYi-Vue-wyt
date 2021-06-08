@@ -49,4 +49,11 @@ public interface MpMapper {
      * @return 结果
      */
     public int updateLunBoTuStatus(LunBoTu lunBoTu);
+
+    /**
+     * 获取轮播图(小程序使用)
+     *
+     * @return 结果
+     */
+    List<LunBoTu> getLunBoTu_mp();
 }

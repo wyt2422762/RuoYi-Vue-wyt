@@ -2,6 +2,7 @@ package com.ruoyi.bus.service;
 
 import java.util.List;
 
+import com.ruoyi.bus.domain.Consumer;
 import com.ruoyi.bus.domain.Nurse;
 
 /**
@@ -92,4 +93,17 @@ public interface INurseService
      */
     int updateNurseStatus(Nurse nurse);
 
+    /**
+     * 根据手机号查询护工(小程序使用)
+     * @param phoneNumber 手机号
+     * @return 结果
+     */
+    Nurse selectNurseByPhoneNumber_mp(String phoneNumber);
+
+    /**
+     * 查询护工列表(小程序使用)
+     * @param nurse
+     * @return
+     */
+    List<Nurse> selectNurseList_mp(Nurse nurse);
 }

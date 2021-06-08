@@ -17,6 +17,8 @@
         <result property="nurseId" column="nurseId"/>
         <result property="nurseName" column="nurseName"/>
 
+        <result property="status" column="status"/>
+
         <result property="evaluationId" column="evaluationId"/>
 
         <result property="delFlag" column="delFlag"/>
@@ -47,6 +49,7 @@
                consumerName,
                nurseId,
                nurseName,
+               status,
                evaluationId,
                create_by,
                create_time,
@@ -68,6 +71,7 @@
             <if test="consumerName != null and consumerName != '' ">and consumerName = #{consumerName}</if>
             <if test="nurseId != null ">and nurseId = #{nurseId}</if>
             <if test="nurseName != null and nurseName != '' ">and nurseName = #{nurseName}</if>
+            <if test="status != null and status != '' ">and status = #{status}</if>
             <if test="evaluationId != null ">and evaluationId = #{evaluationId}</if>
         </where>
     </select>
@@ -79,9 +83,9 @@
 
     <insert id="insertOrder" parameterType="com.ruoyi.bus.domain.Order">
         insert into `order`(orderNo, orderType, workTime, workLevel, money, consumerId,
-                          nurseId, evaluationId, create_by, create_time, remark)
+                          nurseId, status, evaluationId, create_by, create_time, remark)
         values (#{orderNo}, #{orderType}, #{workTime}, #{workLevel}, #{money},
-                #{consumerId}, #{nurseId}, #{evaluationId},
+                #{consumerId}, #{nurseId}, #{status}, #{evaluationId},
                 #{createBy}, sysdate(), #{remark})
     </insert>
 
@@ -90,8 +94,8 @@
         <trim prefix="SET" suffixOverrides=",">
             orderType = #{orderType}, workTime = #{workTime}, workLevel = #{workLevel},
             money = #{money}, consumerId = #{consumerId}, nurseId = #{nurseId},
-            evaluationId = #{evaluationId}, update_by = #{updateBy},
-            update_time = sysdate(), remark = #{remark}
+            status = #{status}, evaluationId = #{evaluationId},
+            update_by = #{updateBy}, update_time = sysdate(), remark = #{remark}
         </trim>
         where orderNo = #{orderNo}
     </update>
@@ -106,5 +110,23 @@
             #{orderNo}
         </foreach>
     </delete>
+
+
+    <select id="selectOrderList_mp" parameterType="com.ruoyi.bus.domain.Order" resultMap="orderResult">
+        <include refid="selectOrderVo"/>
+        <where>
+            delFlag = '0'
+            <if test="orderType != null  and orderType != ''">and orderType = #{orderType}</if>
+            <if test="workTime != null  and workTime != ''">and workTime = #{workTime}</if>
+            <if test="workLevel != null  and workLevel != ''">and workLevel = #{workLevel}</if>
+            <if test="money != null ">and money = #{money}</if>
+            <if test="consumerId != null ">and consumerId = #{consumerId}</if>
+            <if test="consumerName != null and consumerName != '' ">and consumerName = #{consumerName}</if>
+            <if test="nurseId != null ">and nurseId = #{nurseId}</if>
+            <if test="nurseName != null and nurseName != '' ">and nurseName = #{nurseName}</if>
+            <if test="status != null and status != '' ">and status = #{status}</if>
+            <if test="evaluationId != null ">and evaluationId = #{evaluationId}</if>
+        </where>
+    </select>
 
 </mapper>

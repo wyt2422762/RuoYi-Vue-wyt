@@ -82,6 +82,11 @@ public class Order extends BaseEntity {
     private Nurse nurse;
 
     /**
+     * 订单状态
+     */
+    private String status;
+
+    /**
      * 评价
      */
     private Evaluation evaluation;
@@ -202,5 +207,13 @@ public class Order extends BaseEntity {
 
     public void setNurseName(String nurseName) {
         this.nurseName = nurseName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -1,16 +1,16 @@
 package com.ruoyi.bus.service.impl;
 
-import java.util.List;
-
+import com.ruoyi.bus.domain.Consumer;
+import com.ruoyi.bus.domain.Nurse;
+import com.ruoyi.bus.mapper.NurseMapper;
+import com.ruoyi.bus.service.INurseService;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.bus.domain.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.bus.mapper.NurseMapper;
-import com.ruoyi.bus.domain.Nurse;
-import com.ruoyi.bus.service.INurseService;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 护工Service业务层处理
@@ -36,9 +36,9 @@ public class NurseServiceImpl implements INurseService {
 
     @Override
     public String checkPhoneUnique(Nurse nurse) {
-        Long consumerId = StringUtils.isNull(nurse.getNurseId()) ? -1L : nurse.getNurseId();
-        Consumer info = nurseMapper.checkPhoneUnique(nurse.getPhonenumber());
-        if (StringUtils.isNotNull(info) && info.getConsumerId().longValue() != consumerId.longValue()) {
+        Long nurseId = StringUtils.isNull(nurse.getNurseId()) ? -1L : nurse.getNurseId();
+        Nurse info = nurseMapper.checkPhoneUnique(nurse.getPhonenumber());
+        if (StringUtils.isNotNull(info) && info.getNurseId().longValue() != nurseId.longValue()) {
             return "1";
         }
         return "0";
@@ -138,4 +138,26 @@ public class NurseServiceImpl implements INurseService {
     public int updateNurseStatus(Nurse nurse) {
         return nurseMapper.updateNurseStatus(nurse);
     }
+
+    /**
+     * 根据手机号查询护工(小程序使用)
+     * @param phoneNumber 手机号
+     * @return 结果
+     */
+    @Override
+    public Nurse selectNurseByPhoneNumber_mp(String phoneNumber) {
+        return nurseMapper.selectNurseByPhoneNumber_mp(phoneNumber);
+    }
+
+    /**
+     * 查询护工列表(小程序使用)
+     *
+     * @param nurse 护工
+     * @return 护工
+     */
+    @Override
+    public List<Nurse> selectNurseList_mp(Nurse nurse) {
+        return nurseMapper.selectNurseList_mp(nurse);
+    }
+
 }

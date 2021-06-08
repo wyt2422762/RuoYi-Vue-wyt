@@ -31,6 +31,16 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="状态" prop="status">
+        <el-select v-model="queryParams.status" placeholder="请选择状态" clearable size="small">
+          <el-option
+            v-for="dict in orderStatusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -54,13 +64,22 @@
     <el-table v-loading="loading" :data="orderList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="订单编号" align="center" prop="orderNo" />
-      <el-table-column label="订单类型" align="center" prop="orderType" />
+      <el-table-column label="订单类型" align="center" prop="orderType" >
+        <template slot-scope="scope">
+          <span>{{ parseOrderType(scope.row.orderType) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="服务时间" align="center" prop="workTime" />
       <el-table-column label="服务星级" align="center" prop="workLevel" />
       <el-table-column label="金额" align="center" prop="money" />
       <el-table-column label="客户" align="center" prop="consumerName" />
       <el-table-column label="护工" align="center" prop="nurseName" />
       <el-table-column label="备注" align="center" prop="remark" />
+      <el-table-column label="状态" align="center" prop="status" >
+        <template slot-scope="scope">
+          <span>{{ parseOrderStatus(scope.row.status) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -93,8 +112,13 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" :disabled="true">
         <el-form-item label="订单类型" prop="orderType">
-          <el-select v-model="form.orderType" placeholder="请选择订单类型">
-            <el-option label="请选择字典生成" value="" />
+          <el-select v-model="form.orderType" placeholder="请选择订单类型" clearable size="small">
+            <el-option
+              v-for="dict in orderTypeOptions"
+              :key="dict.dictValue"
+              :label="dict.dictLabel"
+              :value="dict.dictValue"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="服务时间" prop="workTime">
@@ -111,6 +135,16 @@
         </el-form-item>
         <el-form-item label="护工" prop="nurseId">
           <el-input v-model="form.nurseId" placeholder="请输入护工id" />
+        </el-form-item>
+        <el-form-item label="状态" prop="nurseId">
+          <el-select v-model="form.status" placeholder="请选择订单状态" clearable size="small">
+            <el-option
+              v-for="dict in orderStatusOptions"
+              :key="dict.dictValue"
+              :label="dict.dictLabel"
+              :value="dict.dictValue"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
@@ -189,6 +223,8 @@ export default {
       orderList: [],
       //订单类型字典
       orderTypeOptions: [],
+      //订单状态字典
+      orderStatusOptions: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -212,6 +248,7 @@ export default {
         nurseId: null,
         nurseName: null,
         evaluationId: null,
+        status: null
       },
       // 表单参数
       form: {},
@@ -227,6 +264,9 @@ export default {
     this.getList();
     this.getDicts("bus_order_type").then(response => {
       this.orderTypeOptions = response.data;
+    });
+    this.getDicts("bus_order_status").then(response => {
+      this.orderStatusOptions = response.data;
     });
   },
   methods: {
@@ -331,7 +371,23 @@ export default {
         }).then(response => {
           this.download(response.msg);
         })
-    }
+    },
+    // 订单类型处理
+    parseOrderType(value) {
+      for (let wlo in this.orderTypeOptions) {
+        if (this.orderTypeOptions[wlo].dictValue === value) {
+          return this.orderTypeOptions[wlo].dictLabel;
+        }
+      }
+    },
+    // 订单章台处理
+    parseOrderStatus(value) {
+      for (let wlo in this.orderStatusOptions) {
+        if (this.orderStatusOptions[wlo].dictValue === value) {
+          return this.orderStatusOptions[wlo].dictLabel;
+        }
+      }
+    },
   }
 };
 </script>

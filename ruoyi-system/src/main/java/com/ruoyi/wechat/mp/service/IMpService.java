@@ -43,10 +43,15 @@ public interface IMpService {
 
     /**
      * 显示、不显示轮播图
-     *
-     * @param id     轮播图id
-     * @param status 是否显示
+     * @param lunBoTu 轮播图信息
      * @return 结果
      */
     int updateLunBoTuStatus(LunBoTu lunBoTu);
+
+    /**
+     * 获取轮播图(小程序使用)
+     *
+     * @return 结果
+     */
+    List<LunBoTu> getLunBoTu_mp();
 }

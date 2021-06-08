@@ -28,7 +28,7 @@ public interface NurseMapper
      * @param phoneNumber 手机号码
      * @return 结果
      */
-    Consumer checkPhoneUnique(String phoneNumber);
+    Nurse checkPhoneUnique(String phoneNumber);
     
     /**
      * 查询护工列表
@@ -85,5 +85,20 @@ public interface NurseMapper
      * @return 结果
      */
     int updateNurseStatus(Nurse nurse);
+
+    /**
+     * 根据手机号查询客户(小程序使用)
+     * @param phoneNumber 手机号
+     * @return 结果
+     */
+    Nurse selectNurseByPhoneNumber_mp(String phoneNumber);
+
+    /**
+     * 查询护工列表(小程序使用)
+     *
+     * @param nurse 护工
+     * @return 护工
+     */
+    List<Nurse> selectNurseList_mp(Nurse nurse);
 
 }
