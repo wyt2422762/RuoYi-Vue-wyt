@@ -180,7 +180,7 @@ export default {
   },
   created() {
     this.getList();
-    this.getDicts("bus_workType_accompany").then(response => {
+    this.getDicts("bus_type_hospitalcare").then(response => {
       this.typeOptions = response.data;
     });
     this.getDicts("bus_hourPerDay").then(response => {

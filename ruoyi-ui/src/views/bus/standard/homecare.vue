@@ -49,7 +49,7 @@
       <el-table-column type="selection" width="55" align="center" />
 <!--      <el-table-column label="id" align="center" prop="id" />-->
       <el-table-column label="编号" align="center" prop="no" />
-      <el-table-column label="服务类型" align="center" prop="type" :formatter="typeFormat" />
+      <el-table-column label="类型" align="center" prop="type" :formatter="typeFormat" />
       <el-table-column label="人数" align="center" prop="num" />
       <el-table-column label="每日服务小时数" align="center" prop="hourPerDay" :formatter="hourPerDayFormat" />
       <el-table-column label="押金" align="center" prop="deposit" />
@@ -85,7 +85,7 @@
     <!-- 添加或修改收费标准-居家陪护对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="560px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="服务类型" prop="type">
+        <el-form-item label="类型" prop="type">
           <el-select v-model="form.type" placeholder="请选择服务类型">
             <el-option
               v-for="dict in typeOptions"
@@ -180,7 +180,7 @@ export default {
   },
   created() {
     this.getList();
-    this.getDicts("bus_workType_accompany").then(response => {
+    this.getDicts("bus_type_homecare").then(response => {
       this.typeOptions = response.data;
     });
     this.getDicts("bus_hourPerDay").then(response => {
