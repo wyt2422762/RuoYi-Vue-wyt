@@ -380,7 +380,7 @@ export default {
         }
       }
     },
-    // 订单章台处理
+    // 订单状态处理
     parseOrderStatus(value) {
       for (let wlo in this.orderStatusOptions) {
         if (this.orderStatusOptions[wlo].dictValue === value) {
