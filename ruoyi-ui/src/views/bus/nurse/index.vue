@@ -304,6 +304,34 @@
             </el-form-item>
           </el-col>
         </el-row>
+
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="标签" prop="labels">
+              <el-select multiple v-model="form.labels" placeholder="请选择标签" clearable size="small">
+                <el-option
+                  v-for="dict in nurseLabelsOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="能力" prop="abilities">
+              <el-select multiple v-model="form.abilities" placeholder="请选择能力" clearable size="small">
+                <el-option
+                  v-for="dict in nurseAbilitiesOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
         <el-row>
           <el-col :span="24">
             <el-form-item label="备注" prop="remark">
@@ -366,6 +394,10 @@ export default {
       workStatusOptions: [],
       // 服务星级字典
       workLevelOptions: [],
+      // 护工标签字典
+      nurseLabelsOptions: [],
+      // 护工标签字典
+      nurseAbilitiesOptions: [],
       // 详情弹出层标题
       title: "",
       // 订单弹出层标题
@@ -464,6 +496,12 @@ export default {
     });
     this.getDicts("bus_workLevel").then(response => {
       this.workLevelOptions = response.data;
+    });
+    this.getDicts("bus_nurse_label").then(response => {
+      this.nurseLabelsOptions = response.data;
+    });
+    this.getDicts("bus_nurse_ability").then(response => {
+      this.nurseAbilitiesOptions = response.data;
     });
   },
   methods: {
