@@ -3,6 +3,7 @@ package com.ruoyi.bus.domain;
 import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.validation.group.CreateGroup;
 import com.ruoyi.common.validation.group.EditGroup;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -10,6 +11,9 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 护工对象 sys_nurse
@@ -73,6 +77,11 @@ public class Nurse extends BaseEntity {
      */
     @Excel(name = "服务状态")
     private String workStatus;
+
+    //标签
+    private List<String> labels;
+    //能力
+    private List<String> abilities;
 
     /**
      * 头像
@@ -196,6 +205,22 @@ public class Nurse extends BaseEntity {
 
     public void setIdNo(String idNo) {
         this.idNo = idNo;
+    }
+
+    public List<String> getLabels() {
+        return this.labels;
+    }
+
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
+    }
+
+    public List<String> getAbilities() {
+        return this.abilities;
+    }
+
+    public void setAbilities(List<String> abilities) {
+        this.abilities = abilities;
     }
 
     @Override
