@@ -24,7 +24,7 @@ import java.util.List;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/wx/{appId}/system/dept")
+@RequestMapping("/wx/{appId}/dept")
 public class SysDeptController extends BaseController
 {
     @Autowired

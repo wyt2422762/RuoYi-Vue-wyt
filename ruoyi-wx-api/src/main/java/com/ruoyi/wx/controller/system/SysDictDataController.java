@@ -25,7 +25,7 @@ import java.util.List;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/wx/{appId}/system/dict/data")
+@RequestMapping("/wx/{appId}/dict/data")
 public class SysDictDataController extends BaseController
 {
     @Autowired

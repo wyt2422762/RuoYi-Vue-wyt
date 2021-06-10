@@ -78,10 +78,19 @@ public class Nurse extends BaseEntity {
     @Excel(name = "服务状态")
     private String workStatus;
 
-    //标签
+    /**
+     * 标签
+     */
     private List<String> labels;
-    //能力
+    /**
+     * 能力
+     */
     private List<String> abilities;
+
+    /**
+     * 证书
+     */
+    private List<String> certificates;
 
     /**
      * 头像
@@ -221,6 +230,14 @@ public class Nurse extends BaseEntity {
 
     public void setAbilities(List<String> abilities) {
         this.abilities = abilities;
+    }
+
+    public List<String> getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates(List<String> certificates) {
+        this.certificates = certificates;
     }
 
     @Override

@@ -230,6 +230,38 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
+            <el-form-item label="头像" >
+              <!-- 用http-request实现自定义上传 -->
+              <el-upload
+                ref="ed"
+                class="avatar-uploader"
+                action=""
+                :limit="1"
+                :http-request="avatarUpload"
+                :show-file-list="false"
+                :before-upload="beforeAvatarUpload"
+                :headers="headers"
+                list-type="picture">
+                <img v-if="form.avatar" :src="getPreviews(form.avatar)" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="证书" prop="certificates">
+              <el-select multiple v-model="form.certificates" placeholder="请选择证书" clearable size="small">
+                <el-option
+                  v-for="dict in nurseCertificatesOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
             <el-form-item label="姓名" prop="name">
               <el-input v-model="form.name" placeholder="请输入姓名"/>
             </el-form-item>
@@ -347,18 +379,18 @@
     </el-dialog>
 
     <!-- 订单列表弹出框 -->
-    <orderList :nurseId="rowNurseId" :open="orderOpen" :title="orderTitle" @close="closeOrderUp" />
+    <orderList ref="ol" :nurseId="rowNurseId" :open="orderOpen" :title="orderTitle" @close="closeOrderUp" />
 
   </div>
 </template>
 
 <script>
 import orderList from "./orderList";
-import {listNurse, getNurse, delNurse, addNurse, updateNurse, exportNurse, changeNurseStatus, listNurseOrder} from "@/api/bus/nurse";
+import {listNurse, getNurse, delNurse, addNurse, updateNurse, exportNurse, changeNurseStatus, addAvatar} from "@/api/bus/nurse";
 import {treeselect} from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
-import NurseOrderList from "@/views/bus/nurse/orderList";
+import {getToken} from "@/utils/auth";
 
 export default {
   name: "Nurse",
@@ -398,6 +430,8 @@ export default {
       nurseLabelsOptions: [],
       // 护工标签字典
       nurseAbilitiesOptions: [],
+      // 护工证书字典
+      nurseCertificatesOptions: [],
       // 详情弹出层标题
       title: "",
       // 订单弹出层标题
@@ -473,7 +507,12 @@ export default {
         label: "label"
       },
       // 点击行的nurseId
-      rowNurseId: null
+      rowNurseId: null,
+
+      //头像上传相关
+      headers: {
+        Authorization: "Bearer " + getToken(),
+      },
     };
   },
   watch: {
@@ -503,6 +542,10 @@ export default {
     this.getDicts("bus_nurse_ability").then(response => {
       this.nurseAbilitiesOptions = response.data;
     });
+    this.getDicts("bus_nurse_certificate").then(response => {
+      this.nurseCertificatesOptions = response.data;
+    });
+
   },
   methods: {
     /** 查询护工列表 */
@@ -668,17 +711,78 @@ export default {
     },
     /** 订单按钮操作 */
     handleOrder(row) {
-      debugger;
       const nurseId = row.nurseId;
       this.orderOpen = true;
       this.orderTitle = "护工订单";
       this.rowNurseId = nurseId;
+
+      // this.$refs.ol.getList();
+
     },
     //订单弹窗关闭
     closeOrderUp(){
       this.orderOpen = false;
       this.orderTitle = '';
-    }
+    },
+    //头像上传前
+    beforeAvatarUpload(file) {
+      // 验证文件类型
+      let testmsg = file.name.substring(file.name.lastIndexOf('.') + 1).toLowerCase();
+      const extension = testmsg === 'jpg' || testmsg === 'png' || testmsg === 'gif'
+      if (!extension) {
+        this.$message({
+          message: '上传文件只能是jpg/png/gif格式!',
+          duration: 1000,
+          showClose: true,
+          type: 'warning'
+        });
+      }
+      return extension;
+    },
+    //头像上传
+    avatarUpload(obj){
+      let formData = new FormData();
+      formData.append("file", obj.file);
+      addAvatar(formData).then(res => {
+        this.$refs['ed'].clearFiles();
+        this.form.avatar = res.imgUrl
+      });
+    },
+    //预览路径
+    getPreviews(url){
+      return [process.env.VUE_APP_BASE_API + url];
+    },
   }
 };
 </script>
+
+<style lang="css" scoped>
+.avatar-uploader {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  width: 78px;
+  height: 78px;
+}
+
+.avatar-uploader:hover {
+  border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 78px;
+  height: 78px;
+  line-height: 78px;
+  text-align: center;
+}
+
+.avatar {
+  width: 78px;
+  height: 78px;
+  display: flex;
+}
+</style>

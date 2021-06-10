@@ -79,7 +79,7 @@ public class EvaluationController extends BaseController
     @GetMapping(value = "getByOrderNo/{orderNo}")
     public AjaxResult getByOrderNo(@PathVariable("orderNo") Long orderNo)
     {
-        return AjaxResult.success(evaluationService.selectEvaluationById(orderNo));
+        return AjaxResult.success(evaluationService.selectEvaluationByOrderNo(orderNo));
     }
 
     /**

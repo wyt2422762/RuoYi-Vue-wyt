@@ -54,7 +54,6 @@ export function exportOrder(query) {
 
 //查询订单评价
 export function getEvaluateData(orderNo){
-  debugger;
   return request({
     url: '/bus/evaluation/getByOrderNo/' + orderNo,
     method: 'get'

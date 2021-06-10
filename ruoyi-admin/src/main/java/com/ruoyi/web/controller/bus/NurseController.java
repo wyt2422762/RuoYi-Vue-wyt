@@ -3,21 +3,28 @@ package com.ruoyi.web.controller.bus;
 import com.ruoyi.bus.domain.Nurse;
 import com.ruoyi.bus.service.INurseService;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.validation.group.CreateGroup;
 import com.ruoyi.common.validation.group.EditGroup;
+import com.ruoyi.wechat.mp.domain.LunBoTu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -125,5 +132,20 @@ public class NurseController extends BaseController
         nurseService.checkNurseAllowed(nurse);
         nurse.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(nurseService.updateNurseStatus(nurse));
+    }
+
+    /**
+     * 上传头像
+     */
+    @PreAuthorize("@ss.hasPermi('bus:nurse:add') or @ss.hasPermi('bus:nurse:edit')")
+    @PostMapping("/uploadAvatar")
+    public AjaxResult add(@RequestParam(value="file", required = false) MultipartFile file) throws IOException {
+        if (!file.isEmpty()){
+            String path = FileUploadUtils.upload(RuoYiConfig.getNurseAvatarPath(), file);
+            AjaxResult ajax = AjaxResult.success();
+            ajax.put("imgUrl", path);
+            return ajax;
+        }
+        return AjaxResult.error("上传图片异常，请联系管理员");
     }
 }

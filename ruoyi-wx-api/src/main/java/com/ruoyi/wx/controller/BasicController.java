@@ -33,7 +33,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/wx/{appId}/base")
-public class BaseController {
+public class BasicController {
 
     @Autowired
     private IConsumerService consumerService;

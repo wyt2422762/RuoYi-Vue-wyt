@@ -76,3 +76,14 @@ export function listNurseOrder(nurseId){
     data: data
   })
 }
+
+//上传头像
+export function addAvatar(data) {
+  debugger
+  return request({
+    url: '/bus/nurse/uploadAvatar',
+    method: 'post',
+    headers: {"Content-Type": "multipart/form-data"},
+    data: data
+  })
+}

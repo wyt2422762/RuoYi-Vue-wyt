@@ -1,13 +1,13 @@
 package com.ruoyi.bus.domain;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.validation.group.EditGroup;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 订单表
@@ -45,6 +45,11 @@ public class Order extends BaseEntity {
     private Long money;
 
     /**
+     * 押金
+     */
+    private Long deposit;
+
+    /**
      * 客户id
      */
     @NotNull(message = "客户id不能为空")
@@ -65,6 +70,12 @@ public class Order extends BaseEntity {
      * 护工姓名
      */
     private String nurseName;
+
+    /**
+     * 服务地址
+     */
+    @NotNull(message = "地址不能为空")
+    private String addr;
 
     /**
      * 评价id
@@ -96,6 +107,12 @@ public class Order extends BaseEntity {
      */
     @Excel(name = "删除标志", readConverterExp = "删除标志（0代表存在 2代表删除)")
     private String delFlag;
+
+    /**
+     * 付款时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date payTime;
 
     public Long getOrderNo() {
         return orderNo;
@@ -215,5 +232,21 @@ public class Order extends BaseEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
     }
 }

@@ -106,6 +106,13 @@ public class RuoYiConfig
     }
 
     /**
+     * 获取护工头像上传路劲
+     */
+    public static String getNurseAvatarPath(){
+        return getProfile() + "/bus/nurse/avatar";
+    }
+
+    /**
      * 获取下载路径
      */
     public static String getDownloadPath()

@@ -1,5 +1,8 @@
 package com.ruoyi.common.utils;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
  * 订单编号生成工具类
  *

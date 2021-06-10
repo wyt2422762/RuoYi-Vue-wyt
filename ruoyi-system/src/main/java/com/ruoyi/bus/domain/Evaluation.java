@@ -35,6 +35,11 @@ public class Evaluation extends BaseEntity {
     private String consumerName;
 
     /**
+     * 客户电话
+     */
+    private String consumerPhone;
+
+    /**
      * 护工id
      */
     @NotNull(message = "护工id不能为空")
@@ -67,6 +72,16 @@ public class Evaluation extends BaseEntity {
      */
     @Excel(name = "删除标志", readConverterExp = "删除标志（0代表存在 2代表删除)")
     private String delFlag;
+
+    /**
+     * 客户
+     */
+    private Consumer consumer;
+
+    /**
+     * 护工
+     */
+    private Nurse nurse;
 
     public Long getEvaluationId() {
         return evaluationId;
@@ -150,5 +165,29 @@ public class Evaluation extends BaseEntity {
 
     public void setDelFlag(String delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public String getConsumerPhone() {
+        return consumerPhone;
+    }
+
+    public void setConsumerPhone(String consumerPhone) {
+        this.consumerPhone = consumerPhone;
+    }
+
+    public Consumer getConsumer() {
+        return consumer;
+    }
+
+    public void setConsumer(Consumer consumer) {
+        this.consumer = consumer;
+    }
+
+    public Nurse getNurse() {
+        return nurse;
+    }
+
+    public void setNurse(Nurse nurse) {
+        this.nurse = nurse;
     }
 }

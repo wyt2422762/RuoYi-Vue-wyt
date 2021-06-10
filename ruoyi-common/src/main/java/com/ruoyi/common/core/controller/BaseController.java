@@ -60,6 +60,15 @@ public class BaseController
     }
 
     /**
+     * 设置请求分页数据
+     */
+    protected void startPage(int pageNum, int pageSize, String orderBy)
+    {
+        String orderBy1 = SqlUtil.escapeOrderBySql(orderBy);
+        PageHelper.startPage(pageNum, pageSize, orderBy1);
+    }
+
+    /**
      * 响应请求分页数据
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })

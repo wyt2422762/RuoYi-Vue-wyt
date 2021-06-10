@@ -72,9 +72,10 @@
       <el-table-column label="服务时间" align="center" prop="workTime" />
       <el-table-column label="服务星级" align="center" prop="workLevel" />
       <el-table-column label="金额" align="center" prop="money" />
-      <el-table-column label="客户" align="center" prop="consumerName" />
-      <el-table-column label="护工" align="center" prop="nurseName" />
-      <el-table-column label="备注" align="center" prop="remark" />
+      <el-table-column label="客户" align="center" prop="consumer.name" />
+      <el-table-column label="护工" align="center" prop="nurse.name" />
+<!--      <el-table-column label="备注" align="center" prop="remark" />-->
+      <el-table-column label="创建时间" align="center" prop="createTime" />
       <el-table-column label="状态" align="center" prop="status" >
         <template slot-scope="scope">
           <span>{{ parseOrderStatus(scope.row.status) }}</span>
@@ -96,6 +97,14 @@
             @click="handleEvaluate(scope.row)"
             v-hasPermi="['bus:evaluation:query']"
           >评价</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            v-if="scope.row.status == 0"
+            icon="el-icon-chat-line-square"
+            @click="handleDispatch(scope.row)"
+            v-hasPermi="['bus:evaluation:edit']"
+          >派遣</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -238,6 +247,8 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        orderByColumn: 'create_time',
+        isAsc: 'desc',
         orderNo: null,
         orderType: null,
         workTime: null,

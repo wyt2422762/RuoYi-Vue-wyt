@@ -123,8 +123,6 @@ export default {
     };
   },
   created() {
-    this.queryParams.nurseId = this.cNurseId;
-    this.getList();
     this.getDicts("bus_order_type").then(response => {
       this.orderTypeOptions = response.data;
     });
@@ -153,10 +151,16 @@ export default {
     },
   },
   watch: {
-    open: function (){
-      this.cOpen = this.open;
-      this.cTitle = this.title;
-      this.cNurseId = this.nurseId
+    open: function (newV, oldV){
+      if(newV !== oldV){
+        this.cOpen = this.open;
+        this.cTitle = this.title;
+        this.cNurseId = this.nurseId
+        this.queryParams.nurseId = this.cNurseId
+        if(newV){
+          this.getList()
+        }
+      }
     }
   }
 }

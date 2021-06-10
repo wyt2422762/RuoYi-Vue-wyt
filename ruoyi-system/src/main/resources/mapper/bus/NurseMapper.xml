@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
         <result property="labels" column="label"  typeHandler="com.ruoyi.common.utils.mybatis.List2VarcharHandler" />
         <result property="abilities" column="ability" typeHandler="com.ruoyi.common.utils.mybatis.List2VarcharHandler" />
+        <result property="certificates" column="certificate" typeHandler="com.ruoyi.common.utils.mybatis.List2VarcharHandler" />
 
         <result property="status"    column="status"    />
         <result property="delFlag"    column="delFlag"    />
@@ -41,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <sql id="selectNurseVo">
         select n.nurseId, n.deptId, n.`name`, n.age, n.sex, n.phonenumber, n.workLevel,
-               n.workStatus, n.avatar, n.label, n.ability, n.status,
+               n.workStatus, n.avatar, n.label, n.ability, n.status, n.certificate,
                n.delFlag, n.create_by, n.create_time, n.update_by, n.update_time, n.remark,
                d.dept_id, d.parent_id, d.dept_name, d.order_num, d.leader, d.status as dept_status
         from nurse n
@@ -78,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into nurse
         <trim prefix="(" suffix=")" suffixOverrides=",">
             deptId, `name`, age, sex, phonenumber, workLevel, workStatus, avatar,
-            label, ability,
+            label, ability, certificate,
             status, create_by, create_time, remark,
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -86,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{workStatus}, #{avatar},
             #{labels, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
             #{abilities, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
+            #{certificates, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
             #{status}, #{createBy}, sysdate(), #{remark}
          </trim>
     </insert>
@@ -98,6 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             avatar = #{avatar},
             label = #{labels, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
             ability = #{abilities, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
+            certificate = #{certificates, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
             status = #{status}, update_by = #{updateBy},
             update_time = sysdate(), remark = #{remark}
         </trim>

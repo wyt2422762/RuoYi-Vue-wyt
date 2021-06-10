@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orderNo"    column="orderNo"    />
         <result property="consumerId"    column="consumerId"    />
         <result property="consumerName"    column="consumerName"    />
+        <result property="consumerPhone"    column="consumerPhone"    />
         <result property="nurseId"    column="nurseId"    />
         <result property="nurseName"    column="nurseName"    />
         <result property="score"    column="score"    />
@@ -20,11 +21,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
+
+        <association property="consumer" column="consumerId"
+                     javaType="com.ruoyi.bus.domain.Consumer"
+                     select="com.ruoyi.bus.mapper.ConsumerMapper.selectConsumerById"
+        />
+        <association property="nurse" column="nurseId"
+                     javaType="com.ruoyi.bus.domain.Nurse"
+                     select="com.ruoyi.bus.mapper.NurseMapper.selectNurseById"
+        />
+
     </resultMap>
 
     <sql id="selectEvaluationVo">
-        select evaluationId, orderNo, consumerId, consumerName, nurseId,
-               nurseName, score, text, `time`,
+        select evaluationId, orderNo, consumerId, consumerName, consumerPhone,
+               nurseId, nurseName, score, text, `time`,
                create_by, create_time, update_by, update_time, remark
         from evaluation
     </sql>
@@ -33,9 +44,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectEvaluationVo"/>
         <where>
             delFlag = '0'
-            <if test="orderId != null "> and orderNo = #{orderNo}</if>
+            <if test="orderNo != null"> and orderNo = #{orderNo}</if>
             <if test="consumerId != null "> and consumerId = #{consumerId}</if>
             <if test="consumerName != null  and consumerName != ''"> and consumerName like concat('%', #{consumerName}, '%')</if>
+            <if test="consumerPhone != null and consumerPhone != ''"> and consumerPhone = #{consumerPhone}</if>
             <if test="nurseId != null "> and nurseId = #{nurseId}</if>
             <if test="nurseName != null  and nurseName != ''"> and nurseName like concat('%', #{nurseName}, '%')</if>
             <if test="score != null "> and score = #{score}</if>
@@ -56,10 +68,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="insertEvaluation" parameterType="com.ruoyi.bus.domain.Evaluation" useGeneratedKeys="true" keyProperty="evaluationid">
         insert into evaluation(
-            orderNo , consumerId, consumerName, nurseId, nurseName, score, text, `time`,
+            orderNo , consumerId, consumerName, consumerPhone, nurseId, nurseName, score, text, `time`,
             create_by, create_time, remark
         ) values (
-            #{orderNo}, #{consumerId}, #{consumerName}, #{nurseId}, #{nurseName}, #{score}, #{text},
+            #{orderNo}, #{consumerId}, #{consumerName}, #{consumerPhone}, #{nurseId}, #{nurseName}, #{score}, #{text},
             #{time}, #{createBy}, sysdate(), #{remark}
         )
     </insert>
@@ -70,6 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             orderNo = #{orderNo},
             consumerId = #{consumerId},
             consumerName = #{consumerName},
+            consumerPhone = #{consumerPhone},
             nurseId = #{nurseId},
             nurseName = #{nurseName},
             score = #{score},
