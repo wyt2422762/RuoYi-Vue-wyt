@@ -1,0 +1,24 @@
+<!--pages/YYPH/YYPH.wxml-->
+<view class="container aui-palace aui-palace-one2 aui-palace-two">
+  
+  <!-- <view class="aui-palace-grid" bindtap="goto" data-url="../JJPH_zlx/JJPH_zlx">
+    <view class="aui-palace-grid-icon2">
+      <image src="../../img/icon_28.png"></image>
+    </view>
+  </view>
+
+  <view class="aui-palace-grid" bindtap="goto" data-url="../JJPH_qhx/JJPH_qhx">
+    <view class="aui-palace-grid-icon2">
+      <image src="../../img/icon_29.png"></image>
+    </view>
+  </view> -->
+
+  <view wx:for="{{typeList}}" wx:for-index="index" wx:for-item="type"  wx:key="dictCode" class="aui-palace-grid" bindtap="goto" data-url="../JJPH_order/JJPH_order" data-typeid="{{type.dictValue}}" data-typename="{{type.dictLabel}}">
+    <view class="aui-palace-grid-icon2">
+      <image wx:if="{{index%2 === 0}}" src="../../img/icon_28.png"></image>
+      <image wx:if="{{index%2 !== 0}}" src="../../img/icon_29.png"></image>
+      {{type.dictLabel}}
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<view class="container">
+  <section class="aui-flexView">
+    <section class="aui-scrollView">
+    <!-- 轮播图 -->
+    <view style="margin:10px;">
+      <swiper class='u-wrp-bnr' indicator-dots='true' autoplay='true' interval='5000' duration='1000' circular='true'>
+        <block wx:for="{{bannerUrl}}" wx:for-index="index" wx:key="id">
+          <swiper-item style="border-radius: 15px;overflow: :hidden;"> 
+            <image src='{{bannerBaseUrl}}{{item.url}}' class='u-img-slide' mode='aspectFill' ></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    
+      <!-- 金刚区 -->
+      <view class="aui-palace aui-palace-one2 aui-palace-two">
+        <navigator url="../JGRZ/JGRZ" class="aui-palace-grid" hover-class="none">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_20.png"></image>
+          </view>
+          <view class="aui-palace-grid-text">
+            <h2>入住说明</h2>
+          </view>
+        </navigator>
+        <navigator url="../JJPH/JJPH" class="aui-palace-grid" hover-class="none">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_21.png"></image>
+          </view>
+          <view class="aui-palace-grid-text">
+            <h2>居家陪护</h2>
+          </view>
+        </navigator>
+        <navigator url="../YYPH/YYPH" class="aui-palace-grid" hover-class="none">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_22.png"></image>
+          </view>
+          <view class="aui-palace-grid-text">
+            <h2>医院陪护</h2>
+          </view>
+        </navigator>
+        <navigator url="../JZFW/JZFW" class="aui-palace-grid" hover-class="none"> 
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_23.png"></image>
+          </view>
+          <view class="aui-palace-grid-text">
+            <h2>家政服务</h2>
+          </view>
+        </navigator>
+        
+      </view>
+    </section>
+  </section>
+</view>

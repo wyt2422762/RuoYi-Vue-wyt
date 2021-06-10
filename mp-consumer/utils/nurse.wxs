@@ -1,0 +1,27 @@
+var filters = {    
+    // 订单类型处理
+    parseSex: function(value) {
+      switch(value){
+        case "0":
+          return "男"
+        case "1":
+          return "女"
+        case "2":
+          return "未知"
+      }
+    },
+    // 服务状态处理
+    parseWorkStatus: function(value) {
+      switch(value){
+        case "0":
+          return "空闲"
+        case "1":
+          return "服务中"
+      }
+    },
+}
+
+module.exports = {
+  parseSex: filters.parseSex,
+  parseWorkStatus: filters.parseWorkStatus,
+}

@@ -1,0 +1,127 @@
+/* pages/login/login.wxss */
+
+page{
+  height: 100%;
+  background-repeat:no-repeat;
+  overflow: hidden;
+  background-size:100% 100%;
+  -moz-background-size:100% 100%;
+}
+ .bj{
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+z-index: -10;
+ }
+ .bj image{
+width: 100%;
+height: 100%;
+ }
+ .bj_bottom{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+
+ } 
+ .bj_bottom image{
+  width: 100%;
+  height: 100%;
+   }
+.container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  /* background-color: #f2f2f2;     */
+} 
+ 
+/*登录图片*/
+.login{
+   flex: none; 
+  margin: 0 auto;
+ 
+}
+.login image{
+ 
+  width: 289rpx;
+  height: 224rpx;
+  margin-top: 180rpx;
+
+}
+.name{
+  color: #fff;
+  font-size: 18px;
+  width: 100px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.login-img2{
+  width: 170rpx;
+  height: 38rpx;margin-top: 30rpx;
+}
+
+
+/*表单内容*/
+.login-from {
+  margin-top: 60px;
+  flex: auto;
+  height:100%;
+}
+ .weui-cell_input{
+   margin-top: 15px;
+ }
+/* 输入框 */
+.myno{
+  width: 75%;
+  height: 80rpx;
+  margin: 0 auto;
+  border-bottom: 1px #fff solid;
+ 
+}
+.mypwd{
+  width: 75%;
+  height: 80rpx;
+  margin: 0 auto;
+  border-bottom: 1px #fff solid;
+  margin-top: 20rpx;
+}
+/*按钮*/
+.loginBtnView {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+ 
+.loginBtn {
+  width: 55%;
+  /* height: 80rpx; */
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: bold; 
+  line-height: 60rpx;
+  margin-top: 150px;
+  color: #49a3fe;
+  background-color:#fff;
+  border-radius: 100px;
+}
+
+.weui-cell__bd input{
+  color: #fff;
+  margin-left: 10px;
+}
+.place-holder{ /* WebKit browsers */
+  color: #fff;
+
+}
+.nameImage, .keyImage {
+  margin-right: 10px;
+  width: 24px;
+  height: 18px
+}

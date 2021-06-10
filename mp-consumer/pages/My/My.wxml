@@ -1,0 +1,55 @@
+<!-- main -->
+<view class="main">
+  <!-- card1 -->
+  <view class="card1"></view>
+  <!-- card2 -->
+  <view class="card2">
+    <!-- 卡片1 -->
+    <view class="one">
+      <!-- 头像 -->
+      <view class="head">
+        <!-- <image wx:if="{{!isLogin}}" src="{{userInfo.avatarUrl}}"></image> -->
+        <image wx:if="{{!isLogin}}" src="../../img/head.png"></image>
+        <view class="head_inner" wx:if="{{isLogin}}">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+      </view>
+      <!-- 名字 -->
+      <view class="button" wx:if="{{!isLogin}}">
+        <button open-type="getPhoneNumber" bindgetphonenumber="login">登录
+        </button>
+      </view>
+      <view class="name" wx:if="{{isLogin}}">
+        <open-data type="userNickName"></open-data>
+      </view>
+    </view>
+    <!-- 卡片2 -->
+    <view class="two">
+      <!-- 个人信息 -->
+      <view class="vw" bindtap="goto" data-url="../GRXX/GRXX">
+        <view class="tu"><image src="../../img/4.1.png"></image></view>
+        <view class="grxx">个人信息</view>
+      </view>
+      <!-- 全部订单 -->
+      <view class="vw" bindtap="goto" data-url="../QBDD/QBDD">
+        <view class="tu"><image src="../../img/4.2.png"></image></view>
+        <view class="grxx">全部订单</view>
+      </view>
+      <!-- 投诉 -->
+      <view class="vw" bindtap="goto" data-url="../TSXQ/TSXQ">
+        <view class="tu"><image src="../../img/4.3.png"></image></view>
+        <view class="grxx">投诉</view>
+      </view>
+      <!-- 联系客服 -->
+      <view class="vw" bindtap="goto" data-url="">
+        <view class="tu"><image src="../../img/4.4.png"></image></view>
+        <view class="grxx">联系客服</view>
+      </view>
+      <!-- 退款记录 -->
+      <view class="vw" bindtap="goto" data-url="../TKLB/TKLB">
+        <view class="tu"><image src="../../img/4.5.png"></image></view>
+        <view class="grxx">退款记录</view>
+      </view>
+    </view>
+  </view>
+</view>

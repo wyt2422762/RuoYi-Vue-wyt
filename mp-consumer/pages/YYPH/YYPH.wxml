@@ -1,0 +1,12 @@
+<!--pages/YYPH/YYPH.wxml-->
+<view class="aui-palace aui-palace-one2 aui-palace-two">
+  <view wx:for="{{typeList}}" wx:for-index="index" wx:for-item="type" wx:key="dictCode" class="aui-palace-grid"
+    bindtap="goto" data-url="../YYPH_order/YYPH_order" data-typeid="{{type.dictValue}}"
+    data-typename="{{type.dictLabel}}">
+    <view class="aui-palace-grid-icon2">
+      <image wx:if="{{index%2 === 0}}" src="../../img/icon_28.png"></image>
+      <image wx:if="{{index%2 !== 0}}" src="../../img/icon_29.png"></image>
+      {{type.dictLabel}}
+    </view>
+  </view>
+</view>

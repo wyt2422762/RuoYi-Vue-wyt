@@ -1,0 +1,43 @@
+<!-- 总 -->
+<view class="main">
+  <!-- 头像 -->
+  <!-- <view class="message">
+    <view class="word">头像</view>
+    <view class="tu"><image src="../../img/head1.png"></image></view>
+  </view> -->
+  <!-- 姓名 -->
+  <view class="message">
+    <view class="word">姓名</view>
+    <view class="qhy">{{consumer.name}}</view>
+  </view>
+  <!-- 年龄 -->
+  <view class="message">
+    <view class="word">年龄</view>
+    <view class="qhy">{{consumer.age}}</view>
+  </view>
+  <!-- 手机号 -->
+  <view class="message">
+    <view class="word">手机号</view>
+    <view class="qhy">{{consumer.phonenumber}}</view>
+  </view>
+  <!-- 身份证号 -->
+  <view class="message">
+    <view class="word">身份证号</view>
+    <view class="qhy">{{consumer.idNo}}</view>
+  </view>
+  <!-- 紧急联系人姓名 -->
+  <view class="message">
+    <view class="word">紧急联系人姓名</view>
+    <view class="qhy">{{consumer.emergencyContactName}}</view>
+  </view>
+  <!-- 紧急联系人电话 -->
+  <view class="message">
+    <view class="word">紧急联系人电话</view>
+    <view class="qhy">{{consumer.emergencyContactPhone}}</view>
+  </view>
+  <!-- 家庭住址 -->
+  <view class="message1">
+    <view class="word1">家庭住址</view>
+    <view class="qhy1">{{consumer.addr}}</view>
+  </view>
+</view>

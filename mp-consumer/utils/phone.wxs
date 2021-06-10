@@ -1,0 +1,12 @@
+var filters = {    
+    // 订单类型处理
+    hideMiddle4: function(value) {
+      value = "" + value;
+      res = value.replace(value.substring(3,7), "****")
+      return res
+    },
+}
+
+module.exports = {
+  hideMiddle4: filters.hideMiddle4,
+}

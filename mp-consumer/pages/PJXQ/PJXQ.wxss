@@ -1,0 +1,40 @@
+/* pages/YJFK/YJFK.wxss */
+.container{
+  background-color: #f5f5f5;
+}
+
+.Btn {
+   position: absolute;
+   bottom: 10%;
+   left: 50%;
+   margin-left: -45%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    width: 90%;
+    border: solid 1px #3a74fd;
+    background: #188cff;
+    box-shadow: 0px 5px 10px 1.26px rgba(24, 140, 255, 0.57);
+    color: #fff;
+    letter-spacing: 4px;
+    font-weight: normal;
+    font-size: 18px;
+    border-radius: 50px;
+  }
+  .star-pos {
+    margin: 10rpx;
+    display: flex;
+    flex-direction: row;
+  }
+  .stars{
+    width: 48rpx;
+    height: 48rpx;
+    margin-left: 20rpx;
+  }
+  .fwtd{
+  font-size:12px;
+  line-height:25px;
+  margin-left:10px;
+  color:#ff5001;
+
+  }

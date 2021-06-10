@@ -1,0 +1,70 @@
+<!--pages/Report/Report.wxml-->
+<view class="page" style="border:none;">
+	<view class="weui-cells weui-cells_after-title" style="border:none;padding-bottom:35px;">
+		<!-- 产品名称 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			订单编号
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="请输入" />
+			</view>
+		</view>
+				<view class="height"></view>
+		<!-- 产品类型 -->
+		<view class="weui-cell weui-cell_select padding" style="border:none;">
+			<view class="weui-cell__hd weui-cell__hd_in-select-after" style="margin-left:16px;">
+			抬头类型
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 50px;">
+						<picker bindchange="bindCountryChange" value="{{countriesIndex}}" range="{{countries}}">
+				<view class="weui-input" style="color:#999;">{{countries[countryIndex]}}</view>
+			</picker>
+			</view>
+		</view>
+			<!-- 产品类型 -->
+		<view class="weui-cell weui-cell_select padding" style="border:none;">
+			<view class="weui-cell__hd weui-cell__hd_in-select-after" style="margin-left:16px;">
+			发票抬头
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 50px;">
+						<picker bindchange="bindinvoiceChange" value="{{invoiceIndex}}" range="{{invoice}}">
+				<view class="weui-input" style="color:#999;">{{invoice[invoiceIndex]}}</view>
+			</picker>
+			</view>
+		</view>
+			<view class="height"></view>
+	
+		<!-- 产品名称 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			开票金额
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="请输入" />
+			</view>
+		</view>
+			<!-- 产品名称 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			联系电话
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="请输入" />
+			</view>
+		</view>
+		<!-- 产品名称 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			税号
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="请输入" />
+			</view>
+		</view>
+	
+   
+
+		</view>
+	<view bindtap="submit" class=" Btn">提交</view>
+</view>

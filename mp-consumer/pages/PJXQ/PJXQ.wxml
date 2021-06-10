@@ -1,0 +1,28 @@
+<!--pages/YJFK/YJFK.wxml-->
+<view class="container">
+	<!-- 服务评价 -->
+	<view class="weui-cell weui-cell_active" style="background-color:#fff;border:none;justify-content: flex-start;">
+		<view class="weui-cell__hd">
+			<view class="weui-label" style="width: 70px;">服务评价</view>
+		</view>
+		<view class="weui-cell__hd">
+			<!-- 放星星 -->
+			<view class="star-pos">
+				<image class='stars' bindtap="changeColor" data-index='0' data-no="{{item}}" wx:for="{{stardata}}" src="{{flag[0]>=item? '../../img/star1.png': '../../img/star0.png'}}" />
+				<view class="fwtd">{{startext[0]}}</view>
+			</view>
+		</view>
+	</view>
+	<!-- 添加描述 -->
+	<view style="background-color:#fff;margin-top:8px;">
+		<view class="weui-cell  weui-cell_select" style="padding:16.5px;">
+			<view class="weui-cell__bd">
+				<view class="weui-label">添加描述</view>
+			</view>
+		</view>
+		<view class="weui-cell__bd" style="border:none;">
+			<textarea class="weui-textarea" model:value='{{ms}}'  placeholder="请输入..." style=" height: 6.3em;font-size:14px;padding-left: 17px;width:85%" />
+			</view>
+</view>
+<view bindtap="submit" class="aui-palace-one Btn" style="top:40%;">提交</view>
+</view>

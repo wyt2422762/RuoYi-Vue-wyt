@@ -1,0 +1,45 @@
+<!--pages/JDGZ/JDGZ.wxml-->
+
+<wxs src='../../utils/order.wxs' module='filters' />
+
+<loading hidden="{{hiddenLoading}}">正在加载</loading>
+
+<view class="aui-palace">
+	<navigator wx:for="{{orderList}}" wx:for-item="order" wx:key="orderNo" url="../DDXQ/DDXQ?orderNo={{order.orderNo}}" hover-class="none">
+		<view class="aui-palace-one">
+			<text class="name">{{order.orderNo}}</text>
+			<view class="Main">
+				<view class="contacts">
+					<view class="icon">
+						<image src="../../img/icon_01.png"></image>
+					</view>
+					<view class="lxr">服务人员</view>
+				</view>
+				<view class="contacts">{{order.nurse.name}}</view>
+			</view>
+			<view class="Main">
+				<view class="contacts">
+					<view class="icon">
+						<image src="../../img/icon_03.png"></image>
+					</view>
+					<view class="lxr">服务时间</view>
+				</view>
+				<view class="contacts" style="font-size:14px;margin-top:3px;">{{order.workTime}}</view>
+			</view>
+			<view class="Main">
+				<view class="contacts">
+					<view class="icon">
+						<image src="../../img/icon_13.png"></image>
+					</view>
+					<view class="lxr">付款金额</view>
+				</view>
+				<view class="contacts" style="font-size:14px;margin-top:3px;">{{order.money}}</view>
+			</view>
+			<!-- 状态 -->
+			<view class="ytk">{{filters.parseOrderStatus(order.status)}}</view>
+		</view>
+	</navigator>
+
+  <button loading="{{more.loading}}" catchtap="more">{{more.loadText}}</button>
+  
+</view>

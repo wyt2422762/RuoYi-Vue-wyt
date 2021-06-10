@@ -1,0 +1,49 @@
+page{
+  background-color: #f6f6f6;
+ 
+}
+.main{
+  margin-bottom: 120rpx;
+  padding-top: 20px;
+}
+.message{
+  width: 82%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: white;
+  border-radius: 15rpx;
+  padding: 30rpx 35rpx;
+  margin: 0 17px;
+  margin-bottom: 25rpx;
+  
+}
+.message1{
+  width: 82%;  margin: 0 17px;
+  background-color: white;
+  border-radius: 20rpx;
+  padding: 30rpx 35rpx;
+  margin-bottom: 30rpx;
+}
+.word{
+  font-size: 16px;
+  font-weight: 600;
+}
+.word1{
+  margin-bottom: 20rpx;
+  font-size: 16px;
+  font-weight: 600;
+}
+.tu image{
+  width: 120rpx;
+  height: 120rpx;
+}
+.qhy{
+  color: #8b8b8b;
+  font-size: 30rpx;
+}
+.qhy1{
+  color: #8b8b8b;
+  font-size: 30rpx;
+}

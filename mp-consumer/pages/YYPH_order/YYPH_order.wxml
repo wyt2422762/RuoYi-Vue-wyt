@@ -1,0 +1,106 @@
+<!--pages/ZLLR/ZLLR.wxml-->
+<view class="page">
+	<view class="top_img">
+		<view class='u-wrp-bnr'>
+			<image src='../../img/icon_24.png' class='u-img-slide' mode='aspectFill'></image>
+		</view>
+		<view class="introduce">
+			<view class="Self">自理老人介绍</view>
+			<view class="details">查看详情</view>
+		</view>
+	</view>
+	<!-- 请选择服务开始时间 -->
+	<view class="service" style="margin-top:20px;">请选择服务开始时间</view>
+	<view class="weui-cell">
+		<view class="weui-cell__bd weui-cell__ft_in-access">
+			<picker mode="date" bindchange="bindStartDateChange" value="{{startDate}}" start="{{nowDate}}">
+				<input class="weui-input" value='{{startDate}}' placeholder='' disabled='disabled' style="color:#999;" />
+			</picker>
+		</view>
+	</view>
+
+	<!-- 结束时间 -->
+	<view class="service" style="margin-top:20px;">请选择服务结束时间</view>
+	<view class="weui-cell">
+		<view class="weui-cell__bd weui-cell__ft_in-access">
+			<picker mode="date" bindchange="bindEndDateChange" value="{{endDate}}" start="{{nowDate}}">
+				<input class="weui-input" value='{{endDate}}' placeholder='' disabled='disabled' style="color:#999;" />
+			</picker>
+	</view>
+</view>
+
+<!-- 每日护理小时数 -->
+<view class="service">每日护理小时数</view>
+<view class="weui-cell">
+	<view class="weui-cell__bd weui-cell__ft_in-access">
+		<picker bindchange="dayTimeChange" value="{{dayTimeIndex}}" range="{{dayTime}}">
+			<input class="weui-input" value='{{dat}}' placeholder='' disabled='disabled' style="color:#999;" />
+		</picker>
+	</view>
+</view>
+<!-- 请填写服务地址 -->
+<view class="service">请填写服务地址</view>
+<view class="weui-cell">
+	<view class="weui-cell__bd"
+		style="padding: 10px;border: solid 1px #d7d7d7;background-color: #fff;border-radius: 4px;">
+		<input class="weui-input" style="color:#999;" value="{{order.addr}}" bindinput="addrChange" placeholder="请输入地址"></input>
+	</view>
+</view>
+<!-- 选择护工 -->
+<view class="service">请选择护工</view>
+<view class="weui-cell">
+	<view class="weui-cell__bd"
+		style="padding: 10px;border: solid 1px #d7d7d7;background-color: #fff;border-radius: 4px;">
+		<input class="weui-input" bindtap="goto" data-url="../HGLB/HGLB" style="color:#999;" value="{{nurse.name}}" disabled placeholder="点击选择护工"></input>
+	</view>
+</view>
+
+<!-- 押金 -->
+<view wx:if="{{deposit != null}}" class="list">
+	<view class="Escort">
+		<view class="fee">
+			<image src="../../img/icon_13.png"></image>
+		</view>
+		<view class="ph">押金</view>
+	</view>
+	<view>￥{{deposit}}</view>
+</view>
+
+<!-- 餐费 -->
+<view wx:if="{{mealSum != null}}" class="list">
+	<view class="Escort">
+		<view class="fee">
+			<image src="../../img/icon_13.png"></image>
+		</view>
+		<view class="ph">餐费</view>
+	</view>
+	<view>￥{{mealSum}}</view>
+</view>
+
+<!-- list1 -->
+<view class="list">
+	<view class="Escort">
+		<view class="fee">
+			<image src="../../img/icon_13.png"></image>
+		</view>
+		<view class="ph">总金额</view>
+	</view>
+	<view>￥{{order.money}}</view>
+</view>
+<!--相关协议-->
+<checkbox-group bindchange="bindAgreeChange">
+	<label class="weui-agree" for="weuiAgree">
+		<view class="weui-agree__text">
+			<checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{}}" />
+			<view class="weui-agree__checkbox-icon">
+				<icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+			</view>
+			阅读并同意<navigator url="" class="weui-agree__link">《夕阳红用户协议》</navigator>
+		</view>
+	</label>
+</checkbox-group>
+<!--提交按钮-->
+<view class="weui-btn-area">
+	<button class="weui-btn" type="primary" bindtap='submitOrder' disabled='{{btn_disabled}}'>确定提交</button>
+</view>
+</view>

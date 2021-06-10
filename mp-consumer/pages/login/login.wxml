@@ -1,0 +1,25 @@
+<view class="container">
+<view style="height:30px;"></view>
+	<view class="logo">
+		<image src="../../img/logo.png"></image>
+		<text class="name">智慧养老</text>
+	</view>
+	<view class="page-body" style="margin:22px;width:87%;margin-top:25%;">
+		<view class="weui-cell weui-cell_input" style="position: relative;">
+			<view class="aui-palace-grid-icon2">
+				<image src="../../img/icon_06.png"></image>
+			</view>
+			<input class="weui-input" maxlength="11" placeholder="请输入手机号码" style="border:solid 1px #ccc;border-radius:50px;padding:10px 15px 10px 50px;" />
+		</view>
+		<view class="loginBtnView">
+			<button class="loginBtn" size="" form-type='submit' disabled='' style="width:90%;">获取手机号码</button>
+		</view>
+			<view class="loginBtnView">
+			<button class="loginBtn" size="" form-type='submit' disabled='' style="width:90%;">登录</button>
+		</view>
+	</view>
+<view class="bj_bottom">
+			<image src="../../img/icon_05.png"></image>
+		</view>
+</view>
+	

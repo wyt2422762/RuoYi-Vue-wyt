@@ -1,0 +1,102 @@
+<wxs src='../../utils/nurse.wxs' module='filters' />
+<wxs src='../../utils/phone.wxs' module='phoneF' />
+
+<loading hidden="{{hiddenLoading}}">正在加载</loading>
+
+<view class="container">
+	<view class="aui-palace">
+		<view class="aui-palace-one">
+			<view class="Nurse">
+				<i-row>
+					<i-col span="8" i-class="col-class">
+						<view class="head">
+							<view class="head_img">
+								<image src="{{avatarBaseUrl}}{{nurse.avatar}}"></image>
+							</view>
+							<view class="best">{{filters.parseWorkStatus(nurse.workStatus)}}</view>
+						</view>
+					</i-col>
+					<i-col span="16" i-class="col-class">
+						<view class="1">
+							<view class="Star_mc">
+								<view class="Name">{{nurse.name}}</view>
+							</view>
+							<view class="Gender">
+								<i-row>
+									<i-col span="24" i-class="col-class">
+										<view class="rating">
+											<i-rate disabled="{{true}}" value="{{nurse.workLevel}}">
+												{{nurse.workLevel}}星
+											</i-rate>
+										</view>
+									</i-col>
+								</i-row>
+								<i-row>
+									<i-col span="12" i-class="col-class">
+										<view class="XB">{{filters.parseSex(nurse.sex)}}</view>
+									</i-col>
+									<i-col span="12" i-class="col-class">
+										<view class="FWSJ">{{nurse.age}}岁</view>
+									</i-col>
+								</i-row>
+							</view>
+						</view>
+					</i-col>
+				</i-row>
+			</view>
+			<!-- 护理能力 -->
+			<view class="Star">
+				<view class="Star_img">
+					<image src="../../img/icon_11.png"></image>
+				</view>
+				<view class="Star_name">护理能力</view>
+			</view>
+			<view class="comment">
+				<block wx:for="{{nurse.abilities}}" wx:for-item="ablity">
+					{{ablity}}
+				</block>
+			</view>
+			<!-- 荣获证书 -->
+			<view class="Star">
+				<view class="Star_img">
+					<image src="../../img/icon_12.png"></image>
+				</view>
+				<view class="Star_name">荣获证书</view>
+			</view>
+			<view class="certificate">
+				<view wx:for="{{nurse.certificates}}" wx:for-item="cert" class="ZS">{{cert}}</view>
+			</view>
+
+		</view>
+	</view>
+	<!-- 历史纪录 -->
+	<view class="aui-palace-one" style="margin-bottom:55px;">
+		<!--历史评价 -->
+		<view class="Historical">
+			<view class="Star_img">
+				<image src="../../img/icon_14.png"></image>
+			</view>
+			<view class="Star_name">历史评价</view>
+		</view>
+		<view wx:for="{{evaluations}}" wx:for-item="eva" wx:for-key="evaluationId" class="hist_list">
+			<i-row>
+				<i-col span="12" i-class="col-class">
+					<view class="phone">{{phoneF.hideMiddle4(eva.consumer.phonenumber)}}</view>
+				</i-col>
+				<i-col span="12" i-class="col-class">
+					<view class="rating">
+						<i-rate disabled="{{true}}" value="{{eva.score}}"></i-rate>
+					</view>
+				</i-col>
+			</i-row>
+			<i-row>
+				<i-col span="24" i-class="col-class">
+					<view class="LSPY">{{eva.text}}</view>
+				</i-col>
+			</i-row>
+		</view>
+	</view>
+	<view class="aui-palace-one">
+		<view class="Btn" bindtap="selectNurse">选择此护工</view>
+	</view>
+</view>

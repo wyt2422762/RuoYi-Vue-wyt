@@ -1,0 +1,15 @@
+/* pages/introduce/introduce.wxss */
+.aui-palace-grid-icon2 {
+  width: 100%; 
+
+  margin: 0 auto;
+}
+.loginBtnView {
+  background-color: #195ffd;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.container{
+  background-color: #195ffd;
+}

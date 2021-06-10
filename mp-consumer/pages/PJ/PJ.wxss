@@ -1,0 +1,266 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}.aui-palace-grid-icon2 {
+  width: 100%; 
+
+  margin: 0 auto;
+}
+.container{
+  /* background: linear-gradient(to right, #e6f6fe, #fff);   */
+background-color: #f8fbfe;
+padding-bottom: 25px;
+}
+
+
+.aui-palace {
+  /* padding: 0.5rem 0; */
+  position: relative;
+  z-index: 99;
+ 
+}
+.order{
+ 
+  color: #fff;
+  width: 90%;
+  height: 127px;
+  margin:  0 18px;
+  margin-top: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: linear-gradient(to right, #6398fe, #5886fc);  
+  box-shadow: 0px 1px 10px 2.03px rgba(35, 82, 184, 0.18);
+}
+.order image{
+  width: 100%;
+  height: 100%;
+}
+.Order_status{
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  z-index: 99;
+  color: #188cff;
+  font-size: 22px;
+letter-spacing: 2px;
+}
+.Star{
+  margin-top: 30px;
+display: flex;
+justify-content: flex-start;
+}
+.Historical{ margin-bottom: 15px;
+  margin-top: 10px;
+ 
+display: flex;
+justify-content: flex-start;
+}
+.Star_img{
+  width: 22px;
+  height: 22px;
+}
+.Star_img image{
+  width: 100%;
+  height: 100%;
+}
+.Star_name{
+  line-height: 22px;
+  margin-left: 15px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+.aui-palace-one {
+  padding:  15px 10px  18px  25px;
+  color: #000;
+  width: 82%;
+  margin:  0 19px;
+  margin-top: 23px;
+  border-radius: 15px;
+  background: #fff;  
+  box-shadow: 0px 1px 10px 2.03px rgba(35, 82, 184, 0.18);
+}
+.Nurse{
+  display: flex;
+  padding-bottom: 25px;
+border-bottom: dashed 1px #eee;
+}
+.head{
+  border-radius: 100%;
+  border:solid 4px #fcab51;
+ 
+  width: 75px;
+  height: 75px;
+  position: relative;
+}
+.best{
+  color: #fff;
+  font-size: 12px;
+  padding: 0px 8px;
+  line-height: 18px;
+  border-radius: 4px;
+  background-color: #fcab51;
+  position: absolute;
+  bottom: -5px;
+  left: 10px;
+
+}
+.head_img{
+  width: 75px;
+  height: 75px;
+  
+}
+.head_img image{
+  width: 100%;
+  height: 100%;
+}
+
+.Star_mc{
+  display: flex;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.Name{
+  font-size: 22px;
+  letter-spacing: 1px;
+
+
+
+}
+.rating {
+   display: flex; 
+   margin-left: 7px;
+}
+.rating_img{
+ 
+margin: 6px 2px;
+  width: 15px;
+  height: 15px;
+ 
+}
+.rating_img image{
+
+  width: 100%;
+  height: 100%;
+}
+.Gender{
+  margin-left: 20px;
+  display: flex;
+  margin-top: 12px;
+}
+.XB{
+  background-color: #5dadfd;
+  border-radius:100px;
+  padding: 0px 8px;
+  line-height: 26px;
+  color: #fff;
+  font-size: 12px;
+}
+.FWSJ{
+  margin-left: 10px;
+ font-weight: bold;
+  padding: 0px 10px;
+  line-height: 26px;
+  color: #000;
+  font-size: 16px;
+}
+.comment{
+padding-left: 37px;
+  margin-top: 15px;
+color: #696969;
+font-size: 15px;
+letter-spacing: 1px;
+}
+.certificate{
+  flex-wrap: wrap;
+  display: flex;
+padding-left: 30px;
+margin-top: 15px;
+}
+.ZS{
+  padding:1px 15px ;
+margin: 5px;
+  color: #455a78;
+  font-size: 15px;
+  letter-spacing: 1px;
+  background-color: #e1f3ff;
+  border-radius: 50px;
+}
+
+.aui-head-chang{
+position: absolute;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:13.5%;
+  background-color:#188cff;
+}
+.Price{
+  display: flex;
+  justify-content: space-between;
+}
+.element{
+  margin-top: 26px;
+  color: #1587f7;
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 18px;
+}
+.LSPY{
+  
+  margin-top: 15px;
+color: #696969;
+font-size: 15px;
+letter-spacing: 1px;
+}
+.DH{
+  margin-top:20px;
+  display: flex;
+  justify-content: space-between;
+
+}
+.phone{
+  font-size:18px;
+  line-height: 38px;
+}
+.hist_list{
+  padding-bottom: 15px;
+  border-bottom: dashed 1px #eee;
+}
+
+.Btn {
+
+ 
+margin: 25px 17px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    width: 90%;
+    border: solid 1px #188cff;
+    background: #188cff;
+    color: #fff;
+    letter-spacing: 4px;
+    font-weight: normal;
+    font-size: 18px;
+    border-radius: 50px;
+    box-shadow: 0px 5px 10px 1.26px rgba(24, 140, 255, 0.57);
+  }
+
+
+

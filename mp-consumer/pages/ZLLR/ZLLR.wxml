@@ -1,0 +1,85 @@
+<!--pages/ZLLR/ZLLR.wxml-->
+<view class="page">
+	<view class="top_img">
+		<view class='u-wrp-bnr'>
+			<image src='../../img/icon_24.png' class='u-img-slide' mode='aspectFill'></image>
+		</view>
+		<view class="introduce">
+			<view class="Self">自理老人介绍</view>
+			<view class="details">查看详情</view>
+		</view>
+	</view>
+	<!-- 请选择服务时间 -->
+	<view class="service" style="margin-top:20px;">请选择服务时间</view>
+	<view class="weui-cell">
+		<view class="weui-cell__bd weui-cell__ft_in-access">
+			<picker mode="date" bindchange="bindDateChange" value="{{date}}">
+				<input class="weui-input" value='{{date}}' placeholder='' disabled='disabled' style="color:#999;" />
+			</picker>
+		</view>
+	</view>
+	<!-- 请选择天数 -->
+	<view class="service">请选择天数</view>
+	<view class="weui-cell">
+		<view class="weui-cell__bd weui-cell__ft_in-access">
+			<picker bindchange="bindCountryChange" value="{{countriesIndex}}" range="{{countries}}">
+				<view class="weui-input" style="color:#999;">{{countries[countryIndex]}}</view>
+			</picker>
+		</view>
+	</view>
+	<!-- 请选择疗养院地址 -->
+	<view class="service">请选择疗养院地址</view>
+	<view class="weui-cell">
+		<view class="weui-cell__bd weui-cell__ft_in-access">
+			<picker bindchange="bindCountry2Change" value="{{SanatoriumIndex}}" range="{{Sanatorium}}">
+				<view class="weui-input" style="color:#999;">{{Sanatorium[SanatoriumIndex]}}</view>
+			</picker>
+		</view>
+	</view>
+	<!-- list1 -->
+	<view class="list">
+		<view class="Escort">
+			<view class="fee">
+				<image src="../../img/icon_13.png"></image>
+			</view>
+			<view class="ph">陪护费</view>
+		</view>
+		<view>￥70</view>
+	</view>
+	<!-- list1 -->
+	<view class="list">
+		<view class="Escort">
+			<view class="fee">
+				<image src="../../img/icon_13.png"></image>
+			</view>
+			<view class="ph">餐费</view>
+		</view>
+		<view>￥70</view>
+	</view>
+	<!-- list1 -->
+	<view class="list">
+		<view class="Escort">
+			<view class="fee">
+				<image src="../../img/icon_13.png"></image>
+			</view>
+			<view class="ph">总金额</view>
+		</view>
+		<view>￥70</view>
+	</view>
+	<!--相关协议-->
+	<checkbox-group bindchange="bindAgreeChange">
+		<label class="weui-agree" for="weuiAgree">
+			<view class="weui-agree__text">
+				<checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{}}" />
+				<view class="weui-agree__checkbox-icon">
+					<icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+				</view>
+				阅读并同意<navigator url="" class="weui-agree__link">《夕阳红用户协议》</navigator>
+			</view>
+		</label>
+	</checkbox-group>
+	<!--提交按钮-->
+	<view class="weui-btn-area">
+		<button class="weui-btn" type="primary" bindtap='submit' disabled='{{btn_disabled}}'>确定提交</button>
+	</view>
+</view>

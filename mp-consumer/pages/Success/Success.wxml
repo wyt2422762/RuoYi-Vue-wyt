@@ -1,0 +1,17 @@
+<view class="container">
+	<view class="bj">
+		<image src="../../img/bj.jpg"></image>
+	</view>
+	<view class="login">
+		<image src="../../img/icon_19.jpg"></image>
+	</view>
+<view class="name">支付成功</view>
+	<view class="login-from">
+		<form bindsubmit="formSubmit" class='form'>	
+			<!--按钮-->
+			<view class="loginBtnView">
+				<button class="loginBtn" size=""  disabled=''>确 定</button>
+			</view>
+		</form>
+	</view>
+</view>

@@ -1,0 +1,23 @@
+<!--pages/YYPH/YYPH.wxml-->
+ <view class="aui-palace aui-palace-one2 aui-palace-two">
+        <navigator url="../WSQJ/WSQJ" class="aui-palace-grid" hover-class="none" >
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_30.png"></image>
+          </view>
+        </navigator>
+          <navigator url="../CLQX/CLQX" class="aui-palace-grid" hover-class="none" >
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_31.png"></image>
+          </view>
+        </navigator>
+          <navigator url="../CDBZQX/CDBZQX" class="aui-palace-grid" hover-class="none">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_32.png"></image>
+          </view>
+        </navigator>
+          <navigator url="../CQBJ/CQBJ" class="aui-palace-grid" hover-class="none">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_33.png"></image>
+          </view>
+        </navigator>
+      </view>

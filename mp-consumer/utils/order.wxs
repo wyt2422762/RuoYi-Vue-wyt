@@ -1,0 +1,32 @@
+var filters = {    
+    // 订单类型处理
+    parseOrderStatus: function(value) {
+      switch(value){
+        case "0":
+          return "未派遣"
+        case "1":
+          return "未支付"
+        case "2":
+          return "服务中"
+        case "3":
+          return "已完成"
+        case "4":
+          return "已取消"
+      }
+    },
+    parseOrderType: function(value) {
+      switch(value){
+        case "0":
+          return "居家陪护"
+        case "1":
+          return "医院陪护"
+        case "2":
+          return "家政服务"
+      }
+    },
+}
+
+module.exports = {
+  parseOrderStatus: filters.parseOrderStatus,
+  parseOrderType: filters.parseOrderType,
+}

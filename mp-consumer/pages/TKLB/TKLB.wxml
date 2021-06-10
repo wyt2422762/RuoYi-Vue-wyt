@@ -1,0 +1,89 @@
+<!--pages/JDGZ/JDGZ.wxml-->
+<view class="aui-palace">
+	<!-- 1 -->
+	<navigator url="" hover-class="none">
+		<view class="aui-palace-one">
+			<view class="list">
+				<text class="name">2020-544142352</text>
+				<view class="Main">
+					<view class="contacts">
+						<view class="icon">
+							<image src="../../img/icon_01.png"></image>
+						</view>
+						<view class="lxr">服务类型</view>
+					</view>
+					<view class="contacts">韩建楠</view>
+				</view>
+				<view class="Main">
+					<view class="contacts">
+						<view class="icon">
+							<image src="../../img/icon_03.png"></image>
+						</view>
+						<view class="lxr">服务时间</view>
+					</view>
+					<view class="contacts" style="font-size:14px;margin-top:3px;">2020-09-15 15:00:02</view>
+				</view>
+				<view class="Main">
+					<view class="contacts">
+						<view class="icon">
+							<image src="../../img/icon_13.png"></image>
+						</view>
+						<view class="lxr">退款金额</view>
+					</view>
+					<view class="contacts" style="font-size:14px;margin-top:3px;">2020-09-15 15:00:02</view>
+				</view>
+			</view>
+			<view class="refund">
+				<view class="TK">删除记录</view>
+				<navigator class="Btn" url="../TKXQ/TKXQ" hover-class="navigator-hover" hover-class="none">
+					<view>查看详情</view>
+				</navigator>
+			</view>
+			<!-- 状态 -->
+			<view class="ytk">已退款</view>
+		</view>
+	</navigator>
+	<!-- 2 -->
+	<navigator url="" hover-class="none">
+		<view class="aui-palace-one">
+			<view class="list">
+				<text class="name">2020-544142352</text>
+				<view class="Main">
+					<view class="contacts">
+						<view class="icon">
+							<image src="../../img/icon_01.png"></image>
+						</view>
+						<view class="lxr">服务类型</view>
+					</view>
+					<view class="contacts">韩建楠</view>
+				</view>
+				<view class="Main">
+					<view class="contacts">
+						<view class="icon">
+							<image src="../../img/icon_03.png"></image>
+						</view>
+						<view class="lxr">服务时间</view>
+					</view>
+					<view class="contacts" style="font-size:14px;margin-top:3px;">2020-09-15 15:00:02</view>
+				</view>
+				<view class="Main">
+					<view class="contacts">
+						<view class="icon">
+							<image src="../../img/icon_13.png"></image>
+						</view>
+						<view class="lxr">退款金额</view>
+					</view>
+					<view class="contacts" style="font-size:14px;margin-top:3px;">2020-09-15 15:00:02</view>
+				</view>
+			</view>
+			<view class="refund">
+				<view class="TK">删除记录</view>
+				<navigator class="Btn" url="../SQTK/SQTK" hover-class="navigator-hover" hover-class="none">
+					<view>查看详情</view>
+				</navigator>
+			</view>
+			<!-- 状态 -->
+			<view class="ytk">已退款</view>
+		</view>
+	</navigator>
+</view>

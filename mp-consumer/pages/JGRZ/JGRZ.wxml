@@ -1,0 +1,6 @@
+	<view class="container">
+		<view class="aui-palace-grid-icon2">
+			<image src="../../img/jgrz.jpg" mode="widthFix" style="width:100%;"></image>
+		</view>
+	
+	</view>
