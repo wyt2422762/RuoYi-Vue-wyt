@@ -75,6 +75,7 @@
     "i-input": "./component/iView/input/index",
     "i-panel": "./component/iView/panel/index",
     "i-button": "./component/iView/button/index",
-    "i-toast": "./component/iView/toast"
+    "i-toast": "./component/iView/toast/index",
+    "i-load-more": "./component/iView/load-more/index"
   }
 }
