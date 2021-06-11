@@ -2,9 +2,6 @@
 let gto = require('../../utils/goto.js')
 
 import {
-  service
-} from '../../utils/request.js'
-import {
   getDicts
 } from '../../utils/dict.js'
 

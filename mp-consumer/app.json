@@ -32,36 +32,10 @@
     "pages/TSXQ/TSXQ",
     "pages/TKXQ/TKXQ",
     "pages/My/My",
-   
-   
-
-   
-  
-   
-  
-  
-  
-   
-    
-    
 
     "pages/Success/Success",
     
-  
-   
-  
-
-    
-   
- 
-
-  
-   
-  
- 
-
     "pages/logs/logs"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -90,5 +64,17 @@
     ]
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+
+  "usingComponents":{
+    "i-rate": "./component/iView/rate/index",
+    "i-row": "./component/iView/row/index",
+    "i-col": "./component/iView/col/index",
+    "i-spin": "./component/iView/spin/index",
+    "i-icon": "./component/iView/icon/index",
+    "i-input": "./component/iView/input/index",
+    "i-panel": "./component/iView/panel/index",
+    "i-button": "./component/iView/button/index",
+    "i-toast": "./component/iView/toast"
+  }
 }

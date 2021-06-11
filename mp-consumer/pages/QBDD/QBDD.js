@@ -7,6 +7,8 @@ import {
   service
 } from '../../utils/request.js'
 
+let iView = require('../../utils/iViewUtil.js')
+
 Page({
   data: {
     //loading
@@ -125,10 +127,7 @@ Page({
       //判断有无数据
       if (res.rows.length <= 0) {
         that.data.queryParams.pageNum = that.data.queryParams.pageNum - 1
-        wx.showToast({
-          title: '没有更多数据了!~',
-          icon: 'none'
-        })
+        iView.toast.warning('没有更多数据了!~')
       } else {
         that.setData({
           orderList: listBefore.concat(res.rows),

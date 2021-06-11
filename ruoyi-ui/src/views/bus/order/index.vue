@@ -208,7 +208,7 @@
 </template>
 
 <script>
-import {listOrder, getOrder, addOrder, updateOrder, exportOrder, getEvaluateData} from "@/api/bus/order";
+import {listOrder, getOrder, addOrder, updateOrder, exportOrder, getEvaluateData, dispatchOrder} from "@/api/bus/order";
 
 export default {
   name: "Order",
@@ -286,7 +286,7 @@ export default {
       this.loading = true;
       listOrder(this.queryParams).then(response => {
         this.orderList = response.rows;
-        this.total = response.total;
+        this.total = response.total-0;
         this.loading = false;
       });
     },
@@ -348,6 +348,19 @@ export default {
       getEvaluateData(orderNo).then(response => {
         this.evaluateData = response.data;
         this.evaluate = true;
+      });
+    },
+    //派遣订单
+    handleDispatch(row){
+      this.$confirm('是否确认派遣该订单?', "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(function() {
+        return dispatchOrder(row.orderNo);
+      }).then(() => {
+        this.getList();
+        this.msgSuccess("派遣成功");
       });
     },
     /** 提交按钮 */

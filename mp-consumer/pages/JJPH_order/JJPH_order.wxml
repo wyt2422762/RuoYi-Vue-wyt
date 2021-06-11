@@ -1,4 +1,6 @@
 <!--pages/ZLLR/ZLLR.wxml-->
+<i-toast id="toast" />
+
 <view class="page">
 	<view class="top_img">
 		<view class='u-wrp-bnr'>

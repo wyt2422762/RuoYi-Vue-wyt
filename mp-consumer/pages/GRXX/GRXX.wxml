@@ -1,43 +1,20 @@
-<!-- 总 -->
+<i-toast id="toast" />
+
+<i-spin fix custom wx:if="{{ !hiddenLoading }}">
+	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+	<view>加载中</view>
+</i-spin>
+
 <view class="main">
-  <!-- 头像 -->
-  <!-- <view class="message">
-    <view class="word">头像</view>
-    <view class="tu"><image src="../../img/head1.png"></image></view>
-  </view> -->
-  <!-- 姓名 -->
-  <view class="message">
-    <view class="word">姓名</view>
-    <view class="qhy">{{consumer.name}}</view>
-  </view>
-  <!-- 年龄 -->
-  <view class="message">
-    <view class="word">年龄</view>
-    <view class="qhy">{{consumer.age}}</view>
-  </view>
-  <!-- 手机号 -->
-  <view class="message">
-    <view class="word">手机号</view>
-    <view class="qhy">{{consumer.phonenumber}}</view>
-  </view>
-  <!-- 身份证号 -->
-  <view class="message">
-    <view class="word">身份证号</view>
-    <view class="qhy">{{consumer.idNo}}</view>
-  </view>
-  <!-- 紧急联系人姓名 -->
-  <view class="message">
-    <view class="word">紧急联系人姓名</view>
-    <view class="qhy">{{consumer.emergencyContactName}}</view>
-  </view>
-  <!-- 紧急联系人电话 -->
-  <view class="message">
-    <view class="word">紧急联系人电话</view>
-    <view class="qhy">{{consumer.emergencyContactPhone}}</view>
-  </view>
-  <!-- 家庭住址 -->
-  <view class="message1">
-    <view class="word1">家庭住址</view>
-    <view class="qhy1">{{consumer.addr}}</view>
-  </view>
+  <i-input right value="{{ consumer.name }}" title="姓名" autofocus placeholder="姓名" mode="wrapped" maxlength="10" bind:change="nameChange"/>
+  <i-input right value="{{ consumer.age }}" title="年龄"  placeholder="年龄"  mode="wrapped" bind:change="ageChange" maxlength="3" bind:change="ageChange" />
+  <i-input right value="{{ consumer.phonenumber }}" title="手机号"  placeholder="手机号"  mode="wrapped" disabled/>
+  <i-input right value="{{ consumer.idNo }}" title="身份证号"  placeholder="身份证号"  mode="wrapped" bind:change="idNoChange" maxlength="18" bind:change="idNoChange" />
+  <i-input right value="{{ consumer.emergencyContactName }}" title="紧急联系人姓名"  placeholder="紧急联系人姓名"  mode="wrapped" bind:change="emergencyContactNameChange" maxlength="10" bind:change="emergencyContactNameChange" />
+  <i-input right value="{{ consumer.emergencyContactPhone }}" title="紧急联系人电话"  placeholder="紧急联系人电话"  mode="wrapped" bind:change="emergencyContactPhoneChange" maxlength="20" bind:change="emergencyContactPhoneChange" />
+  <i-panel title="家庭地址" i-class="pp" i-panel-content="ipc">
+    <i-input right value="{{ consumer.addr }}" placeholder="请输入家庭地址" mode="wrapped" type="textarea" bind:change="addrChange" maxlength="100" bind:change="addrChange" />
+  </i-panel>
+
+  <i-button bind:click="update" type="success" shape="circle" size="small" i-class="ib">保存</i-button>
 </view>

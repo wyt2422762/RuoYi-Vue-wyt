@@ -4,28 +4,15 @@ import {
   service
 } from '../../utils/request.js'
 
+let gto = require('../../utils/goto.js')
+
 //获取应用实例
 const app = getApp()
 Page({
   data: {
-    userInfo: {},
-    hasUserInfo: false,
-    currentSelectTripType: 'pinche',
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     //轮播图
     bannerBaseUrl: app.globalData.backBaseUrl,
     bannerUrl: [],
-  },
-  // 更新data 切换选中状态
-  selectedPinche: function (e) {
-    this.setData({
-      currentSelectTripType: e.currentTarget.dataset.id
-    })
-  },
-  selectedBaoche: function (e) {
-    this.setData({
-      currentSelectTripType: e.currentTarget.dataset.id
-    })
   },
   //事件处理函数
   bindViewTap: function () {
@@ -47,6 +34,10 @@ Page({
         bannerUrl: res.data
       })
     })
+  },
+  //跳转
+  goto(e) {
+    let url = e.currentTarget.dataset.url
+    gto.gotoIfLogin(url)
   }
-
 })

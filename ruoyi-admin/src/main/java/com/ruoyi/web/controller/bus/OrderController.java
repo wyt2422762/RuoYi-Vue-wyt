@@ -101,4 +101,21 @@ public class OrderController extends BaseController {
         return toAjax(orderService.deleteOrderByIds(orderNos));
     }
 
+    /**
+     * 派遣订单
+     */
+    @PreAuthorize("@ss.hasPermi('bus:order:edit')")
+    @Log(title = "订单", businessType = BusinessType.DELETE)
+    @PutMapping("/{orderNo}/dispatch")
+    public AjaxResult dispatch(@PathVariable Long orderNo)
+    {
+        //1. 查询order
+        Order order = orderService.selectOrderById(orderNo);
+        //2. 修改order的状态为1 未支付
+        order.setStatus("1");
+        orderService.updateOrder(order);
+        //3. 返回数据
+        return AjaxResult.success("派遣成功");
+    }
+
 }

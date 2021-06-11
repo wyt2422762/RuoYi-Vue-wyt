@@ -3,6 +3,7 @@
 const config = require("../../utils/config.js")
 let util = require("../../utils/util.js")
 let gto = require('../../utils/goto.js')
+let iView = require('../../utils/iViewUtil.js')
 
 import {
   service
@@ -172,9 +173,7 @@ Page({
       that.setData({
         hiddenLoading: !that.data.hiddenLoading
       })
-      wx.showToast({
-        title: '提交失败'
-      })
+      iView.toast.error('提交失败')
     })
   },
   //参数检查
@@ -182,28 +181,16 @@ Page({
     let that = this
     let order = that.data.order
     if(!order['consumerId']){
-      wx.showToast({
-        title: '客户id不能为空',
-        icon: 'none'
-      })
+      iView.toast.warning('客户id不能为空')
       return false
     } else if(!order['nurseId']){
-      wx.showToast({
-        title: '请选择护工',
-        icon: 'none'
-      })
+      iView.toast.warning('请选择护工')
       return false
     } else if(!order['addr']){
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none'
-      })
+      iView.toast.warning('请选择地址')
       return false
     } else if(!order['money']){
-      wx.showToast({
-        title: '请选择服务项目',
-        icon: 'none'
-      })
+      iView.toast.warning('请选择服务项目')
       return false
     }
     return true

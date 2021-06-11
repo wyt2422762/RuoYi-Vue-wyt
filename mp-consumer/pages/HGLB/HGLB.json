@@ -1,9 +1,5 @@
 {
-  "usingComponents": {
-    "i-rate": "../../component/iView/rate/index",
-    "i-row": "../../component/iView/row/index",
-    "i-col": "../../component/iView/col/index"
-  },
+  "usingComponents": {},
   "navigationBarTitleText": "护工列表",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#188cff",

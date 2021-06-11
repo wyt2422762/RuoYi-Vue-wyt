@@ -8,7 +8,6 @@ import com.ruoyi.bus.domain.Nurse;
 import com.ruoyi.bus.service.IConsumerService;
 import com.ruoyi.bus.service.INurseService;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.exception.CustomException;
 import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.wx.core.config.WxConfig;
 import com.ruoyi.wx.model.WxReqCommonParam;
@@ -98,17 +97,20 @@ public class BasicController {
             case "0":
                 Consumer consumer = consumerService.selectConsumerByPhoneNumber_mp(phoneNumber);
                 if(consumer == null){
-                    //这里需不需要注册新客户？
+                    //这注册新客户
+                    consumer = new Consumer();
+                    consumer.setPhonenumber(phoneNumber);
+                    consumer.setOpenId(openId);
+                    consumerService.insertConsumer(consumer);
                 } else {
                     if(!openId.equals(consumer.getOpenId())){
                         consumer.setOpenId(openId);
                         consumerService.updateConsumer(consumer);
                     }
-                    //登陆
-                    String token = tokenService.createToken(consumer);
-                    return AjaxResult.success("成功", token);
                 }
-                break;
+                //登陆
+                String token = tokenService.createToken(consumer);
+                return AjaxResult.success("成功", token);
             //护工
             case "1":
                 break;
@@ -135,20 +137,24 @@ public class BasicController {
             case "0":
                 Consumer consumer = consumerService.selectConsumerByPhoneNumber_mp(phoneNumber);
                 if(consumer == null){
-                    //这里需不需要注册新客户？
+                    //注册新客户
+                    //这注册新客户
+                    consumer = new Consumer();
+                    consumer.setPhonenumber(phoneNumber);
+                    consumer.setOpenId(openId);
+                    consumerService.insertConsumer(consumer);
                 } else {
                     if(!openId.equals(consumer.getOpenId())){
                         consumer.setOpenId(openId);
                         consumerService.updateConsumer(consumer);
                     }
-                    //token
-                    String token = tokenService.createToken(consumer);
-                    Map<String, Object> res = new HashMap<>(2);
-                    res.put("token", token);
-                    res.put("user", consumer);
-                    return AjaxResult.success("成功", res);
                 }
-                break;
+                //token
+                String token = tokenService.createToken(consumer);
+                Map<String, Object> res = new HashMap<>(2);
+                res.put("token", token);
+                res.put("user", consumer);
+                return AjaxResult.success("成功", res);
             //护工
             case "1":
                 Nurse nurse = nurseService.selectNurseByPhoneNumber_mp(phoneNumber);

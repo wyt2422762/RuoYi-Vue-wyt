@@ -74,9 +74,27 @@ public class OrderController extends BaseController {
     //订单支付
 
 
-    //订单取消
+    /**
+     * 取消订单
+     * @param orderNo 订单编号
+     * @return 结果
+     */
+    @PreAuthorize("hasAuthority('consumer')")
+    @PutMapping(value = "/cancel/{orderNo}")
+    public AjaxResult cancelOrder(@PathVariable Long orderNo){
+        //1. 查询订单看状态是否==0
+        Order order = orderService.selectOrderById(orderNo);
+        if("0".equals(order.getStatus())){
+            //修改订单状态为4 已取消
+            order.setStatus("4");
+            orderService.updateOrder(order);
+            return AjaxResult.success("订单取消成功");
+        } else {
+            //订单状态不为0，不能取消
+            return AjaxResult.error(5001001, "订单状态已改变，无法取消");
+        }
+    }
 
 
     //订单xxx
-
 }

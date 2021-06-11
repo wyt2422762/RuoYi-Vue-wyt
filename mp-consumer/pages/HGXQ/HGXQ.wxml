@@ -1,7 +1,12 @@
 <wxs src='../../utils/nurse.wxs' module='filters' />
 <wxs src='../../utils/phone.wxs' module='phoneF' />
 
-<loading hidden="{{hiddenLoading}}">正在加载</loading>
+<i-toast id="toast" />
+
+<i-spin fix custom wx:if="{{ !hiddenLoading }}">
+	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+	<view>加载中</view>
+</i-spin>
 
 <view class="container">
 	<view class="aui-palace">

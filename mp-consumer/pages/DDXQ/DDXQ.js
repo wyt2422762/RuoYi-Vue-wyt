@@ -1,11 +1,15 @@
 //订单详情页
-
 import {
   getDicts
 } from '../../utils/dict.js'
 import {
   service
 } from '../../utils/request.js'
+import {
+  pay
+} from '../../utils/pay.js'
+
+let iView = require('../../utils/iViewUtil.js')
 
 Page({
   data: {
@@ -56,5 +60,40 @@ Page({
         hiddenLoading: !that.data.hiddenLoading
       })
     })
+  },
+  //订单取消
+  cancelOrder(e) {
+    let that = this
+    let orderNo = that.data.order.orderNo
+    service.put("/order/cancel/" + orderNo, {
+    }).then(res => {
+      iView.toast.success('取消成功')
+    }).catch(err => {
+      iView.toast.error('取消失败')
+    })
+  },
+  //支付方法
+  payOrder(e) {
+    debugger
+    let that = this
+    //订单编号
+    let orderNo = that.data.order.orderNo
+    //金额(元)
+    let money = that.data.order.money
+    //支付
+    pay(orderNo, money, that.paySuccess, that.payFail)
+  },
+  //支付成功回调方法
+  paySuccess(res) {
+    let that = this
+    iView.toast.success('支付成功')
+    //刷新当前页面
+    that.onLoad()
+  },
+  //支付失败回调方法
+  payFail(err) {
+    let that = this
+    iView.toast.error('支付失败')
+    return false
   }
 })

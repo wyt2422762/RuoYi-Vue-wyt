@@ -29,7 +29,7 @@ public class Consumer extends BaseEntity {
      * 客户姓名
      */
     @Excel(name = "姓名")
-    @NotBlank(message = "客户编号不能为空")
+    @NotBlank(message = "姓名不能为空")
     private String name;
 
     /**

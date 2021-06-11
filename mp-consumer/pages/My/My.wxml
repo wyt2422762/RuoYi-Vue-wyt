@@ -1,4 +1,6 @@
 <!-- main -->
+<i-toast id="toast" />
+
 <view class="main">
   <!-- card1 -->
   <view class="card1"></view>

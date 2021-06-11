@@ -2,7 +2,12 @@
 
 <wxs src='../../utils/order.wxs' module='filters' />
 
-<loading hidden="{{hiddenLoading}}">正在加载</loading>
+<i-toast id="toast" />
+
+<i-spin fix custom wx:if="{{ !hiddenLoading }}">
+	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+	<view>加载中</view>
+</i-spin>
 
 <view class="page" style="border:none;">
 	<view class="weui-cells weui-cells_after-title" style="border:none;padding-bottom:35px;">
@@ -12,7 +17,8 @@
 				订单编号
 			</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.orderNo}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.orderNo}}" disabled />
 			</view>
 		</view>
 		<view class="height"></view>
@@ -20,35 +26,40 @@
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">下单时间</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.createTime}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.createTime}}" disabled />
 			</view>
 		</view>
 		<!-- 付款金额 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">付款金额</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.money}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.money}}"
+					disabled />
 			</view>
 		</view>
 		<!-- 支付方式 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">支付方式</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="支付方式" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="支付方式"
+					disabled />
 			</view>
 		</view>
 		<!-- 付款时间 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">付款时间</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="付款时间" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="付款时间"
+					disabled />
 			</view>
 		</view>
 		<!-- 	订单状态 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">订单状态</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{filters.parseOrderStatus(order.status)}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{filters.parseOrderStatus(order.status)}}" disabled />
 			</view>
 		</view>
 		<view class="height"></view>
@@ -56,35 +67,40 @@
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">客户姓名</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.consumer.name}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.consumer.name}}" disabled />
 			</view>
 		</view>
 		<!-- 客户电话 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">客户电话</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.consumer.phonenumber}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.consumer.phonenumber}}" disabled />
 			</view>
 		</view>
 		<!-- 地址信息 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">地址信息</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.addr}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.addr}}"
+					disabled />
 			</view>
 		</view>
 		<!-- 紧急联系人姓名 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">紧急联系人姓名</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.consumer.emergencyContactName}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.consumer.emergencyContactName}}" disabled />
 			</view>
 		</view>
 		<!-- 紧急联系人电话 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">紧急联系人电话</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.consumer.emergencyContactPhone}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.consumer.emergencyContactPhone}}" disabled />
 			</view>
 		</view>
 		<view class="height"></view>
@@ -92,28 +108,31 @@
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">服务时间</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.workTime}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.workTime}}" disabled />
 			</view>
 		</view>
 		<!-- 服务类型 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">服务类型</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{filters.parseOrderType(order.orderType)}}" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{filters.parseOrderType(order.orderType)}}" disabled />
 			</view>
 		</view>
 		<!-- 服务状态 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">服务状态</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="啥叫服务状态" disabled/>
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="啥叫服务状态"
+					disabled />
 			</view>
 		</view>
-	
+
 	</view>
 
 	<view class="payment">
-		<button wx:if="{{order.status == 0}}" class="cancel" style="width:40%;margin-right:10px">取消</button>
-		<button wx:if="{{order.status == 0}}" class="Btn" style="width:40%;margin-left:10px;">去支付</button>
+		<button wx:if="{{order.status == 0}}" class="cancel">取消</button>
+		<button bindtap="payOrder" wx:if="{{order.status == 1}}" class="Btn">去支付</button>
 	</view>
 </view>
