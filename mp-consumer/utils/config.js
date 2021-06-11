@@ -10,8 +10,9 @@ const config = {
     '居家陪护': '0',
     '医院陪护': '1',
     '家政服务': '2'
-  }
-
+  },
+  //客服电话
+  phone_cs: 18611136442
 }
 
 module.exports = config

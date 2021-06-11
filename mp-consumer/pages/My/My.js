@@ -4,6 +4,7 @@ import {
 } from '../../utils/request.js'
 
 let gto = require('../../utils/goto.js')
+const config = require("../../utils/config.js")
 
 Page({
   /**
@@ -11,7 +12,9 @@ Page({
    */
   data: {
     userInfo: getApp().globalData.userInfo,
-    isLogin: getApp().globalData.isLogin
+    isLogin: getApp().globalData.isLogin,
+    //客服电话
+    phone_cs: config.phone_cs
   },
   /**
    * 生命周期函数--监听页面加载
@@ -60,5 +63,11 @@ Page({
   goto(e) {
     let url = e.currentTarget.dataset.url
     gto.gotoIfLogin(url)
+  },
+  //联系客服
+  callService(e) {
+    wx.makePhoneCall({
+      phoneNumber: this.data.phone_cs
+    })
   }
 })

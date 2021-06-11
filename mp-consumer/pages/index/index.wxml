@@ -1,6 +1,4 @@
 <!--index.wxml-->
-<i-toast id="toast" />
-
 <view class="container">
   <section class="aui-flexView">
     <section class="aui-scrollView">
@@ -49,7 +47,6 @@
             <h2>家政服务</h2>
           </view>
         </navigator>
-        
       </view>
     </section>
   </section>

@@ -43,7 +43,7 @@
         <view class="grxx">投诉</view>
       </view>
       <!-- 联系客服 -->
-      <view class="vw" bindtap="goto" data-url="">
+      <view class="vw" bindtap="callService" >
         <view class="tu"><image src="../../img/4.4.png"></image></view>
         <view class="grxx">联系客服</view>
       </view>
