@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/FW_YYPH/FW_YYPH",
+    "pages/DDXQ/DDXQ",
+    "pages/login/login",  
+    "pages/FW_CQBJ/FW_CQBJ",
+    "pages/FW_WSQJ/FW_WSQJ",
+    "pages/FW_JJPH/FW_JJPH",
+    "pages/FW_CDBZQX/FW_CDBZQX", 
+    "pages/WD/WD",
+    "pages/index/index",
+    "pages/logs/logs"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#5a5a5a",
+    "selectedColor": "#ff8a00",
+    "backgroundColor": "#f7f7f7",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "定位",
+        "iconPath": "img/1.1.png",
+        "selectedIconPath": "img/1.2.png"
+      },
+      {
+        "pagePath": "pages/FW_YYPH/FW_YYPH",
+        "text": "服务",
+        "iconPath": "img/2.1.png",
+        "selectedIconPath": "img/2.2.png"
+      },
+      {
+        "pagePath": "pages/WD/WD",
+        "text": "我的",
+        "iconPath": "img/3.1.png",
+        "selectedIconPath": "img/3.2.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+
+  "usingComponents":{
+    "i-rate": "./component/iView/rate/index",
+    "i-row": "./component/iView/row/index",
+    "i-col": "./component/iView/col/index",
+    "i-spin": "./component/iView/spin/index",
+    "i-icon": "./component/iView/icon/index",
+    "i-input": "./component/iView/input/index",
+    "i-panel": "./component/iView/panel/index",
+    "i-button": "./component/iView/button/index",
+    "i-toast": "./component/iView/toast/index",
+    "i-load-more": "./component/iView/load-more/index"
+  }
+}

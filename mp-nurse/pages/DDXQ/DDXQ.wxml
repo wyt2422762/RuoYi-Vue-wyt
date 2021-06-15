@@ -1,0 +1,133 @@
+<!--pages/Report/Report.wxml-->
+<view class="page" style="border:none;">
+	<view class="weui-cells weui-cells_after-title" style="border:none;padding-bottom:35px;">
+		<!-- 订单编号 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+				服务产品
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>
+		<view class="height"></view>
+		<!-- 下单时间 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+		服务类型
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>
+			<!-- 付款金额 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+		服务时间
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>
+		<!-- 支付方式 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+		服务天数
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>
+<view class="height"></view>
+		<!-- 付款时间 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			护工姓名
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>
+			<!-- 	订单状态 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+				服务状态
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>	
+		<view class="height"></view>
+			<!-- 服务类型 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			客户姓名
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>	
+			<!-- 服务星级 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			客户电话
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>	
+				<!-- 护工姓名 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+		服务地址
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>	
+			<view class="height"></view>
+				<!-- 护工电话 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			陪护费
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>	
+					<!-- 服务状态 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			餐费
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>	
+				<!-- 服务状态 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			总金额
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" style="color:#ff7200;"/>
+			</view>
+		</view>	
+					<!-- 服务状态 -->
+		<view class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+			支付方式
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1"/>
+			</view>
+		</view>	
+		<view class="height"></view>
+
+		</view>
+
+		<view class="payment">
+
+		<button class="Btn" style="width:100%;margin-left:10px;">返回</button>
+		</view>
+</view>

@@ -1,0 +1,83 @@
+<view class="container">
+			<view class="aui-head-chang">
+				<!-- 头部 -->
+					<view class="aui-list-img">
+						<image src="../../img/TX1.png" style="height:90px;width:90px;"></image>
+						<view class="right">
+							<view class="name">秦海燕</view>
+							<view class="name1">
+								<image src="../../img/nv.png"></image>
+								<text>33岁</text>
+							</view>
+							<view class="name2">
+						★★★★☆
+							</view>
+						</view> 
+					</view>
+			</view>
+			<!-- 1按钮 -->
+			<view class="aui-palace-one">
+			<!-- 1 -->
+			<view class="list">
+				<view class="sources">
+					<view class="origin">
+						<view class="icon_name">
+							<image src="../../img/icon_01.png"></image>
+						</view>
+						<view class="name">手机号</view>
+					</view>
+					<view class="Input_time">15533445566</view>
+				</view>
+			</view>
+				<!-- 1 -->
+			<view class="list">
+				<view class="sources">
+					<view class="origin">
+						<view class="icon_name">
+							<image src="../../img/icon_02.png"></image>
+						</view>
+						<view class="name">所属部门</view>
+					</view>
+					<view class="Input_time">15533445566</view>
+				</view>
+			</view>
+				<!-- 1 -->
+			<view class="list">
+				<view class="sources">
+					<view class="origin">
+						<view class="icon_name">
+							<image src="../../img/icon_03.png"></image>
+						</view>
+						<view class="name">护工状态</view>
+					</view>
+					<view class="Input_time">15533445566</view>
+				</view>
+			</view>
+				<!-- 1 -->
+			<view class="list">
+				<view class="sources">
+					<view class="origin">
+						<view class="icon_name">
+							<image src="../../img/icon_04.png"></image>
+						</view>
+						<view class="name">证书</view>
+					</view>
+					<view class="Input_time">15533445566</view>
+				</view>
+			</view>
+				<!-- 1 -->
+			<view class="list">
+				<view class="sources">
+					<view class="origin">
+						<view class="icon_name">
+							<image src="../../img/icon_05.png"></image>
+						</view>
+						<view class="name">特长</view>
+					</view>
+					<view class="Input_time">15533445566</view>
+				</view>
+			</view>
+		
+
+			</view>
+</view>
