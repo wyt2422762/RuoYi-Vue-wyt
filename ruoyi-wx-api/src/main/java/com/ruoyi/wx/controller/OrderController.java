@@ -7,7 +7,6 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.utils.OrderNoUtil;
 import com.ruoyi.common.validation.group.CreateGroup;
-import com.ruoyi.common.validation.group.EditGroup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,6 +37,17 @@ public class OrderController extends BaseController {
     public TableDataInfo list(Order order)
     {
         startPage();
+        List<Order> orderList = orderService.selectOrderList_mp(order);
+        return getDataTable(orderList);
+    }
+
+    /**
+     * 查询订单列表
+     */
+    @PreAuthorize("hasAuthority('consumer') or hasAuthority('nurse')")
+    @GetMapping("/all")
+    public TableDataInfo all(Order order)
+    {
         List<Order> orderList = orderService.selectOrderList_mp(order);
         return getDataTable(orderList);
     }

@@ -121,7 +121,7 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" :disabled="true">
         <el-form-item label="订单类型" prop="orderType">
-          <el-select v-model="form.orderType" placeholder="请选择订单类型" clearable size="small">
+          <el-select v-model="form.orderType" clearable size="small">
             <el-option
               v-for="dict in orderTypeOptions"
               :key="dict.dictValue"
@@ -131,22 +131,22 @@
           </el-select>
         </el-form-item>
         <el-form-item label="服务时间" prop="workTime">
-          <el-input v-model="form.workTime" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.workTime" type="textarea" />
         </el-form-item>
         <el-form-item label="服务星级" prop="workLevel">
-          <el-input v-model="form.workLevel" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.workLevel" type="textarea" />
         </el-form-item>
         <el-form-item label="金额" prop="money">
-          <el-input v-model="form.money" placeholder="请输入金额" />
+          <el-input v-model="form.money" />
         </el-form-item>
         <el-form-item label="客户" prop="consumerId">
-          <el-input v-model="form.consumerId" placeholder="请输入客户id" />
+          <el-input v-model="form.consumer.name" />
         </el-form-item>
         <el-form-item label="护工" prop="nurseId">
-          <el-input v-model="form.nurseId" placeholder="请输入护工id" />
+          <el-input v-model="form.nurse.name" />
         </el-form-item>
         <el-form-item label="状态" prop="nurseId">
-          <el-select v-model="form.status" placeholder="请选择订单状态" clearable size="small">
+          <el-select v-model="form.status" size="small">
             <el-option
               v-for="dict in orderStatusOptions"
               :key="dict.dictValue"
@@ -156,7 +156,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.remark" type="textarea" />
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -262,7 +262,10 @@ export default {
         status: null
       },
       // 表单参数
-      form: {},
+      form: {
+        consumer: {},
+        nurse: {},
+      },
       // 表单校验
       rules: {
         orderType: [
@@ -298,21 +301,8 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-        orderNo: null,
-        orderType: null,
-        workTime: null,
-        workLevel: null,
-        money: null,
-        consumerId: null,
-        consumerName: null,
-        nurseId: null,
-        nurseName: null,
-        evaluationId: null,
-        createBy: null,
-        createTime: null,
-        updateBy: null,
-        updateTime: null,
-        remark: null
+        consumer: {},
+        nurse: {},
       };
       this.resetForm("form");
     },

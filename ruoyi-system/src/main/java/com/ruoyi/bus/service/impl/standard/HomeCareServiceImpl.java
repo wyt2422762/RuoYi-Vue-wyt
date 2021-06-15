@@ -60,7 +60,7 @@ public class HomeCareServiceImpl implements IHomeCareService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertHomeCare(HomeCare homeCare) {
         return homeCareMapper.insertHomeCare(homeCare);
     }
@@ -72,7 +72,7 @@ public class HomeCareServiceImpl implements IHomeCareService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateHomeCare(HomeCare homeCare) {
         return homeCareMapper.updateHomeCare(homeCare);
     }
@@ -84,7 +84,7 @@ public class HomeCareServiceImpl implements IHomeCareService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteHomeCareByIds(Long[] ids) {
         return homeCareMapper.deleteHomeCareByIds(ids);
     }
@@ -96,7 +96,7 @@ public class HomeCareServiceImpl implements IHomeCareService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteHomeCareById(Long id) {
         return homeCareMapper.deleteHomeCareById(id);
     }

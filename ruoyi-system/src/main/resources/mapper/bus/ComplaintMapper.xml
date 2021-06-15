@@ -1,53 +1,106 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.bus.mapper.ComplaintMapper">
-    
-    <resultMap type="com.ruoyi.bus.domain.Complaint" id="ComplaintResult">
-        <result property="id"    column="id"    />
-        <result property="orderNo"    column="orderNo"    />
-        <result property="consumerId"    column="consumerId"    />
-        <result property="consumerName"    column="consumerName"    />
-        <result property="phonenumber"    column="phoneNumber"    />
-        <result property="content"    column="content"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="remark"    column="remark"    />
 
-        <collection property="attach" column="id" select="selectAttachById" javaType="ArrayList"
-            ofType="com.ruoyi.bus.domain.ComplaintAttach"
+    <resultMap type="com.ruoyi.bus.domain.Complaint" id="ComplaintResult">
+        <result property="id" column="id"/>
+        <result property="orderNo" column="orderNo"/>
+        <result property="consumerId" column="consumerId"/>
+        <result property="content" column="content"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="remark" column="remark"/>
+
+        <association property="consumer" column="consumerId"
+                     javaType="com.ruoyi.bus.domain.Consumer"
+                     select="com.ruoyi.bus.mapper.ConsumerMapper.selectConsumerById"
         />
 
+        <collection property="attach" column="id" select="selectAttachById" javaType="ArrayList"
+                    ofType="com.ruoyi.bus.domain.ComplaintAttach"
+        />
     </resultMap>
 
-    <sql id="selectComplaintVo">
-        select id, orderNo, consumerId, consumerName, phoneNumber, content, create_by, create_time, remark from complaint
+    <sql id="selectComplaintVo1">
+        select c.id,
+               c.orderNo,
+               c.consumerId,
+               c.content,
+               c.create_by,
+               c.create_time,
+               c.remark
+        from complaint c
+        inner join consumer co on c.consumerId = co.consumerId
+    </sql>
+
+    <sql id="selectComplaintVo2">
+        select id,
+               orderNo,
+               consumerId,
+               content,
+               create_by,
+               create_time,
+               remark
+        from complaint
     </sql>
 
     <!-- 查询列表 -->
-    <select id="selectComplaintList" parameterType="Complaint" resultMap="ComplaintResult">
-        <include refid="selectComplaintVo"/>
-        <where>  
-            <if test="orderNo != null "> and orderNo = #{orderNo}</if>
-            <if test="consumerId != null "> and consumerId = #{consumerId}</if>
-            <if test="consumerName != null  and consumerName != ''"> and consumerName like concat('%', #{consumerName}, '%')</if>
-            <if test="phonenumber != null  and phonenumber != ''"> and phoneNumber = #{phonenumber}</if>
-            <if test="content != null  and content != ''"> and content = #{content}</if>
-            <if test="createTime != null "> and create_time = #{createTime}</if>
+    <select id="selectComplaintList" parameterType="com.ruoyi.bus.domain.Complaint" resultMap="ComplaintResult">
+        <include refid="selectComplaintVo1"/>
+        <where>
+            <if test="orderNo != null ">and c.orderNo = #{orderNo}</if>
+            <if test="consumerId != null ">and c.consumerId = #{consumerId}</if>
+            <if test="consumerName != null  and consumerName != ''">and co.name like concat('%', #{consumerName},
+                '%')
+            </if>
+            <if test="phonenumber != null  and phonenumber != ''">and co.phoneNumber = #{phonenumber}</if>
+            <if test="content != null  and content != ''">and c.content = #{content}</if>
+            <if test="createTime != null ">and c.create_time = #{createTime}</if>
         </where>
     </select>
 
     <!-- 查询详情 -->
     <select id="selectComplaintById" parameterType="Long" resultMap="ComplaintResult">
-        <include refid="selectComplaintVo"/>
+        <include refid="selectComplaintVo2"/>
         where id = #{id}
     </select>
 
     <!-- 查询附件 -->
     <select id="selectAttachById" parameterType="Long" resultType="com.ruoyi.bus.domain.ComplaintAttach">
-        select complaintId, url from complaint_attach
+        select complaintId, url
+        from complaint_attach
         where complaintId = #{id}
     </select>
 
+    <!-- 添加投诉信息 -->
+    <insert id="insertComplaint" parameterType="com.ruoyi.bus.domain.Complaint" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `complaint`(orderNo, consumerId, content, create_by, create_time, remark)
+        VALUES(#{orderNo}, #{consumerId}, #{content}, #{createBy}, sysdate(), #{remark})
+    </insert>
+
+    <!-- 添加投诉信息附件 -->
+    <insert id="insertComplaintAttach" parameterType="java.util.List">
+        INSERT INTO `complaint_attach`(complaintId, url)
+        VALUES
+        <foreach item="item" collection="list" separator=",">
+            (#{item.complaintId}, #{item.url})
+        </foreach>
+    </insert>
+
+    <!-- 查询列表 -->
+    <select id="selectComplaintList_mp" parameterType="com.ruoyi.bus.domain.Complaint" resultMap="ComplaintResult">
+        <include refid="selectComplaintVo1"/>
+        <where>
+            <if test="orderNo != null ">and c.orderNo = #{orderNo}</if>
+            <if test="consumerId != null ">and c.consumerId = #{consumerId}</if>
+            <if test="consumerName != null  and consumerName != ''">and co.consumerName like concat('%', #{consumerName},
+                '%')
+            </if>
+            <if test="phonenumber != null  and phonenumber != ''">and co.phoneNumber = #{phonenumber}</if>
+            <if test="content != null  and content != ''">and c.content = #{content}</if>
+            <if test="createTime != null ">and c.create_time = #{createTime}</if>
+        </where>
+    </select>
 </mapper>

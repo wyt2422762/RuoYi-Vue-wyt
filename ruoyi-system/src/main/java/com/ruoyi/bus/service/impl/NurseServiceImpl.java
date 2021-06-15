@@ -62,7 +62,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertNurse(Nurse nurse) {
         nurse.setCreateTime(DateUtils.getNowDate());
         return nurseMapper.insertNurse(nurse);
@@ -75,7 +75,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateNurse(Nurse nurse) {
         nurse.setUpdateTime(DateUtils.getNowDate());
         return nurseMapper.updateNurse(nurse);
@@ -88,7 +88,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteNurseByIds(Long[] nurseids) {
         return nurseMapper.deleteNurseByIds(nurseids);
     }
@@ -100,7 +100,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteNurseById(Long nurseid) {
         return nurseMapper.deleteNurseById(nurseid);
     }
@@ -113,7 +113,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateNurseAvatar(Long nurseId, String avatar) {
         return nurseMapper.updateNurseAvatar(nurseId, avatar) > 0;
     }
@@ -134,7 +134,7 @@ public class NurseServiceImpl implements INurseService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateNurseStatus(Nurse nurse) {
         return nurseMapper.updateNurseStatus(nurse);
     }

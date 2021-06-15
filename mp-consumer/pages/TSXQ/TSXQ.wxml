@@ -1,25 +1,26 @@
 <!--pages/Report/Report.wxml-->
+<i-toast id="toast" />
+
+<i-spin fix custom wx:if="{{ !hiddenLoading }}">
+	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+	<view>加载中</view>
+</i-spin>
+
 <view class="page" style="border:none;">
 	<view class="weui-cells weui-cells_after-title" style="border:none;padding-bottom:35px;">
-		<!-- 投诉人 -->
+		<!-- 订单编号 -->
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">
-				投诉人
+				订单编号
 			</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="请输入" />
+				<picker bindchange="orderNoChange" value="{{defaultIndex}}" range="{{orderList}}" range-key="orderNo">
+					<view class="picker">
+						{{orderList[defaultIndex].orderNo}}
+					</view>
+				</picker>
 			</view>
 		</view>
-		<!-- 联系电话 -->
-		<view class="weui-cell padding" style="border:none;">
-			<view class="weui-cell__hd " style="margin-left:16px;">
-				联系电话
-			</view>
-			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="请输入" />
-			</view>
-		</view>
-		<view class="height"></view>
 		<!-- 投诉内容 -->
 		<view style="background-color:#fff;">
 			<view class="weui-cell  weui-cell_select" style="padding:16.5px;">
@@ -28,30 +29,34 @@
 				</view>
 			</view>
 			<view class="weui-cell__bd" style="border:none;">
-				<textarea class="weui-textarea" placeholder="请简单概述..." style=" height: 6.3em;font-size:14px;padding-left: 17px;width:85%" />
-				</view>
-</view>
-	<view class="height"></view>
+				<!-- <textarea class="weui-textarea" placeholder="请简单概述..."
+					style=" height: 6.3em;font-size:14px;padding-left: 17px;" value='{{complaint.text}}' bindchange="textChange" /> -->
+
+					<i-input value="{{ complaint.content }}" type="textarea" 
+					i-class="ic" placeholder="请简单概述..." bind:change="contentChange" maxlength="100" />
+
+			</view>
+		</view>
+		<view class="height"></view>
 		<!-- 图片上传 -->
 		<view class="weui-cell " style="border:none;background-color:#fff;margin-top:8px;">
 			<view class="weui-cell__hd">
 				<view class="weui-label">上传凭证</view>
 			</view>
 		</view>
-		<view class="weui-uploader"  style="border:none;background-color:#fff;">
+		<view class="weui-uploader" style="border:none;background-color:#fff;">
 			<view class="img-v weui-uploader__bd" style="margin-left:10px;padding-bottom:20px;">
+				<button class="upload-img-btn " bindtap="chooseImg" style="width:96px;height:96px;padding:0px;margin:0px;">
+					<image style="width:96px;height:96px;" src="../../img/icon_16.png"></image>
+				</button>
 				<view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
-						<image class='weui-uploader__img '
-										src="{{item}}"
-										data-index="{{index}}" mode="aspectFill" bindtap="previewImg">
-											<icon type='cancel' class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></icon>
-						</image>
-        </view>
-        <button class="upload-img-btn " bindtap="chooseImg" style="width:96px;height:96px;padding:0px;margin:0px;">
-          <image style="width:96px;height:96px;" src="../../img/icon_16.png"></image>
-        </button>
+					<image class='weui-uploader__img ' src="{{baseUrl}}{{item}}" data-index="{{index}}" mode="aspectFill"
+						bindtap="previewImg">
+						<icon type='cancel' class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></icon>
+					</image>
+				</view>
 			</view>
 		</view>
-		</view>
-	<view bindtap="submit" class=" Btn">提交</view>
+	</view>
+	<view bindtap="addComplaint" class=" Btn">提交</view>
 </view>

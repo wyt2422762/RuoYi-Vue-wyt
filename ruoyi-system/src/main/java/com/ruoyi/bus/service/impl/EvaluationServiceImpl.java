@@ -63,7 +63,7 @@ public class EvaluationServiceImpl implements IEvaluationService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertEvaluation(Evaluation evaluation)
     {
         evaluation.setCreateTime(DateUtils.getNowDate());
@@ -77,7 +77,7 @@ public class EvaluationServiceImpl implements IEvaluationService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateEvaluation(Evaluation evaluation)
     {
         evaluation.setUpdateTime(DateUtils.getNowDate());
@@ -91,7 +91,7 @@ public class EvaluationServiceImpl implements IEvaluationService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteEvaluationByIds(Long[] evaluationIds)
     {
         return evaluationMapper.deleteEvaluationByIds(evaluationIds);
@@ -104,7 +104,7 @@ public class EvaluationServiceImpl implements IEvaluationService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteEvaluationById(Long evaluationId)
     {
         return evaluationMapper.deleteEvaluationById(evaluationId);

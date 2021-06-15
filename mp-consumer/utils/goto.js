@@ -8,7 +8,8 @@ let gotoIfLogin = function (url) {
   let token = wx.getStorageSync('token')
   if (token) {
     //判断用户信息是否完善
-    if (getApp().globalData.userInfoComplete) {
+    console.log('complete = ' + wx.getStorageSync('userInfoComplete'))
+    if (url.indexOf('GRXX') >= 0 || wx.getStorageSync('userInfoComplete')) {
       wx.navigateTo({
         url: url
       })

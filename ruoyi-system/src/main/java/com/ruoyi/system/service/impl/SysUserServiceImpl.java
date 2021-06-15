@@ -208,7 +208,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertUser(SysUser user)
     {
         // 新增用户信息
@@ -227,7 +227,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateUser(SysUser user)
     {
         Long userId = user.getUserId();
@@ -363,7 +363,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteUserById(Long userId)
     {
         // 删除用户与角色关联
@@ -380,7 +380,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteUserByIds(Long[] userIds)
     {
         for (Long userId : userIds)

@@ -171,7 +171,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateDictType(SysDictType dictType)
     {
         SysDictType oldDict = dictTypeMapper.selectDictTypeById(dictType.getDictId());

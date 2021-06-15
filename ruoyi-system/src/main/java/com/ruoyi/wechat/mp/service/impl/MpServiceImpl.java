@@ -31,7 +31,7 @@ public class MpServiceImpl implements IMpService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertLunBoTu(LunBoTu lunBoTu) {
         return mpMapper.insertLunBoTu(lunBoTu);
     }
@@ -43,7 +43,7 @@ public class MpServiceImpl implements IMpService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteLunBoTu(Long id) {
         return mpMapper.deleteLunBoTu(id);
     }
@@ -55,7 +55,7 @@ public class MpServiceImpl implements IMpService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteLunBoTus(Long[] ids) {
         return mpMapper.deleteLunBoTus(ids);
     }
@@ -67,7 +67,7 @@ public class MpServiceImpl implements IMpService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateLunBoTuStatus(LunBoTu lunBoTu) {
         return mpMapper.updateLunBoTuStatus(lunBoTu);
     }
@@ -78,6 +78,7 @@ public class MpServiceImpl implements IMpService {
      *
      * @return 结果
      */
+    @Override
     public List<LunBoTu> getLunBoTu_mp(){
         return mpMapper.getLunBoTu_mp();
     }

@@ -50,7 +50,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertOrder(Order order) {
         order.setCreateTime(DateUtils.getNowDate());
         return orderMapper.insertOrder(order);
@@ -63,7 +63,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateOrder(Order order) {
         order.setUpdateTime(DateUtils.getNowDate());
         return orderMapper.updateOrder(order);
@@ -76,7 +76,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteOrderById(Long orderno) {
         return orderMapper.deleteOrderById(orderno);
     }
@@ -88,7 +88,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteOrderByIds(Long[] ordernos) {
         return orderMapper.deleteOrderByIds(ordernos);
     }
@@ -99,6 +99,7 @@ public class OrderServiceImpl implements IOrderService {
      * @param order 订单
      * @return 订单集合
      */
+    @Override
     public List<Order> selectOrderList_mp(Order order){
         return orderMapper.selectOrderList_mp(order);
     }

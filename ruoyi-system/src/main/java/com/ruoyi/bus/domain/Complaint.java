@@ -1,11 +1,13 @@
 package com.ruoyi.bus.domain;
 
 import com.ruoyi.common.validation.group.EditGroup;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -15,9 +17,8 @@ import java.util.List;
  * @author wyt
  * @date 2021-06-01
  */
+@Data
 public class Complaint extends BaseEntity {
-    private static final long serialVersionUID = 1L;
-
     /**
      * id
      */
@@ -49,79 +50,16 @@ public class Complaint extends BaseEntity {
     /**
      * 投诉内容
      */
+    @NotBlank(message = "投诉内容不能为空")
     private String content;
 
-
+    /**
+     * 附件
+     */
     private List<ComplaintAttach> attach;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public Long getOrderNo() {
-        return orderNo;
-    }
-
-    public void setConsumerId(Long consumerId) {
-        this.consumerId = consumerId;
-    }
-
-    public Long getConsumerId() {
-        return consumerId;
-    }
-
-    public void setConsumerName(String consumerName) {
-        this.consumerName = consumerName;
-    }
-
-    public String getConsumerName() {
-        return consumerName;
-    }
-
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
-
-    public String getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public List<ComplaintAttach> getAttach() {
-        return attach;
-    }
-
-    public void setAttach(List<ComplaintAttach> attach) {
-        this.attach = attach;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("orderNo", getOrderNo())
-                .append("consumerId", getConsumerId())
-                .append("consumerName", getConsumerName())
-                .append("phonenumber", getPhonenumber())
-                .append("content", getContent())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("remark", getRemark())
-                .toString();
-    }
+    /**
+     * 客户信息
+     */
+    private Consumer consumer;
 }

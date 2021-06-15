@@ -8,8 +8,8 @@
         <el-table-column label="服务时间" align="center" prop="workTime" />
         <el-table-column label="服务星级" align="center" prop="workLevel" />
         <el-table-column label="金额" align="center" prop="money" />
-        <el-table-column label="客户" align="center" prop="consumerName" />
-        <el-table-column label="护工" align="center" prop="nurseName" />
+        <el-table-column label="客户" align="center" prop="consumer.name" />
+        <el-table-column label="护工" align="center" prop="nurse.name" />
         <el-table-column label="备注" align="center" prop="remark" />
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template slot-scope="scope">

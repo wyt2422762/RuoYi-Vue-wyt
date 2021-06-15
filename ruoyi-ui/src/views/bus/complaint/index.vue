@@ -52,18 +52,18 @@
       <el-table-column type="selection" width="55" align="center" />
 <!--      <el-table-column label="id" align="center" prop="id" />-->
       <el-table-column label="订单编号" align="center" prop="orderNo" />
-      <el-table-column label="客户id" align="center" prop="consumerId" />
-      <el-table-column label="客户姓名" align="center" prop="consumerName" />
-      <el-table-column label="手机号" align="center" prop="phonenumber" />
+<!--      <el-table-column label="客户id" align="center" prop="consumerId" />-->
+      <el-table-column label="客户姓名" align="center" prop="consumer.name" />
+      <el-table-column label="手机号" align="center" prop="consumer.phonenumber" />
       <el-table-column label="投诉内容" align="center" prop="content" />
-      <el-table-column label="备注" align="center" prop="remark" />
+<!--      <el-table-column label="备注" align="center" prop="remark" />-->
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
             icon="el-icon-picture-outline"
-            @click="handleUpdate(scope.row)"
+            @click="handleAttach(scope.row)"
             v-hasPermi="['bus:complaint:list']"
           >查看凭证</el-button>
         </template>
@@ -78,11 +78,24 @@
       @pagination="getList"
     />
 
+    <!-- 附件列表 -->
+    <el-dialog title="附件列表" :visible.sync="showAttach">
+      <div class="demo-image__placeholder" >
+        <div class="block" v-for="(attach, i) in attaches">
+          <el-image
+            :src="getActUrl(attach.url)"
+            :preview-src-list="getPreviews(attach.url)"
+            z-index="9999999"
+          ></el-image>
+        </div>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { listComplaint, getComplaint } from "@/api/bus/complaint";
+import { listComplaint } from "@/api/bus/complaint";
 
 export default {
   name: "Complaint",
@@ -118,12 +131,17 @@ export default {
         phonenumber: null,
         content: null,
         createTime: null,
+        orderByColumn: 'create_time',
+        isAsc: 'desc',
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
-      }
+      },
+      //附件列表
+      showAttach: false,
+      attaches: []
     };
   },
   created() {
@@ -135,7 +153,7 @@ export default {
       this.loading = true;
       listComplaint(this.queryParams).then(response => {
         this.complaintList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },
@@ -187,7 +205,20 @@ export default {
         }).then(response => {
           this.download(response.msg);
         })
-    }
+    },
+    //查看凭证
+    handleAttach(row) {
+      this.attaches = row.attach;
+      this.showAttach = true;
+    },
+    //获取图片路径
+    getActUrl(url){
+      return process.env.VUE_APP_BASE_API + url;
+    },
+    //预览路径
+    getPreviews(url){
+      return [process.env.VUE_APP_BASE_API + url];
+    },
   }
 };
 </script>

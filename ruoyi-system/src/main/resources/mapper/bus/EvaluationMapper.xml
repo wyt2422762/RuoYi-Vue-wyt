@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.bus.mapper.EvaluationMapper">
-    
+
     <resultMap type="com.ruoyi.bus.domain.Evaluation" id="evaluationResult">
-        <result property="evaluationId"    column="evaluationId"    />
-        <result property="orderNo"    column="orderNo"    />
-        <result property="consumerId"    column="consumerId"    />
-        <result property="consumerName"    column="consumerName"    />
-        <result property="consumerPhone"    column="consumerPhone"    />
-        <result property="nurseId"    column="nurseId"    />
-        <result property="nurseName"    column="nurseName"    />
-        <result property="score"    column="score"    />
-        <result property="text"    column="text"    />
-        <result property="time"    column="time"    />
-        <result property="delFlag"    column="delFlag"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="remark"    column="remark"    />
+        <result property="evaluationId" column="evaluationId"/>
+        <result property="orderNo" column="orderNo"/>
+        <result property="consumerId" column="consumerId"/>
+        <result property="nurseId" column="nurseId"/>
+        <result property="score" column="score"/>
+        <result property="text" column="text"/>
+        <result property="time" column="time"/>
+        <result property="delFlag" column="delFlag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
 
         <association property="consumer" column="consumerId"
                      javaType="com.ruoyi.bus.domain.Consumer"
@@ -33,47 +30,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     </resultMap>
 
-    <sql id="selectEvaluationVo">
-        select evaluationId, orderNo, consumerId, consumerName, consumerPhone,
-               nurseId, nurseName, score, text, `time`,
-               create_by, create_time, update_by, update_time, remark
+    <sql id="selectEvaluationVo1">
+        select e.evaluationId,
+               e.orderNo,
+               e.consumerId,
+               e.nurseId,
+               e.score,
+               e.text,
+               e.`time`,
+               e.create_by,
+               e.create_time,
+               e.update_by,
+               e.update_time,
+               e.remark
+        from evaluation e
+                 inner join `order` o on e.orderNo = o.orderNo
+                 inner join `consumer` c on e.consumerId = c.consumerId
+                 inner join `nurse` n on e.nurseId = n.nurseId
+    </sql>
+
+    <sql id="selectEvaluationVo2">
+        select evaluationId,
+               orderNo,
+               consumerId,
+               nurseId,
+               score,
+               text,
+               `time`,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark
         from evaluation
     </sql>
 
     <select id="selectEvaluationList" parameterType="com.ruoyi.bus.domain.Evaluation" resultMap="evaluationResult">
-        <include refid="selectEvaluationVo"/>
+        <include refid="selectEvaluationVo1"/>
         <where>
-            delFlag = '0'
-            <if test="orderNo != null"> and orderNo = #{orderNo}</if>
-            <if test="consumerId != null "> and consumerId = #{consumerId}</if>
-            <if test="consumerName != null  and consumerName != ''"> and consumerName like concat('%', #{consumerName}, '%')</if>
-            <if test="consumerPhone != null and consumerPhone != ''"> and consumerPhone = #{consumerPhone}</if>
-            <if test="nurseId != null "> and nurseId = #{nurseId}</if>
-            <if test="nurseName != null  and nurseName != ''"> and nurseName like concat('%', #{nurseName}, '%')</if>
-            <if test="score != null "> and score = #{score}</if>
-            <if test="text != null  and text != ''"> and text = #{text}</if>
-            <if test="time != null "> and time = #{time}</if>
+            e.delFlag = '0'
+            <if test="orderNo != null">and e.orderNo = #{orderNo}</if>
+            <if test="consumerId != null ">and e.consumerId = #{consumerId}</if>
+            <if test="consumerName != null  and consumerName != ''">and c.name like concat('%', #{consumerName},
+                '%')
+            </if>
+            <if test="consumerPhone != null and consumerPhone != ''">and c.phonenumber = #{consumerPhone}</if>
+            <if test="nurseId != null ">and nurseId = #{nurseId}</if>
+            <if test="nurseName != null  and nurseName != ''">and n.name like concat('%', #{nurseName}, '%')</if>
+            <if test="score != null ">and e.score = #{score}</if>
+            <if test="text != null  and text != ''">and e.text = #{text}</if>
+            <if test="time != null ">and e.time = #{time}</if>
         </where>
     </select>
-    
+
     <select id="selectEvaluationById" parameterType="Long" resultMap="evaluationResult">
-        <include refid="selectEvaluationVo"/>
+        <include refid="selectEvaluationVo2"/>
         where evaluationId = #{evaluationId}
     </select>
 
     <select id="selectEvaluationByOrderNo" parameterType="Long" resultMap="evaluationResult">
-        <include refid="selectEvaluationVo"/>
+        <include refid="selectEvaluationVo2"/>
         where orderNo = #{orderNo} limit 1
     </select>
 
-    <insert id="insertEvaluation" parameterType="com.ruoyi.bus.domain.Evaluation" useGeneratedKeys="true" keyProperty="evaluationid">
-        insert into evaluation(
-            orderNo , consumerId, consumerName, consumerPhone, nurseId, nurseName, score, text, `time`,
-            create_by, create_time, remark
-        ) values (
-            #{orderNo}, #{consumerId}, #{consumerName}, #{consumerPhone}, #{nurseId}, #{nurseName}, #{score}, #{text},
-            #{time}, #{createBy}, sysdate(), #{remark}
-        )
+    <insert id="insertEvaluation" parameterType="com.ruoyi.bus.domain.Evaluation" useGeneratedKeys="true"
+            keyProperty="evaluationId">
+        insert into evaluation(orderNo, consumerId, nurseId, score, text, `time`,
+                               create_by, create_time, remark)
+        values (#{orderNo}, #{consumerId}, #{nurseId}, #{score}, #{text},
+                #{time}, #{createBy}, sysdate(), #{remark})
     </insert>
 
     <update id="updateEvaluation" parameterType="com.ruoyi.bus.domain.Evaluation">
@@ -81,10 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             orderNo = #{orderNo},
             consumerId = #{consumerId},
-            consumerName = #{consumerName},
-            consumerPhone = #{consumerPhone},
             nurseId = #{nurseId},
-            nurseName = #{nurseName},
             score = #{score},
             text = #{text}, `time` = #{time},
             update_by = #{updateBy},
@@ -94,11 +116,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteEvaluationById" parameterType="Long">
-        delete from evaluation where evaluationId = #{evaluationId}
+        delete
+        from evaluation
+        where evaluationId = #{evaluationId}
     </delete>
 
     <delete id="deleteEvaluationByIds" parameterType="String">
-        delete from evaluation where evaluationId in 
+        delete from evaluation where evaluationId in
         <foreach item="evaluationId" collection="array" open="(" separator="," close=")">
             #{evaluationId}
         </foreach>

@@ -45,20 +45,16 @@ App({
   //判断用户信息是否完善
   isUserComplete(user) {
     let that = this
-    if(!user.name || !user.addr || !user.emergencyContactPhone || !user.emergencyContactName){
-      that.globalData.userInfoComplete = false
+    if (!user.name || !user.addr || !user.emergencyContactPhone || !user.emergencyContactName) {
+      wx.setStorageSync('userInfoComplete', false)
     } else {
-      that.globalData.userInfoComplete = true
+      wx.setStorageSync('userInfoComplete', true)
     }
   },
   //获取个人信息方法(这里用来革新缓存的用户信息)
   getUserInfo() {
     let that = this
     console.log('电话号码 = ' + wx.getStorageSync('phoneNumber'))
-    //loading
-    that.setData({
-      hiddenLoading: !that.data.hiddenLoading
-    })
     service.get('/userInfo/getConsumer', {
       data: {
         phoneNumber: wx.getStorageSync('phoneNumber')
@@ -67,7 +63,7 @@ App({
       console.log('读取个人信息成功')
       //更新缓存的个人信息
       wx.setStorageSync('user', res.data)
-      isUserComplete(res.data)
+      that.isUserComplete(res.data)
     }).catch(error => {
       console.log('读取个人信息失败')
     })
@@ -85,7 +81,5 @@ App({
     openId: null,
     //sessionKey
     sessionKey: null,
-    //用户信息是否完善标识
-    userInfoComplete: false
   }
 })

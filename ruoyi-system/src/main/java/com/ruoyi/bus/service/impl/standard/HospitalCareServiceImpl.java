@@ -60,7 +60,7 @@ public class HospitalCareServiceImpl implements IHospitalCareService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertHospitalCare(HospitalCare hospitalCare) {
         return hospitalCareMapper.insertHospitalCare(hospitalCare);
     }
@@ -72,7 +72,7 @@ public class HospitalCareServiceImpl implements IHospitalCareService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateHospitalCare(HospitalCare hospitalCare) {
         return hospitalCareMapper.updateHospitalCare(hospitalCare);
     }
@@ -84,7 +84,7 @@ public class HospitalCareServiceImpl implements IHospitalCareService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteHospitalCareByIds(Long[] ids) {
         return hospitalCareMapper.deleteHospitalCareByIds(ids);
     }
@@ -96,7 +96,7 @@ public class HospitalCareServiceImpl implements IHospitalCareService {
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteHospitalCareById(Long id) {
         return hospitalCareMapper.deleteHospitalCareById(id);
     }
