@@ -7,11 +7,15 @@ var filters = {
         case "1":
           return "未支付"
         case "2":
-          return "服务中"
+          return "已支付"  
         case "3":
-          return "已完成"
+          return "服务中"
         case "4":
+          return "已完成"
+        case "5":
           return "已取消"
+        case "6":
+          return "已退款"
       }
     },
     parseOrderType: function(value) {
