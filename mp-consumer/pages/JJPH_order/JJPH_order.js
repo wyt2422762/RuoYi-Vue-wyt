@@ -11,7 +11,7 @@ import {
 
 Page({
   data: {
-    type:{
+    type: {
       id: null,
       name: null
     },
@@ -37,7 +37,33 @@ Page({
       orderType: '0',
     },
     //护工信息
-    nurse: {}
+    nurse: {},
+    //额外服务
+    extraList: [],
+    extraMap: {},
+    extras: [],
+    extraMoney: 0
+  },
+  //额外服务变化
+  extraChange(e) {
+    let that = this
+    let index = that.data.extras.indexOf(e.detail.value)
+    index === -1 ? that.data.extras.push(e.detail.value) : that.data.extras.splice(index, 1)
+    if (index === -1) {
+      //选中
+      //算钱
+      that.data.extraMoney += (that.data.extraMap[e.detail.value].money - 0)
+      that.data.order.money += (that.data.extraMap[e.detail.value].money - 0)
+    } else {
+      //取消
+      //算钱
+      that.data.order.money -= (that.data.extraMap[e.detail.value].money - 0)
+      that.data.extraMoney -= (that.data.extraMap[e.detail.value].money - 0)
+    }
+    that.setData({
+      extras: that.data.extras,
+      'order.money': that.data.order.money
+    })
   },
   //日期变化
   bindDateChange: function (e) {
@@ -102,6 +128,8 @@ Page({
     wx.setNavigationBarTitle({
       title: e.typeName
     })
+    //3. 获取额外服务
+    that.getExtra()
   },
   //获取居家陪护收费标准
   getHomeCareStandard() {
@@ -110,6 +138,16 @@ Page({
       that.data.homeCareStandardMap = res.data
       that.calcMoney()
     })
+  },
+  //获取额外服务
+  getExtra() {
+    let that = this
+    service.get('/standard/extras', {}).then(res => {
+      that.setData({
+        extraList: res.data.list,
+        extraMap: res.data.map
+      })
+    }).catch(err => {})
   },
   //计算金额
   calcMoney() {
@@ -128,7 +166,8 @@ Page({
   },
   //计算钱
   calc(standard, month) {
-    return (standard.money == null ? 0 : standard.money) * month + (standard.deposit == null ? 0 : standard.deposit);
+    let that = this
+    return (standard.money == null ? 0 : standard.money) * month + (standard.deposit == null ? 0 : standard.deposit) + (that.data.extraMoney ? that.data.extraMoney : 0)
   },
   //跳转
   goto(e) {
@@ -138,7 +177,16 @@ Page({
   //提交订单
   submitOrder() {
     let that = this
-    if(!that.checkOrderParam()){
+    //处理人数
+    if (that.data.personNum[that.data.personNumIndex]) {
+      that.data.order.personNum = that.data.personNum[that.data.personNumIndex]
+    }
+    //处理额外服务
+    if (that.data.extras && that.data.extras.length > 0) {
+      that.data.order.extra = that.data.extras
+    }
+    //参数检查
+    if (!that.checkOrderParam()) {
       return false
     }
     //参数检查通过，提交订单
@@ -168,16 +216,16 @@ Page({
   checkOrderParam() {
     let that = this
     let order = that.data.order
-    if(!order['consumerId']){
+    if (!order['consumerId']) {
       iView.toast.warning('客户id不能为空')
       return false
-    } else if(!order['nurseId']){
+    } else if (!order['nurseId']) {
       iView.toast.warning('请选择护工')
       return false
-    } else if(!order['addr']){
+    } else if (!order['addr']) {
       iView.toast.warning('请选择地址')
       return false
-    } else if(!order['money']){
+    } else if (!order['money']) {
       iView.toast.warning('请选择服务项目')
       return false
     }

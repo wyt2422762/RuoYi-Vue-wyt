@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bus.mapper.standard.ExtraMapper">
+
+    <resultMap type="com.ruoyi.bus.domain.standard.Extra" id="extraResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="money" column="money"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectExtraVo">
+        select id,
+               `name`,
+               money,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark
+        from standard_extra
+    </sql>
+
+    <select id="selectExtraList" parameterType="com.ruoyi.bus.domain.standard.Extra" resultMap="extraResult">
+        <include refid="selectExtraVo"/>
+        <where>
+            <if test="name != null  and name != ''">and `name` like concat('%', #{name}, '%')</if>
+            <if test="money != null ">and money = #{money}</if>
+        </where>
+    </select>
+
+    <select id="selectExtraById" parameterType="Long" resultMap="extraResult">
+        <include refid="selectExtraVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertExtra" parameterType="com.ruoyi.bus.domain.standard.Extra" useGeneratedKeys="true" keyProperty="id">
+        insert into standard_extra
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `name`, money, create_by, create_time, remark
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{name}, #{money}, #{createBy}, #{createTime}, #{remark}
+        </trim>
+    </insert>
+
+    <update id="updateExtra" parameterType="com.ruoyi.bus.domain.standard.Extra">
+        update standard_extra
+        <trim prefix="SET" suffixOverrides=",">
+            `name` = #{name}, money = #{money},
+            update_by = #{updateBy}, update_time = #{updateTime},
+            remark = #{remark}
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStandardExtraById" parameterType="Long">
+        delete
+        from standard_extra
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteExtraByIds" parameterType="String">
+        delete from standard_extra where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

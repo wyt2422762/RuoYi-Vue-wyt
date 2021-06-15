@@ -1,19 +1,21 @@
 package com.ruoyi.bus.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.validation.group.EditGroup;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单表
  *
  * @author Administrator
  */
+@Data
 public class Order extends BaseEntity {
     /**
      * 订单编号
@@ -105,7 +107,6 @@ public class Order extends BaseEntity {
     /**
      * 删除标志（0代表存在 2代表删除)
      */
-    @Excel(name = "删除标志", readConverterExp = "删除标志（0代表存在 2代表删除)")
     private String delFlag;
 
     /**
@@ -114,139 +115,13 @@ public class Order extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date payTime;
 
-    public Long getOrderNo() {
-        return orderNo;
-    }
+    /**
+     * 人数
+     */
+    private Long personNum;
 
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public String getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(String orderType) {
-        this.orderType = orderType;
-    }
-
-    public String getWorkTime() {
-        return workTime;
-    }
-
-    public void setWorkTime(String workTime) {
-        this.workTime = workTime;
-    }
-
-    public String getWorkLevel() {
-        return workLevel;
-    }
-
-    public void setWorkLevel(String workLevel) {
-        this.workLevel = workLevel;
-    }
-
-    public Long getMoney() {
-        return money;
-    }
-
-    public void setMoney(Long money) {
-        this.money = money;
-    }
-
-    public Long getConsumerId() {
-        return consumerId;
-    }
-
-    public void setConsumerId(Long consumerId) {
-        this.consumerId = consumerId;
-    }
-
-    public Long getNurseId() {
-        return nurseId;
-    }
-
-    public void setNurseId(Long nurseId) {
-        this.nurseId = nurseId;
-    }
-
-    public Long getEvaluationId() {
-        return evaluationId;
-    }
-
-    public void setEvaluationId(Long evaluationId) {
-        this.evaluationId = evaluationId;
-    }
-
-    public Consumer getConsumer() {
-        return consumer;
-    }
-
-    public void setConsumer(Consumer consumer) {
-        this.consumer = consumer;
-    }
-
-    public Nurse getNurse() {
-        return nurse;
-    }
-
-    public void setNurse(Nurse nurse) {
-        this.nurse = nurse;
-    }
-
-    public Evaluation getEvaluation() {
-        return evaluation;
-    }
-
-    public void setEvaluation(Evaluation evaluation) {
-        this.evaluation = evaluation;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public String getConsumerName() {
-        return consumerName;
-    }
-
-    public void setConsumerName(String consumerName) {
-        this.consumerName = consumerName;
-    }
-
-    public String getNurseName() {
-        return nurseName;
-    }
-
-    public void setNurseName(String nurseName) {
-        this.nurseName = nurseName;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getAddr() {
-        return addr;
-    }
-
-    public void setAddr(String addr) {
-        this.addr = addr;
-    }
-
-    public Date getPayTime() {
-        return payTime;
-    }
-
-    public void setPayTime(Date payTime) {
-        this.payTime = payTime;
-    }
+    /**
+     * 额外服务
+     */
+    private List<String> extra;
 }

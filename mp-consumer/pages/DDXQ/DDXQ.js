@@ -10,6 +10,7 @@ import {
 } from '../../utils/pay.js'
 
 let iView = require('../../utils/iViewUtil.js')
+let gto = require('../../utils/goto.js')
 
 Page({
   data: {
@@ -87,6 +88,13 @@ Page({
   paySuccess(res) {
     let that = this
     iView.toast.success('支付成功')
+    //更新订单状态
+    let orderNo = that.data.order.orderNo
+    service.put("/order/paySuccess/" + orderNo, {
+    }).then(res => {
+    }).catch(err => {
+      console.log("更改订单状态失败")
+    })
     //刷新当前页面
     that.onLoad()
   },
@@ -94,6 +102,11 @@ Page({
   payFail(err) {
     let that = this
     iView.toast.error('支付失败')
-    return false
-  }
+  },
+  //跳转
+  goto(e) {
+    let url = e.currentTarget.dataset.url
+    let orderNo = this.data.order.orderNo
+    gto.gotoIfLogin(url + "?orderNo=" + orderNo)
+  },
 })

@@ -16,9 +16,16 @@ public enum OperatorType
      * 后台用户
      */
     MANAGE,
-
     /**
      * 手机端用户
      */
-    MOBILE
+    MOBILE,
+    /**
+     * 客户
+     */
+    CONSUMER,
+    /**
+     * 护工
+     */
+    NURSE
 }

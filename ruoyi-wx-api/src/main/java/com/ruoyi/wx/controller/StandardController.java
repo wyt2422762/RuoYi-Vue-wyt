@@ -1,7 +1,9 @@
 package com.ruoyi.wx.controller;
 
+import com.ruoyi.bus.domain.standard.Extra;
 import com.ruoyi.bus.domain.standard.HomeCare;
 import com.ruoyi.bus.domain.standard.HospitalCare;
+import com.ruoyi.bus.service.standard.IExtraService;
 import com.ruoyi.bus.service.standard.IHomeCareService;
 import com.ruoyi.bus.service.standard.IHospitalCareService;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -28,6 +30,8 @@ public class StandardController {
     private IHomeCareService homeCareService;
     @Autowired
     private IHospitalCareService hospitalCareService;
+    @Autowired
+    private IExtraService extraService;
 
     /**
      * 获取居家陪护收费标准
@@ -59,4 +63,24 @@ public class StandardController {
         return AjaxResult.success("查询成功", res);
     }
 
+
+    /**
+     * 获取医院陪护收费标准
+     *
+     * @return 结果
+     */
+    @GetMapping("extras")
+    public AjaxResult getExtra() {
+        List<Extra> extras = extraService.selectExtraList(null);
+        Map<String, Extra> map = new HashMap<>();
+        for (Extra extra : extras) {
+            map.put(extra.getName(), extra);
+        }
+
+        Map<String, Object> res = new HashMap<>();
+        res.put("list", extras);
+        res.put("map", map);
+
+        return AjaxResult.success("查询成功", res);
+    }
 }

@@ -1,101 +1,67 @@
 // pages/PJXQ/PJXQ.js
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+const config = require("../../utils/config.js")
+let util = require("../../utils/util.js")
+let gto = require('../../utils/goto.js')
+let iView = require('../../utils/iViewUtil.js')
+
+import {
+  service
+} from '../../utils/request.js'
+
+Page({
   data: {
-    flag:[0, 0, 0],
-    startext: ['', '', ''],
-    stardata: [1, 2, 3, 4, 5],
+    //loading
+    hiddenLoading: true,
+    //评价
+    evaluation: {}
   },
-// 五星评价事件
-changeColor: function (e) {
-  var index = e.currentTarget.dataset.index;
-  var num = e.currentTarget.dataset.no;
-  var a = 'flag[' + index + ']';
-  var b = 'startext[' + index + ']';
-  var that = this;
-  if(num == 1) {
-    that.setData({
-      [a]: 1,
-      [b]: '非常不满意'
-    });
-  } else if (num == 2){
-    that.setData({
-      [a]: 2,
-      [b]: '不满意'
-    });
-  } else if (num == 3) {
-    that.setData({
-      [a]: 3,
-      [b]: '一般'
-    });
-  } else if (num == 4) {
-    that.setData({
-      [a]: 4,
-      [b]: '满意'
-    });
-  } else if (num == 5) {
-    that.setData({
-      [a]: 5,
-      [b]: '非常满意'
-    });
-  }
-},
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad(options) {
+    let that = this
+    that.data.evaluation.orderNo = options.orderNo
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  //分数变化
+  scoreChange(e) {
+    let that = this
+    that.setData({
+      'evaluation.score': e.detail.index
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  //内容变化
+  textChange(e) {
+    let that = this
+    that.setData({
+      'evaluation.text': e.detail.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  //提交评价
+  submit(e) {
+    let that = this
+    debugger
+    //loading
+    that.setData({
+      hiddenLoading: !that.data.hiddenLoading
+    })
+    service.post('/order/evaluation/' + that.data.evaluation.orderNo, {
+      data: that.data.evaluation
+    }).then(res => {
+      //loading
+      that.setData({
+        hiddenLoading: !that.data.hiddenLoading
+      })
+      iView.toast.success('评价成功')
+      wx.redirectTo({
+        url: '../QBDD/QBDD',
+      })
+    }).catch(err => {
+      //loading
+      that.setData({
+        hiddenLoading: !that.data.hiddenLoading
+      })
+      iView.toast.error('评价失败')
+    })
   }
 })

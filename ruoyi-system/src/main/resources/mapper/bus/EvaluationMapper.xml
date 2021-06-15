@@ -75,7 +75,7 @@
                 '%')
             </if>
             <if test="consumerPhone != null and consumerPhone != ''">and c.phonenumber = #{consumerPhone}</if>
-            <if test="nurseId != null ">and nurseId = #{nurseId}</if>
+            <if test="nurseId != null ">and e.nurseId = #{nurseId}</if>
             <if test="nurseName != null  and nurseName != ''">and n.name like concat('%', #{nurseName}, '%')</if>
             <if test="score != null ">and e.score = #{score}</if>
             <if test="text != null  and text != ''">and e.text = #{text}</if>

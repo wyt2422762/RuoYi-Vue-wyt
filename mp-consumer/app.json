@@ -76,6 +76,8 @@
     "i-panel": "./component/iView/panel/index",
     "i-button": "./component/iView/button/index",
     "i-toast": "./component/iView/toast/index",
-    "i-load-more": "./component/iView/load-more/index"
+    "i-load-more": "./component/iView/load-more/index",
+    "i-checkbox-group": "./component/iView/checkbox-group/index",
+    "i-checkbox": "./component/iView/checkbox/index"
   }
 }

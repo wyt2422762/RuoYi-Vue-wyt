@@ -47,7 +47,7 @@ service.interceptors.response.use(res => {
     return res.data
   } else {
     console.log('错误')
-    return Promise.reject('error')
+    return Promise.reject(new Error(msg))
   }
 }, error => {
   console.log('err' + error)

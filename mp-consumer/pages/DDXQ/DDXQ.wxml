@@ -62,6 +62,26 @@
 					value="{{filters.parseOrderStatus(order.status)}}" disabled />
 			</view>
 		</view>
+		<!-- 人数 -->
+		<view class="weui-cell padding" style="border:none;" wx:if="{{order.personNum > 0}}">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+				人数
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.personNum}}" disabled />
+			</view>
+		</view>
+		<!-- 额外服务 -->
+		<view class="weui-cell padding" style="border:none;" wx:if="{{order.extra.length > 0}}">
+			<view class="weui-cell__hd " style="margin-left:16px;">
+				额外服务
+			</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.extra}}" disabled />
+			</view>
+		</view>
 		<view class="height"></view>
 		<!-- 客户姓名 -->
 		<view class="weui-cell padding" style="border:none;">
@@ -134,5 +154,6 @@
 	<view class="payment">
 		<button wx:if="{{order.status == 0}}" class="cancel">取消</button>
 		<button bindtap="payOrder" wx:if="{{order.status == 1}}" class="Btn">去支付</button>
+		<button wx:if="{{!order.evaluation}}"  bindtap="goto" data-url="../PJXQ/PJXQ"  class="Btn">评价</button>
 	</view>
 </view>

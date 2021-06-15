@@ -11,9 +11,10 @@
         <result property="workLevel" column="workLevel"/>
         <result property="money" column="money"/>
         <result property="deposit" column="deposit"/>
+        <result property="personNum" column="personNum"/>
+        <result property="extra" column="extra" typeHandler="com.ruoyi.common.utils.mybatis.List2VarcharHandler"/>
 
         <result property="consumerId" column="consumerId"/>
-
         <result property="nurseId" column="nurseId"/>
 
         <result property="addr" column="addr"/>
@@ -38,6 +39,10 @@
                      javaType="com.ruoyi.bus.domain.Nurse"
                      select="com.ruoyi.bus.mapper.NurseMapper.selectNurseById"
         />
+        <association property="evaluation" column="orderNo"
+                     javaType="com.ruoyi.bus.domain.Evaluation"
+                     select="com.ruoyi.bus.mapper.EvaluationMapper.selectEvaluationByOrderNo"
+        />
     </resultMap>
 
     <sql id="selectOrderVo1">
@@ -47,6 +52,8 @@
                o.workLevel,
                o.money,
                o.deposit,
+               o.personNum,
+               o.extra,
                o.consumerId,
                o.nurseId,
                o.addr,
@@ -58,8 +65,8 @@
                o.update_time,
                o.remark
         from `order` o
-        inner join consumer c on o.consumerId = c.consumerId
-        inner join nurse n on o.nurseId = n.nurseId
+                 inner join consumer c on o.consumerId = c.consumerId
+                 inner join nurse n on o.nurseId = n.nurseId
     </sql>
 
     <sql id="selectOrderVo2">
@@ -69,6 +76,8 @@
                workLevel,
                money,
                deposit,
+               personNum,
+               extra,
                consumerId,
                nurseId,
                addr,
@@ -92,7 +101,8 @@
             <if test="money != null ">and o.money = #{money}</if>
             <if test="consumerId != null ">and o.consumerId = #{consumerId}</if>
             <if test="consumerName != null and consumerName != '' ">and c.name like concat('%', #{consumerName},
-                '%'</if>
+                '%'
+            </if>
             <if test="nurseId != null ">and o.nurseId = #{nurseId}</if>
             <if test="nurseName != null and nurseName != '' ">and n.name like concat('%', #{nurseName}, '%')</if>
             <if test="status != null and status != '' ">and o.status = #{status}</if>
@@ -106,9 +116,10 @@
     </select>
 
     <insert id="insertOrder" parameterType="com.ruoyi.bus.domain.Order">
-        insert into `order`(orderNo, orderType, workTime, workLevel, money, deposit, consumerId,
-                          nurseId, addr, create_by, create_time, remark)
-        values (#{orderNo}, #{orderType}, #{workTime}, #{workLevel}, #{money}, #{deposit},
+        insert into `order`(orderNo, orderType, workTime, workLevel, money, deposit, personNum, extra, consumerId,
+                            nurseId, addr, create_by, create_time, remark)
+        values (#{orderNo}, #{orderType}, #{workTime}, #{workLevel}, #{money}, #{deposit}, #{personNum},
+                #{extra, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
                 #{consumerId}, #{nurseId}, #{addr}, #{createBy}, sysdate(), #{remark})
     </insert>
 
@@ -116,11 +127,12 @@
         update `order`
         <trim prefix="SET" suffixOverrides=",">
             orderType = #{orderType}, workTime = #{workTime}, workLevel = #{workLevel},
-            money = #{money}, deposit = #{deposit}, consumerId = #{consumerId}, nurseId = #{nurseId},
-            addr = #{addr}, status = #{status},
+            money = #{money}, deposit = #{deposit}, personNum = #{personNum},
+            extra = #{extra, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
+            consumerId = #{consumerId}, nurseId = #{nurseId}, addr = #{addr}, status = #{status},
 
             <if test="updateBy != null  and updateBy != ''">
-            update_by = #{updateBy},
+                update_by = #{updateBy},
             </if>
 
             update_time = sysdate(),
@@ -130,7 +142,9 @@
     </update>
 
     <delete id="deleteOrderById" parameterType="Long">
-        update `order` set delFlag = '2' where orderNo = #{orderNo}
+        update `order`
+        set delFlag = '2'
+        where orderNo = #{orderNo}
     </delete>
 
     <delete id="deleteOrderByIds" parameterType="String">
@@ -150,7 +164,8 @@
             <if test="money != null ">and o.money = #{money}</if>
             <if test="consumerId != null ">and o.consumerId = #{consumerId}</if>
             <if test="consumerName != null and consumerName != '' ">and c.name like concat('%', #{consumerName},
-                '%'</if>
+                '%'
+            </if>
             <if test="nurseId != null ">and o.nurseId = #{nurseId}</if>
             <if test="nurseName != null and nurseName != '' ">and n.name like concat('%', #{nurseName}, '%')</if>
             <if test="status != null and status != '' ">and o.status = #{status}</if>
