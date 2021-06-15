@@ -21,16 +21,6 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="服务类型" prop="orderType">
-        <el-select v-model="queryParams.orderType" placeholder="请选择订单类型" clearable size="small">
-          <el-option
-            v-for="dict in orderTypeOptions"
-            :key="dict.dictValue"
-            :label="dict.dictLabel"
-            :value="dict.dictValue"
-          />
-        </el-select>
-      </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable size="small">
           <el-option
