@@ -8,7 +8,9 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 订单表
@@ -80,11 +82,6 @@ public class Order extends BaseEntity {
     private String addr;
 
     /**
-     * 评价id
-     */
-    private Long evaluationId;
-
-    /**
      * 客户
      */
     private Consumer consumer;
@@ -116,12 +113,21 @@ public class Order extends BaseEntity {
     private Date payTime;
 
     /**
-     * 人数
+     * 订单内容详情
      */
-    private Long personNum;
+    private List<OrderMeta> meta;
 
-    /**
-     * 额外服务
-     */
-    private List<String> extra;
+    private Map<String, OrderMeta> metaMap;
+
+    public Map<String, OrderMeta> getMetaMap() {
+        if(this.meta == null || this.meta.isEmpty()){
+            return null;
+        } else {
+            Map<String, OrderMeta> map = new HashMap<>();
+            for (OrderMeta orderMeta : this.meta) {
+                map.put(orderMeta.getLabel(), orderMeta);
+            }
+            return map;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.ruoyi.bus.service.impl;
 
 import com.ruoyi.bus.domain.Order;
+import com.ruoyi.bus.domain.OrderMeta;
 import com.ruoyi.bus.mapper.OrderMapper;
 import com.ruoyi.bus.service.IOrderService;
 import com.ruoyi.common.utils.DateUtils;
@@ -53,6 +54,14 @@ public class OrderServiceImpl implements IOrderService {
     @Transactional(rollbackFor = Exception.class)
     public int insertOrder(Order order) {
         order.setCreateTime(DateUtils.getNowDate());
+        //内容详情
+        List<OrderMeta> orderMetas = order.getMeta();
+        if(orderMetas != null && !orderMetas.isEmpty()){
+            for (OrderMeta orderMeta : orderMetas) {
+                orderMeta.setOrderNo(order.getOrderNo());
+            }
+            orderMapper.insertOrderMeta(orderMetas);
+        }
         return orderMapper.insertOrder(order);
     }
 

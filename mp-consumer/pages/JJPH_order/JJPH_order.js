@@ -190,6 +190,32 @@ Page({
       return false
     }
     //参数检查通过，提交订单
+
+    //这里处理meta内容
+    let meta = []
+    //人数
+    if (that.data.personNum[that.data.personNumIndex]) {
+      let personNum = that.data.personNum[that.data.personNumIndex]
+      let mta = {
+        label: '人数',
+        data: personNum
+      }
+      meta.push(mta)
+    }
+    //处理额外服务
+    if (that.data.extras && that.data.extras.length > 0) {
+      let extra = that.data.extras
+      let mta = {
+        label: '额外服务',
+        data: extra.join(';')
+      }
+      meta.push(mta)
+    }
+    //添加额外服务信息
+    if(meta && meta.length > 0){
+      that.data.order.meta = meta
+    }
+
     //loading
     that.setData({
       hiddenLoading: !that.data.hiddenLoading

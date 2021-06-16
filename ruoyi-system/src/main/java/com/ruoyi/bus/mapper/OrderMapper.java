@@ -3,6 +3,7 @@ package com.ruoyi.bus.mapper;
 import java.util.List;
 
 import com.ruoyi.bus.domain.Order;
+import com.ruoyi.bus.domain.OrderMeta;
 
 /**
  * 订单Mapper接口
@@ -66,4 +67,11 @@ public interface OrderMapper {
      * @return 订单集合
      */
     List<Order> selectOrderList_mp(Order order);
+
+    /**
+     * 添加订单内容详情
+     * @param orderMetas
+     * @return 结果
+     */
+    int insertOrderMeta(List<OrderMeta> orderMetas);
 }

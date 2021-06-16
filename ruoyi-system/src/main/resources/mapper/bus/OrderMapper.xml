@@ -10,9 +10,8 @@
         <result property="workTime" column="workTime"/>
         <result property="workLevel" column="workLevel"/>
         <result property="money" column="money"/>
+
         <result property="deposit" column="deposit"/>
-        <result property="personNum" column="personNum"/>
-        <result property="extra" column="extra" typeHandler="com.ruoyi.common.utils.mybatis.List2VarcharHandler"/>
 
         <result property="consumerId" column="consumerId"/>
         <result property="nurseId" column="nurseId"/>
@@ -43,6 +42,11 @@
                      javaType="com.ruoyi.bus.domain.Evaluation"
                      select="com.ruoyi.bus.mapper.EvaluationMapper.selectEvaluationByOrderNo"
         />
+
+        <collection property="meta" column="orderNo"
+                    javaType="java.util.List" ofType="com.ruoyi.bus.domain.OrderMeta"
+                    select="com.ruoyi.bus.mapper.OrderMapper.selectOrderMeta"
+        />
     </resultMap>
 
     <sql id="selectOrderVo1">
@@ -52,8 +56,6 @@
                o.workLevel,
                o.money,
                o.deposit,
-               o.personNum,
-               o.extra,
                o.consumerId,
                o.nurseId,
                o.addr,
@@ -76,8 +78,6 @@
                workLevel,
                money,
                deposit,
-               personNum,
-               extra,
                consumerId,
                nurseId,
                addr,
@@ -116,10 +116,9 @@
     </select>
 
     <insert id="insertOrder" parameterType="com.ruoyi.bus.domain.Order">
-        insert into `order`(orderNo, orderType, workTime, workLevel, money, deposit, personNum, extra, consumerId,
+        insert into `order`(orderNo, orderType, workTime, workLevel, money, deposit, consumerId,
                             nurseId, addr, create_by, create_time, remark)
-        values (#{orderNo}, #{orderType}, #{workTime}, #{workLevel}, #{money}, #{deposit}, #{personNum},
-                #{extra, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
+        values (#{orderNo}, #{orderType}, #{workTime}, #{workLevel}, #{money}, #{deposit},
                 #{consumerId}, #{nurseId}, #{addr}, #{createBy}, sysdate(), #{remark})
     </insert>
 
@@ -127,8 +126,7 @@
         update `order`
         <trim prefix="SET" suffixOverrides=",">
             orderType = #{orderType}, workTime = #{workTime}, workLevel = #{workLevel},
-            money = #{money}, deposit = #{deposit}, personNum = #{personNum},
-            extra = #{extra, typeHandler=com.ruoyi.common.utils.mybatis.List2VarcharHandler},
+            money = #{money}, deposit = #{deposit},
             consumerId = #{consumerId}, nurseId = #{nurseId}, addr = #{addr}, status = #{status},
 
             <if test="updateBy != null  and updateBy != ''">
@@ -171,6 +169,20 @@
             <if test="status != null and status != '' ">and o.status = #{status}</if>
             <if test="addr != null and addr != '' ">and o.addr = #{addr}</if>
         </where>
+    </select>
+
+    <insert id="insertOrderMeta" parameterType="java.util.List">
+        insert into `order_meta`(orderNo, label, `data`)
+        values
+        <foreach collection="list" item="meta" index="index" separator=",">
+            (#{meta.orderNo}, #{meta.label}, #{meta.data})
+        </foreach>
+    </insert>
+
+    <select id="selectOrderMeta" parameterType="java.lang.Long" resultType="com.ruoyi.bus.domain.OrderMeta">
+        select orderNo, label, `data`
+        from `order_meta`
+        where orderNo = #{orderNo}
     </select>
 
 </mapper>

@@ -78,8 +78,8 @@
 				额外服务
 			</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
-					value="{{order.extra}}" disabled />
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.extra}}"
+					disabled />
 			</view>
 		</view>
 		<view class="height"></view>
@@ -132,9 +132,9 @@
 					value="{{order.workTime}}" disabled />
 			</view>
 		</view>
-		<!-- 服务类型 -->
+		<!-- 订单类型 -->
 		<view class="weui-cell padding" style="border:none;">
-			<view class="weui-cell__hd " style="margin-left:16px;">服务类型</view>
+			<view class="weui-cell__hd " style="margin-left:16px;">订单类型</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
 				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
 					value="{{filters.parseOrderType(order.orderType)}}" disabled />
@@ -148,12 +148,60 @@
 					disabled />
 			</view>
 		</view>
-
+		<!-- 人数 -->
+		<view wx:if="{{order.orderType == 0}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">人数</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['人数'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 额外服务 -->
+		<view wx:if="{{order.orderType == 0}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">额外服务</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['额外服务'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 每日小时数 -->
+		<view wx:if="{{order.orderType == 1}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">每日小时数</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['每日小时数'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 餐费 -->
+		<view wx:if="{{order.orderType == 1}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">人数</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['餐费'].data}}" disabled />
+			</view>
+		</view>
+		<view class="height"></view>
+		<!-- 护工 -->
+		<view wx:if="{{order.status != 0}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">护工</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.nurse.name}}" disabled />
+			</view>
+		</view>
+		<!-- 护工电话 -->
+		<view wx:if="{{order.status != 0}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">护工电话</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.nurse.phonenumber}}" disabled />
+			</view>
+		</view>
 	</view>
 
 	<view class="payment">
 		<button wx:if="{{order.status == 0}}" class="cancel">取消</button>
 		<button bindtap="payOrder" wx:if="{{order.status == 1}}" class="Btn">去支付</button>
-		<button wx:if="{{!order.evaluation}}"  bindtap="goto" data-url="../PJXQ/PJXQ"  class="Btn">评价</button>
+		<button wx:if="{{!order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ" class="Btn">评价</button>
 	</view>
 </view>

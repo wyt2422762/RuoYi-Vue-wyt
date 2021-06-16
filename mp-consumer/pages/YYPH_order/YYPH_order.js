@@ -154,6 +154,30 @@ Page({
       return false
     }
     //参数检查通过，提交订单
+
+    //处理meta
+    let meta = []
+    //每日小时数
+    if (that.data.dat) {
+      let mta = {
+        label: '每日小时数',
+        data: that.data.dat
+      }
+      meta.push(mta)
+    }
+    //餐费
+    if(that.data.mealSum){
+      let mta = {
+        label: '餐费',
+        data: that.data.mealSum
+      }
+      meta.push(mta)
+    }
+    //添加额外服务信息
+    if(meta && meta.length > 0){
+      that.data.order.meta = meta
+    }
+
     //loading
     that.setData({
       hiddenLoading: !that.data.hiddenLoading
