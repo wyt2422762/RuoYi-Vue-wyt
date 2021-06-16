@@ -160,10 +160,19 @@ public class BasicController {
                 Nurse nurse = nurseService.selectNurseByPhoneNumber_mp(phoneNumber);
                 if(nurse == null){
                     //这里需不需要注册？
+                    return AjaxResult.error("手机号对应的用户存不存在");
                 } else {
-
+                    if(!openId.equals(nurse.getOpenId())){
+                        nurse.setOpenId(openId);
+                        nurseService.updateNurse(nurse);
+                    }
                 }
-                break;
+                //token
+                String tokenN = tokenService.createToken(nurse);
+                Map<String, Object> resN = new HashMap<>(2);
+                resN.put("token", tokenN);
+                resN.put("user", nurse);
+                return AjaxResult.success("成功", resN);
             default:;
         }
 

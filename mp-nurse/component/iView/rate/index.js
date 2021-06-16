@@ -1,5 +1,5 @@
 Component({
-    externalClasses: ['i-class'],
+    externalClasses: ['i-class', 'i-rate-current'],
     properties : {
         count : {
             type : Number,

@@ -12,10 +12,10 @@ ruoyi:
 
 logging:
   level:
-    com.ruoyi: debug
+    com.ruoyi: info
     org.springframework: error
-    com.github.binarywang.wxpay: debug
-    cn.binarywang.wx.miniapp: debug
+    com.github.binarywang.wxpay: error
+    cn.binarywang.wx.miniapp: error
 
 spring:
   datasource:
@@ -92,12 +92,6 @@ wx:
         secret: 8d08af025de6481c414e7a5c5d7b264f
         token: 456
         aesKey: 789
-        msgDataFormat: JSON
-
-      - appid: wxfaadeb9cabd5d5fb
-        secret: 8d08af025de6481c414e7a5c5d7b264b
-        token: 457
-        aesKey: 890
         msgDataFormat: JSON
   pay:
     appId: wxfaadeb9cabd5d5fa

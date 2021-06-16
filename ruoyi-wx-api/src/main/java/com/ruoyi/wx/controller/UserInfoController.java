@@ -1,7 +1,9 @@
 package com.ruoyi.wx.controller;
 
 import com.ruoyi.bus.domain.Consumer;
+import com.ruoyi.bus.domain.Nurse;
 import com.ruoyi.bus.service.IConsumerService;
+import com.ruoyi.bus.service.INurseService;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.validation.group.EditGroup;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,8 @@ public class UserInfoController {
 
     @Autowired
     private IConsumerService consumerService;
+    @Autowired
+    private INurseService nurseService;
 
     /**
      * 获取客户个人信息
@@ -44,6 +48,18 @@ public class UserInfoController {
     public AjaxResult updateConsumer(@Validated(EditGroup.class) @RequestBody Consumer consumer){
         consumerService.updateConsumer(consumer);
         return AjaxResult.success("修改");
+    }
+
+    /**
+     * 获取护工个人信息
+     * @param phoneNumber 手机号
+     * @return 结果
+     */
+    @PreAuthorize("hasAuthority('nurse')")
+    @GetMapping("getNurse")
+    public AjaxResult getNurse(String phoneNumber){
+        Nurse nurse = nurseService.selectNurseByPhoneNumber_mp(phoneNumber);
+        return AjaxResult.success("查询成功", nurse);
     }
 
 }

@@ -109,20 +109,6 @@ xss:
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
 
-wx:
-  miniapp:
-    configs:
-      - appid: wxfaadeb9cabd5d5fa
-        secret: 8d08af025de6481c414e7a5c5d7b264f
-        token: 456
-        aesKey: 789
-        msgDataFormat: JSON
-  pay:
-    appId: wxfaadeb9cabd5d5fa
-    mchId: #微信支付商户号
-    mchKey: #微信支付商户密钥
-    keyPath: # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
-
 orderNo:
   datacenterId: 1
   machineId: 1

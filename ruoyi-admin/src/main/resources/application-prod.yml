@@ -1,21 +1,24 @@
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 8082
+  port: 8080
   servlet:
     # 应用的访问路径
     context-path: /
 
+# 项目相关配置
 ruoyi:
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
   profile: D:/ruoyi/uploadPath
 
+# 日志配置
 logging:
   level:
-    com.ruoyi: debug
+    com.ruoyi: info
     org.springframework: error
-    com.github.binarywang.wxpay: debug
-    cn.binarywang.wx.miniapp: debug
+    com.github.binarywang.wxpay: error
+    cn.binarywang.wx.miniapp: error
+
 
 spring:
   datasource:
@@ -74,6 +77,7 @@ spring:
           config:
             multi-statement-allow: true
 
+
   redis:
     # 地址
     host: 127.0.0.1
@@ -84,23 +88,3 @@ spring:
     # 密码
     password:
 
-
-wx:
-  miniapp:
-    configs:
-      - appid: wxfaadeb9cabd5d5fa
-        secret: 8d08af025de6481c414e7a5c5d7b264f
-        token: 456
-        aesKey: 789
-        msgDataFormat: JSON
-
-      - appid: wxfaadeb9cabd5d5fb
-        secret: 8d08af025de6481c414e7a5c5d7b264b
-        token: 457
-        aesKey: 890
-        msgDataFormat: JSON
-  pay:
-    appId: wxfaadeb9cabd5d5fa
-    mchId: #微信支付商户号
-    mchKey: #微信支付商户密钥
-    keyPath: # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）

@@ -1,26 +1,22 @@
 package com.ruoyi.bus.domain;
 
-import com.ruoyi.common.core.domain.entity.SysDept;
-import com.ruoyi.common.validation.group.CreateGroup;
-import com.ruoyi.common.validation.group.EditGroup;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.core.domain.entity.SysDept;
+import com.ruoyi.common.validation.group.EditGroup;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * 护工对象 sys_nurse
+ * 护工对象
  *
  * @author ruoyi
  * @date 2021-05-29
  */
+@Data
 public class Nurse extends BaseEntity {
     /**
      * id
@@ -112,153 +108,8 @@ public class Nurse extends BaseEntity {
 
     private SysDept dept;
 
-    public void setNurseId(Long nurseId) {
-        this.nurseId = nurseId;
-    }
-
-    public Long getNurseId() {
-        return nurseId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
-
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setAge(Long age) {
-        this.age = age;
-    }
-
-    public Long getAge() {
-        return age;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
-
-    public String getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setWorkLevel(String workLevel) {
-        this.workLevel = workLevel;
-    }
-
-    public String getWorkLevel() {
-        return workLevel;
-    }
-
-    public void setWorkStatus(String workStatus) {
-        this.workStatus = workStatus;
-    }
-
-    public String getWorkStatus() {
-        return workStatus;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public SysDept getDept() {
-        return dept;
-    }
-
-    public void setDept(SysDept dept) {
-        this.dept = dept;
-    }
-
-    public String getIdNo() {
-        return idNo;
-    }
-
-    public void setIdNo(String idNo) {
-        this.idNo = idNo;
-    }
-
-    public List<String> getLabels() {
-        return this.labels;
-    }
-
-    public void setLabels(List<String> labels) {
-        this.labels = labels;
-    }
-
-    public List<String> getAbilities() {
-        return this.abilities;
-    }
-
-    public void setAbilities(List<String> abilities) {
-        this.abilities = abilities;
-    }
-
-    public List<String> getCertificates() {
-        return certificates;
-    }
-
-    public void setCertificates(List<String> certificates) {
-        this.certificates = certificates;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("nurseid", getNurseId())
-                .append("deptid", getDeptId())
-                .append("name", getName())
-                .append("age", getAge())
-                .append("sex", getSex())
-                .append("phonenumber", getPhonenumber())
-                .append("worklevel", getWorkLevel())
-                .append("workstatus", getWorkStatus())
-                .append("avatar", getAvatar())
-                .append("status", getStatus())
-                .append("delflag", getDelFlag())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
-                .append("remark", getRemark())
-                .toString();
-    }
+    /**
+     * openId
+     */
+    private String openId;
 }

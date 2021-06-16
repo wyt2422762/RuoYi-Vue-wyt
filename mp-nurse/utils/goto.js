@@ -9,14 +9,9 @@ let gotoIfLogin = function (url) {
   if (token) {
     //判断用户信息是否完善
     console.log('complete = ' + wx.getStorageSync('userInfoComplete'))
-    if (url.indexOf('GRXX') >= 0 || wx.getStorageSync('userInfoComplete')) {
-      wx.navigateTo({
-        url: url
-      })
-    } else {
-      iView.toast.warning('用户信息未完善，请先完善用户信息')
-      return false
-    }
+    wx.navigateTo({
+      url: url
+    })
   } else {
     iView.toast.warning('请先登录')
   }

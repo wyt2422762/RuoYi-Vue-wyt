@@ -1,34 +1,67 @@
 /* pages/ZNSD/ZNSD.wxss */
 /**index.wxss**/
-.right{
+.right {
   margin: 16rpx 40rpx 100rpx;
   color: #fff;
   display: flex;
   flex-direction: column;
 }
 
-.name1{
+.header {
+  border-radius: 100%;
+  border: solid 4px #fcab51;
+  width: 90px;
+  height: 90px;
+  position: relative;
+}
+
+.header_img {
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
+.header_img image {
+  width: 100%;
+  height: 100%;
+}
+
+.irc {
+  color: #5dadfd !important;
+}
+
+.name {
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.label{
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.name1 {
   font-size: 24rpx;
   display: flex;
 }
-.name1 image{
+
+.name1 image {
   width: 20rpx;
   height: 28rpx;
   margin: 16rpx 20rpx 0rpx 10rpx;
 }
-text{
+
+text {
   margin: 12rpx 0rpx 0rpx;
 }
 
-
-.sz{
+.sz {
   color: #8b8b8b;
- font-size: 28rpx;
- padding-top: 16rpx;
+  font-size: 28rpx;
+  padding-top: 16rpx;
 }
-
-
-
 
 .container {
   background-color: #fff;
@@ -39,7 +72,6 @@ text{
 }
 
 /* 必要布局样式css */
-
 
 /* 列表 */
 
@@ -84,30 +116,32 @@ text{
   text-overflow: ellipsis;
 }
 
-.Status_value{
-  
+.Status_value {
+
   color: #fff;
-  font-size: 29px;  
+  font-size: 29px;
   font-weight: bold;
   margin-bottom: 5px;
 }
-.locking_img{
- 
+
+.locking_img {
+
   margin: 0 auto;
   width: 19px;
   height: 22px;
 }
+
 .locking_img image {
   width: 100%;
 
 }
+
 .time {
- margin-top: 10px;
+  margin-top: 10px;
   color: #fff;
   font-weight: bold;
-  font-size: 22px;  
+  font-size: 22px;
 }
-
 
 .aui-flex_list {
   display: -webkit-box;
@@ -118,13 +152,11 @@ text{
   align-items: center;
   padding: 10px 20px 20px 20px;
   position: relative;
-
 }
 
-
 .aui-list-img {
-  width: 70%;
-  height:360rpx;
+  width: 100%;
+  height: 360rpx;
   display: flex;
   justify-content: left;
   padding: 40rpx;
@@ -146,7 +178,6 @@ text{
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   word-break: break-all;
-
   text-overflow: ellipsis;
 }
 
@@ -768,7 +799,7 @@ textarea {
   /* margin:-2.5rem  auto 1rem; */
   margin: -2.5rem auto 1rem;
   /* background: #fff; */
- /*  border-radius: 30rpx;
+  /*  border-radius: 30rpx;
     box-shadow:0 1px 5px #e8e8e8; */
   /* padding: 5px 10px; */
   /* margin-bottom: 110rpx; */
@@ -1019,26 +1050,29 @@ textarea {
   border-radius: 20px;
   padding: 20px 10px;
 }
-.origin{
+
+.origin {
   display: flex;
 }
+
 .sources {
   margin-bottom: 15px;
-  padding:17px 20px;
+  padding: 17px 20px;
   display: flex;
   justify-content: space-between;
   box-shadow: 2px 6px 11px 2px rgba(156, 81, 0, 0.09);
-  border-radius:8px;
- background: #fff;
+  border-radius: 8px;
+  background: #fff;
 }
 
-.Input_time{
+.Input_time {
   color: #7b7b7b;
+  line-height: 25px;
 }
 
 .icon_name {
-margin-right: 5px;
-  width:25px;
+  margin-right: 5px;
+  width: 25px;
   height: 25px;
 }
 

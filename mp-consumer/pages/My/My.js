@@ -11,7 +11,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: getApp().globalData.userInfo,
     isLogin: getApp().globalData.isLogin,
     //客服电话
     phone_cs: config.phone_cs
