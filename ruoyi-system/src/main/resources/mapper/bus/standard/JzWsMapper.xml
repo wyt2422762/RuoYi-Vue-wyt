@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bus.mapper.standard.JzWsMapper">
+
+    <resultMap type="com.ruoyi.bus.domain.standard.JzWs" id="jzWsResult">
+        <result property="id" column="id"/>
+        <result property="no" column="no"/>
+        <result property="size" column="size"/>
+        <result property="work" column="work"/>
+        <result property="money" column="money"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectJzWsVo">
+        select id, `no`, `size`, `work`, money, create_by, create_time, update_by,
+            update_time, remark
+        from standard_jz_ws
+    </sql>
+
+    <select id="selectJzWsList" parameterType="com.ruoyi.bus.domain.standard.JzWs" resultMap="jzWsResult">
+        <include refid="selectJzWsVo"/>
+        <where>
+        </where>
+    </select>
+
+    <select id="selectJzWsById" parameterType="Long" resultMap="jzWsResult">
+        <include refid="selectJzWsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertJzWs" parameterType="com.ruoyi.bus.domain.standard.JzWs" useGeneratedKeys="true" keyProperty="id">
+        insert into standard_jz_ws
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `no`, `size`, `work`, money, create_by, create_time, remark,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{no}, #{size}, #{work}, #{money}, #{createBy}, #{createTime},
+            #{remark},
+        </trim>
+    </insert>
+
+    <update id="updateJzWs" parameterType="com.ruoyi.bus.domain.standard.JzWs">
+        update standard_jz_ws
+        <trim prefix="SET" suffixOverrides=",">
+            `no` = #{no}, `size` = #{size}, `work` = #{work}, money = #{money},
+            update_by = #{updateBy}, update_time = #{updateTime},
+            remark = #{remark},
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzWsById" parameterType="Long">
+        delete
+        from standard_jz_ws
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteJzWsByIds" parameterType="String">
+        delete from standard_jz_ws where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

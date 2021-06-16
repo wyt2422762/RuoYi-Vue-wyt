@@ -8,7 +8,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['bus:standard:homecare:add']"
+          v-hasPermi="['bus:standard:housekeeping:ws:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -19,7 +19,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['bus:standard:homecare:edit']"
+          v-hasPermi="['bus:standard:housekeeping:ws:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -30,7 +30,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['bus:standard:homecare:remove']"
+          v-hasPermi="['bus:standard:housekeeping:ws:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -40,19 +40,18 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['bus:standard:homecare:export']"
+          v-hasPermi="['bus:standard:housekeeping:ws:export']"
         >导出</el-button>
       </el-col>
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="homecareList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="wsList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-<!--      <el-table-column label="id" align="center" prop="id" />-->
+      <el-table-column label="金额" align="center" prop="id" />
       <el-table-column label="编号" align="center" prop="no" />
-      <el-table-column label="类型" align="center" prop="type" :formatter="typeFormat" />
-      <el-table-column label="人数" align="center" prop="num" />
-      <el-table-column label="每日服务小时数" align="center" prop="hourPerDay" :formatter="hourPerDayFormat" />
-      <el-table-column label="押金" align="center" prop="deposit" />
+      <el-table-column label="居室面积" align="center" prop="size" :formatter="sizeFormat" />
+      <el-table-column label="项目" align="center" prop="work" :formatter="workFormat" />
       <el-table-column label="金额" align="center" prop="money" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -61,14 +60,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['bus:standard:homecare:edit']"
+            v-hasPermi="['bus:standard:housekeeping:ws:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['bus:standard:homecare:remove']"
+            v-hasPermi="['bus:standard:housekeeping:ws:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -82,38 +81,35 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改收费标准-居家陪护对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="560px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="类型" prop="type">
-          <el-select v-model="form.type" placeholder="请选择服务类型">
+    <!-- 添加或修改家政-卫生清洁-收费标准对话框 -->
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="居室面积" prop="size">
+          <el-select v-model="form.size" placeholder="请选择居室面积">
             <el-option
-              v-for="dict in typeOptions"
-              :key="dict.dictValue"
-              :label="dict.dictLabel"
-              :value="dict.dictValue"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="人数" prop="num">
-          <el-input-number v-model="form.num" :precision="0" :min="0" controls-position="right"/>
-        </el-form-item>
-        <el-form-item label="每日服务小时数" prop="hourPerDay">
-          <el-select v-model="form.hourPerDay" placeholder="请选择每日服务小时数">
-            <el-option
-              v-for="dict in hourPerDayOptions"
+              v-for="dict in sizeOptions"
               :key="dict.dictValue"
               :label="dict.dictLabel"
               :value="parseInt(dict.dictValue)"
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="押金" prop="deposit">
-          <el-input-number v-model="form.deposit" :precision="0" :min="0" controls-position="right"/>
+        <el-form-item label="项目" prop="work">
+          <el-select v-model="form.work" placeholder="请选择项目">
+            <el-option
+              v-for="dict in workOptions"
+              :key="dict.dictValue"
+              :label="dict.dictLabel"
+              :value="parseInt(dict.dictValue)"
+            ></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="金额(/月)" prop="money">
-          <el-input-number v-model="form.money" :precision="0" :min="0" controls-position="right"/>
+        <el-form-item label="金额" prop="money">
+          <el-input-number v-model="form.money" placeholder="请输入金额" controls-position="right" />
         </el-form-item>
+<!--        <el-form-item label="备注" prop="remark">
+          <el-input v-model="form.remark" placeholder="请输入备注" />
+        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -124,10 +120,10 @@
 </template>
 
 <script>
-import { listHomecare, getHomecare, delHomecare, addHomecare, updateHomecare, exportHomecare } from "@/api/bus/standard/homecare";
+import { listWs, getWs, delWs, addWs, updateWs, exportWs } from "@/api/bus/standard/housekeeping/ws";
 
 export default {
-  name: "Standard-homecare",
+  name: "Ws",
   components: {
   },
   data() {
@@ -144,16 +140,16 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 收费标准-居家陪护表格数据
-      homecareList: [],
+      // 家政-卫生清洁-收费标准表格数据
+      wsList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
       open: false,
-      // 服务类型字典
-      typeOptions: [],
-      // 每日服务小时数字典
-      hourPerDayOptions: [],
+      // 居室面积(字典数据)字典
+      sizeOptions: [],
+      // 项目(字典数据)字典
+      workOptions: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -163,47 +159,35 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        type: [
-          {required: true, message: "服务类型不能为空", trigger: "blur"}
-        ],
-        num: [
-          {required: true, message: "人数不能为空", trigger: "blur"}
-        ],
-        hourPerDay: [
-          {required: true, message: "每日小时数不能为空", trigger: "blur"}
-        ],
-        money: [
-          {required: true, message: "金额不能为空", trigger: "blur"}
-        ]
       }
     };
   },
   created() {
     this.getList();
-    this.getDicts("bus_type_homecare").then(response => {
-      this.typeOptions = response.data;
+    this.getDicts("bus_living_size").then(response => {
+      this.sizeOptions = response.data;
     });
-    this.getDicts("bus_hourPerDay").then(response => {
-      this.hourPerDayOptions = response.data;
+    this.getDicts("bus_housekeeping_ws").then(response => {
+      this.workOptions = response.data;
     });
   },
   methods: {
-    /** 查询收费标准-居家陪护列表 */
+    /** 查询家政-卫生清洁-收费标准列表 */
     getList() {
       this.loading = true;
-      listHomecare(this.queryParams).then(response => {
-        this.homecareList = response.rows;
+      listWs(this.queryParams).then(response => {
+        this.wsList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
     },
-    // 服务类型字典翻译
-    typeFormat(row, column) {
-      return this.selectDictLabel(this.typeOptions, row.type);
+    // 居室面积(字典数据)字典翻译
+    sizeFormat(row, column) {
+      return this.selectDictLabel(this.sizeOptions, row.size);
     },
-    // 每日服务小时数字典翻译
-    hourPerDayFormat(row, column) {
-      return this.selectDictLabel(this.hourPerDayOptions, row.hourPerDay);
+    // 项目(字典数据)字典翻译
+    workFormat(row, column) {
+      return this.selectDictLabel(this.workOptions, row.work);
     },
     // 取消按钮
     cancel() {
@@ -215,11 +199,14 @@ export default {
       this.form = {
         id: null,
         no: null,
-        type: null,
-        num: null,
-        hourPerDay: null,
-        deposit: null,
-        money: null
+        size: null,
+        work: null,
+        money: null,
+        createBy: null,
+        createTime: null,
+        updateBy: null,
+        updateTime: null,
+        remark: null
       };
       this.resetForm("form");
     },
@@ -243,16 +230,16 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加收费标准-居家陪护";
+      this.title = "添加家政-卫生清洁-收费标准";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids
-      getHomecare(id).then(response => {
+      getWs(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改收费标准-居家陪护";
+        this.title = "修改家政-卫生清洁-收费标准";
       });
     },
     /** 提交按钮 */
@@ -260,13 +247,13 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.id != null) {
-            updateHomecare(this.form).then(response => {
+            updateWs(this.form).then(response => {
               this.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addHomecare(this.form).then(response => {
+            addWs(this.form).then(response => {
               this.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -278,12 +265,12 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$confirm('是否确认删除收费标准-居家陪护编号为"' + ids + '"的数据项?', "警告", {
+      this.$confirm('是否确认删除家政-卫生清洁-收费标准编号为"' + ids + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return delHomecare(ids);
+          return delWs(ids);
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");
@@ -292,12 +279,12 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有收费标准-居家陪护数据项?', "警告", {
+      this.$confirm('是否确认导出所有家政-卫生清洁-收费标准数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return exportHomecare(queryParams);
+          return exportWs(queryParams);
         }).then(response => {
           this.download(response.msg);
         })
