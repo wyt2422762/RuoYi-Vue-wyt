@@ -3,7 +3,8 @@ import {
   getDicts
 } from '../../utils/dict.js'
 import {
-  service
+  service,
+  allReq
 } from '../../utils/request.js'
 import {
   pay
@@ -28,13 +29,10 @@ Page({
   onLoad: function (options) {
     let that = this
     that.data.order.orderNo = options.orderNo
-    //获取订单类型字典
-    getDicts("bus_order_type").then(res => {
-      that.orderTypeOptions = res.data;
-    })
-    //获取订单状态字典
-    getDicts("bus_order_status").then(res => {
-      that.orderStatusOptions = res.data;
+    //获取字典，数据
+    allReq([getDicts("bus_order_type"), getDicts("bus_order_status")]).then(res => {
+      that.data.orderTypeOptions = res[0].data
+      that.data.orderStatusOptions = res[1].data
     })
     //获取数据
     that.getDetail()
@@ -66,8 +64,7 @@ Page({
   cancelOrder(e) {
     let that = this
     let orderNo = that.data.order.orderNo
-    service.put("/order/cancel/" + orderNo, {
-    }).then(res => {
+    service.put("/order/cancel/" + orderNo, {}).then(res => {
       iView.toast.success('取消成功')
     }).catch(err => {
       iView.toast.error('取消失败')
@@ -75,7 +72,6 @@ Page({
   },
   //支付方法
   payOrder(e) {
-    debugger
     let that = this
     //订单编号
     let orderNo = that.data.order.orderNo
@@ -90,9 +86,7 @@ Page({
     iView.toast.success('支付成功')
     //更新订单状态
     let orderNo = that.data.order.orderNo
-    service.put("/order/paySuccess/" + orderNo, {
-    }).then(res => {
-    }).catch(err => {
+    service.put("/order/paySuccess/" + orderNo, {}).then(res => {}).catch(err => {
       console.log("更改订单状态失败")
     })
     //刷新当前页面

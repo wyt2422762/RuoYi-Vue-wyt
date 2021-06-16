@@ -4,7 +4,7 @@ import {
   getDicts
 } from '../../utils/dict.js'
 import {
-  service
+  service, allReq
 } from '../../utils/request.js'
 
 let iView = require('../../utils/iViewUtil.js')
@@ -46,13 +46,9 @@ Page({
   onLoad: function (options) {
     let that = this
     that.data.queryParams.consumerId = wx.getStorageSync('user').consumerId
-    //获取订单类型字典
-    getDicts("bus_order_type").then(res => {
-      that.orderTypeOptions = res.data;
-    })
-    //获取订单状态字典
-    getDicts("bus_order_status").then(res => {
-      that.orderStatusOptions = res.data;
+    allReq([getDicts("bus_order_type"), getDicts("bus_order_status")]).then(res => {
+      that.data.orderTypeOptions = res[0].data
+      that.data.orderStatusOptions = res[1].data
     })
     //查询订单列表
     that.getList()

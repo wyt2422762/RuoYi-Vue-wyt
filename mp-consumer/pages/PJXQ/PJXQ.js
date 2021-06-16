@@ -40,7 +40,6 @@ Page({
   //提交评价
   submit(e) {
     let that = this
-    debugger
     //loading
     that.setData({
       hiddenLoading: !that.data.hiddenLoading
