@@ -6,8 +6,9 @@ let gto = require('../../utils/goto.js')
 let iView = require('../../utils/iViewUtil.js')
 
 import {
-  service
+  service, allReq
 } from '../../utils/request.js'
+import {getDicts} from '../../utils/dict.js'
 
 Page({
   data: {
@@ -15,9 +16,10 @@ Page({
       id: null,
       name: null
     },
-    personNum: ["1", "2"],
+    personNum: null,
     personNumIndex: 0,
-    dayTime: ["12", "24"],
+    pNum: null,
+    dayTime: null,
     dayTimeIndex: 0,
     dat: 12,
     //押金
@@ -68,7 +70,7 @@ Page({
     let that = this
     this.setData({
       dayTimeIndex: e.detail.value,
-      dat: that.data.dayTime[e.detail.value]
+      dat: that.data.dayTime[e.detail.value].dictValue - 0
     })
     that.calcMoney()
   },
@@ -101,19 +103,24 @@ Page({
     this.data.order.consumerId = wx.getStorageSync('user').consumerId
     that.data.type.id = e.typeId
     that.data.type.name = e.typeName
-    //1. 获取收费标准
-    that.getHospitalCareStandard()
-    //2. 修改标题
+    //1. 修改标题
     wx.setNavigationBarTitle({
       title: e.typeName
     })
-  },
-  //获取居家陪护收费标准
-  getHospitalCareStandard() {
-    let that = this
-    service.get('/standard/hospitalCare', {}).then(res => {
-      that.data.hospitalCareStandardMap = res.data
-      that.calcMoney()
+    //2. 获取各种人数字典、每日小时数自带字典，收费标准
+    allReq([getDicts("bus_person_num"), getDicts("bus_hourPerDay"), service.get('/standard/hospitalCare', {})]).then(res =>{
+      that.setData({
+        personNum: res[0].data,
+        pNum: res[0].data[0].dictValue - 0,
+
+        dayTime: res[1].data,
+        dat: res[1].data[0].dictValue - 0,
+
+        hospitalCareStandardMap: res[2].data,
+      }, function() {
+        //计算钱
+        that.calcMoney()
+      })
     })
   },
   //计算金额

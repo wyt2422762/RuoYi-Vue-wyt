@@ -1,6 +1,6 @@
 <!--pages/YYPH/YYPH.wxml-->
  <view class="aui-palace aui-palace-one2 aui-palace-two">
-        <navigator url="../WSQJ/WSQJ" class="aui-palace-grid" hover-class="none" >
+        <navigator url="../WSQJ/WSQJ?type=0&typeName=卫生清理" class="aui-palace-grid" hover-class="none" >
           <view class="aui-palace-grid-icon2">
             <image src="../../img/icon_30.png"></image>
           </view>

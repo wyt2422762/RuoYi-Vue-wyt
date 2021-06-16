@@ -28,12 +28,11 @@
 			<input class="weui-input" value='{{endDate}}' placeholder='' disabled='disabled' style="color:#999;" />
 		</view>
 	</view>
-
-	<!-- 请选择天数 -->
+	<!-- 请选择人数 -->
 	<view class="service">请选择人数</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd weui-cell__ft_in-access">
-			<picker bindchange="bindPersonNumChange" value="{{personNumIndex}}" range="{{personNum}}">
+			<picker bindchange="bindPersonNumChange" value="{{personNumIndex}}" range="{{personNum}}" range-key="dictLabel">
 				<input class="weui-input" value='{{pNum}}' placeholder='' disabled='disabled' style="color:#999;" />
 			</picker>
 		</view>
@@ -42,7 +41,7 @@
 	<view class="service">请选择每日护理小时数</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd weui-cell__ft_in-access">
-			<picker bindchange="dayTimeChange" value="{{dayTimeIndex}}" range="{{dayTime}}">
+			<picker bindchange="dayTimeChange" value="{{dayTimeIndex}}" range="{{dayTime}}" range-key="dictLabel">
 				<input class="weui-input" value='{{dat}}' placeholder='' disabled='disabled' style="color:#999;" />
 			</picker>
 		</view>

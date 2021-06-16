@@ -54,6 +54,10 @@ service.interceptors.response.use(res => {
   return Promise.reject(error)
 })
 
+function allReq(funcs){
+  return dov.all(funcs)
+}
+
 export {
-  service
+  service, allReq
 }

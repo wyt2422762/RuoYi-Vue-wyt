@@ -36,7 +36,7 @@
 <view class="service">每日护理小时数</view>
 <view class="weui-cell">
 	<view class="weui-cell__bd weui-cell__ft_in-access">
-		<picker bindchange="dayTimeChange" value="{{dayTimeIndex}}" range="{{dayTime}}">
+		<picker bindchange="dayTimeChange" value="{{dayTimeIndex}}" range="{{dayTime}}" range-key="dictLabel">
 			<input class="weui-input" value='{{dat}}' placeholder='' disabled='disabled' style="color:#999;" />
 		</picker>
 	</view>
