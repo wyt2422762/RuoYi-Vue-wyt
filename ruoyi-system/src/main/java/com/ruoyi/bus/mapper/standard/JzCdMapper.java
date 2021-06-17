@@ -1,8 +1,8 @@
 package com.ruoyi.bus.mapper.standard;
 
-import java.util.List;
+import com.ruoyi.bus.domain.standard.JzCd;
 
-import com.ruoyi.bus.domain.standard.JzWs;
+import java.util.List;
 
 /**
  * 家政-卫生清洁-收费标准Mapper接口
@@ -10,38 +10,38 @@ import com.ruoyi.bus.domain.standard.JzWs;
  * @author wyt
  * @date 2021-06-16
  */
-public interface JzWsMapper {
+public interface JzCdMapper {
     /**
      * 查询家政-卫生清洁-收费标准
      *
      * @param id 家政-卫生清洁-收费标准ID
      * @return 家政-卫生清洁-收费标准
      */
-    JzWs selectJzWsById(Long id);
+    JzCd selectJzCdById(Long id);
 
     /**
      * 查询家政-卫生清洁-收费标准列表
      *
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCd 家政-卫生清洁-收费标准
      * @return 家政-卫生清洁-收费标准集合
      */
-    List<JzWs> selectJzWsList(JzWs jzWs);
+    List<JzCd> selectJzCdList(JzCd jzCd);
 
     /**
      * 新增家政-卫生清洁-收费标准
      *
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCd 家政-卫生清洁-收费标准
      * @return 结果
      */
-    int insertJzWs(JzWs jzWs);
+    int insertJzCd(JzCd jzCd);
 
     /**
      * 修改家政-卫生清洁-收费标准
      *
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCd 家政-卫生清洁-收费标准
      * @return 结果
      */
-    int updateJzWs(JzWs jzWs);
+    int updateJzCd(JzCd jzCd);
 
     /**
      * 删除家政-卫生清洁-收费标准
@@ -49,7 +49,7 @@ public interface JzWsMapper {
      * @param id 家政-卫生清洁-收费标准ID
      * @return 结果
      */
-    int deleteJzWsById(Long id);
+    int deleteJzCdById(Long id);
 
     /**
      * 批量删除家政-卫生清洁-收费标准
@@ -57,7 +57,7 @@ public interface JzWsMapper {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    int deleteJzWsByIds(Long[] ids);
+    int deleteJzCdByIds(Long[] ids);
 
     /**
      * 查询收费标准
@@ -65,5 +65,5 @@ public interface JzWsMapper {
      * @param no 收费标准-no
      * @return
      */
-    JzWs selectByNo(String no);
+    JzCd selectByNo(String no);
 }

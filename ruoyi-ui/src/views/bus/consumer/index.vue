@@ -127,11 +127,7 @@
       <el-table-column label="年龄" align="center" key="age" prop="age" v-if="columns[4].visible"
                        :show-overflow-tooltip="true"/>
       <el-table-column label="性别" align="center" key="sex" prop="sex" v-if="columns[5].visible"
-                       :show-overflow-tooltip="true">
-        <template slot-scope="scope">
-          <span>{{ parseSex(scope.row.sex) }}</span>
-        </template>
-      </el-table-column>
+                       :show-overflow-tooltip="true" :formatter="sexFormat" />
       <el-table-column label="紧急联系人姓名" align="center" key="emergencyContactName" prop="emergencyContactName"
                        v-if="columns[6].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="紧急联系人电话" align="center" key="emergencyContactPhone" prop="emergencyContactPhone"
@@ -438,12 +434,16 @@ export default {
     });
   },
   methods: {
+    // 性别字典翻译
+    sexFormat(row, column) {
+      return this.selectDictLabel(this.sexOptions, row.sex);
+    },
     /** 查询客户列表 */
     getList() {
       this.loading = true;
       listConsumer(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.consumerList = response.rows;
-          this.total = response.total;
+          this.total = response.total - 0;
           this.loading = false;
         }
       );

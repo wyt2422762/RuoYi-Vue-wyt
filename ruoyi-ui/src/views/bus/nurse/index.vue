@@ -154,11 +154,7 @@
           <el-table-column label="姓名" align="center" key="name" prop="name"/>
           <el-table-column label="部门" align="center" key="deptName" prop="dept.deptName"/>
           <el-table-column label="年龄" align="center" key="age" prop="age"/>
-          <el-table-column label="性别" align="center" key="sex">
-            <template slot-scope="scope">
-              <span>{{ parseSex(scope.row.sex) }}</span>
-            </template>
-          </el-table-column>
+          <el-table-column label="性别" align="center" key="sex" :formatter="sexFormat" />
           <el-table-column label="手机号" align="center" key="phonenumber" prop="phonenumber"/>
           <el-table-column label="服务星级" align="center" key="workLevel">
             <template slot-scope="scope">
@@ -548,12 +544,16 @@ export default {
 
   },
   methods: {
+    // 性别字典翻译
+    sexFormat(row, column) {
+      return this.selectDictLabel(this.sexOptions, row.sex);
+    },
     /** 查询护工列表 */
     getList() {
       this.loading = true;
       listNurse(this.queryParams).then(response => {
         this.nurseList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },

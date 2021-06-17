@@ -1,23 +1,20 @@
 package com.ruoyi.bus.domain.standard;
 
+import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.validation.group.EditGroup;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
- * 家政-卫生清洁-收费标准对象
+ * 家政-窗帘清洗-收费标准对象
  *
  * @author wyt
  * @date 2021-06-16
  */
 @Data
-public class JzWs extends BaseEntity {
+public class JzCl extends BaseEntity {
 
     @NotNull(message = "id不能为空", groups = {EditGroup.class})
     private Long id;
@@ -35,10 +32,10 @@ public class JzWs extends BaseEntity {
     private String size;
 
     /**
-     * 项目(字典数据)
+     * 厚度(字典数据)
      */
-    @NotBlank(message = "项目不能为空")
-    private String work;
+    @NotBlank(message = "厚度不能为空")
+    private String thickness;
 
     /**
      * 金额
@@ -50,6 +47,6 @@ public class JzWs extends BaseEntity {
      * 生成编号
      */
     public void buildNo() {
-        this.no = this.size + "-" + this.work;
+        this.no = this.size + "-" + this.thickness;
     }
 }

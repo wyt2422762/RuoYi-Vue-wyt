@@ -62,7 +62,6 @@ export function getEvaluateData(orderNo){
 
 //派遣订单
 export function dispatchOrder(orderNo){
-  debugger
   return request({
     url: '/bus/order/' + orderNo + '/dispatch' ,
     method: 'put'

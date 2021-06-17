@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bus.mapper.standard.JzCleanMapper">
+
+    <resultMap type="com.ruoyi.bus.domain.standard.JzClean" id="jzCleanResult">
+        <result property="id" column="id"/>
+        <result property="no" column="no"/>
+        <result property="time" column="time"/>
+        <result property="frequency" column="frequency"/>
+        <result property="money" column="money"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectJzCleanVo">
+        select id, `no`, `time`, frequency, money, create_by, create_time, update_by,
+            update_time, remark
+        from standard_jz_clean
+    </sql>
+
+    <select id="selectJzCleanList" parameterType="com.ruoyi.bus.domain.standard.JzClean" resultMap="jzCleanResult">
+        <include refid="selectJzCleanVo"/>
+        <where>
+        </where>
+    </select>
+
+    <select id="selectJzCleanById" parameterType="Long" resultMap="jzCleanResult">
+        <include refid="selectJzCleanVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertJzClean" parameterType="com.ruoyi.bus.domain.standard.JzClean" useGeneratedKeys="true" keyProperty="id">
+        insert into standard_jz_clean
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `no`, `time`, frequency, money, create_by, create_time, remark,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{no}, #{time}, #{frequency}, #{money}, #{createBy}, #{createTime},
+            #{remark},
+        </trim>
+    </insert>
+
+    <update id="updateJzClean" parameterType="com.ruoyi.bus.domain.standard.JzClean">
+        update standard_jz_clean
+        <trim prefix="SET" suffixOverrides=",">
+            `no` = #{no}, `time` = #{time}, `frequency` = #{frequency}, money = #{money},
+            update_by = #{updateBy}, update_time = #{updateTime},
+            remark = #{remark},
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzCleanById" parameterType="Long">
+        delete
+        from standard_jz_clean
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteJzCleanByIds" parameterType="String">
+        delete from standard_jz_clean where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectByNo" resultMap="jzCleanResult">
+        <include refid="selectJzCleanVo"/>
+        where `no` = #{no}
+    </select>
+
+</mapper>

@@ -285,7 +285,7 @@ export default {
       this.loading = true;
       listEvaluation(this.queryParams).then(response => {
         this.evaluationList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },

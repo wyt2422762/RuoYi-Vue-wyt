@@ -1,7 +1,6 @@
 package com.ruoyi.bus.service.standard;
 
-import com.ruoyi.bus.domain.standard.HospitalCare;
-import com.ruoyi.bus.domain.standard.JzWs;
+import com.ruoyi.bus.domain.standard.JzCl;
 
 import java.util.List;
 
@@ -11,38 +10,38 @@ import java.util.List;
  * @author wyt
  * @date 2021-06-16
  */
-public interface IJzWsService {
+public interface IJzClService {
     /**
      * 查询家政-卫生清洁-收费标准
      *
      * @param id 家政-卫生清洁-收费标准ID
      * @return 家政-卫生清洁-收费标准
      */
-    JzWs selectJzWsById(Long id);
+    JzCl selectJzClById(Long id);
 
     /**
      * 查询家政-卫生清洁-收费标准列表
      *
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCl 家政-卫生清洁-收费标准
      * @return 家政-卫生清洁-收费标准集合
      */
-    List<JzWs> selectJzWsList(JzWs jzWs);
+    List<JzCl> selectJzClList(JzCl jzCl);
 
     /**
      * 新增家政-卫生清洁-收费标准
      *
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCl 家政-卫生清洁-收费标准
      * @return 结果
      */
-    int insertJzWs(JzWs jzWs);
+    int insertJzCl(JzCl jzCl);
 
     /**
      * 修改家政-卫生清洁-收费标准
      *
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCl 家政-卫生清洁-收费标准
      * @return 结果
      */
-    int updateJzWs(JzWs jzWs);
+    int updateJzCl(JzCl jzCl);
 
     /**
      * 批量删除家政-卫生清洁-收费标准
@@ -50,7 +49,7 @@ public interface IJzWsService {
      * @param ids 需要删除的家政-卫生清洁-收费标准ID
      * @return 结果
      */
-    int deleteJzWsByIds(Long[] ids);
+    int deleteJzClByIds(Long[] ids);
 
     /**
      * 删除家政-卫生清洁-收费标准信息
@@ -58,13 +57,13 @@ public interface IJzWsService {
      * @param id 家政-卫生清洁-收费标准ID
      * @return 结果
      */
-    int deleteJzWsById(Long id);
+    int deleteJzClById(Long id);
 
     /**
      * 校验编码是否唯一
      *
-     * @param jzWs 卫生清洁信息
+     * @param jzCl 卫生清洁信息
      * @return 结果
      */
-    String checkNoUnique(JzWs jzWs);
+    String checkNoUnique(JzCl jzCl);
 }

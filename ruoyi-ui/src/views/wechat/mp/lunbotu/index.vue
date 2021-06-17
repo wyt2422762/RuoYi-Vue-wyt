@@ -126,7 +126,7 @@ export default {
       this.loading = true;
       listLunbotu(this.queryParams).then(response => {
         this.lunbotuList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },

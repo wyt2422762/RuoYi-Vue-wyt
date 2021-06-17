@@ -79,7 +79,6 @@ export function listNurseOrder(nurseId){
 
 //上传头像
 export function addAvatar(data) {
-  debugger
   return request({
     url: '/bus/nurse/uploadAvatar',
     method: 'post',

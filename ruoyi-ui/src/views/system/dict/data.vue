@@ -243,7 +243,7 @@ export default {
       this.loading = true;
       listData(this.queryParams).then(response => {
         this.dataList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },

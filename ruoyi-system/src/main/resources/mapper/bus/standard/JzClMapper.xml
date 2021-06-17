@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.bus.mapper.standard.JzWsMapper">
+<mapper namespace="com.ruoyi.bus.mapper.standard.JzClMapper">
 
-    <resultMap type="com.ruoyi.bus.domain.standard.JzWs" id="jzWsResult">
+    <resultMap type="com.ruoyi.bus.domain.standard.JzCl" id="jzClResult">
         <result property="id" column="id"/>
         <result property="no" column="no"/>
         <result property="size" column="size"/>
-        <result property="work" column="work"/>
+        <result property="thickness" column="thickness"/>
         <result property="money" column="money"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
@@ -17,59 +17,59 @@
         <result property="remark" column="remark"/>
     </resultMap>
 
-    <sql id="selectJzWsVo">
-        select id, `no`, `size`, `work`, money, create_by, create_time, update_by,
+    <sql id="selectJzClVo">
+        select id, `no`, `size`, thickness, money, create_by, create_time, update_by,
             update_time, remark
-        from standard_jz_ws
+        from standard_jz_cl
     </sql>
 
-    <select id="selectJzWsList" parameterType="com.ruoyi.bus.domain.standard.JzWs" resultMap="jzWsResult">
-        <include refid="selectJzWsVo"/>
+    <select id="selectJzClList" parameterType="com.ruoyi.bus.domain.standard.JzCl" resultMap="jzClResult">
+        <include refid="selectJzClVo"/>
         <where>
         </where>
     </select>
 
-    <select id="selectJzWsById" parameterType="Long" resultMap="jzWsResult">
-        <include refid="selectJzWsVo"/>
+    <select id="selectJzClById" parameterType="Long" resultMap="jzClResult">
+        <include refid="selectJzClVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertJzWs" parameterType="com.ruoyi.bus.domain.standard.JzWs" useGeneratedKeys="true" keyProperty="id">
-        insert into standard_jz_ws
+    <insert id="insertJzCl" parameterType="com.ruoyi.bus.domain.standard.JzCl" useGeneratedKeys="true" keyProperty="id">
+        insert into standard_jz_cl
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            `no`, `size`, `work`, money, create_by, create_time, remark,
+            `no`, `size`, thickness, money, create_by, create_time, remark,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{no}, #{size}, #{work}, #{money}, #{createBy}, #{createTime},
+            #{no}, #{size}, #{thickness}, #{money}, #{createBy}, #{createTime},
             #{remark},
         </trim>
     </insert>
 
-    <update id="updateJzWs" parameterType="com.ruoyi.bus.domain.standard.JzWs">
-        update standard_jz_ws
+    <update id="updateJzCl" parameterType="com.ruoyi.bus.domain.standard.JzCl">
+        update standard_jz_cl
         <trim prefix="SET" suffixOverrides=",">
-            `no` = #{no}, `size` = #{size}, `work` = #{work}, money = #{money},
+            `no` = #{no}, `size` = #{size}, thickness = #{thickness}, money = #{money},
             update_by = #{updateBy}, update_time = #{updateTime},
             remark = #{remark},
         </trim>
         where id = #{id}
     </update>
 
-    <delete id="deleteJzWsById" parameterType="Long">
+    <delete id="deleteJzClById" parameterType="Long">
         delete
-        from standard_jz_ws
+        from standard_jz_cl
         where id = #{id}
     </delete>
 
-    <delete id="deleteJzWsByIds" parameterType="String">
-        delete from standard_jz_ws where id in
+    <delete id="deleteJzClByIds" parameterType="String">
+        delete from standard_jz_cl where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
-    <select id="selectByNo" resultMap="jzWsResult">
-        <include refid="selectJzWsVo"/>
+    <select id="selectByNo" resultMap="jzClResult">
+        <include refid="selectJzClVo"/>
         where `no` = #{no}
     </select>
 

@@ -249,7 +249,7 @@ export default {
       this.loading = true;
       listType(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.typeList = response.rows;
-          this.total = response.total;
+          this.total = response.total - 0;
           this.loading = false;
         }
       );

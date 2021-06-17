@@ -1,9 +1,8 @@
 package com.ruoyi.bus.service.impl.standard;
 
-import com.ruoyi.bus.domain.standard.HospitalCare;
-import com.ruoyi.bus.domain.standard.JzWs;
-import com.ruoyi.bus.mapper.standard.JzWsMapper;
-import com.ruoyi.bus.service.standard.IJzWsService;
+import com.ruoyi.bus.domain.standard.JzCl;
+import com.ruoyi.bus.mapper.standard.JzClMapper;
+import com.ruoyi.bus.service.standard.IJzClService;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +16,10 @@ import java.util.List;
  * @date 2021-06-16
  */
 @Service
-public class JzWsServiceImpl implements IJzWsService 
+public class JzClServiceImpl implements IJzClService 
 {
     @Autowired
-    private JzWsMapper jzWsMapper;
+    private JzClMapper jzClMapper;
 
     /**
      * 查询家政-卫生清洁-收费标准
@@ -29,47 +28,47 @@ public class JzWsServiceImpl implements IJzWsService
      * @return 家政-卫生清洁-收费标准
      */
     @Override
-    public JzWs selectJzWsById(Long id)
+    public JzCl selectJzClById(Long id)
     {
-        return jzWsMapper.selectJzWsById(id);
+        return jzClMapper.selectJzClById(id);
     }
 
     /**
      * 查询家政-卫生清洁-收费标准列表
      * 
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCl 家政-卫生清洁-收费标准
      * @return 家政-卫生清洁-收费标准
      */
     @Override
-    public List<JzWs> selectJzWsList(JzWs jzWs)
+    public List<JzCl> selectJzClList(JzCl jzCl)
     {
-        return jzWsMapper.selectJzWsList(jzWs);
+        return jzClMapper.selectJzClList(jzCl);
     }
 
     /**
      * 新增家政-卫生清洁-收费标准
      * 
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCl 家政-卫生清洁-收费标准
      * @return 结果
      */
     @Override
-    public int insertJzWs(JzWs jzWs)
+    public int insertJzCl(JzCl jzCl)
     {
-        jzWs.setCreateTime(DateUtils.getNowDate());
-        return jzWsMapper.insertJzWs(jzWs);
+        jzCl.setCreateTime(DateUtils.getNowDate());
+        return jzClMapper.insertJzCl(jzCl);
     }
 
     /**
      * 修改家政-卫生清洁-收费标准
      * 
-     * @param jzWs 家政-卫生清洁-收费标准
+     * @param jzCl 家政-卫生清洁-收费标准
      * @return 结果
      */
     @Override
-    public int updateJzWs(JzWs jzWs)
+    public int updateJzCl(JzCl jzCl)
     {
-        jzWs.setUpdateTime(DateUtils.getNowDate());
-        return jzWsMapper.updateJzWs(jzWs);
+        jzCl.setUpdateTime(DateUtils.getNowDate());
+        return jzClMapper.updateJzCl(jzCl);
     }
 
     /**
@@ -79,9 +78,9 @@ public class JzWsServiceImpl implements IJzWsService
      * @return 结果
      */
     @Override
-    public int deleteJzWsByIds(Long[] ids)
+    public int deleteJzClByIds(Long[] ids)
     {
-        return jzWsMapper.deleteJzWsByIds(ids);
+        return jzClMapper.deleteJzClByIds(ids);
     }
 
     /**
@@ -91,23 +90,23 @@ public class JzWsServiceImpl implements IJzWsService
      * @return 结果
      */
     @Override
-    public int deleteJzWsById(Long id)
+    public int deleteJzClById(Long id)
     {
-        return jzWsMapper.deleteJzWsById(id);
+        return jzClMapper.deleteJzClById(id);
     }
 
     /**
      * 校验编码是否唯一
      *
-     * @param jzWs 卫生清洁信息
+     * @param jzCl 卫生清洁信息
      * @return 结果
      */
     @Override
-    public String checkNoUnique(JzWs jzWs) {
-        JzWs h = jzWsMapper.selectByNo(jzWs.getNo());
+    public String checkNoUnique(JzCl jzCl) {
+        JzCl h = jzClMapper.selectByNo(jzCl.getNo());
         if (h != null) {
             //判断是否是自己
-            if (h.getId().equals(jzWs.getId())) {
+            if (h.getId().equals(jzCl.getId())) {
                 return "0";
             }
             return "1";

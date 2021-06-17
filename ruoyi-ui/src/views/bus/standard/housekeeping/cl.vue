@@ -8,7 +8,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['bus:standard:housekeeping:ws:add']"
+          v-hasPermi="['bus:standard:housekeeping:cl:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -19,7 +19,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['bus:standard:housekeeping:ws:edit']"
+          v-hasPermi="['bus:standard:housekeeping:cl:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -30,7 +30,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['bus:standard:housekeeping:ws:remove']"
+          v-hasPermi="['bus:standard:housekeeping:cl:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -40,17 +40,17 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['bus:standard:housekeeping:ws:export']"
+          v-hasPermi="['bus:standard:housekeeping:cl:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="wsList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="clList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="no" />
       <el-table-column label="居室面积" align="center" prop="size" :formatter="sizeFormat" />
-      <el-table-column label="项目" align="center" prop="work" :formatter="workFormat" />
+      <el-table-column label="厚度" align="center" prop="thickness" :formatter="thicknessFormat" />
       <el-table-column label="金额" align="center" prop="money" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -59,14 +59,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['bus:standard:housekeeping:ws:edit']"
+            v-hasPermi="['bus:standard:housekeeping:cl:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['bus:standard:housekeeping:ws:remove']"
+            v-hasPermi="['bus:standard:housekeeping:cl:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -93,10 +93,10 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="项目" prop="work">
-          <el-select v-model="form.work" placeholder="请选择项目">
+        <el-form-item label="厚度" prop="work">
+          <el-select v-model="form.thickness" placeholder="请选择厚度">
             <el-option
-              v-for="dict in workOptions"
+              v-for="dict in thicknessOptions"
               :key="dict.dictValue"
               :label="dict.dictLabel"
               :value="dict.dictValue"
@@ -119,10 +119,10 @@
 </template>
 
 <script>
-import { listWs, getWs, delWs, addWs, updateWs, exportWs } from "@/api/bus/standard/housekeeping/ws";
+import { listCl, getCl, delCl, addCl, updateCl, exportCl } from "@/api/bus/standard/housekeeping/cl";
 
 export default {
-  name: "Ws",
+  name: "Cl",
   components: {
   },
   data() {
@@ -139,8 +139,8 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 家政-卫生清洁-收费标准表格数据
-      wsList: [],
+      // 家政-窗帘清洗-收费标准表格数据
+      clList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -148,7 +148,7 @@ export default {
       // 居室面积(字典数据)字典
       sizeOptions: [],
       // 项目(字典数据)字典
-      workOptions: [],
+      thicknessOptions: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -161,8 +161,8 @@ export default {
         size: [
           {required: true, message: "居室面积不能为空", trigger: "blur"}
         ],
-        work: [
-          {required: true, message: "项目不能为空", trigger: "blur"}
+        thickness: [
+          {required: true, message: "厚度不能为空", trigger: "blur"}
         ],
         money: [
           {required: true, message: "金额不能为空", trigger: "blur"}
@@ -175,16 +175,16 @@ export default {
     this.getDicts("bus_living_size").then(response => {
       this.sizeOptions = response.data;
     });
-    this.getDicts("bus_housekeeping_ws").then(response => {
-      this.workOptions = response.data;
+    this.getDicts("bus_housekeeping_thickness").then(response => {
+      this.thicknessOptions = response.data;
     });
   },
   methods: {
     /** 查询家政-卫生清洁-收费标准列表 */
     getList() {
       this.loading = true;
-      listWs(this.queryParams).then(response => {
-        this.wsList = response.rows;
+      listCl(this.queryParams).then(response => {
+        this.clList = response.rows;
         this.total = response.total - 0;
         this.loading = false;
       });
@@ -194,8 +194,8 @@ export default {
       return this.selectDictLabel(this.sizeOptions, row.size);
     },
     // 项目字典翻译
-    workFormat(row, column) {
-      return this.selectDictLabel(this.workOptions, row.work);
+    thicknessFormat(row, column) {
+      return this.selectDictLabel(this.thicknessOptions, row.thickness);
     },
     // 取消按钮
     cancel() {
@@ -208,7 +208,7 @@ export default {
         id: null,
         no: null,
         size: null,
-        work: null,
+        thickness: null,
         money: null,
         createBy: null,
         createTime: null,
@@ -238,13 +238,13 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加家政-卫生清洁-收费标准";
+      this.title = "添加家政-窗帘清洗-收费标准";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids
-      getWs(id).then(response => {
+      getCl(id).then(response => {
         this.form = response.data;
         this.open = true;
         this.title = "修改家政-卫生清洁-收费标准";
@@ -255,13 +255,13 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.id != null) {
-            updateWs(this.form).then(response => {
+            updateCl(this.form).then(response => {
               this.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addWs(this.form).then(response => {
+            addCl(this.form).then(response => {
               this.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -278,7 +278,7 @@ export default {
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return delWs(ids);
+          return delCl(ids);
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");
@@ -292,7 +292,7 @@ export default {
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return exportWs(queryParams);
+          return exportCl(queryParams);
         }).then(response => {
           this.download(response.msg);
         })

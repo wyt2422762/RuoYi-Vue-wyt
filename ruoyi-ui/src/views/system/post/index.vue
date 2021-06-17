@@ -112,7 +112,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -217,7 +217,7 @@ export default {
       this.loading = true;
       listPost(this.queryParams).then(response => {
         this.postList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },

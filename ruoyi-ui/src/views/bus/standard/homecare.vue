@@ -193,7 +193,7 @@ export default {
       this.loading = true;
       listHomecare(this.queryParams).then(response => {
         this.homecareList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },

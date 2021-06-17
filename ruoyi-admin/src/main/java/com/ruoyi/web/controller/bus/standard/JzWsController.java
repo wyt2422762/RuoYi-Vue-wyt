@@ -4,9 +4,15 @@ import java.util.List;
 
 import com.ruoyi.bus.domain.standard.JzWs;
 import com.ruoyi.bus.service.standard.IJzWsService;
+import com.ruoyi.common.constant.UserConstants;
+import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.common.validation.group.CreateGroup;
+import com.ruoyi.common.validation.group.EditGroup;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -75,8 +81,13 @@ public class JzWsController extends BaseController
     @PreAuthorize("@ss.hasPermi('bus:standard:housekeeping:ws:add')")
     @Log(title = "家政-卫生清洁-收费标准", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody JzWs jzWs)
+    public AjaxResult add(@Validated(CreateGroup.class) @RequestBody JzWs jzWs)
     {
+        jzWs.buildNo();
+        if (StringUtils.isNotEmpty(jzWs.getNo()) && UserConstants.NOT_UNIQUE.equals(jzWsService.checkNoUnique(jzWs))){
+            return AjaxResult.error("新增卫生清洁收费标准失败，该类型的收费标准已存在，同类型的收费标准只能存在一个");
+        }
+        jzWs.setCreateBy(SecurityUtils.getUsername());
         return toAjax(jzWsService.insertJzWs(jzWs));
     }
 
@@ -86,8 +97,13 @@ public class JzWsController extends BaseController
     @PreAuthorize("@ss.hasPermi('bus:standard:housekeeping:ws:edit')")
     @Log(title = "家政-卫生清洁-收费标准", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody JzWs jzWs)
+    public AjaxResult edit(@Validated(EditGroup.class) @RequestBody JzWs jzWs)
     {
+        jzWs.buildNo();
+        if (StringUtils.isNotEmpty(jzWs.getNo()) && UserConstants.NOT_UNIQUE.equals(jzWsService.checkNoUnique(jzWs))){
+            return AjaxResult.error("修改卫生清洁收费标准失败，该类型的收费标准已存在，同类型的收费标准只能存在一个");
+        }
+        jzWs.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(jzWsService.updateJzWs(jzWs));
     }
 

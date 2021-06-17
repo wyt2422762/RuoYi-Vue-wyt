@@ -244,7 +244,7 @@ export default {
       this.loading = true;
       listNotice(this.queryParams).then(response => {
         this.noticeList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },

@@ -247,7 +247,7 @@ export default {
       this.loading = true;
       listTable(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.tableList = response.rows;
-          this.total = response.total;
+          this.total = response.total - 0;
           this.loading = false;
         }
       );

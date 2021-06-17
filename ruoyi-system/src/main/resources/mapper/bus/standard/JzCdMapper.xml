@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.bus.mapper.standard.JzWsMapper">
+<mapper namespace="com.ruoyi.bus.mapper.standard.JzCdMapper">
 
-    <resultMap type="com.ruoyi.bus.domain.standard.JzWs" id="jzWsResult">
+    <resultMap type="com.ruoyi.bus.domain.standard.JzCd" id="jzCdResult">
         <result property="id" column="id"/>
         <result property="no" column="no"/>
         <result property="size" column="size"/>
@@ -17,25 +17,25 @@
         <result property="remark" column="remark"/>
     </resultMap>
 
-    <sql id="selectJzWsVo">
+    <sql id="selectJzCdVo">
         select id, `no`, `size`, `work`, money, create_by, create_time, update_by,
             update_time, remark
-        from standard_jz_ws
+        from standard_jz_cd
     </sql>
 
-    <select id="selectJzWsList" parameterType="com.ruoyi.bus.domain.standard.JzWs" resultMap="jzWsResult">
-        <include refid="selectJzWsVo"/>
+    <select id="selectJzCdList" parameterType="com.ruoyi.bus.domain.standard.JzCd" resultMap="jzCdResult">
+        <include refid="selectJzCdVo"/>
         <where>
         </where>
     </select>
 
-    <select id="selectJzWsById" parameterType="Long" resultMap="jzWsResult">
-        <include refid="selectJzWsVo"/>
+    <select id="selectJzCdById" parameterType="Long" resultMap="jzCdResult">
+        <include refid="selectJzCdVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertJzWs" parameterType="com.ruoyi.bus.domain.standard.JzWs" useGeneratedKeys="true" keyProperty="id">
-        insert into standard_jz_ws
+    <insert id="insertJzCd" parameterType="com.ruoyi.bus.domain.standard.JzCd" useGeneratedKeys="true" keyProperty="id">
+        insert into standard_jz_cd
         <trim prefix="(" suffix=")" suffixOverrides=",">
             `no`, `size`, `work`, money, create_by, create_time, remark,
         </trim>
@@ -45,8 +45,8 @@
         </trim>
     </insert>
 
-    <update id="updateJzWs" parameterType="com.ruoyi.bus.domain.standard.JzWs">
-        update standard_jz_ws
+    <update id="updateJzCd" parameterType="com.ruoyi.bus.domain.standard.JzCd">
+        update standard_jz_cd
         <trim prefix="SET" suffixOverrides=",">
             `no` = #{no}, `size` = #{size}, `work` = #{work}, money = #{money},
             update_by = #{updateBy}, update_time = #{updateTime},
@@ -55,21 +55,21 @@
         where id = #{id}
     </update>
 
-    <delete id="deleteJzWsById" parameterType="Long">
+    <delete id="deleteJzCdById" parameterType="Long">
         delete
-        from standard_jz_ws
+        from standard_jz_cd
         where id = #{id}
     </delete>
 
-    <delete id="deleteJzWsByIds" parameterType="String">
-        delete from standard_jz_ws where id in
+    <delete id="deleteJzCdByIds" parameterType="String">
+        delete from standard_jz_cd where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
-    <select id="selectByNo" resultMap="jzWsResult">
-        <include refid="selectJzWsVo"/>
+    <select id="selectByNo" resultMap="jzCdResult">
+        <include refid="selectJzCdVo"/>
         where `no` = #{no}
     </select>
 

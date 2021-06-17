@@ -193,7 +193,7 @@ export default {
       this.loading = true;
       listHospitalcare(this.queryParams).then(response => {
         this.careList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },

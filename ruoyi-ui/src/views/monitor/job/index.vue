@@ -335,7 +335,7 @@ export default {
       this.loading = true;
       listJob(this.queryParams).then(response => {
         this.jobList = response.rows;
-        this.total = response.total;
+        this.total = response.total - 0;
         this.loading = false;
       });
     },
