@@ -12,6 +12,8 @@ import {getDicts} from '../../utils/dict.js'
 
 Page({
   data: {
+    //loading
+    hiddenLoading: true,
     type:{
       id: null,
       name: null

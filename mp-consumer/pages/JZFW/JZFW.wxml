@@ -1,21 +1,21 @@
 <!--pages/YYPH/YYPH.wxml-->
  <view class="aui-palace aui-palace-one2 aui-palace-two">
-        <navigator url="../WSQJ/WSQJ?type=0&typeName=卫生清理" class="aui-palace-grid" hover-class="none" >
+        <navigator url="../WSQJ/WSQJ?typeId=0&typeName=卫生清理" class="aui-palace-grid" hover-class="none" >
           <view class="aui-palace-grid-icon2">
             <image src="../../img/icon_30.png"></image>
           </view>
         </navigator>
-          <navigator url="../CLQX/CLQX" class="aui-palace-grid" hover-class="none" >
+          <navigator url="../CLQX/CLQX?typeId=1&typeName=窗帘清洗" class="aui-palace-grid" hover-class="none" >
           <view class="aui-palace-grid-icon2">
             <image src="../../img/icon_31.png"></image>
           </view>
         </navigator>
-          <navigator url="../CDBZQX/CDBZQX" class="aui-palace-grid" hover-class="none">
+          <navigator url="../CDBZQX/CDBZQX?typeId=2&typeName=床单被罩清洗" class="aui-palace-grid" hover-class="none">
           <view class="aui-palace-grid-icon2">
             <image src="../../img/icon_32.png"></image>
           </view>
         </navigator>
-          <navigator url="../CQBJ/CQBJ" class="aui-palace-grid" hover-class="none">
+          <navigator url="../CQBJ/CQBJ?typeId=3&typeName=长期保洁" class="aui-palace-grid" hover-class="none">
           <view class="aui-palace-grid-icon2">
             <image src="../../img/icon_33.png"></image>
           </view>

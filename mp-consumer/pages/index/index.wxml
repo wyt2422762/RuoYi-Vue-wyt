@@ -1,4 +1,7 @@
 <!--index.wxml-->
+
+<i-toast id="toast" />
+
 <view class="container">
   <section class="aui-flexView">
     <section class="aui-scrollView">
@@ -39,14 +42,14 @@
             <h2>医院陪护</h2>
           </view>
         </view>
-        <navigator url="../JZFW/JZFW" class="aui-palace-grid" hover-class="none"> 
+        <view bindtap="goto" data-url="../JZFW/JZFW" class="aui-palace-grid" hover-class="none"> 
           <view class="aui-palace-grid-icon2">
             <image src="../../img/icon_23.png"></image>
           </view>
           <view class="aui-palace-grid-text">
             <h2>家政服务</h2>
           </view>
-        </navigator>
+        </view>
       </view>
     </section>
   </section>

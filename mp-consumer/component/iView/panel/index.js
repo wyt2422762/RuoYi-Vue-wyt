@@ -1,5 +1,5 @@
 Component({
-    externalClasses: ['i-class', 'i-panel-content'],
+    externalClasses: ['i-class', 'i-panel-content', 'i-panel-title'],
 
     properties: {
         title: {

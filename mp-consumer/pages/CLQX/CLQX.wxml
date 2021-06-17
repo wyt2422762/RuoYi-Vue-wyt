@@ -1,4 +1,11 @@
 <!--pages/ZLLR/ZLLR.wxml-->
+<i-toast id="toast" />
+
+<i-spin fix custom wx:if="{{ !hiddenLoading }}">
+	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+	<view>加载中</view>
+</i-spin>
+
 <view class="page">
 	<view class="top_img">
 		<view class='u-wrp-bnr'>
@@ -9,72 +16,52 @@
 			<view class="details">查看详情</view>
 		</view>
 	</view>
-		<!-- 请选择家政服务 -->
-	<view class="service">请选择家政服务</view>
+
+	<!-- 请选择服务时间 -->
+	<view class="service" style="margin-top:20px;">请选择服务时间</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd weui-cell__ft_in-access">
-			<picker bindchange="bindhomeChange" value="{{homeIndex}}" range="{{home}}">
-				<view class="weui-input" style="color:#999;">{{home[homeIndex]}}</view>
+			<picker mode="date" bindchange="timeChange" value="{{time}}" start="{{time}}">
+				<input class="weui-input" value='{{time}}' placeholder='' disabled='disabled' style="color:#999;" />
 			</picker>
 		</view>
 	</view>
-		<!-- 请选择家政服务 -->
-	<view class="service">窗帘厚度</view>
+	<!-- 请选择窗帘厚度 -->
+	<view class="service" style="margin-top:20px;">请选择床帘厚度</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd weui-cell__ft_in-access">
-			<picker bindchange="bindCurtainChange" value="{{CurtainIndex}}" range="{{Curtain}}">
-				<view class="weui-input" style="color:#999;">{{Curtain[CurtainIndex]}}</view>
+			<picker bindchange="thicknessChange" value="{{thicknessIndex}}" range="{{thicknessOptions}}" range-key="dictLabel">
+				<input class="weui-input" value='{{thicknessStr}}' placeholder='' disabled='disabled' style="color:#999;" />
 			</picker>
 		</view>
 	</view>
-	<!-- 预约时间 -->
-	<view class="service" style="margin-top:20px;">预约时间</view>
+	<!-- 请选择居室面积 -->
+	<view class="service" style="margin-top:20px;">请选择居室面积</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd weui-cell__ft_in-access">
-			<picker mode="date" bindchange="bindDateChange" value="{{date}}">
-				<input class="weui-input" value='{{date}}' placeholder='' disabled='disabled' style="color:#999;" />
+			<picker bindchange="sizeChange" value="{{sizeIndex}}" range="{{sizeOptions}}" range-key="dictLabel">
+				<input class="weui-input" value='{{sizeStr}}' placeholder='' disabled='disabled' style="color:#999;" />
 			</picker>
 		</view>
 	</view>
-	<!-- 请选择天数 -->
-	<view class="service">时段</view>
-	<view class="weui-cell">
-		<view class="weui-cell__bd weui-cell__ft_in-access">
-			<picker bindchange="bindCountryChange" value="{{countriesIndex}}" range="{{countries}}">
-				<view class="weui-input" style="color:#999;">{{countries[countryIndex]}}</view>
-			</picker>
-		</view>
-	</view>
-	<!-- 请选择疗养院地址 -->
-	<view class="service">居室面积</view>
-	<view class="weui-cell">
-		<view class="weui-cell__bd weui-cell__ft_in-access">
-			<picker bindchange="bindCountry2Change" value="{{SanatoriumIndex}}" range="{{Sanatorium}}">
-				<view class="weui-input" style="color:#999;">{{Sanatorium[SanatoriumIndex]}}</view>
-			</picker>
-		</view>
-			</view>
-			<!-- 请选择疗养院地址 -->
+	<!-- 请填写服务地址 -->
 	<view class="service">请填写服务地址</view>
 	<view class="weui-cell">
-		<view class="weui-cell__bd" style="padding: 10px;border: solid 1px #d7d7d7;background-color: #fff;border-radius: 4px;">
-				<input class="weui-input" style="color:#999;"></input>
+		<view class="weui-cell__bd"
+			style="padding: 10px;border: solid 1px #d7d7d7;background-color: #fff;border-radius: 4px;">
+			<input class="weui-input" style="color:#999;" value="{{order.addr}}" bindinput="addrChange"></input>
 		</view>
 	</view>
-				<!-- 请选择疗养院地址 -->
-	<view class="service">请填写客户姓名</view>
+	<!-- 选择护工 -->
+	<view class="service">请选择护工</view>
 	<view class="weui-cell">
-		<view class="weui-cell__bd" style="padding: 10px;border: solid 1px #d7d7d7;background-color: #fff;border-radius: 4px;">
-				<input class="weui-input" style="color:#999;"></input>
+		<view class="weui-cell__bd"
+			style="padding: 10px;border: solid 1px #d7d7d7;background-color: #fff;border-radius: 4px;">
+			<input class="weui-input" bindtap="goto" data-url="../HGLB/HGLB" style="color:#999;" value="{{nurse.name}}"
+				disabled placeholder="点击选择护工"></input>
 		</view>
 	</view>
-			<!-- 请选择疗养院地址 -->
-	<view class="service">请填写客户电话</view>
-	<view class="weui-cell">
-		<view class="weui-cell__bd" style="padding: 10px;border: solid 1px #d7d7d7;background-color: #fff;border-radius: 4px;">
-				<input class="weui-input" style="color:#999;"></input>
-		</view>
-	</view>
+
 	<!-- list1 -->
 	<view class="list">
 		<view class="Escort">
@@ -83,7 +70,7 @@
 			</view>
 			<view class="ph">总金额</view>
 		</view>
-		<view style="color: #fe7e01;font-weight: bold;">￥70</view>
+		<view style="color: #fe7e01;font-weight: bold;">{{order.money}}</view>
 	</view>
 	<!--相关协议-->
 	<checkbox-group bindchange="bindAgreeChange">
@@ -99,6 +86,6 @@
 	</checkbox-group>
 	<!--提交按钮-->
 	<view class="weui-btn-area">
-		<button class="weui-btn" type="primary" bindtap='submit' disabled='{{btn_disabled}}'>确定提交</button>
+		<button class="weui-btn" type="primary" bindtap='submitOrder' disabled='{{btn_disabled}}'>确定提交</button>
 	</view>
 </view>
