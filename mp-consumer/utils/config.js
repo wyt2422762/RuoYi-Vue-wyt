@@ -12,7 +12,7 @@ const config = {
     '家政服务': '2'
   },
   //客服电话
-  phone_cs: 18611136442
+  phone_cs: '12344456993'
 }
 
 module.exports = config
