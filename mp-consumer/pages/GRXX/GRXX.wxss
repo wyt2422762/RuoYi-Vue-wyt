@@ -7,11 +7,18 @@ page{
   padding-top: 20px;
 }
 
-.ipc {
-  background: none !important;
+.ip{
+  padding-left: 17px!important;
 }
 
 .ib{
   line-height: 26px !important;
 }
 
+.ic{
+  height: 3.3em
+}
+
+.ic textarea{
+  height: 100%!important
+}

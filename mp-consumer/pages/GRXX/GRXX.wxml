@@ -12,9 +12,10 @@
   <i-input right value="{{ consumer.idNo }}" title="身份证号"  placeholder="身份证号"  mode="wrapped" bind:change="idNoChange" maxlength="18" bind:change="idNoChange" />
   <i-input right value="{{ consumer.emergencyContactName }}" title="紧急联系人姓名"  placeholder="紧急联系人姓名"  mode="wrapped" bind:change="emergencyContactNameChange" maxlength="10" bind:change="emergencyContactNameChange" />
   <i-input right value="{{ consumer.emergencyContactPhone }}" title="紧急联系人电话"  placeholder="紧急联系人电话"  mode="wrapped" bind:change="emergencyContactPhoneChange" maxlength="20" bind:change="emergencyContactPhoneChange" />
-  <i-panel title="家庭地址" i-class="pp" i-panel-content="ipc">
-    <i-input right value="{{ consumer.addr }}" placeholder="请输入家庭地址" mode="wrapped" type="textarea" bind:change="addrChange" maxlength="100" bind:change="addrChange" />
-  </i-panel>
+  
+  <i-panel title="家庭地址" i-class="ip"></i-panel>
+
+  <i-input i-class="ic" value="{{ consumer.addr }}" placeholder="请输入家庭地址" mode="wrapped" type="textarea" bind:change="addrChange" maxlength="50" bind:change="addrChange" />
 
   <i-button bind:click="update" type="success" shape="circle" size="small" i-class="ib">保存</i-button>
 </view>
