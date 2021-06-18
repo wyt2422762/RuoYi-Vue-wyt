@@ -53,12 +53,16 @@ Page({
     //参数检查
     if (!consumer.name) {
       iView.toast.warning('姓名不能为空')
+      return false
     } else if (!consumer.emergencyContactName) {
       iView.toast.warning('紧急联系人姓名不能为空')
+      return false
     } else if (!consumer.emergencyContactPhone) {
       iView.toast.warning('紧急联系人电话不能为空')
+      return false
     } else if (!consumer.addr) {
       iView.toast.warning('家庭地址不能为空')
+      return false
     }
     //loading
     that.setData({

@@ -34,6 +34,8 @@ public class StandardController {
     private IJzClService jzClService;
     @Autowired
     private IJzCdService jzCdService;
+    @Autowired
+    private IJzCleanService jzCleanService;
 
     /**
      * 获取居家陪护收费标准
@@ -133,6 +135,24 @@ public class StandardController {
         }
         Map<String, Object> res = new HashMap<>();
         res.put("list", jzCds);
+        res.put("map", map);
+        return AjaxResult.success("查询成功", res);
+    }
+
+    /**
+     * 获取长期保洁收费标准
+     *
+     * @return 结果
+     */
+    @GetMapping("housekeeping/clean")
+    public AjaxResult getHclean() {
+        List<JzClean> jzCleans = jzCleanService.selectJzCleanList(null);
+        Map<String, JzClean> map = new HashMap<>();
+        for (JzClean jzClean : jzCleans) {
+            map.put(jzClean.getNo(), jzClean);
+        }
+        Map<String, Object> res = new HashMap<>();
+        res.put("list", jzCleans);
         res.put("map", map);
         return AjaxResult.success("查询成功", res);
     }

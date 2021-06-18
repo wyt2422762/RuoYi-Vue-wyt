@@ -4,7 +4,7 @@ server:
   port: 8082
   servlet:
     # 应用的访问路径
-    context-path: /api
+    context-path: /
 
 ruoyi:
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
