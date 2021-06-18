@@ -6,12 +6,17 @@ let gto = require('../../utils/goto.js')
 let iView = require('../../utils/iViewUtil.js')
 
 import {
-  service, allReq
+  service,
+  allReq
 } from '../../utils/request.js'
-import {getDicts} from '../../utils/dict.js'
+import {
+  getDicts
+} from '../../utils/dict.js'
 
 Page({
   data: {
+    //loading
+    hiddenLoading: true,
     type: {
       id: null,
       name: null
@@ -140,7 +145,7 @@ Page({
 
         extraList: res[3].data.list,
         extraMap: res[3].data.map
-      }, function() {
+      }, function () {
         //计算钱
         that.calcMoney()
       })
@@ -151,15 +156,23 @@ Page({
     let that = this
     //首先获取对应的收费标准
     let key = that.data.type.id + '-' + that.data.pNum + '-' + that.data.dat
+
     let stantard = that.data.homeCareStandardMap[key]
-    //押金
-    let deposit = stantard.deposit
-    //金额
-    let money = that.calc(stantard, 1)
-    that.setData({
-      'order.money': money,
-      deposit: deposit
-    })
+    if (stantard) {
+      //押金
+      let deposit = stantard.deposit
+      //金额
+      let money = that.calc(stantard, 1)
+      that.setData({
+        'order.money': money,
+        deposit: deposit
+      })
+    } else {
+      that.setData({
+        'order.money': null,
+        deposit: null
+      })
+    }
   },
   //计算钱
   calc(standard, month) {
@@ -192,7 +205,7 @@ Page({
     let meta = []
     //人数
     if (that.data.personNum[that.data.personNumIndex]) {
-      let personNum = that.data.personNum[that.data.personNumIndex]
+      let personNum = that.data.personNum[that.data.personNumIndex].dictValue
       let mta = {
         label: '人数',
         data: personNum
@@ -209,7 +222,7 @@ Page({
       meta.push(mta)
     }
     //添加额外服务信息
-    if(meta && meta.length > 0){
+    if (meta && meta.length > 0) {
       that.data.order.meta = meta
     }
 
@@ -224,7 +237,7 @@ Page({
       that.setData({
         hiddenLoading: !that.data.hiddenLoading
       })
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../QBDD/QBDD',
       })
     }).catch(err => {

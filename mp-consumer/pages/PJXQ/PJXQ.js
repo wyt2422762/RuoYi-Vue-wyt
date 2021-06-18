@@ -52,8 +52,8 @@ Page({
         hiddenLoading: !that.data.hiddenLoading
       })
       iView.toast.success('评价成功')
-      wx.redirectTo({
-        url: '../QBDD/QBDD',
+      wx.navigateBack({
+        delta: 2,
       })
     }).catch(err => {
       //loading

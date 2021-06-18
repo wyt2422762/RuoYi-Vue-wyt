@@ -200,7 +200,7 @@
 	</view>
 
 	<view class="payment">
-		<button wx:if="{{order.status == 0}}" class="cancel">取消</button>
+		<button wx:if="{{order.status == 0}}" class="cancel" bindtap="cancelOrder">取消</button>
 		<button bindtap="payOrder" wx:if="{{order.status == 1}}" class="Btn">去支付</button>
 		<button wx:if="{{!order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ" class="Btn">评价</button>
 	</view>

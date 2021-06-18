@@ -19,7 +19,7 @@ Page({
     complaint: {
       consumerId: null,
       orderNo: null,
-      text: ''
+      content: ''
     },
     baseUrl: getApp().globalData.backBaseUrl
   },
@@ -28,7 +28,7 @@ Page({
     let that = this
     let imgs = this.data.imgs
     let complaint = that.data.complaint
-    let orderNo = that.data.complaint.orderNo
+    let orderNo = complaint.orderNo
     let url = getApp().globalData.apiBaseUrl + "/file/upload"
     if (imgs.length >= 3) {
       //最多传3张图片
@@ -151,7 +151,7 @@ Page({
     if(!complaint.consumerId){
       iView.toast.warning('客户id不能为空')
       return false
-    } else if(!complaint.text){
+    } else if(!complaint.content){
       iView.toast.warning('投诉内容不能为空')
       return false
     } else if(!complaint.orderNo){
@@ -170,8 +170,8 @@ Page({
       data: complaint
     }).then(res => {
       iView.toast.success('投诉提交成功')
-      wx.switchTab({
-        url: '../index/index',
+      wx.navigateBack({
+        delta: 1,
       })
     }).catch(err => {
       iView.toast.error('投诉提交失败')

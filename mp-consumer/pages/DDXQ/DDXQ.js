@@ -66,6 +66,9 @@ Page({
     let orderNo = that.data.order.orderNo
     service.put("/order/cancel/" + orderNo, {}).then(res => {
       iView.toast.success('取消成功')
+      wx.navigateBack({
+        delta: 1,
+      })
     }).catch(err => {
       iView.toast.error('取消失败')
     })
@@ -86,7 +89,11 @@ Page({
     iView.toast.success('支付成功')
     //更新订单状态
     let orderNo = that.data.order.orderNo
-    service.put("/order/paySuccess/" + orderNo, {}).then(res => {}).catch(err => {
+    service.put("/order/paySuccess/" + orderNo, {}).then(res => {
+      wx.navigateBack({
+        delta: 1,
+      })
+    }).catch(err => {
       console.log("更改订单状态失败")
     })
     //刷新当前页面

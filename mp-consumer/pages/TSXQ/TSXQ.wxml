@@ -29,9 +29,6 @@
 				</view>
 			</view>
 			<view class="weui-cell__bd" style="border:none;">
-				<!-- <textarea class="weui-textarea" placeholder="请简单概述..."
-					style=" height: 6.3em;font-size:14px;padding-left: 17px;" value='{{complaint.text}}' bindchange="textChange" /> -->
-
 					<i-input value="{{ complaint.content }}" type="textarea" 
 					i-class="ic" placeholder="请简单概述..." bind:change="contentChange" maxlength="100" />
 

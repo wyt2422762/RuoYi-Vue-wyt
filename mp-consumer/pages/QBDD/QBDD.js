@@ -4,7 +4,8 @@ import {
   getDicts
 } from '../../utils/dict.js'
 import {
-  service, allReq
+  service,
+  allReq
 } from '../../utils/request.js'
 
 let iView = require('../../utils/iViewUtil.js')
@@ -50,6 +51,10 @@ Page({
       that.data.orderTypeOptions = res[0].data
       that.data.orderStatusOptions = res[1].data
     })
+  },
+  onShow() {
+    let that = this
+    that.data.queryParams.pageNum = 1
     //查询订单列表
     that.getList()
   },

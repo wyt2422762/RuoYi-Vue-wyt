@@ -187,7 +187,7 @@ Page({
       that.setData({
         hiddenLoading: !that.data.hiddenLoading
       })
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../QBDD/QBDD',
       })
     }).catch(err => {
