@@ -10,6 +10,7 @@ import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.ruoyi.bus.service.IOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,16 @@ import java.util.Date;
 @RequestMapping("/wx/{appId}/pay")
 public class PayController {
 
+    //未支付
+    private final String STATUS_UNPAID = "1";
+    //已支付
+    private final String STATUS_PAID = "2";
+
+
     @Autowired
     private WxPayService wxPayService;
+    @Autowired
+    private IOrderService orderService;
 
     /**
      * 查询订单(详见https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_2)
@@ -169,6 +178,8 @@ public class PayController {
     public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayException {
         final WxPayOrderNotifyResult notifyResult = this.wxPayService.parseOrderNotifyResult(xmlData);
         // TODO 根据自己业务场景需要构造返回对象
+        String outTradeNo = notifyResult.getOutTradeNo();
+        orderService.updateOrderPayStatus(outTradeNo, STATUS_UNPAID, STATUS_PAID);
         return WxPayNotifyResponse.success("成功");
     }
 

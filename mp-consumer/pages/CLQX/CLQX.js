@@ -61,7 +61,6 @@ Page({
         btn_disabled: false,
       })
     } else {
-      //console.log(e.detail.value.length)
       this.setData({
         btn_disabled: true
       })

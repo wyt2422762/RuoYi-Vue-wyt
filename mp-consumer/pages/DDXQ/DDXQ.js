@@ -17,6 +17,8 @@ Page({
   data: {
     //loading
     hiddenLoading: true,
+    //支付按钮是否点击过
+    payButtonClicked: false,
     //订单类型字典
     orderTypeOptions: [],
     //订单状态字典
@@ -26,7 +28,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onLoad: function (options) {
+  onLoad(options) {
     let that = this
     that.data.order.orderNo = options.orderNo
     //获取字典，数据
@@ -76,6 +78,9 @@ Page({
   //支付方法
   payOrder(e) {
     let that = this
+    that.setData({
+      payButtonClicked: false
+    })
     //订单编号
     let orderNo = that.data.order.orderNo
     //金额(元)
@@ -87,22 +92,31 @@ Page({
   paySuccess(res) {
     let that = this
     iView.toast.success('支付成功')
-    //更新订单状态
-    let orderNo = that.data.order.orderNo
-    service.put("/order/paySuccess/" + orderNo, {}).then(res => {
-      wx.navigateBack({
-        delta: 1,
-      })
-    }).catch(err => {
-      console.log("更改订单状态失败")
+    that.setData({
+      payButtonClicked: false
     })
-    //刷新当前页面
-    that.onLoad()
+    wx.navigateBack({
+      delta: 1,
+    })
+    //更新订单状态
+    // let orderNo = that.data.order.orderNo
+    // service.put("/order/paySuccess/" + orderNo, {}).then(res => {
+    // }).catch(err => {
+    //   console.log("更改订单状态失败")
+    // }).finally(f => {
+    //   wx.navigateBack({
+    //     delta: 1,
+    //   })
+    // })
   },
   //支付失败回调方法
   payFail(err) {
     let that = this
     iView.toast.error('支付失败')
+    console.error("支付失败", err)
+    that.setData({
+      payButtonClicked: false
+    })
   },
   //跳转
   goto(e) {

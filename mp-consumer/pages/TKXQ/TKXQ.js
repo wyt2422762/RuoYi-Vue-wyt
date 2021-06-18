@@ -36,8 +36,6 @@ Page({
     })
   },
   bindCountryChange: function (e) {
-    console.log('picker country 发生选择改变，携带值为', e.detail.value);
-
     this.setData({
       countryIndex: e.detail.value
     })

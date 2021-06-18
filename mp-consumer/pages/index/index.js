@@ -5,13 +5,14 @@ import {
 } from '../../utils/request.js'
 
 let gto = require('../../utils/goto.js')
+let config = require('../../utils/config.js')
 
 //获取应用实例
 const app = getApp()
 Page({
   data: {
     //轮播图
-    bannerBaseUrl: app.globalData.backBaseUrl,
+    bannerBaseUrl: config.backBaseUrl,
     bannerUrl: [],
   },
   //事件处理函数

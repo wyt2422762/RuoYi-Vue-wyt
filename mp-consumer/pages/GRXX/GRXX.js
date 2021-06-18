@@ -25,7 +25,6 @@ Page({
   //获取个人信息方法
   getUserInfo() {
     let that = this
-    console.log('电话号码 = ' + wx.getStorageSync('phoneNumber'))
     //loading
     that.setData({
       hiddenLoading: !that.data.hiddenLoading

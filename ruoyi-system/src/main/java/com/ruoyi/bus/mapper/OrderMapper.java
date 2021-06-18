@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.bus.domain.Order;
 import com.ruoyi.bus.domain.OrderMeta;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 订单Mapper接口
@@ -74,4 +75,13 @@ public interface OrderMapper {
      * @return 结果
      */
     int insertOrderMeta(List<OrderMeta> orderMetas);
+
+    /**
+     * 更新订单支付状态
+     * @param orderNo 订单号
+     * @param statusOld 旧状态
+     * @param statusNew 新状态
+     * @return 结果
+     */
+    int updateOrderPayStatus(@Param("orderNo") String orderNo, @Param("statusOld") String statusOld, @Param("statusNew") String statusNew);
 }

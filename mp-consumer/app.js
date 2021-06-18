@@ -6,7 +6,7 @@ import {
 //app.js
 App({
   onLaunch: function () {
-    console.log('app onLanuch')
+    //console.log('app onLanuch')
     let that = this
     // 展示本地存储能力
     let user = wx.getStorageSync('user')
@@ -16,10 +16,10 @@ App({
     // 登录
     wx.checkSession({
       success: res => {
-        console.log('登录状态正常')
+        //console.log('登录状态正常')
       },
       fail: res => {
-        console.log('登录状态不正常')
+        //console.log('登录状态不正常')
         // 登录
         wx.login({
           success: res => {
@@ -30,8 +30,8 @@ App({
                 code: res.code
               }
             }).then(res => {
-              that.globalData.openId = res.data['openid']
-              that.globalData.sessionKey = res.data['sessionKey']
+              wx.setStorageSync('openid', res.data['openid'])
+              wx.setStorageSync('sessionKey', res.data['sessionKey'])
             })
           }
         })
@@ -41,6 +41,8 @@ App({
     if (user) {
       that.getUserInfo()
     }
+    //验证token是否有效，无效的话重新登录后台
+    
   },
   //判断用户信息是否完善
   isUserComplete(user) {
@@ -54,7 +56,6 @@ App({
   //获取个人信息方法(这里用来革新缓存的用户信息)
   getUserInfo() {
     let that = this
-    console.log('电话号码 = ' + wx.getStorageSync('phoneNumber'))
     service.get('/userInfo/getConsumer', {
       data: {
         phoneNumber: wx.getStorageSync('phoneNumber')
@@ -77,9 +78,5 @@ App({
     apiBaseUrl: config.apiBaseUrl,
     //是否登录
     isLogin: false,
-    //openId
-    openId: null,
-    //sessionKey
-    sessionKey: null,
   }
 })

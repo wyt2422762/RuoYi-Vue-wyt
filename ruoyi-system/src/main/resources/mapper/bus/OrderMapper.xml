@@ -185,4 +185,13 @@
         where orderNo = #{orderNo}
     </select>
 
+    <update id="updateOrderPayStatus">
+        update `order`
+        <trim prefix="SET" suffixOverrides=",">
+            status = #{statusNew},
+            pay_time = sysdate(),
+        </trim>
+        where orderNo = #{orderNo} and status = #{statusOld}
+    </update>
+
 </mapper>

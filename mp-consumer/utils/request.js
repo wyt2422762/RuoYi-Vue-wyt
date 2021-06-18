@@ -4,8 +4,6 @@ import errorCode from './errCode.js'
 
 const config = require("./config")
 
-// const app = getApp()
-
 // 创建实例
 const service = dov.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分

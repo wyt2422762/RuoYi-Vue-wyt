@@ -35,10 +35,7 @@ Page({
       date4: e.detail.value
     })
   },
-  bindCountryChange: function (e) {
-    console.log('picker country 发生选择改变，携带值为', e.detail.value);
-
-    this.setData({
+  bindCountryChange: function (e) {this.setData({
       countryIndex: e.detail.value
     })
   },

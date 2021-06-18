@@ -5,6 +5,7 @@ import {
 } from '../../utils/request.js'
 
 let iView = require('../../utils/iViewUtil.js')
+let config = require('../../utils/config.js')
 
 Page({
   data: {
@@ -21,7 +22,7 @@ Page({
       orderNo: null,
       content: ''
     },
-    baseUrl: getApp().globalData.backBaseUrl
+    baseUrl: config.backBaseUrl
   },
   // 上传图片
   chooseImg: function (e) {
@@ -29,7 +30,7 @@ Page({
     let imgs = this.data.imgs
     let complaint = that.data.complaint
     let orderNo = complaint.orderNo
-    let url = getApp().globalData.apiBaseUrl + "/file/upload"
+    let url = config.apiBaseUrl + "/file/upload"
     if (imgs.length >= 3) {
       //最多传3张图片
       return false

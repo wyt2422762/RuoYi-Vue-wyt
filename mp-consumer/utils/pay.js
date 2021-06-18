@@ -1,5 +1,6 @@
 //微信支付
 import { service } from "./request"
+const config = require("./config.js")
 
 /**
  * 支付方法
@@ -13,15 +14,25 @@ import { service } from "./request"
  * @param {支付失败回调} failHandler
  */
 export function pay(orderNo, money, successhandler, failHandler) {
+  let app = getApp()
   debugger
   service.post('/pay/createOrder', {
     data: {
       //openid
-      openid: getApp().globalData.openId,
+      openid: wx.getStorageSync('openid'),
       //金额
-      total_fee: money * 100, //微信支付的单位是分
+      //totalFee: money * 100, //微信支付的单位是分
+      totalFee: 1, //微信支付的单位是分
       //订单号
-      outTradeNo: orderNo
+      outTradeNo: orderNo,
+      //body
+      body: config.wxPay.body,
+      //spbillCreateIp
+      spbillCreateIp: config.wxPay.spbillCreateIp,
+      //tradeType
+      tradeType: config.wxPay.tradeType,
+      //notifyUrl
+      notifyUrl: config.wxPay.notifyUrl
     }
   }).then(res => {
     console.log('统一支付返回成功，接下来调用支付接口')
@@ -45,7 +56,7 @@ export function pay(orderNo, money, successhandler, failHandler) {
         fail(payFail) {
           console.log('支付失败', payFail)
           //调用关闭订单接口
-          closeOrder(orderNo)
+          //closeOrder(orderNo)
           if(failHandler && typeof failHandler == 'function'){
             failHandler(payFail)
           }
@@ -53,10 +64,9 @@ export function pay(orderNo, money, successhandler, failHandler) {
       })
     }
   }).catch(err => {
-    wx.showToast({
-      title: '支付出现问题',
-      icon: 'error'
-    })
+    if(failHandler && typeof failHandler == 'function'){
+      failHandler(err)
+    }
     return false
   })
 }

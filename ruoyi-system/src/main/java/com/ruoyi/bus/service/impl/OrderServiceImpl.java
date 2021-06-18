@@ -91,6 +91,19 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     /**
+     * 更新订单支付状态
+     * @param orderNo 订单号
+     * @param statusOld 旧状态
+     * @param statusNew 新状态
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int updateOrderPayStatus(String orderNo, String statusOld, String statusNew) {
+        return orderMapper.updateOrderPayStatus(orderNo, statusOld, statusNew);
+    }
+
+    /**
      * 批量删除订单
      *
      * @param ordernos 需要删除的订单ID
@@ -101,6 +114,8 @@ public class OrderServiceImpl implements IOrderService {
     public int deleteOrderByIds(Long[] ordernos) {
         return orderMapper.deleteOrderByIds(ordernos);
     }
+
+
 
     /**
      * 查询订单列表(小程序使用)

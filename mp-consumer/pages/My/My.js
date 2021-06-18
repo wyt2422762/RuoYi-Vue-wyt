@@ -6,12 +6,14 @@ import {
 let gto = require('../../utils/goto.js')
 const config = require("../../utils/config.js")
 
+const app = getApp()
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    isLogin: getApp().globalData.isLogin,
+    isLogin: app.globalData.isLogin,
     //客服电话
     phone_cs: config.phone_cs
   },
@@ -29,8 +31,8 @@ Page({
     let that = this
     service.get('/base/phone', {
       data: {
-        appId: getApp().globalData.appid,
-        sessionKey: getApp().globalData.sessionKey,
+        appId: config.appid,
+        sessionKey: wx.getStorageSync('sessionKey'),
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv
       }
@@ -40,7 +42,7 @@ Page({
       //登录
       service.get('/base/login', {
         data: {
-          openId: getApp().globalData.openId,
+          openId: wx.getStorageSync('openid'),
           phoneNumber:  wx.getStorageSync('phoneNumber'),
           type: '0'
         }
@@ -49,9 +51,8 @@ Page({
         wx.setStorageSync('token', res.data.token)
         //存用户信息
         wx.setStorageSync('user', res.data.user)
-        //app.globalData.user = res.data.user
-        getApp().isUserComplete(res.data.user)
-        getApp().globalData.isLogin = true
+        app.isUserComplete(res.data.user)
+        app.globalData.isLogin = true
         that.setData({
           isLogin: true
         })

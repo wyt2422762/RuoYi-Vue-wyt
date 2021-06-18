@@ -16,21 +16,16 @@ Page({
     })
   },
   bindCountryChange: function (e) {
-    console.log('picker country 发生选择改变，携带值为', e.detail.value);
-
     this.setData({
       countryIndex: e.detail.value
     })
   },
   bindCountry2Change: function (e) {
-    console.log('picker country 发生选择改变，携带值为', e.detail.value);
-
     this.setData({
       SanatoriumIndex: e.detail.value
     })
   },
   bindAgreeChange:function(e) {
-    //  console.log(e.detail.value)
       this.setData({
         isAgree:e.detail.value.length,
       })
