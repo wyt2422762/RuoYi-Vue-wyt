@@ -30,8 +30,8 @@ App({
                 code: res.code
               }
             }).then(res => {
-              that.globalData.openId = res.data['openid']
-              that.globalData.sessionKey = res.data['sessionKey']
+              wx.setStorageSync('openid', res.data['openid'])
+              wx.setStorageSync('sessionKey', res.data['sessionKey'])
             })
           }
         })

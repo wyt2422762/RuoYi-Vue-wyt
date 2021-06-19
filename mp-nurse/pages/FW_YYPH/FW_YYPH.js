@@ -1,98 +1,92 @@
-// pages/FW/FW.js
+import {
+  getDicts
+} from '../../utils/dict.js'
+import {
+  service,
+  allReq
+} from '../../utils/request.js'
+
+let iView = require('../../utils/iViewUtil.js')
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    currentTab: 0,
+    //loading
+    hiddenLoading: true,
+    //选项卡index
+    currentTab: '0',
+    //订单类型字典
+    orderTypeOptions: [],
+    //订单状态字典
+    orderStatusOptions: [],
+    //进行中list
+    orderList_jxz: [],
+    // 查询参数(进行中)
+    queryParams_jxz: {
+      pageNum: 1,
+      pageSize: 5,
+      orderByColumn: 'create_time',
+      isAsc: 'desc',
+      nurseId: null,
+      status: 0
+    },
+    //分页参数(进行中)
+    page_jxz: {
+      //总条数
+      total: null,
+      //总页数
+      pages: null
+    },
+
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this;
-     /**
-     * 获取当前设备的宽高
-     */
-    wx.getSystemInfo( {
-
-      success: function( res ) {
-          that.setData( {
-              winWidth: res.windowWidth,
-              winHeight: res.windowHeight
-          });
-      }
-
-  });
+  onLoad: function (e) {
+    let that = this
+    that.data.queryParams_jxz.nurseId = wx.getStorageSync('user').nurseId
+    allReq([getDicts("bus_order_type"), getDicts("bus_order_status")]).then(res => {
+      that.data.orderTypeOptions = res[0].data
+      that.data.orderStatusOptions = res[1].data
+    })
   },
-
-  //  tab切换逻辑
-swichNav: function( e ) {
-
-  var that = this;
-
-  if( this.data.currentTab === e.target.dataset.current ) {
-      return false;
-  } else {
-      that.setData( {
-          currentTab: e.target.dataset.current
+  onShow() {
+    let that = this
+    that.data.queryParams_jxz.pageNum = 1
+    //查询订单列表
+    that.getOrderList_jxz()
+  },
+  //获取进行中订单
+  getOrderList_jxz() {
+    let that = this
+    //loading
+    that.setData({
+      hiddenLoading: !that.data.hiddenLoading
+    })
+    service.get('/order/list', {
+      data: that.data.queryParams_jxz
+    }).then(res => {
+      //loading
+      that.setData({
+        hiddenLoading: !that.data.hiddenLoading
       })
-  }
-},
-bindChange: function( e ) {
-
-  var that = this;
-  that.setData( { currentTab: e.detail.current });
-
-},
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+      that.setData({
+        orderList_jxz: res.rows,
+        'page_jxz.total': res.total
+      })
+    }).catch(err => {
+      //loading
+      that.setData({
+        hiddenLoading: !that.data.hiddenLoading
+      })
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  //选项卡切换
+  tabChange(e) {
+    this.setData({
+      currentTab: e.detail.key
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  swiperChange(e) {
+    let that = this
+    that.setData({
+      currentTab: e.detail.current
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

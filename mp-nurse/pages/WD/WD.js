@@ -33,7 +33,7 @@ Page({
     service.get('/base/phone', {
       data: {
         appId: config.appid,
-        sessionKey: config.sessionKey,
+        sessionKey: wx.getStorageSync('sessionKey'),
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv
       }

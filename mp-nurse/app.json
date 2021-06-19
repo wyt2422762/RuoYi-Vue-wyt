@@ -9,8 +9,8 @@
     "pages/FW_CDBZQX/FW_CDBZQX", 
     "pages/WD/WD",
     "pages/index/index",
-    "pages/logs/logs"
-    
+    "pages/logs/logs",
+    "pages/FW/FW"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -56,6 +56,8 @@
     "i-panel": "./component/iView/panel/index",
     "i-button": "./component/iView/button/index",
     "i-toast": "./component/iView/toast/index",
-    "i-load-more": "./component/iView/load-more/index"
+    "i-load-more": "./component/iView/load-more/index",
+    "i-tabs": "./component/iView/tabs/index",
+    "i-tab": "./component/iView/tab/index"
   }
 }

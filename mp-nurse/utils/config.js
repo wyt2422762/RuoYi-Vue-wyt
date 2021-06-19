@@ -1,4 +1,4 @@
-const appId = 'wx46ec2c2610591c41'
+const appId = 'wxe8fb45f5ee29f354'
 
 const config = {
   //appid

@@ -1,184 +1,80 @@
-<!--pages/FW/FW.wxml-->
-<view class="swiper-tab" style="position: fixed;top: 0;left: 0; z-index: 99;background-color:#fff;">
-	<view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">进行中</view>
-	<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已完成</view>
+<wxs src='../../utils/order.wxs' module='filters' />
+
+<i-toast id="toast" />
+<i-spin fix custom wx:if="{{ !hiddenLoading }}">
+	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+	<view>加载中</view>
+</i-spin>
+
+<view class="container">
+	<i-tabs i-class="its" current="{{ currentTab }}" bindchange="tabChange">
+		<i-tab key="0" title="进行中"></i-tab>
+		<i-tab key="1" title="已完成"></i-tab>
+	</i-tabs>
+
+	<swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="swiperChange">
+		<!-- 进行中 -->
+		<swiper-item style="overflow-y: scroll;">
+			<view class="aui-palace">
+				<navigator wx:for="{{orderList_jxz}}" wx:for-item="order" wx:key="orderNo"
+					url="../DDXQ/DDXQ?orderNo={{order.orderNo}}" hover-class="none">
+					<view class="aui-palace-one">
+						<text class="name">{{order.orderNo}}</text>
+						<view class="Main">
+							<view class="contacts">
+								<view class="icon">
+									<image src="../../img/3.2.png"></image>
+								</view>
+								<view class="lxr">客户姓名</view>
+							</view>
+							<view class="contacts contacts2">{{order.consumer.name}}</view>
+						</view>
+						<view class="Main">
+							<view class="contacts">
+								<view class="icon">
+									<image src="../../img/icon_01.png"></image>
+								</view>
+								<view class="lxr">联系电话</view>
+							</view>
+							<view class="contacts contacts2" style="font-size:14px;margin-top:3px;">{{order.consumer.phonenumber}}</view>
+						</view>
+						<view class="Main">
+							<view class="contacts">
+								<view class="icon">
+									<!-- <image src="../../img/icon_01.png"></image> -->
+								</view>
+								<view class="lxr">服务时间</view>
+							</view>
+							<view class="contacts contacts2" style="font-size:14px;margin-top:3px;">{{order.workTime}}</view>
+						</view>
+						<view class="Main">
+							<view class="contacts">
+								<view class="icon">
+									<!-- <image src="../../img/icon_01.png"></image> -->
+								</view>
+								<view class="lxr">地址</view>
+							</view>
+							<view class="contacts contacts2" style="font-size:14px;margin-top:3px;">{{order.addr}}</view>
+						</view>
+						<view class="Main">
+							<view class="contacts">
+								<view class="icon">
+									<image src="../../img/icon_13.png"></image>
+								</view>
+								<view class="lxr">付款金额</view>
+							</view>
+							<view class="contacts contacts2" style="font-size:14px;margin-top:3px;">{{order.money}}</view>
+						</view>
+						<!-- 状态 -->
+						<view class="ytk">{{filters.parseOrderStatus(order.status)}}</view>
+					</view>
+				</navigator>
+			</view>
+		</swiper-item>
+		<!-- 已完成 -->
+		<swiper-item style="overflow-y: scroll;">
+			<view class="aui-palace">
+			</view>
+		</swiper-item>
+	</swiper>
 </view>
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange">
-	<!-- 进行中 -->
-	<swiper-item style="overflow-y: scroll;">
-		<!-- 1 -->
-		<view class="weui-cells weui-cells_after-title" style="border:none;padding-bottom:35px;">
-			<!-- 订单编号 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					服务产品
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<view class="height"></view>
-			<!-- 下单时间 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					服务类型
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<!-- 付款金额 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					服务时间
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<!-- 支付方式 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					服务天数
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<view class="height"></view>
-			<!-- 付款时间 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					护工姓名
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<!-- 	订单状态 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					服务状态
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<view class="height"></view>
-			<!-- 服务类型 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					客户姓名
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<!-- 服务星级 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					客户电话
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<!-- 护工姓名 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					服务地址
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<view class="height"></view>
-			<!-- 护工电话 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					陪护费
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<!-- 服务状态 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					餐费
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-			<!-- 服务状态 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					总金额
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" style="color:#ff7200;" />
-				</view>
-			</view>
-			<!-- 服务状态 -->
-			<view class="weui-cell padding" style="border:none;">
-				<view class="weui-cell__hd " style="margin-left:16px;">
-					支付方式
-				</view>
-				<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-					<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="1" />
-				</view>
-			</view>
-		</view>
-	</swiper-item>
-	<!-- 已完成 -->
-	<swiper-item style="overflow-y: scroll;">
-		<!-- card3 -->
-		<navigator url="../DDXQ/DDXQ">
-			<view class="card">
-				<!-- 进度标签 -->
-				<view class="tag">已完成</view>
-				<!-- 总信息 -->
-				<view class="word">
-					<view class="top">
-						<!-- 头像 -->
-						<view class="tu">
-							<image src="../../img/TX.png"></image>
-						</view>
-						<!-- 老人信息 -->
-						<view class="xx">
-							<!-- 姓名 -->
-							<view class="name">
-								<view style="font-weight:550; font-size:45rpx; margin-right:30rpx; ">江天昊</view>
-								<view class="Age">
-									<view class="Gender">
-										<image src="../../img/age.png"></image>
-									</view>
-									<view>58</view>
-								</view>
-							</view>
-							<!-- 电话、时间 -->
-							<view class="massage">
-								<!-- 电话 -->
-								<view class="phone">
-									<text style="width:60rpx; background-color:#ffa441; color:white; border-radius: 8rpx; font-size:21rpx;padding: 2rpx 12rpx;">电话</text>
-									<text style="color:#4c4c4c; font-size:24rpx; margin-left:16rpx;">18855664499</text>
-								</view>
-								<!-- 时间 -->
-								<view class="phone">
-									<text style="width:60rpx; background-color:#ffa441; color:white; border-radius: 8rpx; font-size:21rpx;padding:  2rpx 12rpx;">时间</text>
-									<text style="color:#4c4c4c; font-size:24rpx; margin-left:16rpx;">2020-07-20 15:00:15</text>
-								</view>
-							</view>
-						</view>
-					</view>
-					<view class="bottom">
-						<!-- 居住地址、服务类型 -->
-								<view class="bold">服务类型：<text> 自理型 10h/月</text></view>
-						<view class="address">居住地址：<text>榆次区田森B座榆</text> </view>
-					</view>
-				</view>
-			</view>
-		</navigator>
-	</swiper-item>
-</swiper>
