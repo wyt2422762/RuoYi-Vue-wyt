@@ -12,7 +12,7 @@
 			<image src='../../img/icon_24.png' class='u-img-slide' mode='aspectFill'></image>
 		</view>
 		<view class="introduce">
-			<view class="Self">自理老人介绍</view>
+			<view class="Self">{{type.name}}</view>
 			<view class="details">查看详情</view>
 		</view>
 	</view>

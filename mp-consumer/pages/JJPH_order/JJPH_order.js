@@ -53,7 +53,6 @@ Page({
   //额外服务变化
   extraChange(e) {
     let that = this
-    debugger;
     let index = that.data.extras.indexOf(e.detail.value)
     index === -1 ? that.data.extras.push(e.detail.value) : that.data.extras.splice(index, 1)
     that.setData({
@@ -115,9 +114,11 @@ Page({
    */
   onLoad: function (e) {
     let that = this
-    that.data.order.consumerId = wx.getStorageSync('user').consumerId
-    that.data.type.id = e.typeId
-    that.data.type.name = e.typeName
+    that.setData({
+      'order.consumerId': wx.getStorageSync('user').consumerId,
+      'typr.id': e.typeId,
+      'type.name': e.typeName
+    })
     //1. 修改标题
     wx.setNavigationBarTitle({
       title: e.typeName

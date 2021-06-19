@@ -2,12 +2,27 @@
 <i-toast id="toast" />
 
 <view class="container aui-palace aui-palace-one2 aui-palace-two">
-  <view wx:for="{{typeList}}" wx:for-index="index" wx:for-item="type"  wx:key="dictCode" class="aui-palace-grid" bindtap="goto" data-url="../JJPH_order/JJPH_order" data-typeid="{{type.dictValue}}" data-typename="{{type.dictLabel}}">
+  <view class="aui-palace-grid" bindtap="goto" data-url="../JJPH_order/JJPH_order" data-typeid="0" data-typename="自理型">
     <view class="aui-palace-grid-icon2">
-      <image wx:if="{{index%2 === 0}}" src="../../img/icon_28.png"></image>
-      <image wx:if="{{index%2 !== 0}}" src="../../img/icon_29.png"></image>
-      {{type.dictLabel}}
+      <image src="../../img/zlx.png"></image>
     </view>
   </view>
 
+  <view class="aui-palace-grid" bindtap="goto" data-url="../JJPH_order/JJPH_order" data-typeid="1" data-typename="全护型">
+    <view class="aui-palace-grid-icon2">
+      <image src="../../img/qhx.png"></image>
+    </view>
+  </view>
+
+  <view class="aui-palace-grid" bindtap="goto" data-url="../JJPH_order/JJPH_order" data-typeid="2" data-typename="专护型">
+    <view class="aui-palace-grid-icon2">
+      <image src="../../img/zhx.png"></image>
+    </view>
+  </view>
+
+  <view class="aui-palace-grid" bindtap="goto" data-url="../JJPH_order/JJPH_order" data-typeid="3" data-typename="特专服务">
+    <view class="aui-palace-grid-icon2">
+      <image src="../../img/tzfw.png"></image>
+    </view>
+  </view>
 </view>

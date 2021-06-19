@@ -105,9 +105,11 @@ Page({
    */
   onLoad: function (e) {
     let that = this
-    this.data.order.consumerId = wx.getStorageSync('user').consumerId
-    that.data.type.id = e.typeId
-    that.data.type.name = e.typeName
+    that.setData({
+      'order.consumerId': wx.getStorageSync('user').consumerId,
+      'typr.id': e.typeId,
+      'type.name': e.typeName
+    })
     //1. 修改标题
     wx.setNavigationBarTitle({
       title: e.typeName

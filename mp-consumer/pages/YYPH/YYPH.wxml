@@ -1,12 +1,26 @@
 <!--pages/YYPH/YYPH.wxml-->
 <view class="aui-palace aui-palace-one2 aui-palace-two">
-  <view wx:for="{{typeList}}" wx:for-index="index" wx:for-item="type" wx:key="dictCode" class="aui-palace-grid"
-    bindtap="goto" data-url="../YYPH_order/YYPH_order" data-typeid="{{type.dictValue}}"
-    data-typename="{{type.dictLabel}}">
+  <view class="aui-palace-grid"
+    bindtap="goto" data-url="../YYPH_order/YYPH_order" data-typeid="0"
+    data-typename="自理老人">
     <view class="aui-palace-grid-icon2">
-      <image wx:if="{{index%2 === 0}}" src="../../img/icon_28.png"></image>
-      <image wx:if="{{index%2 !== 0}}" src="../../img/icon_29.png"></image>
-      {{type.dictLabel}}
+      <image src="../../img/zllr.png"></image>
+    </view>
+  </view>
+
+  <view class="aui-palace-grid"
+    bindtap="goto" data-url="../YYPH_order/YYPH_order" data-typeid="1"
+    data-typename="介助老人">
+    <view class="aui-palace-grid-icon2">
+      <image src="../../img/jzlr.png"></image>
+    </view>
+  </view>
+
+  <view class="aui-palace-grid"
+    bindtap="goto" data-url="../YYPH_order/YYPH_order" data-typeid="2"
+    data-typename="介护老人">
+    <view class="aui-palace-grid-icon2">
+      <image src="../../img/jhlr.png"></image>
     </view>
   </view>
 </view>

@@ -5,19 +5,25 @@ server:
   servlet:
     # 应用的访问路径
     context-path: /admin
+  ssl:
+    enabled: true
+    key-store: classpath:xx.p12
+    key-store-password: 123
+    key-store-type: RSA
+    key-alias:
 
 # 项目相关配置
 ruoyi:
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: D:/ruoyi/uploadPath
+  profile: D:/java/xyhFile
 
 # 日志配置
 logging:
   level:
-    com.ruoyi: info
-    org.springframework: error
-    com.github.binarywang.wxpay: error
-    cn.binarywang.wx.miniapp: error
+    com.ruoyi: debug
+    org.springframework: debug
+    com.github.binarywang.wxpay: debug
+    cn.binarywang.wx.miniapp: debug
 
 
 spring:
@@ -27,7 +33,7 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://localhost:3306/ruoyi_vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: jdbc:mysql://47.92.37.222:3306/xyh?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: xyh
         password: fdkj@2020
       # 从库数据源
@@ -80,7 +86,7 @@ spring:
 
   redis:
     # 地址
-    host: 127.0.0.1
+    host: 47.92.37.222
     # 端口，默认为6379
     port: 6379
     # 数据库索引
