@@ -177,6 +177,14 @@ Page({
 
     //处理meta
     let meta = []
+    //服务类型
+    if(that.data.type.name){
+      let mta = {
+        label: '服务类型',
+        data: that.data.type.name
+      }
+      meta.push(mta)
+    }
     //每日小时数
     if (that.data.dat) {
       let mta = {

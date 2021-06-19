@@ -4,13 +4,13 @@
     <el-dialog :title="cTitle" :visible.sync="cOpen" width="800px" append-to-body @close="handleClose" >
       <el-table v-loading="loading" :data="orderList">
         <el-table-column label="订单编号" align="center" prop="orderNo" />
-        <el-table-column label="订单类型" align="center" prop="orderType" />
+        <el-table-column label="订单类型" align="center" :formatter="orderTypeFormat" />
         <el-table-column label="服务时间" align="center" prop="workTime" />
-        <el-table-column label="服务星级" align="center" prop="workLevel" />
+<!--        <el-table-column label="服务星级" align="center" prop="workLevel" />-->
         <el-table-column label="金额" align="center" prop="money" />
         <el-table-column label="客户" align="center" prop="consumer.name" />
         <el-table-column label="护工" align="center" prop="nurse.name" />
-        <el-table-column label="备注" align="center" prop="remark" />
+<!--        <el-table-column label="备注" align="center" prop="remark" />-->
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template slot-scope="scope">
             <el-button
@@ -128,6 +128,10 @@ export default {
     });
   },
   methods: {
+    // 性别字典翻译
+    orderTypeFormat(row, column) {
+      return this.selectDictLabel(this.orderTypeOptions, row.orderType);
+    },
     // 弹窗关闭
     handleClose(){
       this.$emit('close');
@@ -148,7 +152,7 @@ export default {
         this.evaluateData = response.data;
         this.evaluate = true;
       });
-    },
+    }
   },
   watch: {
     open: function (newV, oldV){

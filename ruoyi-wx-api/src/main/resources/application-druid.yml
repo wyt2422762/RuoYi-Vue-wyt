@@ -93,6 +93,12 @@ wx:
         token: 456
         aesKey: 789
         msgDataFormat: JSON
+
+      - appid: wxe8fb45f5ee29f354
+        secret: ea2ebaa0fda455cf87557c63a4d12089
+        token: 456
+        aesKey: 789
+        msgDataFormat: JSON
   pay:
     appId: wx46ec2c2610591c41
     #微信支付商户号

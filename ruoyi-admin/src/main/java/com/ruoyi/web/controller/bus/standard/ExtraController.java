@@ -36,7 +36,7 @@ public class ExtraController extends BaseController {
     /**
      * 查询额外服务列表
      */
-    @PreAuthorize("@ss.hasPermi('standard:extra:list')")
+    @PreAuthorize("@ss.hasPermi('bus:standard:extra:list')")
     @GetMapping("/list")
     public TableDataInfo list(Extra extra) {
         startPage();
@@ -47,7 +47,7 @@ public class ExtraController extends BaseController {
     /**
      * 导出额外服务列表
      */
-    @PreAuthorize("@ss.hasPermi('standard:extra:export')")
+    @PreAuthorize("@ss.hasPermi('bus:standard:extra:export')")
     @Log(title = "额外服务", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(Extra extra) {
@@ -59,7 +59,7 @@ public class ExtraController extends BaseController {
     /**
      * 获取额外服务详细信息
      */
-    @PreAuthorize("@ss.hasPermi('standard:extra:query')")
+    @PreAuthorize("@ss.hasPermi('bus:standard:extra:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(extraService.selectExtraById(id));
@@ -68,7 +68,7 @@ public class ExtraController extends BaseController {
     /**
      * 新增额外服务
      */
-    @PreAuthorize("@ss.hasPermi('standard:extra:add')")
+    @PreAuthorize("@ss.hasPermi('bus:standard:extra:add')")
     @Log(title = "额外服务", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Extra extra) {
@@ -78,7 +78,7 @@ public class ExtraController extends BaseController {
     /**
      * 修改额外服务
      */
-    @PreAuthorize("@ss.hasPermi('standard:extra:edit')")
+    @PreAuthorize("@ss.hasPermi('bus:standard:extra:edit')")
     @Log(title = "额外服务", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Extra extra) {
@@ -88,7 +88,7 @@ public class ExtraController extends BaseController {
     /**
      * 删除额外服务
      */
-    @PreAuthorize("@ss.hasPermi('standard:extra:remove')")
+    @PreAuthorize("@ss.hasPermi('bus:standard:extra:remove')")
     @Log(title = "额外服务", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

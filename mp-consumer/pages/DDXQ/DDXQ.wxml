@@ -140,14 +140,15 @@
 					value="{{filters.parseOrderType(order.orderType)}}" disabled />
 			</view>
 		</view>
-		<!-- 服务状态 -->
-		<view class="weui-cell padding" style="border:none;">
-			<view class="weui-cell__hd " style="margin-left:16px;">服务状态</view>
+		<!-- 服务类型 -->
+		<view wx:if="{{order.metaMap['服务类型']}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">服务类型</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="啥叫服务状态"
-					disabled />
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['服务类型'].data}}" disabled />
 			</view>
 		</view>
+		<view class="height"></view>
 		<!-- 人数 -->
 		<view wx:if="{{order.orderType == 0}}" class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">人数</view>
@@ -157,7 +158,7 @@
 			</view>
 		</view>
 		<!-- 额外服务 -->
-		<view wx:if="{{order.orderType == 0}}" class="weui-cell padding" style="border:none;">
+		<view wx:if="{{order.orderType == 0 && order.metaMap['额外服务']}}" class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">额外服务</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
 				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
@@ -165,7 +166,7 @@
 			</view>
 		</view>
 		<!-- 每日小时数 -->
-		<view wx:if="{{order.orderType == 1}}" class="weui-cell padding" style="border:none;">
+		<view wx:if="{{order.orderType == 1 && order.metaMap['每日小时数']}}" class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">每日小时数</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
 				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
@@ -173,11 +174,60 @@
 			</view>
 		</view>
 		<!-- 餐费 -->
-		<view wx:if="{{order.orderType == 1}}" class="weui-cell padding" style="border:none;">
-			<view class="weui-cell__hd " style="margin-left:16px;">人数</view>
+		<view wx:if="{{order.orderType == 1 && order.metaMap['餐费']}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">餐费</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
 				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
 					value="{{order.metaMap['餐费'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 家政服务项目 -->
+		<!-- 居室面积 -->
+		<view wx:if="{{order.orderType == 2 && order.metaMap['居室面积']}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">居室面积</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['居室面积'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 项目 -->
+		<view wx:if="{{order.orderType == 2 && order.metaMap['项目']}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">项目</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['项目'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 床单尺寸 -->
+		<view wx:if="{{order.orderType == 2 && order.metaMap['床单尺寸']}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">床单尺寸</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['床单尺寸'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 窗帘厚度 -->
+		<view wx:if="{{order.orderType == 2 && order.metaMap['窗帘厚度']}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">窗帘厚度</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['窗帘厚度'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 保洁时长 -->
+		<view wx:if="{{order.orderType == 2 && order.metaMap['保洁时长']}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">保洁时长</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['保洁时长'].data}}" disabled />
+			</view>
+		</view>
+		<!-- 保洁频率 -->
+		<view wx:if="{{order.orderType == 2 && order.metaMap['保洁频率']}}" class="weui-cell padding" style="border:none;">
+			<view class="weui-cell__hd " style="margin-left:16px;">保洁频率</view>
+			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.metaMap['保洁频率'].data}}" disabled />
 			</view>
 		</view>
 		<view class="height"></view>
@@ -202,6 +252,6 @@
 	<view class="payment">
 		<button wx:if="{{order.status == 0}}" class="cancel" bindtap="cancelOrder">取消</button>
 		<button bindtap="{{!payButtonClicked?'payOrder':''}}" wx:if="{{order.status == 1}}" class="Btn">去支付</button>
-		<button wx:if="{{!order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ" class="Btn">评价</button>
+		<button wx:if="{{order.status == 4 && !order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ" class="Btn">评价</button>
 	</view>
 </view>

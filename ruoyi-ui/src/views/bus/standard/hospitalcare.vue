@@ -8,7 +8,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['bus:care:add']"
+          v-hasPermi="['bus:standard:hospitalcare:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -19,7 +19,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['bus:care:edit']"
+          v-hasPermi="['bus:standard:hospitalcare:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -30,7 +30,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['bus:care:remove']"
+          v-hasPermi="['bus:standard:hospitalcare:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -40,7 +40,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['bus:care:export']"
+          v-hasPermi="['bus:standard:hospitalcare:export']"
         >导出</el-button>
       </el-col>
     </el-row>
@@ -61,14 +61,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['bus:care:edit']"
+            v-hasPermi="['bus:standard:hospitalcare:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['bus:care:remove']"
+            v-hasPermi="['bus:standard:hospitalcare:remove']"
           >删除</el-button>
         </template>
       </el-table-column>

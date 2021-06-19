@@ -60,17 +60,7 @@ App({
     })
   },
   globalData: {
-    //appid
-    appid: config.appid,
-    //后台基础路径
-    backBaseUrl: config.backBaseUrl,
-    //接口基础路径接口
-    apiBaseUrl: config.apiBaseUrl,
     //是否登录
     isLogin: false,
-    //openId
-    openId: null,
-    //sessionKey
-    sessionKey: null,
   }
 })

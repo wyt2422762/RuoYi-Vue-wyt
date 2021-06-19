@@ -48,10 +48,10 @@
         <view class="grxx">联系客服</view>
       </view>
       <!-- 退款记录 -->
-      <view class="vw" bindtap="goto" data-url="../TKLB/TKLB">
+      <!-- <view class="vw" bindtap="goto" data-url="../TKLB/TKLB">
         <view class="tu"><image src="../../img/4.5.png"></image></view>
         <view class="grxx">退款记录</view>
-      </view>
+      </view> -->
     </view>
   </view>
 </view>

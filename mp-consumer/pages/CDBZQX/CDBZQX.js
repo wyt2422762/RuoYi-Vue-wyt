@@ -171,6 +171,13 @@ Page({
 
     //这里处理meta内容
     let meta = []
+    if(that.data.type.name){
+      let mta = {
+        label: '服务类型',
+        data: that.data.type.name
+      }
+      meta.push(mta)
+    }
     //项目
     if(that.data.works_labelStr && that.data.works_labelStr.length > 0){
       let mta = {

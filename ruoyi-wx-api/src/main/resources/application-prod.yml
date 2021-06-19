@@ -88,13 +88,22 @@ spring:
 wx:
   miniapp:
     configs:
-      - appid: wxfaadeb9cabd5d5fa
-        secret: 8d08af025de6481c414e7a5c5d7b264f
+      - appid: wx46ec2c2610591c41
+        secret: 29baabdf33b9fefd89c64c8b51719543
+        token: 456
+        aesKey: 789
+        msgDataFormat: JSON
+
+      - appid: wxe8fb45f5ee29f354
+        secret: ea2ebaa0fda455cf87557c63a4d12089
         token: 456
         aesKey: 789
         msgDataFormat: JSON
   pay:
-    appId: wxfaadeb9cabd5d5fa
-    mchId: #微信支付商户号
-    mchKey: #微信支付商户密钥
-    keyPath: # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+    appId: wx46ec2c2610591c41
+    #微信支付商户号
+    mchId: 1605325081
+    #微信支付商户密钥
+    mchKey: fdkj2021fdkj2021fdkj2021fdkj2021
+    # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+    keyPath:

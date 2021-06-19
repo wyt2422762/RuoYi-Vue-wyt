@@ -11,6 +11,10 @@ import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.ruoyi.bus.service.IOrderService;
+import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.enums.OperatorType;
+import com.ruoyi.enm.OrderStatusEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +33,6 @@ import java.util.Date;
 @RestController
 @RequestMapping("/wx/{appId}/pay")
 public class PayController {
-
-    //未支付
-    private final String STATUS_UNPAID = "1";
-    //已支付
-    private final String STATUS_PAID = "2";
-
 
     @Autowired
     private WxPayService wxPayService;
@@ -173,19 +171,20 @@ public class PayController {
     }
 
     @ApiOperation(value = "支付回调通知处理")
-    @PreAuthorize("hasAuthority('consumer') or hasAuthority('nurse')")
-    @PostMapping("/notify/order")
+    //@PreAuthorize("hasAuthority('consumer') or hasAuthority('nurse')")
+    @RequestMapping("/notify/order")
+    @Log(title="评价订单", operatorType = OperatorType.CONSUMER, businessType = BusinessType.UPDATE)
     public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayException {
         final WxPayOrderNotifyResult notifyResult = this.wxPayService.parseOrderNotifyResult(xmlData);
         // TODO 根据自己业务场景需要构造返回对象
         String outTradeNo = notifyResult.getOutTradeNo();
-        orderService.updateOrderPayStatus(outTradeNo, STATUS_UNPAID, STATUS_PAID);
+        orderService.updateOrderPayStatus(outTradeNo, OrderStatusEnum.WZF.getValue(), OrderStatusEnum.YZF.getValue());
         return WxPayNotifyResponse.success("成功");
     }
 
     @ApiOperation(value = "退款回调通知处理")
-    @PreAuthorize("hasAuthority('consumer') or hasAuthority('nurse')")
-    @PostMapping("/notify/refund")
+    //@PreAuthorize("hasAuthority('consumer') or hasAuthority('nurse')")
+    @RequestMapping("/notify/refund")
     public String parseRefundNotifyResult(@RequestBody String xmlData) throws WxPayException {
         final WxPayRefundNotifyResult result = this.wxPayService.parseRefundNotifyResult(xmlData);
         // TODO 根据自己业务场景需要构造返回对象
@@ -194,7 +193,7 @@ public class PayController {
 
     @ApiOperation(value = "扫码支付回调通知处理")
     @PreAuthorize("hasAuthority('consumer') or hasAuthority('nurse')")
-    @PostMapping("/notify/scanpay")
+    @RequestMapping("/notify/scanpay")
     public String parseScanPayNotifyResult(String xmlData) throws WxPayException {
         final WxScanPayNotifyResult result = this.wxPayService.parseScanPayNotifyResult(xmlData);
         // TODO 根据自己业务场景需要构造返回对象

@@ -11,6 +11,7 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.validation.group.CreateGroup;
 import com.ruoyi.common.validation.group.EditGroup;
+import com.ruoyi.enm.OrderStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -105,17 +106,50 @@ public class OrderController extends BaseController {
      * 派遣订单
      */
     @PreAuthorize("@ss.hasPermi('bus:order:edit')")
-    @Log(title = "订单", businessType = BusinessType.DELETE)
+    @Log(title = "派遣订单", businessType = BusinessType.DELETE)
     @PutMapping("/{orderNo}/dispatch")
     public AjaxResult dispatch(@PathVariable Long orderNo)
     {
         //1. 查询order
         Order order = orderService.selectOrderById(orderNo);
         //2. 修改order的状态为1 未支付
-        order.setStatus("1");
+        order.setStatus(OrderStatusEnum.WZF.getValue());
         orderService.updateOrder(order);
         //3. 返回数据
         return AjaxResult.success("派遣成功");
     }
 
+    /**
+     * 订单服务中
+     */
+    @PreAuthorize("@ss.hasPermi('bus:order:edit')")
+    @Log(title = "订单服务中", businessType = BusinessType.DELETE)
+    @PutMapping("/{orderNo}/working")
+    public AjaxResult working(@PathVariable Long orderNo)
+    {
+        //1. 查询order
+        Order order = orderService.selectOrderById(orderNo);
+        //2. 修改order的状态为3 服务中
+        order.setStatus(OrderStatusEnum.FWZ.getValue());
+        orderService.updateOrder(order);
+        //3. 返回数据
+        return AjaxResult.success("服务中成功");
+    }
+
+    /**
+     * 订单完成
+     */
+    @PreAuthorize("@ss.hasPermi('bus:order:edit')")
+    @Log(title = "订单完成", businessType = BusinessType.DELETE)
+    @PutMapping("/{orderNo}/done")
+    public AjaxResult done(@PathVariable Long orderNo)
+    {
+        //1. 查询order
+        Order order = orderService.selectOrderById(orderNo);
+        //2. 修改order的状态为4 已完成
+        order.setStatus(OrderStatusEnum.YWC.getValue());
+        orderService.updateOrder(order);
+        //3. 返回数据
+        return AjaxResult.success("已完成成功");
+    }
 }

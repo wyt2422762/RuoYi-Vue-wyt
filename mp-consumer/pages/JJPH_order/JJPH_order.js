@@ -53,23 +53,13 @@ Page({
   //额外服务变化
   extraChange(e) {
     let that = this
+    debugger;
     let index = that.data.extras.indexOf(e.detail.value)
     index === -1 ? that.data.extras.push(e.detail.value) : that.data.extras.splice(index, 1)
-    if (index === -1) {
-      //选中
-      //算钱
-      that.data.extraMoney += (that.data.extraMap[e.detail.value].money - 0)
-      that.data.order.money += (that.data.extraMap[e.detail.value].money - 0)
-    } else {
-      //取消
-      //算钱
-      that.data.order.money -= (that.data.extraMap[e.detail.value].money - 0)
-      that.data.extraMoney -= (that.data.extraMap[e.detail.value].money - 0)
-    }
     that.setData({
-      extras: that.data.extras,
-      'order.money': that.data.order.money
+      extras: that.data.extras
     })
+    that.calcMoney()
   },
   //日期变化
   bindDateChange: function (e) {
@@ -177,7 +167,14 @@ Page({
   //计算钱
   calc(standard, month) {
     let that = this
-    return (standard.money == null ? 0 : standard.money) * month + (standard.deposit == null ? 0 : standard.deposit) + (that.data.extraMoney ? that.data.extraMoney : 0)
+    //额外服务
+    let extraMoney = 0
+    if(that.data.extras && that.data.extras.length > 0){
+      for(let i = 0; i < that.data.extras.length; i++){
+        extraMoney += (that.data.extraMap[that.data.extras[i]].money - 0)
+      }
+    }
+    return (standard.money == null ? 0 : standard.money) * month + (standard.deposit == null ? 0 : standard.deposit) + extraMoney
   },
   //跳转
   goto(e) {
@@ -203,6 +200,14 @@ Page({
 
     //这里处理meta内容
     let meta = []
+    //服务类型
+    if(that.data.type.name){
+      let mta = {
+        label: '服务类型',
+        data: that.data.type.name
+      }
+      meta.push(mta)
+    }
     //人数
     if (that.data.personNum[that.data.personNumIndex]) {
       let personNum = that.data.personNum[that.data.personNumIndex].dictValue

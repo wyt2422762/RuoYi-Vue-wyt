@@ -33,7 +33,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['standard:extra:add']"
+          v-hasPermi="['bus:standard:extra:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -44,7 +44,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['standard:extra:edit']"
+          v-hasPermi="['bus:standard:extra:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -55,7 +55,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['standard:extra:remove']"
+          v-hasPermi="['bus:standard:extra:remove']"
         >删除</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -74,14 +74,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['standard:extra:edit']"
+            v-hasPermi="['bus:standard:extra:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['standard:extra:remove']"
+            v-hasPermi="['bus:standard:extra:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
