@@ -5,48 +5,35 @@ package com.ruoyi.enm;
  *
  * @author wyt
  */
-public enum OrderStatusEnum {
+public class OrderStatusEnum {
 
     /**
      * 未派遣
      */
-    WPQ("未派遣", "0"),
+    public static final String WPQ = "0";
     /**
      * 未支付
      */
-    WZF("未支付", "1"),
+    public static final String WZF = "1";
     /**
      * 已支付
      */
-    YZF("已支付", "2"),
+    public static final String YZF = "2";
     /**
      * 服务中
      */
-    FWZ("服务中", "3"),
+    public static final String FWZ = "3";
     /**
      * 已完成
      */
-    YWC("已完成", "4"),
+    public static final String YWC = "4";
     /**
      * 已取消
      */
-    YQX("已取消", "5"),
+    public static final String YQX = "5";
     /**
      * 已退款
      */
-    YTK("已退款", "6");
+    public static final String YTK = "6";
 
-    private String name;
-    private String value;
-
-    OrderStatusEnum(String name, String value) {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getValue() {
-        return value;
-    }
 }

@@ -178,7 +178,7 @@ public class PayController {
         final WxPayOrderNotifyResult notifyResult = this.wxPayService.parseOrderNotifyResult(xmlData);
         // TODO 根据自己业务场景需要构造返回对象
         String outTradeNo = notifyResult.getOutTradeNo();
-        orderService.updateOrderPayStatus(outTradeNo, OrderStatusEnum.WZF.getValue(), OrderStatusEnum.YZF.getValue());
+        orderService.updateOrderPayStatus(outTradeNo, OrderStatusEnum.WZF, OrderStatusEnum.YZF);
         return WxPayNotifyResponse.success("成功");
     }
 

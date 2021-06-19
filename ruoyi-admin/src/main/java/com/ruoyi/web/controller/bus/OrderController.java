@@ -113,7 +113,7 @@ public class OrderController extends BaseController {
         //1. 查询order
         Order order = orderService.selectOrderById(orderNo);
         //2. 修改order的状态为1 未支付
-        order.setStatus(OrderStatusEnum.WZF.getValue());
+        order.setStatus(OrderStatusEnum.WZF);
         orderService.updateOrder(order);
         //3. 返回数据
         return AjaxResult.success("派遣成功");
@@ -130,7 +130,7 @@ public class OrderController extends BaseController {
         //1. 查询order
         Order order = orderService.selectOrderById(orderNo);
         //2. 修改order的状态为3 服务中
-        order.setStatus(OrderStatusEnum.FWZ.getValue());
+        order.setStatus(OrderStatusEnum.FWZ);
         orderService.updateOrder(order);
         //3. 返回数据
         return AjaxResult.success("服务中成功");
@@ -147,7 +147,7 @@ public class OrderController extends BaseController {
         //1. 查询order
         Order order = orderService.selectOrderById(orderNo);
         //2. 修改order的状态为4 已完成
-        order.setStatus(OrderStatusEnum.YWC.getValue());
+        order.setStatus(OrderStatusEnum.YWC);
         orderService.updateOrder(order);
         //3. 返回数据
         return AjaxResult.success("已完成成功");
