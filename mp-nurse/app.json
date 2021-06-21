@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/WD/WD",
+    
     "pages/FW_YYPH/FW_YYPH",
     "pages/DDXQ/DDXQ",
     "pages/login/login",  
@@ -7,7 +9,6 @@
     "pages/FW_WSQJ/FW_WSQJ",
     "pages/FW_JJPH/FW_JJPH",
     "pages/FW_CDBZQX/FW_CDBZQX", 
-    "pages/WD/WD",
     "pages/index/index",
     "pages/logs/logs",
     "pages/FW/FW"
