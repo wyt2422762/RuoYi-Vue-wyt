@@ -4,8 +4,6 @@ import errorCode from './errCode.js'
 
 const config = require("./config")
 
-// const app = getApp()
-
 // 创建实例
 const service = dov.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
@@ -47,13 +45,17 @@ service.interceptors.response.use(res => {
     return res.data
   } else {
     console.log('错误')
-    return Promise.reject('error')
+    return Promise.reject(new Error(msg))
   }
 }, error => {
   console.log('err' + error)
   return Promise.reject(error)
 })
 
+function allReq(funcs){
+  return dov.all(funcs)
+}
+
 export {
-  service
+  service, allReq
 }

@@ -5,8 +5,8 @@ import {
 
 //app.js
 App({
-  onLaunch: function () {
-    //console.log('app onLanuch')
+  onShow: function () {
+    console.log('app show')
     let that = this
     // 展示本地存储能力
     let user = wx.getStorageSync('user')
@@ -14,38 +14,59 @@ App({
       that.globalData.isLogin = true
     }
     // 登录
-    wx.checkSession({
+    // wx.checkSession({
+    //   success: res => {
+    //     console.log('登录状态正常')
+    //   },
+    //   fail: res => {
+    //     console.log('登录状态不正常')
+    //     // 登录
+    //     wx.login({
+    //       success: res => {
+    //         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //         service.get('/base/getOpenId', {
+    //           notAddToken: true,
+    //           data: {
+    //             code: res.code
+    //           }
+    //         }).then(res => {
+    //           wx.setStorageSync('openid', res.data['openid'])
+    //           wx.setStorageSync('sessionKey', res.data['sessionKey'])
+    //         })
+    //       }
+    //     })
+    //   }
+    // })
+
+    // 登录
+    wx.login({
       success: res => {
-        //console.log('登录状态正常')
-      },
-      fail: res => {
-        //console.log('登录状态不正常')
-        // 登录
-        wx.login({
-          success: res => {
-            // 发送 res.code 到后台换取 openId, sessionKey, unionId
-            service.get('/base/getOpenId', {
-              notAddToken: true,
-              data: {
-                code: res.code
-              }
-            }).then(res => {
-              wx.setStorageSync('openid', res.data['openid'])
-              wx.setStorageSync('sessionKey', res.data['sessionKey'])
-            })
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        service.get('/base/getOpenId', {
+          notAddToken: true,
+          data: {
+            code: res.code
           }
+        }).then(res => {
+          wx.setStorageSync('openid', res.data['openid'])
+          wx.setStorageSync('sessionKey', res.data['sessionKey'])
         })
       }
     })
+
     //获取用户信息
     if (user) {
       that.getUserInfo()
     }
     //验证token是否有效，无效的话重新登录后台
-    
+    let token = wx.getStorageSync('token')
+    if(token){
+      that.validateToken(token)
+    }
   },
   //判断用户信息是否完善
   isUserComplete(user) {
+    console.log('isUserComplete')
     let that = this
     if (!user.name || !user.addr || !user.emergencyContactPhone || !user.emergencyContactName) {
       wx.setStorageSync('userInfoComplete', false)
@@ -68,6 +89,25 @@ App({
     }).catch(error => {
       console.log('读取个人信息失败')
     })
+  },
+  //验证token是否有效
+  validateToken(token){
+    service.get('/base/validateToken/' + token, {
+      notAddToken: true,
+    }).then(res => {
+      let validate = res.data
+      if(!validate){
+        //token失效，需要重新登陆
+        wx.clearStorageSync('token')
+        wx.clearStorageSync('user')
+        wx.clearStorageSync('phoneNumber')
+        wx.clearStorageSync('isLogin')
+        that.globalData.isLogin = false
+      }
+    })
+  },
+  //登陆
+  login(e){
   },
   globalData: {
     //appid

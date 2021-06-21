@@ -40,7 +40,6 @@ Page({
   },
   onLoad: function (e) {
     let that = this
-    that.data.queryParams_jxz.nurseId = wx.getStorageSync('user').nurseId
     allReq([getDicts("bus_order_type"), getDicts("bus_order_status")]).then(res => {
       that.data.orderTypeOptions = res[0].data
       that.data.orderStatusOptions = res[1].data
@@ -48,6 +47,7 @@ Page({
   },
   onShow() {
     let that = this
+    that.data.queryParams_jxz.nurseId = wx.getStorageSync('user').nurseId
     that.data.queryParams_jxz.pageNum = 1
     //查询订单列表
     that.getOrderList_jxz()

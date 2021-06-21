@@ -142,6 +142,7 @@ public class BasicController {
                     consumer = new Consumer();
                     consumer.setPhonenumber(phoneNumber);
                     consumer.setOpenId(openId);
+                    consumer.setStatus("0");
                     consumerService.insertConsumer(consumer);
                 } else {
                     if(!openId.equals(consumer.getOpenId())){
@@ -177,6 +178,17 @@ public class BasicController {
         }
 
         return null;
+    }
+
+    /**
+     * 验证token是否有效
+     * @param token token
+     * @return true 有效 false 无效
+     */
+    @GetMapping("/validateToken/{token}")
+    public AjaxResult validateToken(@PathVariable String token){
+        boolean res = tokenService.validateToken(token);
+        return AjaxResult.success(res);
     }
 
 }

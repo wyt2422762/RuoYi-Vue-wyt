@@ -5,6 +5,8 @@ import {
 
 let iView = require('../../utils/iViewUtil.js')
 
+const app = getApp()
+
 Page({
   /**
    * 页面的初始数据
@@ -77,6 +79,7 @@ Page({
       })
       //更新缓存的用户信息
       wx.setStorageSync('user', consumer)
+      app.isUserComplete(consumer)
       iView.toast.success('保存成功')
     }).catch(err => {
       //loading
