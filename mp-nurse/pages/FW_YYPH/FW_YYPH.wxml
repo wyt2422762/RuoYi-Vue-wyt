@@ -13,7 +13,7 @@
 </i-tabs>
 
 <view class="aui-palace" wx:if="{{currentTab == 0}}">
-	<view wx:for="{{orderList_jxz}}" wx:for-item="order" wx:key="orderNo" url="../DDXQ/DDXQ?orderNo={{order.orderNo}}"
+	<navigator wx:for="{{orderList_jxz}}" wx:for-item="order" wx:key="orderNo" url="../DDXQ/DDXQ?orderNo={{order.orderNo}}"
 				hover-class="none">
 				<view class="aui-palace-one">
 					<text class="name">{{order.orderNo}}</text>
@@ -73,7 +73,7 @@
 						<view class="contacts" style="font-size:14px;">{{order.addr}}</view>
 					</view>
 				</view>
-			</view>
+			</navigator>
 
 			<button loading="{{more_jxz.loading}}" catchtap="more_jxz">{{more.loadText}}</button>
 </view>

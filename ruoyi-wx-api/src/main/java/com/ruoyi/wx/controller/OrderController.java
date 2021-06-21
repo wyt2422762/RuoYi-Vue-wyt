@@ -12,6 +12,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.enums.OperatorType;
 import com.ruoyi.common.utils.OrderNoUtil;
 import com.ruoyi.common.validation.group.CreateGroup;
+import com.ruoyi.enm.OrderStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -145,5 +146,19 @@ public class OrderController extends BaseController {
         evaluation.setConsumerId(order.getConsumerId());
         evaluationService.insertEvaluation(evaluation);
         return AjaxResult.success("订单评价成功");
+    }
+
+
+    /**
+     * 完成订单
+     * @param orderNo 订单编号
+     * @return 结果
+     */
+    @PreAuthorize("hasAuthority('nurse')")
+    @PutMapping(value = "/done/{orderNo}")
+    @Log(title="取消订单", operatorType = OperatorType.NURSE, businessType = BusinessType.UPDATE)
+    public AjaxResult doneOrder(@PathVariable Long orderNo){
+        int res = orderService.updateOrderPayStatus(orderNo + "", OrderStatusEnum.FWZ, OrderStatusEnum.YWC);
+        return AjaxResult.success(res);
     }
 }
