@@ -95,6 +95,22 @@
             @click="handleDispatch(scope.row)"
             v-hasPermi="['bus:evaluation:edit']"
           >派遣</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            v-if="scope.row.status == 2"
+            icon="el-icon-chat-line-square"
+            @click="handleWorking(scope.row)"
+            v-hasPermi="['bus:evaluation:edit']"
+          >启动</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            v-if="scope.row.status == 3"
+            icon="el-icon-chat-line-square"
+            @click="handleDone(scope.row)"
+            v-hasPermi="['bus:evaluation:edit']"
+          >完成</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -198,7 +214,7 @@
 </template>
 
 <script>
-import {listOrder, getOrder, addOrder, updateOrder, exportOrder, getEvaluateData, dispatchOrder} from "@/api/bus/order";
+import {listOrder, getOrder, addOrder, updateOrder, exportOrder, getEvaluateData, dispatchOrder, workingOrder, doneOrder} from "@/api/bus/order";
 
 export default {
   name: "Order",
@@ -341,6 +357,32 @@ export default {
       }).then(() => {
         this.getList();
         this.msgSuccess("派遣成功");
+      });
+    },
+    //启动订单
+    handleWorking(row){
+      this.$confirm('是否确认启动该订单?', "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(function() {
+        return workingOrder(row.orderNo);
+      }).then(() => {
+        this.getList();
+        this.msgSuccess("启动成功");
+      });
+    },
+    //完成订单
+    handleDone(row){
+      this.$confirm('是否确认完成该订单?', "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(function() {
+        return doneOrder(row.orderNo);
+      }).then(() => {
+        this.getList();
+        this.msgSuccess("启动成功");
       });
     },
     /** 提交按钮 */

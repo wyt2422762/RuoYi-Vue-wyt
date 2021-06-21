@@ -67,3 +67,20 @@ export function dispatchOrder(orderNo){
     method: 'put'
   })
 }
+
+//启动订单
+export function workingOrder(orderNo){
+  return request({
+    url: '/bus/order/' + orderNo + '/working' ,
+    method: 'put'
+  })
+}
+
+//完成订单
+export function doneOrder(orderNo){
+  return request({
+    url: '/bus/order/' + orderNo + '/done' ,
+    method: 'put'
+  })
+}
+
