@@ -27,7 +27,7 @@ Page({
       orderByColumn: 'create_time',
       isAsc: 'desc',
       nurseId: null,
-      status: 0
+      status: 3
     },
     //分页参数(进行中)
     page_jxz: {
