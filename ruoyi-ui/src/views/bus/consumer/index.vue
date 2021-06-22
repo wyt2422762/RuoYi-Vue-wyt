@@ -272,6 +272,7 @@
                   :key="dict.dictValue"
                   :label="dict.dictLabel"
                   :value="dict.dictValue"
+                  clearable
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -284,6 +285,7 @@
                   :key="dict.dictValue"
                   :label="dict.dictLabel"
                   :value="dict.dictValue"
+                  clearable
                 ></el-option>
               </el-select>
             </el-form-item>
