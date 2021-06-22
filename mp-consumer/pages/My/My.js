@@ -5,6 +5,7 @@ import {
 
 let gto = require('../../utils/goto.js')
 const config = require("../../utils/config.js")
+let iView = require('../../utils/iViewUtil.js')
 
 const app = getApp()
 
@@ -56,6 +57,8 @@ Page({
         that.setData({
           isLogin: true
         })
+      }).catch(err => {
+        iView.toast.error('登录失败')
       })
     })
   },

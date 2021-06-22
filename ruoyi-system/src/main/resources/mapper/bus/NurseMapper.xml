@@ -136,7 +136,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             n.phonenumber = #{phonenumber}
             and n.delFlag = '0'
-            and n.status = '0'
         </where>
     </select>
 

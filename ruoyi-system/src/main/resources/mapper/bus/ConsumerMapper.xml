@@ -157,7 +157,6 @@
         <where>
             c.phonenumber = #{phonenumber}
             and c.delFlag = '0'
-            and c.status = '0'
         </where>
     </select>
 

@@ -1,6 +1,8 @@
 <wxs src='../../utils/nurse.wxs' module='filters' />
 <wxs src='../../utils/phone.wxs' module='phoneF' />
 
+<i-toast id="toast" />
+
 <view class="container">
 	<view class="aui-head-chang">
 		<!-- 头部 -->
