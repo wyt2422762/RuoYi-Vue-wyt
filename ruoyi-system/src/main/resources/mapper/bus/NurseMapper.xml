@@ -54,7 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectNurseList" parameterType="com.ruoyi.bus.domain.Nurse" resultMap="nurseResult">
         <include refid="selectNurseVo"/>
-        <where>  
+        <where>
+            and n.delFlag = '0'
             <if test="deptId != null "> and n.deptId = #{deptId}</if>
             <if test="name != null  and name != ''"> and n.`name` like concat('%', #{name}, '%')</if>
             <if test="age != null "> and n.age = #{age}</if>
@@ -142,6 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectNurseList_mp" parameterType="com.ruoyi.bus.domain.Nurse" resultMap="nurseResult">
         <include refid="selectNurseVo"/>
         <where>
+            and n.delFlag = '0'
             <if test="deptId != null "> and n.deptId = #{deptId}</if>
             <if test="name != null  and name != ''"> and n.`name` like concat('%', #{name}, '%')</if>
             <if test="age != null "> and n.age = #{age}</if>

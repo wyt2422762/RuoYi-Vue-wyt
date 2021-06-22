@@ -16,6 +16,10 @@
         <result property="emergencyContactPhone" column="emergencyContactPhone"/>
         <result property="medicalHistoryNow" column="medicalHistoryNow"/>
         <result property="medicalHistoryHis" column="medicalHistoryHis"/>
+
+        <result property="type" column="type"/>
+        <result property="service" column="serviceType"/>
+
         <result property="delFlag" column="delFlag"/>
         <result property="status" column="status"/>
 
@@ -42,6 +46,8 @@
                c.emergencyContactPhone,
                c.medicalHistoryNow,
                c.medicalHistoryHis,
+               c.type,
+               c.serviceType,
                c.avatar,
                c.status,
                c.delFlag,
@@ -100,12 +106,12 @@
         insert into consumer(
             consumerId, `name`, email, phonenumber, sex, age, birth, addr,
             emergencyContactName, emergencyContactPhone, medicalHistoryNow,
-            medicalHistoryHis, avatar, `status`, create_by, create_time,
-            remark, openId)
+            medicalHistoryHis, `type`, serviceType, avatar, `status`, create_by,
+            create_time, remark, openId)
         values (
             #{consumerId}, #{name}, #{email}, #{phonenumber}, #{sex}, #{age}, #{birth},
             #{addr}, #{emergencyContactName}, #{emergencyContactPhone}, #{medicalHistoryNow},
-            #{medicalHistoryHis}, #{avatar}, #{status}, #{createBy},
+            #{medicalHistoryHis}, #{type}, #{serviceType}, #{avatar}, #{status}, #{createBy},
             sysdate(), #{remark}, #{openId}
         )
     </insert>
@@ -117,9 +123,9 @@
             sex = #{sex}, age = #{age}, birth = #{birth}, addr = #{addr},
             emergencyContactName = #{emergencyContactName}, emergencyContactPhone = #{emergencyContactPhone},
             medicalHistoryNow = #{medicalHistoryNow}, medicalHistoryHis = #{medicalHistoryHis},
-            avatar = #{avatar}, `status` = #{status},
-            update_by = #{updateBy}, update_time = sysdate(), remark = #{remark},
-            openId = #{openId}
+            `type` = #{type}, service = #{serviceType},
+            avatar = #{avatar}, `status` = #{status}, update_by = #{updateBy},
+            update_time = sysdate(), remark = #{remark}, openId = #{openId}
         </set>
         <where>
             consumerId = #{consumerId}

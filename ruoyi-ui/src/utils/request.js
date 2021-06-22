@@ -61,7 +61,7 @@ service.interceptors.response.use(res => {
         }
       ).then(() => {
         store.dispatch('LogOut').then(() => {
-          location.href = '/';
+          location.href = process.env.VUE_APP_CONTEXT_PATH
         })
       })
     } else if (code === 500) {

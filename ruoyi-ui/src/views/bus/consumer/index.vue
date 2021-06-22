@@ -264,6 +264,32 @@
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="12">
+            <el-form-item label="老人类型">
+              <el-select v-model="form.type" placeholder="请选择">
+                <el-option
+                  v-for="dict in typeOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="服务类型">
+              <el-select v-model="form.serviceType" placeholder="请选择">
+                <el-option
+                  v-for="dict in serviceTypeOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="24">
             <el-form-item label="现病史" prop="medicalHistoryNow">
               <el-input v-model="form.medicalHistoryNow" type="textarea" placeholder="请输入内容"></el-input>
@@ -348,6 +374,10 @@ export default {
       postOptions: [],
       // 角色选项
       roleOptions: [],
+      //老人类型字典
+      typeOptions: [],
+      //服务类型字典
+      serviceTypeOptions: [],
       // 表单参数
       form: {},
       defaultProps: {
@@ -432,6 +462,12 @@ export default {
     this.getDicts("sys_user_sex").then(response => {
       this.sexOptions = response.data;
     });
+    this.getDicts("bus_laoren_fenlei").then(response => {
+      this.typeOptions = response.data;
+    });
+    this.getDicts("bus_laoren_type").then(response => {
+      this.serviceTypeOptions = response.data;
+    });
   },
   methods: {
     // 性别字典翻译
@@ -482,6 +518,8 @@ export default {
         birth:undefined,
         medicalHistoryNow: undefined,
         medicalHistoryHis: undefined,
+        type: undefined,
+        serviceType: undefined,
         remark: undefined,
       };
       this.resetForm("form");

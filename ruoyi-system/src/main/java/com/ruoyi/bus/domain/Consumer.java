@@ -5,6 +5,7 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.validation.group.CreateGroup;
 import com.ruoyi.common.validation.group.EditGroup;
+import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author wyt
  */
+@Data
 public class Consumer extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -103,6 +105,18 @@ public class Consumer extends BaseEntity {
     private String idNo;
 
     /**
+     * 老人分类
+     */
+    @Excel(name = "老人分类")
+    private String type;
+
+    /**
+     * 老人服务类型
+     */
+    @Excel(name = "老人分类")
+    private String serviceType;
+
+    /**
      * 删除标志（0代表存在 2代表删除）
      */
     private String delFlag;
@@ -120,140 +134,4 @@ public class Consumer extends BaseEntity {
      * openId
      */
     private String openId;
-
-    public Long getConsumerId() {
-        return consumerId;
-    }
-
-    public void setConsumerId(Long consumerId) {
-        this.consumerId = consumerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getBirth() {
-        return birth;
-    }
-
-    public void setBirth(String birth) {
-        this.birth = birth;
-    }
-
-    public String getAddr() {
-        return addr;
-    }
-
-    public void setAddr(String addr) {
-        this.addr = addr;
-    }
-
-    public String getEmergencyContactName() {
-        return emergencyContactName;
-    }
-
-    public void setEmergencyContactName(String emergencyContactName) {
-        this.emergencyContactName = emergencyContactName;
-    }
-
-    public String getEmergencyContactPhone() {
-        return emergencyContactPhone;
-    }
-
-    public void setEmergencyContactPhone(String emergencyContactPhone) {
-        this.emergencyContactPhone = emergencyContactPhone;
-    }
-
-    public String getMedicalHistoryNow() {
-        return medicalHistoryNow;
-    }
-
-    public void setMedicalHistoryNow(String medicalHistoryNow) {
-        this.medicalHistoryNow = medicalHistoryNow;
-    }
-
-    public String getMedicalHistoryHis() {
-        return medicalHistoryHis;
-    }
-
-    public void setMedicalHistoryHis(String medicalHistoryHis) {
-        this.medicalHistoryHis = medicalHistoryHis;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getIdNo() {
-        return idNo;
-    }
-
-    public void setIdNo(String idNo) {
-        this.idNo = idNo;
-    }
-
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
 }

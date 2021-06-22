@@ -107,7 +107,7 @@ Page({
     let that = this
     that.setData({
       'order.consumerId': wx.getStorageSync('user').consumerId,
-      'typr.id': e.typeId,
+      'type.id': e.typeId,
       'type.name': e.typeName
     })
     //1. 修改标题

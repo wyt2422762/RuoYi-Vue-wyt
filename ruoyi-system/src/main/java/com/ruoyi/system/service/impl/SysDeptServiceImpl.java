@@ -186,6 +186,8 @@ public class SysDeptServiceImpl implements ISysDeptService
                 throw new CustomException("部门停用，不允许新增");
             }
             dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
+        } else {
+            dept.setAncestors("0");
         }
         return deptMapper.insertDept(dept);
     }
