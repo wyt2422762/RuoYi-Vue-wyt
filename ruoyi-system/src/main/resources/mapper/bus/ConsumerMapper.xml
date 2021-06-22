@@ -18,7 +18,7 @@
         <result property="medicalHistoryHis" column="medicalHistoryHis"/>
 
         <result property="type" column="type"/>
-        <result property="service" column="serviceType"/>
+        <result property="serviceType" column="serviceType"/>
 
         <result property="delFlag" column="delFlag"/>
         <result property="status" column="status"/>
@@ -123,7 +123,7 @@
             sex = #{sex}, age = #{age}, birth = #{birth}, addr = #{addr},
             emergencyContactName = #{emergencyContactName}, emergencyContactPhone = #{emergencyContactPhone},
             medicalHistoryNow = #{medicalHistoryNow}, medicalHistoryHis = #{medicalHistoryHis},
-            `type` = #{type}, service = #{serviceType},
+            `type` = #{type}, serviceType = #{serviceType},
             avatar = #{avatar}, `status` = #{status}, update_by = #{updateBy},
             update_time = sysdate(), remark = #{remark}, openId = #{openId}
         </set>
