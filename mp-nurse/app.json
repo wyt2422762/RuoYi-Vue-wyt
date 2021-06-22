@@ -64,6 +64,7 @@
     "i-toast": "./component/iView/toast/index",
     "i-load-more": "./component/iView/load-more/index",
     "i-tabs": "./component/iView/tabs/index",
-    "i-tab": "./component/iView/tab/index"
+    "i-tab": "./component/iView/tab/index",
+    "i-modal": "./component/iView/modal/index"
   }
 }

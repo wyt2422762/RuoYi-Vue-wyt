@@ -3,11 +3,14 @@
 <wxs src='../../utils/order.wxs' module='filters' />
 
 <i-toast id="toast" />
-
 <i-spin fix custom wx:if="{{ !hiddenLoading }}">
 	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
 	<view>加载中</view>
 </i-spin>
+<i-modal i-class="im" title="取消确认" visible="{{ showCancelOrderConfirm }}" bind:ok="cancelOrder" bind:cancel="hideCancelOrder">
+    <view>确认要取消该订单</view>
+</i-modal>
+
 
 <view class="page" style="border:none;">
 	<view class="weui-cells weui-cells_after-title" style="border:none;padding-bottom:35px;">
@@ -250,7 +253,7 @@
 	</view>
 
 	<view class="payment">
-		<button wx:if="{{order.status == 0}}" class="cancel" bindtap="cancelOrder">取消</button>
+		<button wx:if="{{order.status == 0}}" class="cancel" bindtap="showCancelOrder">取消</button>
 		<button bindtap="{{!payButtonClicked?'payOrder':''}}" wx:if="{{order.status == 1}}" class="Btn">去支付</button>
 		<button wx:if="{{order.status == 4 && !order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ" class="Btn">评价</button>
 	</view>

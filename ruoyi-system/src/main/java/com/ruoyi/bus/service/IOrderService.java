@@ -60,13 +60,22 @@ public interface IOrderService {
     int deleteOrderById(Long orderno);
 
     /**
-     * 更新订单支付状态
+     * 支付成功
+     * @param orderno
+     * @param statusOld
+     * @param statusNew
+     * @return
+     */
+    int paySuccess(String orderno, String statusOld, String statusNew);
+
+    /**
+     * 更新订单状态
      * @param orderNo 订单号
      * @param statusOld 旧状态
      * @param statusNew 新状态
      * @return 结果
      */
-    int updateOrderPayStatus(String orderNo, String statusOld, String statusNew);
+    int updateOrderStatus(String orderNo, String statusOld, String statusNew);
 
     /**
      * 查询订单列表(小程序使用)

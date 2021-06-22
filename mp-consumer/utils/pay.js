@@ -15,7 +15,6 @@ const config = require("./config.js")
  */
 export function pay(orderNo, money, successhandler, failHandler) {
   let app = getApp()
-  debugger
   service.post('/pay/createOrder', {
     data: {
       //openid

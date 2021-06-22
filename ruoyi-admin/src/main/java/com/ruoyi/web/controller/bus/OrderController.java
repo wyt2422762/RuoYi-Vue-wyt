@@ -110,7 +110,7 @@ public class OrderController extends BaseController {
     @PutMapping("/{orderNo}/dispatch")
     public AjaxResult dispatch(@PathVariable Long orderNo)
     {
-        int num = orderService.updateOrderPayStatus(orderNo + "", OrderStatusEnum.WPQ, OrderStatusEnum.WZF);
+        int num = orderService.updateOrderStatus(orderNo + "", OrderStatusEnum.WPQ, OrderStatusEnum.WZF);
         //返回数据
         return AjaxResult.success(num > 0 ? "派遣成功": "订单状态改变");
     }
@@ -123,7 +123,7 @@ public class OrderController extends BaseController {
     @PutMapping("/{orderNo}/working")
     public AjaxResult working(@PathVariable Long orderNo)
     {
-        int num = orderService.updateOrderPayStatus(orderNo + "", OrderStatusEnum.YZF, OrderStatusEnum.FWZ);
+        int num = orderService.updateOrderStatus(orderNo + "", OrderStatusEnum.YZF, OrderStatusEnum.FWZ);
         //返回数据
         return AjaxResult.success(num > 0 ? "启动成功": "订单状态改变");
     }
@@ -136,7 +136,7 @@ public class OrderController extends BaseController {
     @PutMapping("/{orderNo}/done")
     public AjaxResult done(@PathVariable Long orderNo)
     {
-        int num = orderService.updateOrderPayStatus(orderNo + "", OrderStatusEnum.FWZ, OrderStatusEnum.YWC);
+        int num = orderService.updateOrderStatus(orderNo + "", OrderStatusEnum.FWZ, OrderStatusEnum.YWC);
         //返回数据
         return AjaxResult.success(num > 0 ? "完成成功": "订单状态改变");
     }

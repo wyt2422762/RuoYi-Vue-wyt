@@ -13,7 +13,6 @@ import { service } from "./request"
  * @param {支付失败回调} failHandler
  */
 export function pay(orderNo, money, successhandler, failHandler) {
-  debugger
   service.post('/pay/createOrder', {
     data: {
       //openid

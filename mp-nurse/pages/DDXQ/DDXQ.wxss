@@ -49,6 +49,7 @@
 
 .payment {
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .weui-cells:after {
@@ -372,4 +373,8 @@ button {
   color: #666;
   background-color: #f5f5f5;
   text-align: left;
+}
+
+.im button {
+  width: 50%!important;
 }

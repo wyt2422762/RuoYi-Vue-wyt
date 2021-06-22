@@ -158,7 +158,7 @@ public class OrderController extends BaseController {
     @PutMapping(value = "/done/{orderNo}")
     @Log(title="取消订单", operatorType = OperatorType.NURSE, businessType = BusinessType.UPDATE)
     public AjaxResult doneOrder(@PathVariable Long orderNo){
-        int res = orderService.updateOrderPayStatus(orderNo + "", OrderStatusEnum.FWZ, OrderStatusEnum.YWC);
+        int res = orderService.updateOrderStatus(orderNo + "", OrderStatusEnum.FWZ, OrderStatusEnum.YWC);
         return AjaxResult.success(res);
     }
 }

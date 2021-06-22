@@ -3,11 +3,13 @@
 <wxs src='../../utils/order.wxs' module='filters' />
 
 <i-toast id="toast" />
-
 <i-spin fix custom wx:if="{{ !hiddenLoading }}">
 	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
 	<view>加载中</view>
 </i-spin>
+<i-modal i-class="im" title="完成确认" visible="{{ showDoneOrderConfirm }}" bind:ok="doneOrder" bind:cancel="hideDoneOrder">
+    <view>确认要将该订单改成完成状态</view>
+</i-modal>
 
 <view class="page" style="border:none;">
 	<view class="weui-cells weui-cells_after-title" style="border:none;padding-bottom:35px;">
@@ -250,6 +252,6 @@
 	</view>
 
 	<view class="payment">
-		<button wx:if="{{order.status == 3}}" class="cancel" bindtap="cancelOrder">订单完成</button>
+		<button wx:if="{{order.status == 0}}" class="cancel" bindtap="showDoneOrder">订单完成</button>
 	</view>
 </view>

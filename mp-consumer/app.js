@@ -8,11 +8,21 @@ App({
   onShow: function () {
     console.log('app show')
     let that = this
-    // 展示本地存储能力
-    let user = wx.getStorageSync('user')
-    if (user) {
+
+    //验证token是否有效，无效的话重新登录后台
+    let token = wx.getStorageSync('token')
+    if(token){
       that.globalData.isLogin = true
+      that.validateToken(token)
+    } else {
+      //token失效，需要重新登陆
+      wx.clearStorageSync('token')
+      wx.clearStorageSync('user')
+      wx.clearStorageSync('phoneNumber')
+      wx.clearStorageSync('isLogin')
+      that.globalData.isLogin = false
     }
+
     // 登录
     // wx.checkSession({
     //   success: res => {
@@ -54,15 +64,6 @@ App({
       }
     })
 
-    //获取用户信息
-    if (user) {
-      that.getUserInfo()
-    }
-    //验证token是否有效，无效的话重新登录后台
-    let token = wx.getStorageSync('token')
-    if(token){
-      that.validateToken(token)
-    }
   },
   //判断用户信息是否完善
   isUserComplete(user) {
@@ -86,12 +87,13 @@ App({
       //更新缓存的个人信息
       wx.setStorageSync('user', res.data)
       that.isUserComplete(res.data)
-    }).catch(error => {
-      console.log('读取个人信息失败')
+    }).catch(err => {
+      console.log('读取个人信息失败', err)
     })
   },
   //验证token是否有效
   validateToken(token){
+    let that = this
     service.get('/base/validateToken/' + token, {
       notAddToken: true,
     }).then(res => {
@@ -103,6 +105,9 @@ App({
         wx.clearStorageSync('phoneNumber')
         wx.clearStorageSync('isLogin')
         that.globalData.isLogin = false
+      } else {
+        //token有效, 更新用户信息
+        that.getUserInfo()
       }
     })
   },

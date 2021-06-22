@@ -90,6 +90,16 @@ public class OrderServiceImpl implements IOrderService {
         return orderMapper.deleteOrderById(orderno);
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int paySuccess(String orderNo, String statusOld, String statusNew) {
+        int res = orderMapper.updateOrderStatus(orderNo, statusOld, statusNew);
+        if(res > 0){
+            orderMapper.updateOrderPayTime(Long.getLong(orderNo));
+        }
+        return res;
+    }
+
     /**
      * 更新订单支付状态
      * @param orderNo 订单号
@@ -99,8 +109,8 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int updateOrderPayStatus(String orderNo, String statusOld, String statusNew) {
-        return orderMapper.updateOrderPayStatus(orderNo, statusOld, statusNew);
+    public int updateOrderStatus(String orderNo, String statusOld, String statusNew) {
+        return orderMapper.updateOrderStatus(orderNo, statusOld, statusNew);
     }
 
     /**
@@ -114,8 +124,6 @@ public class OrderServiceImpl implements IOrderService {
     public int deleteOrderByIds(Long[] ordernos) {
         return orderMapper.deleteOrderByIds(ordernos);
     }
-
-
 
     /**
      * 查询订单列表(小程序使用)

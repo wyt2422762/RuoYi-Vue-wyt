@@ -17,6 +17,8 @@ Page({
   data: {
     //loading
     hiddenLoading: true,
+    //是否显示取消确认
+    showCancelOrderConfirm: false,
     //支付按钮是否点击过
     payButtonClicked: false,
     //订单类型字典
@@ -62,16 +64,42 @@ Page({
       })
     })
   },
+  //显示取消确认
+  showCancelOrder() {
+    this.setData({
+      showCancelOrderConfirm: true
+    })
+  },
+  //隐藏取消确认
+  hideCancelOrder() {
+    this.setData({
+      showCancelOrderConfirm: false
+    })
+  },
   //订单取消
   cancelOrder(e) {
     let that = this
     let orderNo = that.data.order.orderNo
+    //loading
+    that.setData({
+      hiddenLoading: !that.data.hiddenLoading
+    })
     service.put("/order/cancel/" + orderNo, {}).then(res => {
+      //loading
+      that.setData({
+        hiddenLoading: !that.data.hiddenLoading,
+        showCancelOrderConfirm: false
+      })
       iView.toast.success('取消成功')
       wx.navigateBack({
         delta: 1,
       })
     }).catch(err => {
+      //loading
+      that.setData({
+        hiddenLoading: !that.data.hiddenLoading,
+        showCancelOrderConfirm: false
+      })
       iView.toast.error('取消失败')
     })
   },

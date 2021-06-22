@@ -150,9 +150,6 @@ input {
   padding-left: 0;
   padding-right: 0;
 }
-.page-section-ctn{
-
-}
 
 /* widget */
 .btn-area{
@@ -238,4 +235,20 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.icon-load{
+  animation: ani-demo-spin 1s linear infinite;
+}
+
+@keyframes ani-demo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

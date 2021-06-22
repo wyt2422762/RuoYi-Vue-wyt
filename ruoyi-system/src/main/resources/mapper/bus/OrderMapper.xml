@@ -185,13 +185,21 @@
         where orderNo = #{orderNo}
     </select>
 
-    <update id="updateOrderPayStatus">
+    <update id="updateOrderStatus">
         update `order`
         <trim prefix="SET" suffixOverrides=",">
             status = #{statusNew},
-            pay_time = sysdate(),
+            update_time = sysdate(),
         </trim>
         where orderNo = #{orderNo} and status = #{statusOld}
+    </update>
+
+    <update id="updateOrderPayTime" parameterType="java.lang.Long">
+        update `order`
+        <trim prefix="SET" suffixOverrides=",">
+            pay_time = sysdate(),
+        </trim>
+        where orderNo = #{orderNo}
     </update>
 
 </mapper>

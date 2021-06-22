@@ -83,5 +83,12 @@ public interface OrderMapper {
      * @param statusNew 新状态
      * @return 结果
      */
-    int updateOrderPayStatus(@Param("orderNo") String orderNo, @Param("statusOld") String statusOld, @Param("statusNew") String statusNew);
+    int updateOrderStatus(@Param("orderNo") String orderNo, @Param("statusOld") String statusOld, @Param("statusNew") String statusNew);
+
+    /**
+     * 更新订单支付时间
+     * @param orderNo
+     * @return
+     */
+    int updateOrderPayTime(Long orderNo);
 }

@@ -13,6 +13,8 @@ Page({
   data: {
     //loading
     hiddenLoading: true,
+    //是否显示完成确认
+    showDoneOrderConfirm: false,
     //订单类型字典
     orderTypeOptions: [],
     //订单状态字典
@@ -56,6 +58,18 @@ Page({
       })
     })
   },
+  //显示完成确认
+  showDoneOrder() {
+    this.setData({
+      showDoneOrderConfirm: true
+    })
+  },
+  //隐藏完成确认
+  hideDoneOrder() {
+    this.setData({
+      showDoneOrderConfirm: false
+    })
+  },
   //订单完成
   doneOrder() {
     let that = this
@@ -67,7 +81,8 @@ Page({
     service.put("/order/done/" + orderNo, {}).then(res => {
       //loading
       that.setData({
-        hiddenLoading: !that.data.hiddenLoading
+        hiddenLoading: !that.data.hiddenLoading,
+        showDoneOrderConfirm: false
       })
       iView.toast.success('操作成功')
       wx.navigateBack({
@@ -76,7 +91,8 @@ Page({
     }).catch(err => {
       //loading
       that.setData({
-        hiddenLoading: !that.data.hiddenLoading
+        hiddenLoading: !that.data.hiddenLoading,
+        showDoneOrderConfirm: false
       })
       iView.toast.error('操作失败')
     })
