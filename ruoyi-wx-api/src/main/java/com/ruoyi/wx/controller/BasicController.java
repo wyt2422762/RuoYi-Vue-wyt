@@ -8,6 +8,7 @@ import com.ruoyi.bus.domain.Nurse;
 import com.ruoyi.bus.service.IConsumerService;
 import com.ruoyi.bus.service.INurseService;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.UserStatus;
 import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.wx.core.config.WxConfig;
 import com.ruoyi.wx.model.WxReqCommonParam;
@@ -142,9 +143,12 @@ public class BasicController {
                     consumer = new Consumer();
                     consumer.setPhonenumber(phoneNumber);
                     consumer.setOpenId(openId);
-                    consumer.setStatus("0");
+                    consumer.setStatus(UserStatus.OK.getCode());
                     consumerService.insertConsumer(consumer);
                 } else {
+                    if(!UserStatus.OK.getCode().equals(consumer.getStatus())){
+                        return AjaxResult.error("登录失败");
+                    }
                     if(!openId.equals(consumer.getOpenId())){
                         consumer.setOpenId(openId);
                         consumerService.updateConsumer(consumer);
@@ -163,6 +167,9 @@ public class BasicController {
                     //这里需不需要注册？
                     return AjaxResult.error("手机号对应的用户存不存在");
                 } else {
+                    if(!UserStatus.OK.getCode().equals(nurse.getStatus())){
+                        return AjaxResult.error("登录失败");
+                    }
                     if(!openId.equals(nurse.getOpenId())){
                         nurse.setOpenId(openId);
                         nurseService.updateNurse(nurse);

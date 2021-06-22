@@ -47,10 +47,10 @@ public class OrderStatusTask {
                 } else {
                     if (date.compareTo(workTime) > 0) {
                         //改成已完成
-                        order.setStatus("4");
+                        order.setStatus(OrderStatusEnum.YWC);
                     } else if (date.compareTo(workTime) == 0) {
                         //改成进行中
-                        order.setStatus("3");
+                        order.setStatus(OrderStatusEnum.FWZ);
                     }
                 }
             } else if (OrderStatusEnum.FWZ.equals(status)) {
