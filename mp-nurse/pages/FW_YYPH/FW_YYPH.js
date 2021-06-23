@@ -109,11 +109,8 @@ Page({
     service.get('/order/list', {
       data: that.data.queryParams_jxz
     }).then(res => {
-      //loading
       that.setData({
-        hiddenLoading: !that.data.hiddenLoading
-      })
-      that.setData({
+        hiddenLoading: !that.data.hiddenLoading,
         orderList_jxz: res.rows,
         'page_jxz.total': res.total
       })
@@ -134,11 +131,8 @@ Page({
     service.get('/order/list', {
       data: that.data.queryParams_ywc
     }).then(res => {
-      //loading
       that.setData({
-        hiddenLoading: !that.data.hiddenLoading
-      })
-      that.setData({
+        hiddenLoading: !that.data.hiddenLoading,
         orderList_ywc: res.rows,
         'page_ywc.total': res.total
       })
@@ -161,6 +155,8 @@ Page({
       orderList = that.data.orderList_jxz
     } else if (currentTab == '1') {
       //已完成
+      queryParams = that.data.queryParams_ywc
+      orderList = that.data.orderList_ywc
     }
     if (queryParams) {
       queryParams.pageNum = queryParams.pageNum + 1
@@ -174,22 +170,26 @@ Page({
       service.get('/order/list', {
         data: queryParams
       }).then(res => {
-        //loading
-        that.setData({
-          hiddenLoading: !that.data.hiddenLoading
-        })
         //判断有无数据
         if (res.rows.length <= 0) {
+          that.setData({
+            hiddenLoading: !that.data.hiddenLoading
+          })
           queryParams.pageNum = queryParams.pageNum - 1
           iView.toast.warning('没有更多数据了!~')
         } else {
           if (currentTab == '0') {
             that.setData({
+              hiddenLoading: !that.data.hiddenLoading,
               orderList_jxz: listBefore.concat(res.rows),
               'page.total': res.total,
             })
           } else if (currentTab == '1') {
-
+            that.setData({
+              hiddenLoading: !that.data.hiddenLoading,
+              orderList_jxz: listBefore.concat(res.rows),
+              'page.total': res.total,
+            })
           }
         }
       }).catch(err => {

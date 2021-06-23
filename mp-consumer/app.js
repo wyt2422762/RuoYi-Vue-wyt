@@ -9,20 +9,6 @@ App({
     console.log('app show')
     let that = this
 
-    //验证token是否有效，无效的话重新登录后台
-    let token = wx.getStorageSync('token')
-    if(token){
-      that.globalData.isLogin = true
-      that.validateToken(token)
-    } else {
-      //token失效，需要重新登陆
-      wx.clearStorageSync('token')
-      wx.clearStorageSync('user')
-      wx.clearStorageSync('phoneNumber')
-      wx.clearStorageSync('isLogin')
-      that.globalData.isLogin = false
-    }
-
     // 登录
     // wx.checkSession({
     //   success: res => {
@@ -63,6 +49,20 @@ App({
         })
       }
     })
+
+    //验证token是否有效，无效的话重新登录后台
+    let token = wx.getStorageSync('token')
+    if(token){
+      that.globalData.isLogin = true
+      that.validateToken(token)
+    } else {
+      //token失效，需要重新登陆
+      wx.clearStorageSync('token')
+      wx.clearStorageSync('user')
+      wx.clearStorageSync('phoneNumber')
+      wx.clearStorageSync('isLogin')
+      that.globalData.isLogin = false
+    }
 
   },
   //判断用户信息是否完善
@@ -105,6 +105,11 @@ App({
         wx.clearStorageSync('phoneNumber')
         wx.clearStorageSync('isLogin')
         that.globalData.isLogin = false
+
+        wx.redirectTo({
+          url: './pages/My/My',
+        })
+
       } else {
         //token有效, 更新用户信息
         that.getUserInfo()

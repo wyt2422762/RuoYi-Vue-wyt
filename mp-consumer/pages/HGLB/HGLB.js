@@ -56,11 +56,8 @@ Page({
     service.get('/nurse/list', {
       data: that.data.queryParams
     }).then(res => {
-      //loading
       that.setData({
-        hiddenLoading: !that.data.hiddenLoading
-      })
-      that.setData({
+        hiddenLoading: !that.data.hiddenLoading,
         nurseList: res.rows,
         'page.total': res.total
       })
@@ -92,16 +89,16 @@ Page({
     service.get('/nurse/list', {
       data: that.data.queryParams
     }).then(res => {
-      //loading
-      that.setData({
-        hiddenLoading: !that.data.hiddenLoading
-      })
       //判断有无数据
       if (res.rows.length <= 0) {
+        that.setData({
+          hiddenLoading: !that.data.hiddenLoading
+        })
         that.data.queryParams.pageNum = that.data.queryParams.pageNum - 1
         iView.toast.warning('没有更多数据了')
       } else {
         that.setData({
+          hiddenLoading: !that.data.hiddenLoading,
           nurseList: listBefore.concat(res.rows),
           'page.total': res.total,
         })

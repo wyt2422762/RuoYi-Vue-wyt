@@ -5,6 +5,9 @@ import {
 } from './utils/request.js'
 
 App({
+  onLaunch() {
+    console.log('app lanuch')
+  },
   onShow() {
     console.log('app show')
     let that = this

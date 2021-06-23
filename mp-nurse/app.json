@@ -4,11 +4,11 @@
     "pages/WD/WD",
     "pages/FW_YYPH/FW_YYPH",
     "pages/DDXQ/DDXQ",
-    "pages/login/login",  
+    "pages/login/login",
     "pages/FW_CQBJ/FW_CQBJ",
     "pages/FW_WSQJ/FW_WSQJ",
     "pages/FW_JJPH/FW_JJPH",
-    "pages/FW_CDBZQX/FW_CDBZQX", 
+    "pages/FW_CDBZQX/FW_CDBZQX",
     "pages/logs/logs",
     "pages/FW/FW"
   ],
@@ -45,14 +45,15 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-
+  "requiredBackgroundModes": [
+    "location"
+  ],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-
-  "usingComponents":{
+  "usingComponents": {
     "i-rate": "./component/iView/rate/index",
     "i-row": "./component/iView/row/index",
     "i-col": "./component/iView/col/index",

@@ -1,5 +1,10 @@
+<i-toast id="toast" />
+
 <view class="map_container">
   <map class='map' longitude='{{longitude}}' latitude='{{latitude}}' scale='{{scale}}' markers='{{markers}}'
     controls="{{controls}}" bindcontroltap="bindcontroltap" polyline='{{polyline}}' circles="{{circles}}"
-    bindmarkertap='bindmarkertap' bindcontroltap='bindcontroltap' show-location></map>
+    bindmarkertap='bindmarkertap' bindcontroltap='bindcontroltap'></map>
+    <!-- <map class='map' longitude='{{longitude}}' latitude='{{latitude}}' scale='{{scale}}' markers='{{markers}}'
+    controls="{{controls}}" bindcontroltap="bindcontroltap" polyline='{{polyline}}' circles="{{circles}}"
+    bindmarkertap='bindmarkertap' bindcontroltap='bindcontroltap' show-location></map> -->
 </view>

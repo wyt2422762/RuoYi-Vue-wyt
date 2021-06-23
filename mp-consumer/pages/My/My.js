@@ -19,9 +19,12 @@ Page({
     phone_cs: config.phone_cs
   },
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面显示
    */
-  onLoad: function (options) {
+  onShow(e) {
+    this.setData({
+      isLogin: app.globalData.isLogin,
+    })
   },
   //登录(获取用户信息，token)
   login(e) {
