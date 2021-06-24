@@ -22,6 +22,11 @@ logging:
     com.github.binarywang.wxpay: error
     cn.binarywang.wx.miniapp: error
 
+# token配置
+token:
+  # 令牌有效期（默认30分钟）
+  expireTime: 10080
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

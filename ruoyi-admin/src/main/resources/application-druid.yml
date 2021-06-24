@@ -19,6 +19,10 @@ logging:
     com.github.binarywang.wxpay: debug
     cn.binarywang.wx.miniapp: debug
 
+# token配置
+token:
+  # 令牌有效期（默认30分钟）
+  expireTime: 30
 
 spring:
   datasource:
