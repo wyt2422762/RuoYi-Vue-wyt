@@ -2,19 +2,20 @@ package com.ruoyi.wx.controller;
 
 import com.ruoyi.bus.domain.Evaluation;
 import com.ruoyi.bus.domain.Nurse;
-import com.ruoyi.bus.domain.Order;
+import com.ruoyi.bus.domain.NursePosition;
 import com.ruoyi.bus.service.IEvaluationService;
+import com.ruoyi.bus.service.INursePositionService;
 import com.ruoyi.bus.service.INurseService;
+import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.enums.OperatorType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,8 @@ public class NurseController extends BaseController {
     private INurseService nurseService;
     @Autowired
     private IEvaluationService evaluationService;
+    @Autowired
+    private INursePositionService nursePostionService;
 
     /**
      * 查询护工列表
@@ -69,5 +72,16 @@ public class NurseController extends BaseController {
         return AjaxResult.success("查询成功", res);
     }
 
-
+    /**
+     * 上报位置
+     * @param nursePosition 护工位置
+     * @return 结果
+     */
+    @PreAuthorize("hasAuthority('nurse')")
+    @PostMapping(value = "/position")
+    @Log(title="上报位置", operatorType = OperatorType.NURSE, businessType = BusinessType.INSERT)
+    public AjaxResult addPosition(@RequestBody NursePosition nursePosition){
+        nursePostionService.addNursePosition(nursePosition);
+        return AjaxResult.success("上报成功");
+    }
 }

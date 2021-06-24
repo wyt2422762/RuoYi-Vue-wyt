@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bus.mapper.NursePositionMapper">
+
+    <resultMap type="com.ruoyi.bus.domain.NursePosition" id="nursePositionResult">
+        <result property="nurseId" column="nurseId"/>
+        <result property="lng" column="longitude"/>
+        <result property="lat" column="latitude"/>
+        <result property="time" column="time"/>
+
+        <association property="nurse" column="nurseId"
+                     javaType="com.ruoyi.bus.domain.Nurse"
+                     select="com.ruoyi.bus.mapper.NurseMapper.selectNurseById"/>
+    </resultMap>
+
+
+    <sql id="selectVo">
+        select nurseId, longitude, latitude, `time`
+        from nurse_postion
+    </sql>
+
+    <select id="selectNursePositionList" parameterType="com.ruoyi.bus.domain.NursePosition"
+            resultMap="nursePositionResult">
+        <include refid="selectVo"/>
+        <where>
+            1 = 1
+            <if test="nurseId != null ">and nurseId = #{nurseId}</if>
+            <if test="time != null">and datediff(`time`, #{time}) = 0</if>
+        </where>
+        order by `time` ASC
+    </select>
+
+    <insert id="addNursePosition" parameterType="com.ruoyi.bus.domain.NursePosition">
+        insert into nurse_postion(nurseId, longitude, latitude, `time`)
+        values (#{nurseId}, #{lng}, #{lat}, sysdate())
+    </insert>
+
+    <delete id="clearNursePosition" parameterType="java.lang.Long">
+        delete from nurse_postion where nurseId = #{nurseId}
+    </delete>
+
+</mapper>

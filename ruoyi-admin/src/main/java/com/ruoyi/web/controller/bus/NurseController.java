@@ -1,23 +1,22 @@
 package com.ruoyi.web.controller.bus;
 
 import com.ruoyi.bus.domain.Nurse;
+import com.ruoyi.bus.domain.NursePosition;
+import com.ruoyi.bus.service.INursePositionService;
 import com.ruoyi.bus.service.INurseService;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.SecurityUtils;
-import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.validation.group.CreateGroup;
 import com.ruoyi.common.validation.group.EditGroup;
-import com.ruoyi.wechat.mp.domain.LunBoTu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -39,6 +38,8 @@ public class NurseController extends BaseController
 {
     @Autowired
     private INurseService nurseService;
+    @Autowired
+    private INursePositionService nursePostionService;
 
     /**
      * 查询护工列表
@@ -50,6 +51,17 @@ public class NurseController extends BaseController
         startPage();
         List<Nurse> list = nurseService.selectNurseList(nurse);
         return getDataTable(list);
+    }
+
+    /**
+     * 查询护工列表(全部)
+     */
+    @PreAuthorize("@ss.hasPermi('bus:nurse:list')")
+    @GetMapping("/listAll")
+    public AjaxResult listAll(Nurse nurse)
+    {
+        List<Nurse> list = nurseService.selectNurseList(nurse);
+        return AjaxResult.success("查询成功", list);
     }
 
     /**
@@ -148,4 +160,29 @@ public class NurseController extends BaseController
         }
         return AjaxResult.error("上传图片异常，请联系管理员");
     }
+
+    /**
+     * 查询护工位置
+     * @param nursePosition 护工位置
+     * @return 结果
+     */
+    @PreAuthorize("@ss.hasPermi('bus:nurse:query')")
+    @GetMapping("/listPosition")
+    public AjaxResult listPostion(NursePosition nursePosition){
+        List<NursePosition> nursePositions = nursePostionService.selectNursePositionList(nursePosition);
+        return AjaxResult.success("查询成功", nursePositions);
+    }
+
+    /**
+     * 清空护工位置
+     * @param nurseId 护工id
+     * @return 结果
+     */
+    @PreAuthorize("@ss.hasPermi('bus:nurse:remove')")
+    @DeleteMapping("/clearPosition/{nurseId}")
+    public AjaxResult clearPosition(@PathVariable Long nurseId){
+        nursePostionService.clearNursePosition(nurseId);
+        return AjaxResult.success("清空成功");
+    }
+
 }

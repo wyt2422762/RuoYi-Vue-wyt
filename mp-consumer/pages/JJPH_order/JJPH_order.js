@@ -138,7 +138,6 @@ Page({
         extraMap: res[3].data.map
       }, function () {
         //计算钱
-        debugger
         that.calcMoney()
       })
     })

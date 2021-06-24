@@ -9,6 +9,15 @@ export function listNurse(query) {
   })
 }
 
+// 查询全部护工列表
+export function listAllNurse(query) {
+  return request({
+    url: '/bus/nurse/listAll',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询护工详细
 export function getNurse(nurseid) {
   return request({
@@ -84,5 +93,22 @@ export function addAvatar(data) {
     method: 'post',
     headers: {"Content-Type": "multipart/form-data"},
     data: data
+  })
+}
+
+//查询护工轨迹
+export function listPosition(query){
+  return request({
+    url: '/bus/nurse/listPosition',
+    method: 'get',
+    params: query
+  })
+}
+
+//查询护工轨迹
+export function clearPosition(nurseId){
+  return request({
+    url: '/bus/nurse/clearPosition/' + nurseId,
+    method: 'delete'
   })
 }

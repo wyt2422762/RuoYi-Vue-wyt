@@ -1,8 +1,7 @@
 let iView = require('../../utils/iViewUtil.js')
 
 import {
-    service,
-    allReq
+    service
 } from '../../utils/request.js'
 
 Page({
@@ -100,10 +99,10 @@ Page({
                 let user = wx.getStorageSync('user')
                 //登录后并且位置变化才上报
                 if (that.data.Curlongitude != res.longitude || that.data.Curlatitude != res.latitude) {
-                    service.post('/nurse/postion', {
+                    service.post('/nurse/position', {
                         data: {
-                            longitude: res.longitude,
-                            latitude: res.latitude,
+                            lng: res.longitude,
+                            lat: res.latitude,
                             nurseId: user.nurseId
                         }
                     }).catch(err => {
