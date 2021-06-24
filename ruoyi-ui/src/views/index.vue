@@ -6,7 +6,7 @@
     </baidu-map>
 
     <div class="nurseDiv" v-show="!showRight" @click="showRight = !showRight">
-      护工列表
+      护工轨迹查询
     </div>
 
     <!-- 护工列表对话框 -->
