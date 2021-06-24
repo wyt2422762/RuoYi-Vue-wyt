@@ -20,10 +20,10 @@ ruoyi:
 # 日志配置
 logging:
   level:
-    com.ruoyi: debug
-    org.springframework: debug
-    com.github.binarywang.wxpay: debug
-    cn.binarywang.wx.miniapp: debug
+    com.ruoyi: info
+    org.springframework: error
+    com.github.binarywang.wxpay: error
+    cn.binarywang.wx.miniapp: error
 
 
 spring:
@@ -33,8 +33,8 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://47.92.37.222:3306/xyh?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        username: xyh
+        url: jdbc:mysql://localhost:3306/xyh?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: root
         password: fdkj@2020
       # 从库数据源
       slave:
@@ -86,11 +86,11 @@ spring:
 
   redis:
     # 地址
-    host: 47.92.37.222
+    host: 127.0.0.1
     # 端口，默认为6379
     port: 6379
     # 数据库索引
     database: 0
     # 密码
-    password:
+    password: fdkj@2020
 
