@@ -25,14 +25,6 @@ server:
     # Tomcat启动初始化的线程数，默认值25
     min-spare-threads: 30
 
-# 日志配置
-logging:
-  level:
-    com.ruoyi: debug
-    org.springframework: error
-    com.github.binarywang.wxpay: debug
-    cn.binarywang.wx.miniapp: debug
-
 # Spring配置
 spring:
   # 资源信息

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <springProperty scope="context" name="logPath" source="logging.file.path"/>
+
     <!-- 日志存放路径 -->
-	<property name="log.path" value="D:/log/ruoyi/RuoYi-Vue-Log-wx" />
+	<property name="log.path" value="${logPath}" />
     <!-- 日志输出格式 -->
 	<property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
 
@@ -70,11 +72,6 @@
             <pattern>${log.pattern}</pattern>
         </encoder>
     </appender>
-	
-	<!-- 系统模块日志级别控制  -->
-	<logger name="com.ruoyi" level="info" />
-	<!-- Spring日志级别控制  -->
-	<logger name="org.springframework" level="warn" />
 
 	<root level="info">
 		<appender-ref ref="console" />

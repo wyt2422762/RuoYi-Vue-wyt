@@ -10,12 +10,15 @@ ruoyi:
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
   profile: D:/ruoyi/uploadPath
 
+#日志配置
 logging:
   level:
     com.ruoyi: debug
     org.springframework: error
     com.github.binarywang.wxpay: debug
     cn.binarywang.wx.miniapp: debug
+  file:
+    path: D:/log/ruoyi/RuoYi-Vue-Log-wx
 
 # token配置
 token:

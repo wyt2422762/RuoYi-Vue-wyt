@@ -24,6 +24,8 @@ logging:
     org.springframework: error
     com.github.binarywang.wxpay: error
     cn.binarywang.wx.miniapp: error
+  file:
+    path: D:/java/log/xyh/web
 
 # token配置
 token:
