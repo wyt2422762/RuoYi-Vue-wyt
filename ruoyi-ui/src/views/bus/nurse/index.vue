@@ -130,6 +130,17 @@
           </el-col>
           <el-col :span="1.5">
             <el-button
+              type="info"
+              plain
+              icon="el-icon-upload2"
+              size="mini"
+              @click="handleImport"
+              v-hasPermi="['bus:nurse:import']"
+            >导入
+            </el-button>
+          </el-col>
+          <el-col :span="1.5">
+            <el-button
               type="warning"
               plain
               icon="el-icon-download"
@@ -376,7 +387,7 @@
 
 <script>
 import orderList from "./orderList";
-import {listNurse, getNurse, delNurse, addNurse, updateNurse, exportNurse, changeNurseStatus, addAvatar} from "@/api/bus/nurse";
+import {listNurse, getNurse, delNurse, addNurse, updateNurse, exportNurse, changeNurseStatus, addAvatar, importTemplate} from "@/api/bus/nurse";
 import {treeselect} from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
@@ -673,6 +684,17 @@ export default {
         this.getList();
         this.msgSuccess("删除成功");
       })
+    },
+    /** 导入按钮操作 */
+    handleImport() {
+      this.upload.title = "客户导入";
+      this.upload.open = true;
+    },
+    /** 下载模板操作 */
+    importTemplate() {
+      importTemplate().then(response => {
+        this.download(response.msg);
+      });
     },
     /** 导出按钮操作 */
     handleExport() {

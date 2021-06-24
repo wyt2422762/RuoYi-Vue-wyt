@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.bus;
 
+import com.ruoyi.bus.domain.Consumer;
 import com.ruoyi.bus.domain.Nurse;
 import com.ruoyi.bus.domain.NursePosition;
 import com.ruoyi.bus.service.INursePositionService;
@@ -9,14 +10,17 @@ import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.validation.group.CreateGroup;
 import com.ruoyi.common.validation.group.EditGroup;
+import com.ruoyi.framework.web.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -40,6 +44,8 @@ public class NurseController extends BaseController
     private INurseService nurseService;
     @Autowired
     private INursePositionService nursePostionService;
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 查询护工列表
@@ -75,6 +81,26 @@ public class NurseController extends BaseController
         List<Nurse> list = nurseService.selectNurseList(nurse);
         ExcelUtil<Nurse> util = new ExcelUtil<>(Nurse.class);
         return util.exportExcel(list, "护工数据");
+    }
+
+    @Log(title = "护工管理", businessType = BusinessType.IMPORT)
+    @PreAuthorize("@ss.hasPermi('bus:nurse:import')")
+    @PostMapping("/importData")
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<Nurse> util = new ExcelUtil<>(Nurse.class);
+        List<Nurse> nurseList = util.importExcel(file.getInputStream());
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        String operName = loginUser.getUsername();
+        String message = nurseService.importNurse(nurseList, updateSupport, operName);
+        return AjaxResult.success(message);
+    }
+
+    @GetMapping("/importTemplate")
+    public AjaxResult importTemplate()
+    {
+        ExcelUtil<Nurse> util = new ExcelUtil<>(Nurse.class);
+        return util.importTemplateExcel("护工数据");
     }
 
     /**

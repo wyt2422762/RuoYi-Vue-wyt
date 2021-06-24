@@ -23,7 +23,7 @@ public class Consumer extends BaseEntity {
     /**
      * 客户编号
      */
-    @Excel(name = "客户编号", cellType = Excel.ColumnType.NUMERIC)
+    //@Excel(name = "客户编号", cellType = Excel.ColumnType.NUMERIC)
     @NotNull(message = "客户编号不能为空", groups = {EditGroup.class})
     private Long consumerId;
 
@@ -51,7 +51,7 @@ public class Consumer extends BaseEntity {
     /**
      * 性别
      */
-    @Excel(name = "性别", readConverterExp = "0=男,1=女,2=未知")
+    @Excel(name = "性别", dictType = "sys_user_sex")
     private String sex;
 
     /**
@@ -107,13 +107,13 @@ public class Consumer extends BaseEntity {
     /**
      * 老人分类
      */
-    @Excel(name = "老人分类")
+    @Excel(name = "老人分类", dictType = "bus_laoren_fenlei")
     private String type;
 
     /**
      * 老人服务类型
      */
-    @Excel(name = "老人分类")
+    @Excel(name = "老人服务类型", dictType = "bus_laoren_type")
     private String serviceType;
 
     /**

@@ -182,36 +182,36 @@ public class ConsumerServiceImpl implements IConsumerService {
         StringBuilder successMsg = new StringBuilder();
         StringBuilder failureMsg = new StringBuilder();
 
-        for (Consumer sysConsumer : consumerList)
+        for (Consumer consumer1 : consumerList)
         {
             try
             {
                 // 验证手机号是否唯一
-                Consumer consumer = consumerMapper.checkPhoneUnique(sysConsumer.getPhonenumber());
+                Consumer consumer = consumerMapper.checkPhoneUnique(consumer1.getPhonenumber());
                 if (StringUtils.isNull(consumer))
                 {
-                    sysConsumer.setCreateBy(operName);
-                    this.insertConsumer(sysConsumer);
+                    consumer1.setCreateBy(operName);
+                    this.insertConsumer(consumer1);
                     successNum++;
-                    successMsg.append("<br/>").append(successNum).append("、客户(").append(sysConsumer.getName()).append("|").append(sysConsumer.getPhonenumber()).append(")导入成功");
+                    successMsg.append("<br/>").append(successNum).append("、客户(").append(consumer1.getName()).append("|").append(consumer1.getPhonenumber()).append(")导入成功");
                 }
                 else if (isUpdateSupport)
                 {
-                    sysConsumer.setUpdateBy(operName);
-                    this.updateConsumer(sysConsumer);
+                    consumer1.setUpdateBy(operName);
+                    this.updateConsumer(consumer1);
                     successNum++;
-                    successMsg.append("<br/>").append(successNum).append("、客户(").append(sysConsumer.getName()).append("|").append(sysConsumer.getPhonenumber()).append(")更新成功");
+                    successMsg.append("<br/>").append(successNum).append("、客户(").append(consumer1.getName()).append("|").append(consumer1.getPhonenumber()).append(")更新成功");
                 }
                 else
                 {
                     failureNum++;
-                    failureMsg.append("<br/>").append(failureNum).append("、客户(").append(sysConsumer.getName()).append("|").append(sysConsumer.getPhonenumber()).append(")已存在");
+                    failureMsg.append("<br/>").append(failureNum).append("、客户(").append(consumer1.getName()).append("|").append(consumer1.getPhonenumber()).append(")已存在");
                 }
             }
             catch (Exception e)
             {
                 failureNum++;
-                String msg = "<br/>" + failureNum + "、客户(" + sysConsumer.getName() + "|" + sysConsumer.getPhonenumber() + ")导入失败：";
+                String msg = "<br/>" + failureNum + "、客户(" + consumer1.getName() + "|" + consumer1.getPhonenumber() + ")导入失败：";
                 failureMsg.append(msg).append(e.getMessage());
                 log.error(msg, e);
             }

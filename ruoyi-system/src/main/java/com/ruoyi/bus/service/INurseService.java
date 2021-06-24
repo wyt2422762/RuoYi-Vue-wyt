@@ -1,8 +1,6 @@
 package com.ruoyi.bus.service;
 
 import java.util.List;
-
-import com.ruoyi.bus.domain.Consumer;
 import com.ruoyi.bus.domain.Nurse;
 
 /**
@@ -99,6 +97,16 @@ public interface INurseService
      * @return 结果
      */
     Nurse selectNurseByPhoneNumber_mp(String phoneNumber);
+
+    /**
+     * 导入护工数据
+     *
+     * @param nurseList 护工数据列表
+     * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
+     * @param operName 操作人
+     * @return 结果
+     */
+    String importNurse(List<Nurse> nurseList, Boolean isUpdateSupport, String operName);
 
     /**
      * 查询护工列表(小程序使用)

@@ -46,7 +46,7 @@ public class Nurse extends BaseEntity {
     /**
      * 用户性别（0男 1女 2未知）
      */
-    @Excel(name = "用户性别", readConverterExp = "0=男,1=女,2=未知")
+    @Excel(name = "用户性别", dictType = "bus_workStatus")
     private String sex;
 
     /**
@@ -65,27 +65,31 @@ public class Nurse extends BaseEntity {
     /**
      * 服务星级
      */
-    @Excel(name = "服务星级")
+    @Excel(name = "服务星级", dictType = "bus_workLevel")
     private String workLevel;
 
     /**
      * 服务状态
      */
-    @Excel(name = "服务状态")
+    @Excel(name = "服务状态", dictType = "bus_workStatus")
     private String workStatus;
 
     /**
      * 标签
      */
+    @Excel(name = "标签")
     private List<String> labels;
+
     /**
      * 能力
      */
+    @Excel(name = "能力")
     private List<String> abilities;
 
     /**
      * 证书
      */
+    @Excel(name = "证书")
     private List<String> certificates;
 
     /**
@@ -103,7 +107,7 @@ public class Nurse extends BaseEntity {
     /**
      * 删除标志（0代表存在 2代表删除
      */
-    @Excel(name = "删除标志", readConverterExp = "删除标志（0代表存在 2代表删除)")
+    //@Excel(name = "删除标志", readConverterExp = "删除标志（0代表存在 2代表删除)")
     private String delFlag;
 
     private SysDept dept;

@@ -112,3 +112,11 @@ export function clearPosition(nurseId){
     method: 'delete'
   })
 }
+
+// 下载护工导入模板
+export function importTemplate() {
+  return request({
+    url: '/bus/nurse/importTemplate',
+    method: 'get'
+  })
+}
