@@ -1,7 +1,12 @@
 // 个人信息
 import {
-  service
+  service,
+  allReq
 } from '../../utils/request.js'
+import {
+  getDicts,
+  getDictValueByLabel
+} from '../../utils/dict.js'
 
 let iView = require('../../utils/iViewUtil.js')
 
@@ -14,15 +19,29 @@ Page({
   data: {
     //loading
     hiddenLoading: true,
+    //老人分类字典
+    typeOptions: [],
+    typeIndex: null,
+    //服务类型字典
+    serviceTypeOptions: [],
+    serviceTypeIndex: null,
     //客户信息
     consumer: null
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad(options) {
+    let that = this
+    //获取老人分类字典，服务类型字典
+    // allReq([getDicts('bus_laoren_fenlei'), getDicts('bus_laoren_type')]).then(res => {
+    //   that.setData({
+    //     typeOptions: res[0].data,
+    //     serviceTypeOptions: res[1].data
+    //   })
+    // })
     //获取个人信息
-    this.getUserInfo()
+    that.getUserInfo()
   },
   //获取个人信息方法
   getUserInfo() {
@@ -54,12 +73,6 @@ Page({
     //参数检查
     if (!consumer.name) {
       iView.toast.warning('姓名不能为空')
-      return false
-    } else if (!consumer.emergencyContactName) {
-      iView.toast.warning('紧急联系人姓名不能为空')
-      return false
-    } else if (!consumer.emergencyContactPhone) {
-      iView.toast.warning('紧急联系人电话不能为空')
       return false
     } else if (!consumer.addr) {
       iView.toast.warning('家庭地址不能为空')

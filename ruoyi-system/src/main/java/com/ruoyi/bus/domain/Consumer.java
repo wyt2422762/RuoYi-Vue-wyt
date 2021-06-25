@@ -76,14 +76,14 @@ public class Consumer extends BaseEntity {
      * 紧急联系人姓名
      */
     @Excel(name = "紧急联系人姓名")
-    @NotBlank(message = "紧急联系人姓名不能为空")
+    //@NotBlank(message = "紧急联系人姓名不能为空")
     private String emergencyContactName;
 
     /**
      * 紧急联系人电话
      */
     @Excel(name = "紧急联系人电话")
-    @NotBlank(message = "紧急联系人电话不能为空")
+    //@NotBlank(message = "紧急联系人电话不能为空")
     private String emergencyContactPhone;
 
     /**

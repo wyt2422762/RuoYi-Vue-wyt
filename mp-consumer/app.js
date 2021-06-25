@@ -69,7 +69,7 @@ App({
   isUserComplete(user) {
     console.log('isUserComplete')
     let that = this
-    if (!user.name || !user.addr || !user.emergencyContactPhone || !user.emergencyContactName) {
+    if (!user.name || !user.addr) {
       wx.setStorageSync('userInfoComplete', false)
     } else {
       wx.setStorageSync('userInfoComplete', true)
@@ -115,9 +115,6 @@ App({
         that.getUserInfo()
       }
     })
-  },
-  //登陆
-  login(e){
   },
   globalData: {
     //appid

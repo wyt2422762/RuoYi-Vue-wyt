@@ -266,26 +266,24 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="老人类型">
-              <el-select v-model="form.type" placeholder="请选择">
+              <el-select v-model="form.type" placeholder="请选择" clearable >
                 <el-option
                   v-for="dict in typeOptions"
                   :key="dict.dictValue"
                   :label="dict.dictLabel"
                   :value="dict.dictValue"
-                  clearable
                 ></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="服务类型">
-              <el-select v-model="form.serviceType" placeholder="请选择">
+              <el-select v-model="form.serviceType" placeholder="请选择" clearable >
                 <el-option
                   v-for="dict in serviceTypeOptions"
                   :key="dict.dictValue"
                   :label="dict.dictLabel"
                   :value="dict.dictValue"
-                  clearable
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -431,12 +429,12 @@ export default {
         addr: [
           {required: true, message: "客户地址不能为空", trigger: "blur"}
         ],
-        emergencyContactName: [
+        /*emergencyContactName: [
           {required: true, message: "紧急联系人姓名不能为空", trigger: "blur"}
         ],
         emergencyContactPhone: [
           {required: true, message: "紧急联系人电话不能为空", trigger: "blur"}
-        ],
+        ],*/
         email: [
           {
             type: "email",

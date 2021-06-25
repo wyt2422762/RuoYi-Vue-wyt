@@ -10,11 +10,18 @@
   <i-input right value="{{ consumer.age }}" title="年龄"  placeholder="年龄"  mode="wrapped" bind:change="ageChange" maxlength="3" bind:change="ageChange" />
   <i-input right value="{{ consumer.phonenumber }}" title="手机号"  placeholder="手机号"  mode="wrapped" disabled/>
   <i-input right value="{{ consumer.idNo }}" title="身份证号"  placeholder="身份证号"  mode="wrapped" bind:change="idNoChange" maxlength="18" bind:change="idNoChange" />
-  <i-input right value="{{ consumer.emergencyContactName }}" title="紧急联系人姓名"  placeholder="紧急联系人姓名"  mode="wrapped" bind:change="emergencyContactNameChange" maxlength="10" bind:change="emergencyContactNameChange" />
-  <i-input right value="{{ consumer.emergencyContactPhone }}" title="紧急联系人电话"  placeholder="紧急联系人电话"  mode="wrapped" bind:change="emergencyContactPhoneChange" maxlength="20" bind:change="emergencyContactPhoneChange" />
+
+  <!-- <picker bindchange="typeChange" value="{{typeIndex}}" range="{{typeOptions}}" range-key="dictLabel">
+		<i-input right value="{{ consumer.type }}" title="老人分类"  placeholder="老人分类"  mode="wrapped" disabled="true"/>
+	</picker>
+  <picker bindchange="serviceTypeChange" value="{{serviceTypeIndex}}" range="{{serviceTypeOptions}}" range-key="dictLabel">
+		<i-input right value="{{ consumer.serviceType }}" title="服务类型"  placeholder="服务类型"  mode="wrapped" disabled="true"/>
+	</picker> -->
+
+  <i-input right value="{{ consumer.emergencyContactName }}" title="紧急联系人姓名"  placeholder="紧急联系人姓名"  mode="wrapped" bind:change="emergencyContactNameChange" maxlength="10"/>
+  <i-input right value="{{ consumer.emergencyContactPhone }}" title="紧急联系人电话"  placeholder="紧急联系人电话"  mode="wrapped" bind:change="emergencyContactPhoneChange" maxlength="20"/>
   
   <i-panel title="家庭地址" i-class="ip"></i-panel>
-
   <i-input i-class="ic" value="{{ consumer.addr }}" placeholder="请输入家庭地址" mode="wrapped" type="textarea" bind:change="addrChange" maxlength="50" bind:change="addrChange" />
 
   <i-button bind:click="update" type="success" shape="circle" size="small" i-class="ib">保存</i-button>
