@@ -3,7 +3,6 @@ package com.ruoyi.bus.domain;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
-import com.ruoyi.common.validation.group.CreateGroup;
 import com.ruoyi.common.validation.group.EditGroup;
 import lombok.Data;
 

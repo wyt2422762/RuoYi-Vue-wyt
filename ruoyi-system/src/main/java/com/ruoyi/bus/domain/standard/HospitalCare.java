@@ -2,6 +2,7 @@ package com.ruoyi.bus.domain.standard;
 
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.validation.group.EditGroup;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author wyt
  */
+@Data
 public class HospitalCare extends BaseEntity {
 
     /**
@@ -55,62 +57,9 @@ public class HospitalCare extends BaseEntity {
     @NotNull(message = "金额不能为空")
     private Integer money;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNo() {
-        return no;
-    }
-
-    public void setNo(String no) {
-        this.no = no;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Integer getHourPerDay() {
-        return hourPerDay;
-    }
-
-    public void setHourPerDay(Integer hourPerDay) {
-        this.hourPerDay = hourPerDay;
-    }
-
-    public Integer getMeal() {
-        return meal;
-    }
-
-    public void setMeal(Integer meal) {
-        this.meal = meal;
-    }
-
-    public Integer getDeposit() {
-        return deposit;
-    }
-
-    public void setDeposit(Integer deposit) {
-        this.deposit = deposit;
-    }
-
-    public Integer getMoney() {
-        return money;
-    }
-
-    public void setMoney(Integer money) {
-        this.money = money;
-    }
-
+    /**
+     * 生成编号
+     */
     public void buildNo() {
         this.no = this.type + "-" + this.hourPerDay;
     }
@@ -122,6 +71,6 @@ public class HospitalCare extends BaseEntity {
      * @return 总金额
      */
     public long calc(int days) {
-        return ((money == null ? 0 : money) + (meal == null ? 0 : meal)) * days + (deposit == null ? 0 : deposit);
+        return (long) ((money == null ? 0 : money) + (meal == null ? 0 : meal)) * days + (deposit == null ? 0 : deposit);
     }
 }

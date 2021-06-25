@@ -100,7 +100,7 @@ public class SysUserServiceImpl implements ISysUserService
     public String selectUserRoleGroup(String userName)
     {
         List<SysRole> list = roleMapper.selectRolesByUserName(userName);
-        StringBuffer idsStr = new StringBuffer();
+        StringBuilder idsStr = new StringBuilder();
         for (SysRole role : list)
         {
             idsStr.append(role.getRoleName()).append(",");
@@ -122,7 +122,7 @@ public class SysUserServiceImpl implements ISysUserService
     public String selectUserPostGroup(String userName)
     {
         List<SysPost> list = postMapper.selectPostsByUserName(userName);
-        StringBuffer idsStr = new StringBuffer();
+        StringBuilder idsStr = new StringBuilder();
         for (SysPost post : list)
         {
             idsStr.append(post.getPostName()).append(",");
@@ -155,7 +155,7 @@ public class SysUserServiceImpl implements ISysUserService
      * 校验用户名称是否唯一
      *
      * @param user 用户信息
-     * @return
+     * @return 结果
      */
     @Override
     public String checkPhoneUnique(SysUser user)
@@ -173,7 +173,7 @@ public class SysUserServiceImpl implements ISysUserService
      * 校验email是否唯一
      *
      * @param user 用户信息
-     * @return
+     * @return 结果
      */
     @Override
     public String checkEmailUnique(SysUser user)
@@ -195,10 +195,10 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public void checkUserAllowed(SysUser user)
     {
-        /*if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin())
+        if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin())
         {
             throw new CustomException("不允许操作超级管理员用户");
-        }*/
+        }
     }
 
     /**
@@ -315,7 +315,7 @@ public class SysUserServiceImpl implements ISysUserService
         if (StringUtils.isNotNull(roles))
         {
             // 新增用户与角色管理
-            List<SysUserRole> list = new ArrayList<SysUserRole>();
+            List<SysUserRole> list = new ArrayList<>();
             for (Long roleId : roles)
             {
                 SysUserRole ur = new SysUserRole();
@@ -341,7 +341,7 @@ public class SysUserServiceImpl implements ISysUserService
         if (StringUtils.isNotNull(posts))
         {
             // 新增用户与岗位管理
-            List<SysUserPost> list = new ArrayList<SysUserPost>();
+            List<SysUserPost> list = new ArrayList<>();
             for (Long postId : posts)
             {
                 SysUserPost up = new SysUserPost();
@@ -426,26 +426,26 @@ public class SysUserServiceImpl implements ISysUserService
                     user.setCreateBy(operName);
                     this.insertUser(user);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 导入成功");
+                    successMsg.append("<br/>").append(successNum).append("、账号 ").append(user.getUserName()).append(" 导入成功");
                 }
                 else if (isUpdateSupport)
                 {
                     user.setUpdateBy(operName);
                     this.updateUser(user);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 更新成功");
+                    successMsg.append("<br/>").append(successNum).append("、账号 ").append(user.getUserName()).append(" 更新成功");
                 }
                 else
                 {
                     failureNum++;
-                    failureMsg.append("<br/>" + failureNum + "、账号 " + user.getUserName() + " 已存在");
+                    failureMsg.append("<br/>").append(failureNum).append("、账号 ").append(user.getUserName()).append(" 已存在");
                 }
             }
             catch (Exception e)
             {
                 failureNum++;
                 String msg = "<br/>" + failureNum + "、账号 " + user.getUserName() + " 导入失败：";
-                failureMsg.append(msg + e.getMessage());
+                failureMsg.append(msg).append(e.getMessage());
                 log.error(msg, e);
             }
         }

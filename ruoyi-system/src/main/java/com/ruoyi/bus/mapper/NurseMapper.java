@@ -2,7 +2,6 @@ package com.ruoyi.bus.mapper;
 
 import java.util.List;
 
-import com.ruoyi.bus.domain.Consumer;
 import com.ruoyi.bus.domain.Nurse;
 import org.apache.ibatis.annotations.Param;
 

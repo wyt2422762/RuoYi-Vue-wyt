@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/test/user")
 public class TestController extends BaseController
 {
-    private final static Map<Integer, UserEntity> users = new LinkedHashMap<Integer, UserEntity>();
+    private final static Map<Integer, UserEntity> users = new LinkedHashMap<>();
     {
         users.put(1, new UserEntity(1, "admin", "admin123", "15888888888"));
         users.put(2, new UserEntity(2, "ry", "admin123", "15666666666"));
@@ -40,7 +40,7 @@ public class TestController extends BaseController
     @GetMapping("/list")
     public AjaxResult userList()
     {
-        List<UserEntity> userList = new ArrayList<UserEntity>(users.values());
+        List<UserEntity> userList = new ArrayList<>(users.values());
         return AjaxResult.success(userList);
     }
 

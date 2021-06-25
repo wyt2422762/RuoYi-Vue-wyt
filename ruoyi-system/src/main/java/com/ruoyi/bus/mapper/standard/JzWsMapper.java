@@ -63,7 +63,7 @@ public interface JzWsMapper {
      * 查询收费标准
      *
      * @param no 收费标准-no
-     * @return
+     * @return 结果
      */
     JzWs selectByNo(String no);
 }

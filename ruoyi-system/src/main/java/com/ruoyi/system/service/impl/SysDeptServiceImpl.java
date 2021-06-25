@@ -1,7 +1,6 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,18 +52,15 @@ public class SysDeptServiceImpl implements ISysDeptService
     @Override
     public List<SysDept> buildDeptTree(List<SysDept> depts)
     {
-        List<SysDept> returnList = new ArrayList<SysDept>();
-        List<Long> tempList = new ArrayList<Long>();
+        List<SysDept> returnList = new ArrayList<>();
+        List<Long> tempList = new ArrayList<>();
         for (SysDept dept : depts)
         {
             tempList.add(dept.getDeptId());
         }
-        for (Iterator<SysDept> iterator = depts.iterator(); iterator.hasNext();)
-        {
-            SysDept dept = (SysDept) iterator.next();
+        for (SysDept dept : depts) {
             // 如果是顶级节点, 遍历该父节点的所有子节点
-            if (!tempList.contains(dept.getParentId()))
-            {
+            if (!tempList.contains(dept.getParentId())) {
                 recursionFn(depts, dept);
                 returnList.add(dept);
             }
@@ -136,7 +132,7 @@ public class SysDeptServiceImpl implements ISysDeptService
     public boolean hasChildByDeptId(Long deptId)
     {
         int result = deptMapper.hasChildByDeptId(deptId);
-        return result > 0 ? true : false;
+        return result > 0;
     }
 
     /**
@@ -149,7 +145,7 @@ public class SysDeptServiceImpl implements ISysDeptService
     public boolean checkDeptExistUser(Long deptId)
     {
         int result = deptMapper.checkDeptExistUser(deptId);
-        return result > 0 ? true : false;
+        return result > 0;
     }
 
     /**
@@ -286,13 +282,9 @@ public class SysDeptServiceImpl implements ISysDeptService
      */
     private List<SysDept> getChildList(List<SysDept> list, SysDept t)
     {
-        List<SysDept> tlist = new ArrayList<SysDept>();
-        Iterator<SysDept> it = list.iterator();
-        while (it.hasNext())
-        {
-            SysDept n = (SysDept) it.next();
-            if (StringUtils.isNotNull(n.getParentId()) && n.getParentId().longValue() == t.getDeptId().longValue())
-            {
+        List<SysDept> tlist = new ArrayList<>();
+        for (SysDept n : list) {
+            if (StringUtils.isNotNull(n.getParentId()) && n.getParentId().longValue() == t.getDeptId().longValue()) {
                 tlist.add(n);
             }
         }
@@ -304,6 +296,6 @@ public class SysDeptServiceImpl implements ISysDeptService
      */
     private boolean hasChild(List<SysDept> list, SysDept t)
     {
-        return getChildList(list, t).size() > 0 ? true : false;
+        return getChildList(list, t).size() > 0;
     }
 }

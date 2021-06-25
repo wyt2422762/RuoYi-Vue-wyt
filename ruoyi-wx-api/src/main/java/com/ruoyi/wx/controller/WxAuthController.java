@@ -38,12 +38,6 @@ public class WxAuthController extends BaseController {
     private IConsumerService consumerService;
 
     @Autowired
-    private INurseService iNurseService;
-
-    @Resource
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     private TokenService tokenService;
 
     /**
@@ -71,8 +65,8 @@ public class WxAuthController extends BaseController {
      *
      * @param appId appId
      * @param wxRcp 微信基础参数
-     * @param encryptedData
-     * @param iv
+     * @param encryptedData encryptedData
+     * @param iv iv
      * @return 结果
      */
     @PreAuthorize("hasAuthority('consumer')")
@@ -98,7 +92,6 @@ public class WxAuthController extends BaseController {
      */
     @GetMapping("/getToken")
     public AjaxResult getToken(@PathVariable String appId, @Validated @NotBlank String openId, @Validated @NotBlank String phoneNumber, @Validated @NotBlank String type){
-        final WxMaService wxService = WxConfig.getMaService(appId);
         //判断是客户还是护工
         switch (type){
             //客户
@@ -119,7 +112,7 @@ public class WxAuthController extends BaseController {
             //护工
             case "1":
                 break;
-            default:;
+            default:
         }
 
         return null;

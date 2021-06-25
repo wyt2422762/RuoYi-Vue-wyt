@@ -120,7 +120,7 @@ public class Order extends BaseEntity {
     private Map<String, OrderMeta> metaMap;
 
     public Map<String, OrderMeta> getMetaMap() {
-        if(this.meta == null || this.meta.isEmpty()){
+        if (this.meta == null || this.meta.isEmpty()) {
             return null;
         } else {
             Map<String, OrderMeta> map = new HashMap<>();

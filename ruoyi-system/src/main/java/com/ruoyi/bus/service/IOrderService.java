@@ -61,10 +61,10 @@ public interface IOrderService {
 
     /**
      * 支付成功
-     * @param orderno
-     * @param statusOld
-     * @param statusNew
-     * @return
+     * @param orderno 订单编号
+     * @param statusOld 旧状态
+     * @param statusNew 新状态
+     * @return 结果
      */
     int paySuccess(String orderno, String statusOld, String statusNew);
 

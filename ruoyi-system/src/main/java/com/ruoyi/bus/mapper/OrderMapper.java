@@ -71,7 +71,7 @@ public interface OrderMapper {
 
     /**
      * 添加订单内容详情
-     * @param orderMetas
+     * @param orderMetas 订单meta
      * @return 结果
      */
     int insertOrderMeta(List<OrderMeta> orderMetas);
@@ -87,8 +87,8 @@ public interface OrderMapper {
 
     /**
      * 更新订单支付时间
-     * @param orderNo
-     * @return
+     * @param orderNo 订单编号
+     * @return 结果
      */
     int updateOrderPayTime(Long orderNo);
 }

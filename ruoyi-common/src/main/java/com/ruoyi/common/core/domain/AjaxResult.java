@@ -104,7 +104,7 @@ public class AjaxResult extends HashMap<String, Object>
     /**
      * 返回错误消息
      * 
-     * @return
+     * @return 结果
      */
     public static AjaxResult error()
     {

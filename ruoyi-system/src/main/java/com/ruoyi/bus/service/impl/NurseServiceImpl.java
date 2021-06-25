@@ -89,25 +89,25 @@ public class NurseServiceImpl implements INurseService {
     /**
      * 批量删除护工
      *
-     * @param nurseids 需要删除的护工ID
+     * @param nurseIds 需要删除的护工ID
      * @return 结果
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int deleteNurseByIds(Long[] nurseids) {
-        return nurseMapper.deleteNurseByIds(nurseids);
+    public int deleteNurseByIds(Long[] nurseIds) {
+        return nurseMapper.deleteNurseByIds(nurseIds);
     }
 
     /**
      * 删除护工信息
      *
-     * @param nurseid 护工ID
+     * @param nurseId 护工ID
      * @return 结果
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int deleteNurseById(Long nurseid) {
-        return nurseMapper.deleteNurseById(nurseid);
+    public int deleteNurseById(Long nurseId) {
+        return nurseMapper.deleteNurseById(nurseId);
     }
 
     /**

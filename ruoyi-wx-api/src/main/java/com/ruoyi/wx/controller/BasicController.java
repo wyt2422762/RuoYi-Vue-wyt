@@ -69,8 +69,8 @@ public class BasicController {
      *
      * @param appId appId
      * @param wxRcp 微信基础参数
-     * @param encryptedData
-     * @param iv
+     * @param encryptedData encryptedData
+     * @param iv iv
      * @return 结果
      */
     @GetMapping("/phone")
@@ -91,7 +91,6 @@ public class BasicController {
      */
     @GetMapping("/getToken")
     public AjaxResult getToken(@PathVariable String appId, @Validated @NotBlank String openId, @Validated @NotBlank String phoneNumber, @Validated @NotBlank String type){
-        final WxMaService wxService = WxConfig.getMaService(appId);
         //判断是客户还是护工
         switch (type){
             //客户
@@ -115,7 +114,7 @@ public class BasicController {
             //护工
             case "1":
                 break;
-            default:;
+            default:
         }
 
         return null;
@@ -131,7 +130,6 @@ public class BasicController {
      */
     @GetMapping("/login")
     public AjaxResult login(@PathVariable String appId, @Validated @NotBlank String openId, @Validated @NotBlank String phoneNumber, @Validated @NotBlank String type){
-        final WxMaService wxService = WxConfig.getMaService(appId);
         //判断是客户还是护工
         switch (type){
             //客户
@@ -181,7 +179,7 @@ public class BasicController {
                 resN.put("token", tokenN);
                 resN.put("user", nurse);
                 return AjaxResult.success("成功", resN);
-            default:;
+            default:
         }
 
         return null;

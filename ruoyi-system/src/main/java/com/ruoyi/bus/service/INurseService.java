@@ -62,10 +62,10 @@ public interface INurseService
     /**
      * 删除护工信息
      * 
-     * @param nurseid 护工ID
+     * @param nursedId 护工ID
      * @return 结果
      */
-    int deleteNurseById(Long nurseid);
+    int deleteNurseById(Long nursedId);
 
     /**
      * 修改护工头像
