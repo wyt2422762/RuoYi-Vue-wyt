@@ -67,8 +67,7 @@ public class CommonController
      * 通用上传请求
      */
     @PostMapping("/common/upload")
-    public AjaxResult uploadFile(MultipartFile file) throws Exception
-    {
+    public AjaxResult uploadFile(MultipartFile file) {
         try
         {
             // 上传文件路径
@@ -91,9 +90,7 @@ public class CommonController
      * 本地资源通用下载
      */
     @GetMapping("/common/download/resource")
-    public void resourceDownload(String resource, HttpServletRequest request, HttpServletResponse response)
-            throws Exception
-    {
+    public void resourceDownload(String resource, HttpServletRequest request, HttpServletResponse response) {
         try
         {
             if (!FileUtils.checkAllowDownload(resource))

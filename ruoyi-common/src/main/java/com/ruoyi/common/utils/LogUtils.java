@@ -13,6 +13,6 @@ public class LogUtils
         {
             msg = "";
         }
-        return "[" + msg.toString() + "]";
+        return "[" + msg + "]";
     }
 }

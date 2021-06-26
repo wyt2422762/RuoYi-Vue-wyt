@@ -267,9 +267,9 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
      * @param sep 分隔符
      * @return set集合
      */
-    public static final Set<String> str2Set(String str, String sep)
+    public static Set<String> str2Set(String str, String sep)
     {
-        return new HashSet<String>(str2List(str, sep, true, false));
+        return new HashSet<>(str2List(str, sep, true, false));
     }
 
     /**
@@ -281,9 +281,9 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
      * @param trim 去掉首尾空白
      * @return list集合
      */
-    public static final List<String> str2List(String str, String sep, boolean filterBlank, boolean trim)
+    public static List<String> str2List(String str, String sep, boolean filterBlank, boolean trim)
     {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         if (StringUtils.isEmpty(str))
         {
             return list;
@@ -322,9 +322,9 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
         }
         StringBuilder sb = new StringBuilder();
         // 前置字符是否大写
-        boolean preCharIsUpperCase = true;
+        boolean preCharIsUpperCase;
         // 当前字符是否大写
-        boolean curreCharIsUpperCase = true;
+        boolean curreCharIsUpperCase;
         // 下一字符是否大写
         boolean nexteCharIsUpperCase = true;
         for (int i = 0; i < str.length(); i++)

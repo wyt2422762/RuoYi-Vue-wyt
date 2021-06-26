@@ -438,7 +438,7 @@ export default {
       // 订单弹出层标题
       orderTitle: "",
       // 部门树选项
-      deptOptions: undefined,
+      deptOptions: [],
       // 是否显示详情弹出层
       open: false,
       // 是否显示订单弹出层

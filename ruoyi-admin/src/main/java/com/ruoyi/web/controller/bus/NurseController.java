@@ -1,6 +1,5 @@
 package com.ruoyi.web.controller.bus;
 
-import com.ruoyi.bus.domain.Consumer;
 import com.ruoyi.bus.domain.Nurse;
 import com.ruoyi.bus.domain.NursePosition;
 import com.ruoyi.bus.service.INursePositionService;

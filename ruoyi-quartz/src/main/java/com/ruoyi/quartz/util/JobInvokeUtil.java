@@ -65,7 +65,7 @@ public class JobInvokeUtil
     /**
      * 校验是否为为class包名
      * 
-     * @param str 名称
+     * @param invokeTarget 名称
      * @return true是 false否
      */
     public static boolean isValidClassName(String invokeTarget)
@@ -112,33 +112,27 @@ public class JobInvokeUtil
         }
         String[] methodParams = methodStr.split(",");
         List<Object[]> classs = new LinkedList<>();
-        for (int i = 0; i < methodParams.length; i++)
-        {
-            String str = StringUtils.trimToEmpty(methodParams[i]);
+        for (String methodParam : methodParams) {
+            String str = StringUtils.trimToEmpty(methodParam);
             // String字符串类型，包含'
-            if (StringUtils.contains(str, "'"))
-            {
-                classs.add(new Object[] { StringUtils.replace(str, "'", ""), String.class });
+            if (StringUtils.contains(str, "'")) {
+                classs.add(new Object[]{StringUtils.replace(str, "'", ""), String.class});
             }
             // boolean布尔类型，等于true或者false
-            else if (StringUtils.equals(str, "true") || StringUtils.equalsIgnoreCase(str, "false"))
-            {
-                classs.add(new Object[] { Boolean.valueOf(str), Boolean.class });
+            else if (StringUtils.equals(str, "true") || StringUtils.equalsIgnoreCase(str, "false")) {
+                classs.add(new Object[]{Boolean.valueOf(str), Boolean.class});
             }
             // long长整形，包含L
-            else if (StringUtils.containsIgnoreCase(str, "L"))
-            {
-                classs.add(new Object[] { Long.valueOf(StringUtils.replaceIgnoreCase(str, "L", "")), Long.class });
+            else if (StringUtils.containsIgnoreCase(str, "L")) {
+                classs.add(new Object[]{Long.valueOf(StringUtils.replaceIgnoreCase(str, "L", "")), Long.class});
             }
             // double浮点类型，包含D
-            else if (StringUtils.containsIgnoreCase(str, "D"))
-            {
-                classs.add(new Object[] { Double.valueOf(StringUtils.replaceIgnoreCase(str, "D", "")), Double.class });
+            else if (StringUtils.containsIgnoreCase(str, "D")) {
+                classs.add(new Object[]{Double.valueOf(StringUtils.replaceIgnoreCase(str, "D", "")), Double.class});
             }
             // 其他类型归类为整形
-            else
-            {
-                classs.add(new Object[] { Integer.valueOf(str), Integer.class });
+            else {
+                classs.add(new Object[]{Integer.valueOf(str), Integer.class});
             }
         }
         return classs;
@@ -174,7 +168,7 @@ public class JobInvokeUtil
         int index = 0;
         for (Object[] os : methodParams)
         {
-            classs[index] = (Object) os[0];
+            classs[index] = os[0];
             index++;
         }
         return classs;

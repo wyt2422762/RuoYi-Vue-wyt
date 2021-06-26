@@ -33,8 +33,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-public class TokenService
-{
+public class TokenService {
     @Autowired
     private IConsumerService consumerService;
     @Autowired
@@ -63,12 +62,10 @@ public class TokenService
      *
      * @return 用户信息
      */
-    public String getType(HttpServletRequest request)
-    {
+    public String getType(HttpServletRequest request) {
         // 获取请求携带的令牌
         String token = getToken(request);
-        if (StringUtils.isNotEmpty(token))
-        {
+        if (StringUtils.isNotEmpty(token)) {
             Claims claims = parseToken(token);
             return claims.get("type", String.class);
         }
@@ -80,12 +77,10 @@ public class TokenService
      *
      * @return 客户信息
      */
-    public Consumer getMpConsumer(HttpServletRequest request)
-    {
+    public Consumer getMpConsumer(HttpServletRequest request) {
         // 获取请求携带的令牌
         String token = getToken(request);
-        if (StringUtils.isNotEmpty(token))
-        {
+        if (StringUtils.isNotEmpty(token)) {
             Claims claims = parseToken(token);
             Long consumerId = claims.get("consumerId", Long.class);
             return consumerService.selectConsumerById(consumerId);
@@ -98,12 +93,10 @@ public class TokenService
      *
      * @return 护工信息
      */
-    public Nurse getMpNurse(HttpServletRequest request)
-    {
+    public Nurse getMpNurse(HttpServletRequest request) {
         // 获取请求携带的令牌
         String token = getToken(request);
-        if (StringUtils.isNotEmpty(token))
-        {
+        if (StringUtils.isNotEmpty(token)) {
             Claims claims = parseToken(token);
             Long nurseId = claims.get("nurseId", Long.class);
             return nurseService.selectNurseById(nurseId);
@@ -128,8 +121,7 @@ public class TokenService
      * @param loginUser 用户信息
      * @return 令牌
      */
-    public String createToken(LoginUser loginUser)
-    {
+    public String createToken(LoginUser loginUser) {
         String token = IdUtils.fastUUID();
         loginUser.setToken(token);
         Map<String, Object> claims = new HashMap<>();
@@ -143,8 +135,7 @@ public class TokenService
      * @param nurse 护工信息
      * @return 令牌
      */
-    public String createToken(Nurse nurse)
-    {
+    public String createToken(Nurse nurse) {
         String token = IdUtils.fastUUID();
         Map<String, Object> claims = new HashMap<>();
         claims.put(Constants.MP_NURSE_KEY, token);
@@ -164,8 +155,7 @@ public class TokenService
      * @param consumer 客户信息
      * @return 令牌
      */
-    public String createToken(Consumer consumer)
-    {
+    public String createToken(Consumer consumer) {
         String token = IdUtils.fastUUID();
         Map<String, Object> claims = new HashMap<>();
         claims.put(Constants.MP_NURSE_KEY, token);
@@ -185,8 +175,7 @@ public class TokenService
      * @param claims 数据声明
      * @return 令牌
      */
-    private String createToken(Map<String, Object> claims)
-    {
+    private String createToken(Map<String, Object> claims) {
         return Jwts.builder()
                 .setClaims(claims)
                 //当前时间
@@ -202,8 +191,7 @@ public class TokenService
      * @param token 令牌
      * @return 数据声明
      */
-    public Claims parseToken(String token)
-    {
+    public Claims parseToken(String token) {
         return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
@@ -216,11 +204,9 @@ public class TokenService
      * @param request req
      * @return token token
      */
-    public String getToken(HttpServletRequest request)
-    {
+    public String getToken(HttpServletRequest request) {
         String token = request.getHeader(header);
-        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
-        {
+        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
             token = token.replace(Constants.TOKEN_PREFIX, "");
         }
         return token;
@@ -228,6 +214,7 @@ public class TokenService
 
     /**
      * 验证token是否有效
+     *
      * @param token token
      * @return 结果
      */
@@ -238,8 +225,7 @@ public class TokenService
         } catch (ExpiredJwtException e) {
             log.error(e.getMessage());
             e.printStackTrace();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("JWT token is invalid.");
             e.printStackTrace();
         }

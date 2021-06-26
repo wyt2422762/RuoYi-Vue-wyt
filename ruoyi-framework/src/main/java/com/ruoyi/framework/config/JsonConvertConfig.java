@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 转json配置
+ *
  * @author wyt
  */
 @Configuration

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 转json配置
+ *
  * @author wyt
  */
 @Configuration
@@ -16,5 +17,4 @@ public class JsonConvertConfig {
         return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.serializerByType(Long.class, ToStringSerializer.instance)
                 .serializerByType(Long.TYPE, ToStringSerializer.instance);
     }
-
 }

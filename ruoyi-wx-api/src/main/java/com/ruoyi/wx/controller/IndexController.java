@@ -1,21 +1,14 @@
 package com.ruoyi.wx.controller;
 
-import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.wechat.mp.domain.LunBoTu;
 import com.ruoyi.wechat.mp.service.IMpService;
-import com.ruoyi.wx.core.config.WxConfig;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**

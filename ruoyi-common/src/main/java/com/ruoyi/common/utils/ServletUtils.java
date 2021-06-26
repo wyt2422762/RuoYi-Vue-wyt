@@ -104,18 +104,18 @@ public class ServletUtils
     /**
      * 是否是Ajax异步请求
      * 
-     * @param request
+     * @param request req
      */
     public static boolean isAjaxRequest(HttpServletRequest request)
     {
         String accept = request.getHeader("accept");
-        if (accept != null && accept.indexOf("application/json") != -1)
+        if (accept != null && accept.contains("application/json"))
         {
             return true;
         }
 
         String xRequestedWith = request.getHeader("X-Requested-With");
-        if (xRequestedWith != null && xRequestedWith.indexOf("XMLHttpRequest") != -1)
+        if (xRequestedWith != null && xRequestedWith.contains("XMLHttpRequest"))
         {
             return true;
         }

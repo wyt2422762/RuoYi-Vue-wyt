@@ -18,22 +18,19 @@ import java.io.IOException;
 
 /**
  * token过滤器 验证token有效性
- * 
+ *
  * @author ruoyi
  */
 @Component
-public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
-{
+public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private TokenService tokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         String token = tokenService.getToken(request);
-        if (StringUtils.isNotBlank(token) && tokenService.validateToken(token))
-        {
+        if (StringUtils.isNotBlank(token) && tokenService.validateToken(token)) {
             try {
                 Authentication authentication = tokenService.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);

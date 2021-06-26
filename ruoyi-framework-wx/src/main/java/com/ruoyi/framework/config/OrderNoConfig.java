@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 订单编号生成配置
+ *
  * @author wyt
  */
 @Configuration
@@ -25,7 +26,7 @@ public class OrderNoConfig {
     private long machineId;
 
     @Bean
-    public OrderNoUtil orderNoUtil(){
+    public OrderNoUtil orderNoUtil() {
         return new OrderNoUtil(datacenterId, machineId);
     }
 

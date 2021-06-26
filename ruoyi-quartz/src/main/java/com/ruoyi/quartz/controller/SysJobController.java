@@ -57,7 +57,7 @@ public class SysJobController extends BaseController
     public AjaxResult export(SysJob sysJob)
     {
         List<SysJob> list = jobService.selectJobList(sysJob);
-        ExcelUtil<SysJob> util = new ExcelUtil<SysJob>(SysJob.class);
+        ExcelUtil<SysJob> util = new ExcelUtil<>(SysJob.class);
         return util.exportExcel(list, "定时任务");
     }
 
