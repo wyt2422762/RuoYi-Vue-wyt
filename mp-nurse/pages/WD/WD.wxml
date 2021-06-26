@@ -12,7 +12,7 @@
 					<view class="header">
 						<view class="header_img">
 							<image wx:if="{{!isLogin}}" src="../../img/TX1.png" style="height:90px;width:90px;"></image>
-							<image wx:if="{{isLogin}}" src="{{avatarBaseUrl}}{{userInfo.avatar}}"></image>
+							<image wx:if="{{isLogin && userInfo.avatar}}" src="{{avatarBaseUrl}}{{userInfo.avatar}}"></image>
 						</view>
 					</view>
 				</i-col>
@@ -105,7 +105,7 @@
 					<view class="label">特长</view>
 				</view>
 				<view class="Input_time">
-					<view wx:for="{{nurse.abilities}}" wx:for-item="ablity">
+					<view wx:for="{{userInfo.abilities}}" wx:for-item="ablity">
 						{{ablity}}
 					</view>
 				</view>

@@ -18,7 +18,7 @@
 					<i-col span="8" i-class="col-class">
 						<view class="head">
 							<view class="head_img">
-								<image src="{{avatarBaseUrl}}{{nurse.avatar}}"></image>
+								<image wx:if="{{nurse.avatar}}" src="{{avatarBaseUrl}}{{nurse.avatar}}"></image>
 							</view>
 							<view class="best">{{nurse.labels[0]}}</view>
 						</view>
