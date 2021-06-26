@@ -59,7 +59,7 @@ Page({
         consumer: res.data,
         hiddenLoading: !that.data.hiddenLoading
       })
-    }).catch(error => {
+    }).catch(err => {
       that.setData({
         hiddenLoading: !that.data.hiddenLoading
       })

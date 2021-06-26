@@ -21,7 +21,6 @@ service.interceptors.request.use(config => {
       config.header = {}
     }
     config.header['Authorization'] = 'Bearer ' + wx.getStorageSync('token')
-    console.log('添加token')
   }
   return config
 }, error => {
@@ -39,12 +38,12 @@ service.interceptors.response.use(res => {
     console.log('登录状态已过期，重新请求token')
     return Promise.reject(new Error(msg))
   } else if (code === 500) {
-    console.log('系统内部错误')
+    console.log('系统内部错误: ', msg)
     return Promise.reject(new Error(msg))
   } else if(code === 200){
     return res.data
   } else {
-    console.log('错误')
+    console.log('错误: ', msg)
     return Promise.reject(new Error(msg))
   }
 }, error => {

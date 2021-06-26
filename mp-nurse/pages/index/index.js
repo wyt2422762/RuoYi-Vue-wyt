@@ -49,16 +49,6 @@ Page({
      */
     onLoad(e) {
         let that = this
-        //开启后台定位
-        wx.startLocationUpdateBackground({
-            success(res) {
-                console.log('开启后台定位', res)
-            },
-            fail(err) {
-                console.log('开启后台定位失败', err)
-                iView.toast.warning('请转到设置位置信息[使用小程序期间和离开小程序后]')
-            }
-        })
         //获取当前的地理位置、速度
         wx.getLocation({
             type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
@@ -80,36 +70,48 @@ Page({
         })
         //位置变化
         wx.onLocationChange(res => {
-            that.setData({
-                longitude: res.longitude, // 经度
-                latitude: res.latitude, //纬度
-                markers: [{
-                    id: 1,
-                    iconPath: '../../img/1.3.png',
+            if (that.data.longitude !== res.longitude || that.data.latitude !== res.latitude) {
+                //上报位置信息
+                that.uploadLocation(res.longitude, res.latitude)
+                that.setData({
                     longitude: res.longitude, // 经度
                     latitude: res.latitude, //纬度
-                    width: 32,
-                    height: 32
-                }]
-            })
-            //向后台上报位置信息
-            let token = wx.getStorageSync('token')
-            if (token) {
-                //用户
-                let user = wx.getStorageSync('user')
-                //登录后并且位置变化才上报
-                if (that.data.Curlongitude != res.longitude || that.data.Curlatitude != res.latitude) {
-                    service.post('/nurse/position', {
-                        data: {
-                            lng: res.longitude,
-                            lat: res.latitude,
-                            nurseId: user.nurseId
-                        }
-                    }).catch(err => {
-                        console.log('上报位置失败', err)
-                    })
-                }
+                    markers: [{
+                        id: 1,
+                        iconPath: '../../img/1.3.png',
+                        longitude: res.longitude, // 经度
+                        latitude: res.latitude, //纬度
+                        width: 32,
+                        height: 32
+                    }]
+                })
+            }
+        })
+        //开启后台定位
+        wx.startLocationUpdateBackground({
+            fail(err) {
+                console.log('开启后台定位失败', err)
+                iView.toast.warning('请转到设置位置信息[使用小程序期间和离开小程序后], 并点击重新进入小程序')
             }
         })
     },
+    //上报位置
+    uploadLocation(longitude, latitude) {
+        let that = this
+        let token = wx.getStorageSync('token')
+        //登录后上报
+        if (!token) {
+            return false
+        }
+        let user = wx.getStorageSync('user')
+        service.post('/nurse/position', {
+            data: {
+                lng: longitude,
+                lat: latitude,
+                nurseId: user.nurseId
+            }
+        }).catch(err => {
+            console.log('上报位置失败', err)
+        })
+    }
 })

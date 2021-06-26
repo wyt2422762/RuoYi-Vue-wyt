@@ -216,7 +216,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-    console.log("上拉加载")
     this.more()
   },
   // 订单类型处理

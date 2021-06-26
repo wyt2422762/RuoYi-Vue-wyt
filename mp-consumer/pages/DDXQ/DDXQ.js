@@ -126,16 +126,6 @@ Page({
     wx.navigateBack({
       delta: 1,
     })
-    //更新订单状态
-    // let orderNo = that.data.order.orderNo
-    // service.put("/order/paySuccess/" + orderNo, {}).then(res => {
-    // }).catch(err => {
-    //   console.log("更改订单状态失败")
-    // }).finally(f => {
-    //   wx.navigateBack({
-    //     delta: 1,
-    //   })
-    // })
   },
   //支付失败回调方法
   payFail(err) {

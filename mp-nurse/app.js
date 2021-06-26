@@ -5,16 +5,12 @@ import {
 } from './utils/request.js'
 
 App({
-  onLaunch() {
-    console.log('app lanuch')
-  },
+  onLaunch() {},
   onShow() {
-    console.log('app show')
     let that = this
-
     //验证token是否有效，无效的话重新登录后台
     let token = wx.getStorageSync('token')
-    if(token){
+    if (token) {
       that.globalData.isLogin = true
       that.validateToken(token)
     } else {
@@ -66,7 +62,6 @@ App({
         })
       }
     })
-
   },
   //验证token是否有效
   validateToken(token) {
@@ -91,17 +86,14 @@ App({
   //获取个人信息方法(这里用来革新缓存的用户信息)
   getUserInfo() {
     let that = this
-    console.log('电话号码 = ' + wx.getStorageSync('phoneNumber'))
     service.get('/userInfo/getNurse', {
       data: {
         phoneNumber: wx.getStorageSync('phoneNumber')
       }
     }).then(res => {
-      console.log('读取个人信息成功')
       //更新缓存的个人信息
       wx.setStorageSync('user', res.data)
-      that.isUserComplete(res.data)
-    }).catch(error => {
+    }).catch(err => {
       console.log('读取个人信息失败')
     })
   },

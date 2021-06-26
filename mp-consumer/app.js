@@ -6,8 +6,21 @@ import {
 //app.js
 App({
   onShow: function () {
-    console.log('app show')
     let that = this
+
+    //验证token是否有效，无效的话重新登录后台
+    let token = wx.getStorageSync('token')
+    if (token) {
+      that.globalData.isLogin = true
+      that.validateToken(token)
+    } else {
+      //token失效，需要重新登陆
+      wx.clearStorageSync('token')
+      wx.clearStorageSync('user')
+      wx.clearStorageSync('phoneNumber')
+      wx.clearStorageSync('isLogin')
+      that.globalData.isLogin = false
+    }
 
     // 登录
     // wx.checkSession({
@@ -50,24 +63,9 @@ App({
       }
     })
 
-    //验证token是否有效，无效的话重新登录后台
-    let token = wx.getStorageSync('token')
-    if(token){
-      that.globalData.isLogin = true
-      that.validateToken(token)
-    } else {
-      //token失效，需要重新登陆
-      wx.clearStorageSync('token')
-      wx.clearStorageSync('user')
-      wx.clearStorageSync('phoneNumber')
-      wx.clearStorageSync('isLogin')
-      that.globalData.isLogin = false
-    }
-
   },
   //判断用户信息是否完善
   isUserComplete(user) {
-    console.log('isUserComplete')
     let that = this
     if (!user.name || !user.addr) {
       wx.setStorageSync('userInfoComplete', false)
@@ -83,7 +81,6 @@ App({
         phoneNumber: wx.getStorageSync('phoneNumber')
       }
     }).then(res => {
-      console.log('读取个人信息成功')
       //更新缓存的个人信息
       wx.setStorageSync('user', res.data)
       that.isUserComplete(res.data)
@@ -92,13 +89,13 @@ App({
     })
   },
   //验证token是否有效
-  validateToken(token){
+  validateToken(token) {
     let that = this
     service.get('/base/validateToken/' + token, {
       notAddToken: true,
     }).then(res => {
       let validate = res.data
-      if(!validate){
+      if (!validate) {
         //token失效，需要重新登陆
         wx.clearStorageSync('token')
         wx.clearStorageSync('user')
