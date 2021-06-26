@@ -49,6 +49,16 @@ Page({
      */
     onLoad(e) {
         let that = this
+        //开启后台定位
+        wx.startLocationUpdateBackground({
+            success(res) {
+                console.log('开启后台定位成功', res)
+            },
+            fail(err) {
+                console.log('开启后台定位失败', err)
+                iView.toast.warning('请转到设置位置信息[使用小程序期间和离开小程序后], 并点击重新进入小程序')
+            }
+        })
         //获取当前的地理位置、速度
         wx.getLocation({
             type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
@@ -85,13 +95,6 @@ Page({
                         height: 32
                     }]
                 })
-            }
-        })
-        //开启后台定位
-        wx.startLocationUpdateBackground({
-            fail(err) {
-                console.log('开启后台定位失败', err)
-                iView.toast.warning('请转到设置位置信息[使用小程序期间和离开小程序后], 并点击重新进入小程序')
             }
         })
     },

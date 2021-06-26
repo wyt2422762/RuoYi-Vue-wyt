@@ -36,7 +36,6 @@ Page({
       //总页数
       pages: null
     },
-
     //订单列表(已完成)
     orderList_ywc: [],
     // 查询参数(已完成)
@@ -56,13 +55,7 @@ Page({
       pages: null
     },
   },
-  onLoad(e) {
-    let that = this
-    allReq([getDicts("bus_order_type"), getDicts("bus_order_status")]).then(res => {
-      that.data.orderTypeOptions = res[0].data
-      that.data.orderStatusOptions = res[1].data
-    })
-  },
+  onLoad(e) {},
   onShow() {
     let that = this
     let nurseId = wx.getStorageSync('user').nurseId
@@ -75,6 +68,10 @@ Page({
   },
   //获取订单列表(进行中已完成)
   getOrderList() {
+    let token = wx.getStorageSync('token')
+    if (!token) {
+      return false
+    }
     let that = this
     //loading
     that.setData({
@@ -99,52 +96,12 @@ Page({
       })
     })
   },
-  //获取进行中订单
-  getOrderList_jxz() {
-    let that = this
-    //loading
-    that.setData({
-      hiddenLoading: !that.data.hiddenLoading
-    })
-    service.get('/order/list', {
-      data: that.data.queryParams_jxz
-    }).then(res => {
-      that.setData({
-        hiddenLoading: !that.data.hiddenLoading,
-        orderList_jxz: res.rows,
-        'page_jxz.total': res.total
-      })
-    }).catch(err => {
-      //loading
-      that.setData({
-        hiddenLoading: !that.data.hiddenLoading
-      })
-    })
-  },
-  //获取已完成订单
-  getOrderList_ywc() {
-    let that = this
-    //loading
-    that.setData({
-      hiddenLoading: !that.data.hiddenLoading
-    })
-    service.get('/order/list', {
-      data: that.data.queryParams_ywc
-    }).then(res => {
-      that.setData({
-        hiddenLoading: !that.data.hiddenLoading,
-        orderList_ywc: res.rows,
-        'page_ywc.total': res.total
-      })
-    }).catch(err => {
-      //loading
-      that.setData({
-        hiddenLoading: !that.data.hiddenLoading
-      })
-    })
-  },
   //加载更多
   more() {
+    let token = wx.getStorageSync('token')
+    if (!token) {
+      return false
+    }
     let that = this
     let currentTab = that.data.currentTab
     let queryParams = null
@@ -217,23 +174,5 @@ Page({
    */
   onReachBottom() {
     this.more()
-  },
-  // 订单类型处理
-  parseOrderType(value) {
-    let that = this
-    for (let wlo in that.orderTypeOptions) {
-      if (that.orderTypeOptions[wlo].dictValue === value) {
-        return that.orderTypeOptions[wlo].dictLabel;
-      }
-    }
-  },
-  // 订单状态处理
-  parseOrderStatus(value) {
-    let that = this
-    for (let wlo in that.orderStatusOptions) {
-      if (that.orderStatusOptions[wlo].dictValue === value) {
-        return that.orderStatusOptions[wlo].dictLabel;
-      }
-    }
   },
 })
