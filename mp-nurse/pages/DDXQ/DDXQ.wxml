@@ -249,9 +249,9 @@
 					value="{{order.nurse.phonenumber}}" disabled />
 			</view>
 		</view>
-	</view>
 
-	<view class="payment">
-		<button wx:if="{{order.status == 0}}" class="cancel" bindtap="showDoneOrder">订单完成</button>
+		<view class="payment">
+			<button wx:if="{{order.status == 3}}" class="cancel" bindtap="showDoneOrder">订单完成</button>
+		</view>
 	</view>
 </view>
