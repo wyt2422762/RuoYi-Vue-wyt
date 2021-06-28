@@ -4,6 +4,7 @@
     "pages/WD/WD",
     "pages/FW_YYPH/FW_YYPH",
     "pages/DDXQ/DDXQ",
+    "pages/PJXQ/PJXQ",
     "pages/login/login",
     "pages/FW_CQBJ/FW_CQBJ",
     "pages/FW_WSQJ/FW_WSQJ",
@@ -54,6 +55,8 @@
     }
   },
   "usingComponents": {
+    "i-tabs": "./component/iView/tabs/index",
+    "i-tab": "./component/iView/tab/index",
     "i-rate": "./component/iView/rate/index",
     "i-row": "./component/iView/row/index",
     "i-col": "./component/iView/col/index",
@@ -64,8 +67,10 @@
     "i-button": "./component/iView/button/index",
     "i-toast": "./component/iView/toast/index",
     "i-load-more": "./component/iView/load-more/index",
-    "i-tabs": "./component/iView/tabs/index",
-    "i-tab": "./component/iView/tab/index",
+    "i-checkbox-group": "./component/iView/checkbox-group/index",
+    "i-checkbox": "./component/iView/checkbox/index",
+    "i-cell-group": "./component/iView/cell-group/index",
+    "i-cell": "./component/iView/cell/index",
     "i-modal": "./component/iView/modal/index"
   }
 }

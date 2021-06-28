@@ -148,7 +148,6 @@ public class OrderController extends BaseController {
         return AjaxResult.success("订单评价成功");
     }
 
-
     /**
      * 完成订单
      * @param orderNo 订单编号
@@ -160,5 +159,20 @@ public class OrderController extends BaseController {
     public AjaxResult doneOrder(@PathVariable Long orderNo){
         int res = orderService.updateOrderStatus(orderNo + "", OrderStatusEnum.FWZ, OrderStatusEnum.YWC);
         return AjaxResult.success(res);
+    }
+
+    /**
+     * 获取订单评价详情
+     */
+    /**
+     * 订单评价
+     * @param orderNo 订单编号
+     * @return 结果
+     */
+    @PreAuthorize("hasAuthority('consumer') or hasAuthority('nurse')")
+    @GetMapping(value = "/getOrderEvaluation/{orderNo}")
+    public AjaxResult getOrderEvaluation(@PathVariable Long orderNo){
+        Evaluation evaluation = evaluationService.selectEvaluationByOrderNo(orderNo);
+        return AjaxResult.success("查询成功", evaluation);
     }
 }

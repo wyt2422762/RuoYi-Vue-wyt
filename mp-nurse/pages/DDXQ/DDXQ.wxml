@@ -252,6 +252,8 @@
 
 		<view class="payment">
 			<button wx:if="{{order.status == 3}}" class="cancel" bindtap="showDoneOrder">订单完成</button>
+			<button wx:if="{{order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ"
+				class="Btn">查看评价</button>
 		</view>
 	</view>
 </view>

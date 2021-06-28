@@ -140,6 +140,11 @@ Page({
   goto(e) {
     let url = e.currentTarget.dataset.url
     let orderNo = this.data.order.orderNo
-    gto.gotoIfLogin(url + "?orderNo=" + orderNo)
+    let detail = e.currentTarget.dataset.detail
+    let url1 = url + "?orderNo=" + orderNo
+    if(detail){
+      url1 = url1 + "&detail=" + detail
+    }
+    gto.gotoIfLogin(url1)
   },
 })

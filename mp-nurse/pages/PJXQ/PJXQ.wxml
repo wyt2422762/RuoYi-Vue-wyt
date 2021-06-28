@@ -14,7 +14,7 @@
 			<view class="weui-label" style="width: 70px;">服务评价</view>
 		</view>
 		<view class="weui-cell__hd">
-			<i-rate value="{{evaluation.score}}" bind:change="scoreChange" disabled="{{detail?true:false}}"></i-rate>
+			<i-rate value="{{evaluation.score}}" i-class="irs" i-rate-current="irc" disabled="{{true}}"></i-rate>
 		</view>
 	</view>
 	<!-- 添加描述 -->
@@ -26,8 +26,7 @@
 		</view>
 		<view class="weui-cell__bd" style="border:none;">
 				<i-input value="{{evaluation.text}}" type="textarea" 
-					i-class="ic" placeholder="请输入..." bind:change="textChange" maxlength="50" disabled="{{detail?true:false}}"/>
+					i-class="ic" placeholder="请输入..." disabled="{{true}}"/>
 		</view>
 	</view>
-	<view wx:if="{{!detail}}" bindtap="submit" class="aui-palace-one Btn" style="top:40%;">提交</view>
 </view>

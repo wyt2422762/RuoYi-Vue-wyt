@@ -179,8 +179,8 @@
           </el-col>
           <el-col :span="18">
             <el-rate
-              v-model="evaluateData.score"
-              disabled="true"
+              v-model="evaluateData.score - 0"
+              :disabled="true"
               :texts="['不满意', '一般', '满意', '很满意', '非常满意']"
               show-text>
             </el-rate>
@@ -201,7 +201,7 @@
             <div class="grid-content bg-purple">评价时间: </div>
           </el-col>
           <el-col :span="18">
-            <div class="grid-content bg-purple-light">{{evaluateData.time}}</div>
+            <div class="grid-content bg-purple-light">{{evaluateData.createTime}}</div>
           </el-col>
         </el-row>
       </div>

@@ -7,8 +7,9 @@
 	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
 	<view>加载中</view>
 </i-spin>
-<i-modal i-class="im" title="取消确认" visible="{{ showCancelOrderConfirm }}" bind:ok="cancelOrder" bind:cancel="hideCancelOrder">
-    <view>确认要取消该订单</view>
+<i-modal i-class="im" title="取消确认" visible="{{ showCancelOrderConfirm }}" bind:ok="cancelOrder"
+	bind:cancel="hideCancelOrder">
+	<view>确认要取消该订单</view>
 </i-modal>
 
 
@@ -45,8 +46,8 @@
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">付款时间</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.payTime}}"
-					disabled />
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder=""
+					value="{{order.payTime}}" disabled />
 			</view>
 		</view>
 		<!-- 	订单状态 -->
@@ -242,11 +243,14 @@
 					value="{{order.nurse.phonenumber}}" disabled />
 			</view>
 		</view>
-	</view>
 
-	<view class="payment">
-		<button wx:if="{{order.status == 0}}" class="cancel" bindtap="showCancelOrder">取消</button>
-		<button bindtap="{{!payButtonClicked?'payOrder':''}}" wx:if="{{order.status == 1}}" class="Btn">去支付</button>
-		<button wx:if="{{order.status == 4 && !order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ" class="Btn">评价</button>
+		<view class="payment">
+			<button wx:if="{{order.status == 0}}" class="cancel" bindtap="showCancelOrder">取消</button>
+			<button bindtap="{{!payButtonClicked?'payOrder':''}}" wx:if="{{order.status == 1}}" class="Btn">去支付</button>
+			<button wx:if="{{order.status == 4 && !order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ"
+				class="Btn">评价</button>
+			<button wx:if="{{order.evaluation}}" bindtap="goto" data-url="../PJXQ/PJXQ"
+				data-detail="true" class="Btn">查看评价</button>
+		</view>
 	</view>
 </view>

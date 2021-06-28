@@ -8,6 +8,7 @@ import {
 } from '../../utils/request.js'
 
 let iView = require('../../utils/iViewUtil.js')
+let gto = require('../../utils/goto.js')
 
 Page({
   data: {
@@ -96,5 +97,12 @@ Page({
       })
       iView.toast.error('操作失败')
     })
+  },
+  //跳转
+  goto(e) {
+    let url = e.currentTarget.dataset.url
+    let orderNo = this.data.order.orderNo
+    let url1 = url + "?orderNo=" + orderNo
+    gto.gotoIfLogin(url1)
   },
 })

@@ -13,6 +13,8 @@ Page({
   data: {
     //loading
     hiddenLoading: true,
+    //detail
+    detail: null,
     //评价
     evaluation: {}
   },
@@ -22,6 +24,12 @@ Page({
   onLoad(options) {
     let that = this
     that.data.evaluation.orderNo = options.orderNo
+    that.setData({
+      detail: options.detail
+    })
+    if(that.data.detail){
+      that.quertDetail()
+    }
   },
   //分数变化
   scoreChange(e) {
@@ -61,6 +69,25 @@ Page({
         hiddenLoading: !that.data.hiddenLoading
       })
       iView.toast.error('评价失败')
+    })
+  },
+  //查看评价详情
+  quertDetail(){
+    let that = this
+    //loading
+    that.setData({
+      hiddenLoading: !that.data.hiddenLoading
+    })
+    service.get('/order/getOrderEvaluation/' + that.data.evaluation.orderNo, {
+    }).then(res => {
+      that.setData({
+        hiddenLoading: !that.data.hiddenLoading,
+        evaluation: res.data
+      })
+    }).catch(err => {
+      that.setData({
+        hiddenLoading: !that.data.hiddenLoading
+      })
     })
   }
 })
