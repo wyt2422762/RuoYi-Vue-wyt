@@ -1,7 +1,7 @@
 <!--pages/YYPH/YYPH.wxml-->
 <i-toast id="toast" />
 
-<view class="container aui-palace aui-palace-one2 aui-palace-two">
+<view class="aui-palace aui-palace-one2 aui-palace-two">
   <view class="aui-palace-grid" bindtap="goto" data-url="../JJPH_order/JJPH_order" data-typeid="0" data-typename="自理型">
     <view class="aui-palace-grid-icon2">
       <image src="../../img/zlx.png"></image>

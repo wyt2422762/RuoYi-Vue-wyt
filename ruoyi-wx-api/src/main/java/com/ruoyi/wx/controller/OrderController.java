@@ -163,9 +163,6 @@ public class OrderController extends BaseController {
 
     /**
      * 获取订单评价详情
-     */
-    /**
-     * 订单评价
      * @param orderNo 订单编号
      * @return 结果
      */
