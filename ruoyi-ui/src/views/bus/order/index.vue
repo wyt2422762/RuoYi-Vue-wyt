@@ -124,7 +124,7 @@
     />
 
     <!-- 订单详情对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="550px" append-to-body class="cus_dialog1">
+    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body class="cus_dialog1">
       <div>
         <el-form ref="form" :model="form" :rules="rules" label-width="90px" :disabled="true">
           <el-row>
