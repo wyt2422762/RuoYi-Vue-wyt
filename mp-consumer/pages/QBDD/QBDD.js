@@ -143,4 +143,10 @@ Page({
       }
     }
   },
+  //下拉刷新
+  onPullDownRefresh() {
+    let that = this
+    wx.stopPullDownRefresh()
+    that.getList()
+  }
 })

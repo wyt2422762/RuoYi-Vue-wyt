@@ -68,9 +68,7 @@ Page({
       })
     })
   },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  //页面上拉触底事件的处理函数
   onReachBottom: function () {
     let that = this
     that.more()
@@ -110,4 +108,10 @@ Page({
       })
     })
   },
+  //下拉刷新
+  onPullDownRefresh() {
+    let that = this
+    wx.stopPullDownRefresh()
+    that.getList()
+  }
 })

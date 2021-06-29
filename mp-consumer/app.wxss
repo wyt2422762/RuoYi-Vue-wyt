@@ -240,8 +240,13 @@ input {
   transform: translate(-50%, -50%);
 }
 
+.cus-spin{
+  z-index: 99999!important;
+}
+
 .icon-load{
   animation: ani-demo-spin 1s linear infinite;
+  z-index: 9999;
 }
 
 @keyframes ani-demo-spin {
