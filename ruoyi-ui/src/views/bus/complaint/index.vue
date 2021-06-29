@@ -80,17 +80,8 @@
 
     <!-- 附件列表 -->
     <el-dialog title="附件列表" :visible.sync="showAttach">
-<!--      <div class="demo-image__placeholder" >
-        <div class="block" v-for="(attach, i) in attaches">
-          <el-image
-            :src="getActUrl(attach.url)"
-            :preview-src-list="getPreviews(attach.url)"
-            z-index="9999999"
-          ></el-image>
-        </div>
-      </div>-->
       <div class="block">
-        <el-carousel height="150px">
+        <el-carousel>
           <el-carousel-item v-for="(attach, i) in attaches" :key="i">
             <el-image
               :src="getActUrl(attach.url)"
@@ -100,10 +91,7 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-
-
     </el-dialog>
-
   </div>
 </template>
 

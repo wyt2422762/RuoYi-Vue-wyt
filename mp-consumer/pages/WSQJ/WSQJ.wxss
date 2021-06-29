@@ -211,3 +211,7 @@ page {
 .page{
   padding-bottom: 25px;
 }
+
+.typeListBox .wrap {
+  margin-top: 30%;
+}

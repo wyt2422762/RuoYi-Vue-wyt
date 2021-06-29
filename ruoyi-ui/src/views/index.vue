@@ -182,7 +182,6 @@ export default {
       this.queryParams.nurseId = this.nurse.nurseId
       this.btnLoading = true
       listPosition(this.queryParams).then(res => {
-        debugger
         this.polylinePath = res.data;
         this.btnLoading = false;
       }).catch(err => {

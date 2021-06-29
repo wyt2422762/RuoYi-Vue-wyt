@@ -60,7 +60,7 @@
         </template>
       </el-table-column>
       <el-table-column label="服务时间" align="center" prop="workTime" />
-      <el-table-column label="服务星级" align="center" prop="workLevel" />
+<!--      <el-table-column label="服务星级" align="center" prop="workLevel" />-->
       <el-table-column label="金额" align="center" prop="money" />
       <el-table-column label="客户" align="center" prop="consumer.name" />
       <el-table-column label="护工" align="center" prop="nurse.name" />
@@ -124,47 +124,89 @@
     />
 
     <!-- 订单详情对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px" :disabled="true">
-        <el-form-item label="订单类型" prop="orderType">
-          <el-select v-model="form.orderType" clearable size="small">
-            <el-option
-              v-for="dict in orderTypeOptions"
-              :key="dict.dictValue"
-              :label="dict.dictLabel"
-              :value="dict.dictValue"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="服务时间" prop="workTime">
-          <el-input v-model="form.workTime" type="textarea" />
-        </el-form-item>
-        <el-form-item label="服务星级" prop="workLevel">
-          <el-input v-model="form.workLevel" type="textarea" />
-        </el-form-item>
-        <el-form-item label="金额" prop="money">
-          <el-input v-model="form.money" />
-        </el-form-item>
-        <el-form-item label="客户" prop="consumerId">
-          <el-input v-model="form.consumer.name" />
-        </el-form-item>
-        <el-form-item label="护工" prop="nurseId">
-          <el-input v-model="form.nurse.name" />
-        </el-form-item>
-        <el-form-item label="状态" prop="nurseId">
-          <el-select v-model="form.status" size="small">
-            <el-option
-              v-for="dict in orderStatusOptions"
-              :key="dict.dictValue"
-              :label="dict.dictLabel"
-              :value="dict.dictValue"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" />
-        </el-form-item>
-      </el-form>
+    <el-dialog :title="title" :visible.sync="open" width="550px" append-to-body class="cus_dialog1">
+      <div>
+        <el-form ref="form" :model="form" :rules="rules" label-width="90px" :disabled="true">
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="订单类型" prop="orderType">
+                <el-select v-model="form.orderType" clearable size="small">
+                  <el-option
+                    v-for="dict in orderTypeOptions"
+                    :key="dict.dictValue"
+                    :label="dict.dictLabel"
+                    :value="dict.dictValue"
+                  />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="订单编号" prop="orderNo">
+                <el-input v-model="form.orderNo" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <el-form-item label="服务时间" prop="workTime">
+                <el-input v-model="form.workTime" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <el-form-item label="地址" prop="workTime">
+                <el-input v-model="form.addr" type="textarea" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="客户" prop="consumer.name">
+                <el-input v-model="form.consumer.name" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="客户电话" prop="consumer.phonenumber">
+                <el-input v-model="form.consumer.phonenumber" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="护工" prop="nurse.name">
+                <el-input v-model="form.nurse.name" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="护工电话" prop="nurse.phonenumber">
+                <el-input v-model="form.nurse.phonenumber" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="押金" prop="deposit" style="margin-bottom: 0;">
+                <el-input v-model="form.deposit" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="金额" prop="money" style="margin-bottom: 0;">
+                <el-input v-model="form.money" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-divider></el-divider>
+          <el-row v-for="(mt,index) in form.meta" :key="index">
+            <el-col :span="24">
+              <el-form-item :label="mt.label">
+                <el-input v-model="mt.data" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </div>
+
     </el-dialog>
 
     <!-- 订单评价对话框 -->
@@ -271,6 +313,8 @@ export default {
       form: {
         consumer: {},
         nurse: {},
+        metaMap: {},
+        meta: []
       },
       // 表单校验
       rules: {
@@ -437,3 +481,15 @@ export default {
   }
 };
 </script>
+
+<style>
+.cus_dialog .el-dialog {
+  height: 90%;
+  overflow: hidden;
+}
+
+.cus_dialog .el-dialog .el-dialog__body {
+  overflow-y: auto;
+  height: 100%;
+}
+</style>
