@@ -21,7 +21,6 @@ service.interceptors.request.use(config => {
       config.header = {}
     }
     config.header['Authorization'] = 'Bearer ' + wx.getStorageSync('token')
-    console.log('添加token')
   }
   return config
 }, error => {

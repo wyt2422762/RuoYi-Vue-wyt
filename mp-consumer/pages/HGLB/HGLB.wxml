@@ -11,7 +11,7 @@
 <view class="container">
 	<view class="aui-palace">
 		<!-- 列表 -->
-		<navigator wx:for="{{nurseList}}" wx:for-item="nurse" wx:for-key="nurseId" class="aui-palace-one"
+		<navigator wx:for="{{nurseList}}" wx:for-item="nurse" wx:key="nurseId" class="aui-palace-one"
 			url="../HGXQ/HGXQ?nurseId={{nurse.nurseId}}">
 			<view class="Nurse">
 				<i-row>
@@ -52,7 +52,7 @@
 				</i-row>
 			</view>
 			<view class="comment">
-				<block wx:for="{{nurse.abilities}}" wx:for-item="ablity">
+				<block wx:for="{{nurse.abilities}}" wx:for-item="ablity" wx:key="ablity">
 					{{ablity}}
 				</block>
 			</view>

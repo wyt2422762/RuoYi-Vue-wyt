@@ -48,6 +48,7 @@ Page({
   //获取护工列表
   getList() {
     let that = this
+    that.data.queryParams.pageNum = 1
     //loading
     that.setData({
       hiddenLoading: !that.data.hiddenLoading

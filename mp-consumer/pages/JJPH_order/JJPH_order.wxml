@@ -55,7 +55,7 @@
 	<view class="weui-cell">
 		<i-panel title="额外服务" style="width: 100%;">
 			<i-checkbox-group current="{{extras}}" bindchange="extraChange">
-				<i-checkbox wx:for="{{extraList}}" wx:key="{{item.id}}" value="{{item.name}}" position="right">
+				<i-checkbox wx:for="{{extraList}}" wx:key="id" value="{{item.name}}" position="right">
 				</i-checkbox>
 			</i-checkbox-group>
 		</i-panel>

@@ -97,7 +97,7 @@
 		<view class='checkbox-con'>
 			<scroll-view scroll-y style="height: 400rpx;" scroll-top="{{scrollTop}}">
 				<i-checkbox-group current="{{works_label}}" bindchange="worksChange">
-					<i-checkbox wx:for="{{workOptions}}" wx:for-item="work" wx:key="{{work.id}}" value="{{work.dictLabel}}"
+					<i-checkbox wx:for="{{workOptions}}" wx:for-item="work" wx:key="id" value="{{work.dictLabel}}"
 						position="right">
 					</i-checkbox>
 				</i-checkbox-group>

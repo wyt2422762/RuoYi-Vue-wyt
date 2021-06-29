@@ -54,7 +54,6 @@ Page({
   },
   onShow() {
     let that = this
-    that.data.queryParams.pageNum = 1
     //查询订单列表
     that.getList()
   },
@@ -68,6 +67,7 @@ Page({
   //查询订单列表
   getList() {
     let that = this
+    that.data.queryParams.pageNum = 1
     //loading
     that.setData({
       hiddenLoading: !that.data.hiddenLoading

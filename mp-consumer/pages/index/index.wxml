@@ -9,7 +9,7 @@
       <view style="margin:10px;">
         <swiper class='u-wrp-bnr' indicator-dots='true' autoplay='true' interval='5000' duration='1000' circular='true'>
           <block wx:for="{{bannerUrl}}" wx:for-index="index" wx:key="id">
-            <swiper-item style="border-radius: 15px;overflow: :hidden;">
+            <swiper-item>
               <image src='{{bannerBaseUrl}}{{item.url}}' class='u-img-slide' mode='aspectFill'></image>
             </swiper-item>
           </block>

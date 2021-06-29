@@ -57,7 +57,7 @@
 				<view class="Star_name">护理能力</view>
 			</view>
 			<view class="comment">
-				<block wx:for="{{nurse.abilities}}" wx:for-item="ablity">
+				<block wx:for="{{nurse.abilities}}" wx:for-item="ablity" wx:key="ablity">
 					{{ablity}}
 				</block>
 			</view>
@@ -69,7 +69,7 @@
 				<view class="Star_name">荣获证书</view>
 			</view>
 			<view class="certificate">
-				<view wx:for="{{nurse.certificates}}" wx:for-item="cert" class="ZS">{{cert}}</view>
+				<view wx:for="{{nurse.certificates}}" wx:for-item="cert" wx:key="cert" class="ZS">{{cert}}</view>
 			</view>
 
 		</view>
@@ -83,7 +83,7 @@
 			</view>
 			<view class="Star_name">历史评价</view>
 		</view>
-		<view wx:for="{{evaluations}}" wx:for-item="eva" wx:for-key="evaluationId" class="hist_list">
+		<view wx:for="{{evaluations}}" wx:for-item="eva" wx:key="evaluationId" class="hist_list">
 			<i-row>
 				<i-col span="12" i-class="col-class">
 					<view class="phone">{{phoneF.hideMiddle4(eva.consumer.phonenumber)}}</view>

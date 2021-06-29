@@ -1,7 +1,7 @@
 <wxs src='../../utils/order.wxs' module='filters' />
 
 <i-toast id="toast" />
-<i-spin fix custom wx:if="{{ !hiddenLoading }}">
+<i-spin fix custom wx:if="{{ !hiddenLoading }}" i-class="cus-spin">
 	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
 	<view>加载中</view>
 </i-spin>

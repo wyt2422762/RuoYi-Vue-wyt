@@ -2,5 +2,6 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ff8a00",
     "navigationBarTitleText": "服务",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
 }

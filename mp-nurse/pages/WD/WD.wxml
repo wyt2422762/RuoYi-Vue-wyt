@@ -91,7 +91,7 @@
 					<view class="label">证书</view>
 				</view>
 				<view class="Input_time">
-					<view wx:for="{{userInfo.certificates}}" wx:for-item="cert" class="ZS">{{cert}}</view>
+					<view wx:for="{{userInfo.certificates}}" wx:for-item="cert" wx:key="cert" class="ZS">{{cert}}</view>
 				</view>
 			</view>
 		</view>
@@ -105,7 +105,7 @@
 					<view class="label">特长</view>
 				</view>
 				<view class="Input_time">
-					<view wx:for="{{userInfo.abilities}}" wx:for-item="ablity">
+					<view wx:for="{{userInfo.abilities}}" wx:for-item="ablity" wx:key="ablity">
 						{{ablity}}
 					</view>
 				</view>

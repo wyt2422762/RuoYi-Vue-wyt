@@ -60,9 +60,7 @@ Page({
     let that = this
     let nurseId = wx.getStorageSync('user').nurseId
     that.data.queryParams_jxz.nurseId = nurseId
-    that.data.queryParams_jxz.pageNum = 1
     that.data.queryParams_ywc.nurseId = nurseId
-    that.data.queryParams_ywc.pageNum = 1
     //查询订单列表
     that.getOrderList()
   },
@@ -73,6 +71,10 @@ Page({
       return false
     }
     let that = this
+
+    that.data.queryParams_jxz.pageNum = 1
+    that.data.queryParams_ywc.pageNum = 1
+
     //loading
     that.setData({
       hiddenLoading: !that.data.hiddenLoading
@@ -169,10 +171,18 @@ Page({
       currentTab: e.detail.current
     })
   },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  //页面上拉触底事件的处理函数
   onReachBottom() {
     this.more()
   },
+  //下拉刷新
+  onPullDownRefresh() {
+    let that = this
+    wx.stopPullDownRefresh()
+    let token = wx.getStorageSync('token')
+    if (!token) {
+      return false
+    }
+    that.getOrderList()
+  }
 })

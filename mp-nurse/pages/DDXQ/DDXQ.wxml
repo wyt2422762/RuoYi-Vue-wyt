@@ -3,7 +3,7 @@
 <wxs src='../../utils/order.wxs' module='filters' />
 
 <i-toast id="toast" />
-<i-spin fix custom wx:if="{{ !hiddenLoading }}">
+<i-spin fix custom wx:if="{{ !hiddenLoading }}" i-class="cus-spin">
 	<i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
 	<view>加载中</view>
 </i-spin>
@@ -36,8 +36,7 @@
 		<view class="weui-cell padding" style="border:none;">
 			<view class="weui-cell__hd " style="margin-left:16px;">付款金额</view>
 			<view class="weui-cell__bd" style=" text-align: right;padding-right: 20px;">
-				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.money}}"
-					disabled />
+				<input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="" value="{{order.money}}" disabled />
 			</view>
 		</view>
 		<!-- 支付方式 -->
