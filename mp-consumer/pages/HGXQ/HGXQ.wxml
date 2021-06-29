@@ -16,9 +16,10 @@
 					<i-col span="8" i-class="col-class">
 						<view class="head">
 							<view class="head_img">
-								<image src="{{avatarBaseUrl}}{{nurse.avatar}}"></image>
+								<image wx:if="{{nurse.avatar}}" src="{{avatarBaseUrl}}{{nurse.avatar}}"></image>
+								<image wx:if="{{!nurse.avatar}}" src="../../img/head1.png"></image>
 							</view>
-							<view class="best">{{filters.parseWorkStatus(nurse.workStatus)}}</view>
+							<!-- <view class="best">{{filters.parseWorkStatus(nurse.workStatus)}}</view> -->
 						</view>
 					</i-col>
 					<i-col span="16" i-class="col-class">
