@@ -22,17 +22,22 @@ const formatDateAfterMonth = (dateStr, n) => {
   let yy = parseInt(s[0])
   let mm = parseInt(s[1])
   let dd = parseInt(s[2])
-  let dt = new Date(yy, mm, dd)
 
-  let num = dt.getMonth() + parseInt(n);
+  let dt = new Date(yy, mm, dd)
+  dt.setMonth((dt.getMonth()-1) + n)
+
+  let num = mm + parseInt(n);
   if (num / 12 > 1) {
     yy += Math.floor(num / 12);
     mm = num % 12;
   } else {
     mm += parseInt(n);
   }
+  
+  let dt2 = new Date(dt.getFullYear(), dt.getMonth(), 0)
+  let dd1 = dd > dt2.getDate() ? dt2.getDate() : dd
 
-  return [yy, mm, dd].map(formatNumber).join('-')
+  return [yy, mm, dd1].map(formatNumber).join('-')
 }
 
 const getDaysBetween = (dateStr1, dateStr2) => {
