@@ -51,6 +51,48 @@
           </view>
         </view>
       </view>
+
+      <!-- 分隔线 -->
+      <i-divider content="热门服务"></i-divider>
+
+      <!-- 热门服务 -->
+      <view class="aui-palace aui-palace-one2 aui-palace-two" style="margin-top:0;">
+        <view class="aui-palace-grid" hover-class="none" bindtap="goto1" data-url="../JJPH_order/JJPH_order" data-typeid="1" data-typename="全护型">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_21.png"></image>
+          </view>
+          <view class="aui-palace-grid-text">
+            <h2>全护型</h2>
+          </view>
+        </view>
+        <view class="aui-palace-grid" hover-class="none" bindtap="goto1" data-url="../JJPH_order/JJPH_order" data-typeid="2" data-typename="专护型">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_21.png"></image>
+          </view>
+          <view class="aui-palace-grid-text">
+            <h2>专护型</h2>
+          </view>
+        </view>
+        <view class="aui-palace-grid" hover-class="none" bindtap="goto1" data-url="../YYPH_order/YYPH_order" data-typeid="2"
+    data-typename="介护老人">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_22.png"></image>
+          </view>
+          <view class="aui-palace-grid-text">
+            <h2>介护老人</h2>
+          </view>
+        </view>
+        <view class="aui-palace-grid" hover-class="none" bindtap="goto1" data-url="../WSQJ/WSQJ" data-typeid="0"
+    data-typename="卫生清理">
+          <view class="aui-palace-grid-icon2">
+            <image src="../../img/icon_23.png"></image>
+          </view>
+          <view class="aui-palace-grid-text">
+            <h2>卫生清理</h2>
+          </view>
+        </view>
+      </view>
+
     </section>
   </section>
 </view>

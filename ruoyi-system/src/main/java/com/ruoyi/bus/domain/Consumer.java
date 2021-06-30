@@ -106,13 +106,13 @@ public class Consumer extends BaseEntity {
     /**
      * 老人分类
      */
-    @Excel(name = "老人分类", dictType = "bus_laoren_fenlei")
+    @Excel(name = "老人分类", dictType = "bus_laoren_fenlei", type = Excel.Type.EXPORT)
     private String type;
 
     /**
      * 老人服务类型
      */
-    @Excel(name = "老人服务类型", dictType = "bus_laoren_type")
+    @Excel(name = "老人服务类型", dictType = "bus_laoren_type", type = Excel.Type.EXPORT)
     private String serviceType;
 
     /**
@@ -126,7 +126,7 @@ public class Consumer extends BaseEntity {
     /**
      * 帐号状态（0正常 1停用）
      */
-    @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
+    //@Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
     /**

@@ -193,6 +193,12 @@ Page({
     if (that.data.extras && that.data.extras.length > 0) {
       that.data.order.extra = that.data.extras
     }
+
+    //处理押金
+    if(that.data.deposit) {
+      that.data.order.deposit = that.data.deposit
+    }
+
     //参数检查
     if (!that.checkOrderParam()) {
       return false

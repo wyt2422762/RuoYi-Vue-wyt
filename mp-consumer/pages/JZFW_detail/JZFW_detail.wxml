@@ -1,0 +1,25 @@
+<view class="page">
+
+  <i-card title="家政服务" thumb="/img/icon_23.png" i-class="icus">
+    <view slot="content">
+      <i-panel title="卫生清理">
+        <view style="padding: 15px;">擦玻璃，扫地出门，擦玻璃带清理阳台厨房卫生间瓷砖</view>
+      </i-panel>
+      <i-panel title="窗帘清洗">
+        <view style="padding: 15px;">薄，厚，加厚</view>
+      </i-panel>
+      <i-panel title="床单被罩清洗">
+        <view style="padding: 15px;">清洗被罩，拆洗做被子(单人，双人)</view>
+      </i-panel>
+      <i-panel title="长期保洁">
+        <view style="padding: 15px;">
+          <view>地面保洁:扫地出门，拖一次，倒垃圾</view>
+          <view>家具:茶几、电视柜、写字台、床头柜等</view>
+          <view>厨具:洗碗筷，擦拭厨柜、餐桌、灶台及油烟机外部</view>
+          <view>洁具保洁:马桶、梳妆台、洗衣机外部</view>
+          <view>玻璃保洁:阳台、卧室外玻璃及室内玻璃门擦拭</view>
+        </view>
+      </i-panel>
+    </view>
+  </i-card>
+</view>

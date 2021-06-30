@@ -1,5 +1,6 @@
 package com.ruoyi.bus.service.impl;
 
+import com.ruoyi.common.enums.UserStatus;
 import com.ruoyi.common.exception.CustomException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.bus.domain.Consumer;
@@ -186,6 +187,7 @@ public class ConsumerServiceImpl implements IConsumerService {
         {
             try
             {
+                consumer1.setStatus(UserStatus.OK.getCode());
                 // 验证手机号是否唯一
                 Consumer consumer = consumerMapper.checkPhoneUnique(consumer1.getPhonenumber());
                 if (StringUtils.isNull(consumer))

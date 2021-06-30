@@ -13,7 +13,8 @@
 		</view>
 		<view class="introduce">
 			<view class="Self">窗帘清洗</view>
-			<view class="details">查看详情</view>
+			<!-- <view class="details">查看详情</view> -->
+			<navigator class="details" url="../JZFW_detail/JZFW_detail">查看详情</navigator>
 		</view>
 	</view>
 

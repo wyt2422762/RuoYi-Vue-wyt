@@ -1,0 +1,35 @@
+<view class="page">
+  
+  <i-card title="{{type.name}}" extra="服务项目" thumb="{{type.id==0?'/img/ZLX.png':(type.id==1?'/img/QHX.png':(type.id==2?'/img/ZHX.png':'/img/tzfw.png'))}}" i-class="icus">
+    <view slot="content">
+      <i-cell-group>
+        <!-- 自理型 -->
+        <i-cell i-class="ic" title="1.每天清扫房间，每周清洗外衣一次"></i-cell>
+        <i-cell i-class="ic" title="2.每两周清洗床单，枕巾一次"></i-cell>
+        <i-cell i-class="ic" title="3.每月清洗被套一次"></i-cell>
+        <i-cell i-class="ic" title="4.提供情感关怀服务"></i-cell>
+        <i-cell i-class="ic" title="5.清洗餐具，帮助老人进行文娱活动"></i-cell>
+
+        <!-- 全护型 -->
+        <i-cell i-class="ic" wx:if="{{type.id > 0}}" title="6.铺床、叠被、清洗内衣，整理整齐衣服"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 0}}" title="7.协助老人穿脱衣，洗脸，刷牙"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 0}}" title="8.剪指甲，洗脚，擦澡，洗发"></i-cell>
+
+        <!-- 专护型 -->
+        <i-cell i-class="ic" wx:if="{{type.id > 1}}" title="10.随时清洗内外衣，随时清洗污染物及污染部位"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 1}}" title="11.随时侍侯大小便"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 1}}" title="12.床单，枕套，被套随时清洗"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 1}}" title="13.每两小时翻身拍背防褥疮，每天上下护理员肢体按摩"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 1}}" title="14.喂饭，24小时生活照料及医疗监护"></i-cell>
+
+        <!-- 特专服务 -->
+        <i-cell i-class="ic" wx:if="{{type.id > 2}}" title="15.每一小时翻身拍背一次，防褥疮"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 2}}" title="16.上下午肢体活动按摩各一次，每次20-25分钟"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 2}}" title="17.喂饭或鼻饲并口护"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 2}}" title="18.给予意识不清，具有暴力倾向者特殊照料"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 2}}" title="19.专业按摩师每周按摩二次，每次30分钟"></i-cell>
+        <i-cell i-class="ic" wx:if="{{type.id > 2}}" title="20.详细记录护理情况"></i-cell>
+      </i-cell-group>
+    </view>
+  </i-card>
+</view>

@@ -1,6 +1,7 @@
 package com.ruoyi.bus.domain;
 
 import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.annotation.Excels;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.validation.group.EditGroup;
@@ -27,7 +28,7 @@ public class Nurse extends BaseEntity {
     /**
      * 部门id
      */
-    @Excel(name = "部门id")
+    @Excel(name = "部门id", type = Excel.Type.IMPORT)
     private Long deptId;
 
     /**
@@ -71,37 +72,37 @@ public class Nurse extends BaseEntity {
     /**
      * 服务状态
      */
-    @Excel(name = "服务状态", dictType = "bus_workStatus")
+    //@Excel(name = "服务状态", dictType = "bus_workStatus")
     private String workStatus;
 
     /**
      * 标签
      */
-    @Excel(name = "标签")
+    @Excel(name = "标签", dictType = "bus_nurse_label", prompt = "如果多个用,分开")
     private List<String> labels;
 
     /**
      * 能力
      */
-    @Excel(name = "能力")
+    @Excel(name = "能力", dictType = "bus_nurse_ability", prompt = "如果多个用,分开")
     private List<String> abilities;
 
     /**
      * 证书
      */
-    @Excel(name = "证书")
+    @Excel(name = "证书", dictType = "bus_nurse_certificate", prompt = "如果多个用,分开")
     private List<String> certificates;
 
     /**
      * 头像
      */
-    @Excel(name = "头像")
+    //@Excel(name = "头像")
     private String avatar;
 
     /**
      * 状态（0正常 1停用）
      */
-    @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
+    //@Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
     /**
@@ -110,6 +111,7 @@ public class Nurse extends BaseEntity {
     //@Excel(name = "删除标志", readConverterExp = "删除标志（0代表存在 2代表删除)")
     private String delFlag;
 
+    @Excel(name = "部门名称", targetAttr = "deptName", type = Excel.Type.EXPORT)
     private SysDept dept;
 
     /**

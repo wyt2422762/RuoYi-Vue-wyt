@@ -3,6 +3,7 @@ package com.ruoyi.bus.service.impl;
 import com.ruoyi.bus.domain.Nurse;
 import com.ruoyi.bus.mapper.NurseMapper;
 import com.ruoyi.bus.service.INurseService;
+import com.ruoyi.common.enums.UserStatus;
 import com.ruoyi.common.exception.CustomException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
@@ -164,6 +165,7 @@ public class NurseServiceImpl implements INurseService {
 
         for (Nurse nurse : nurseList) {
             try {
+                nurse.setStatus(UserStatus.OK.getCode());
                 // 验证手机号是否唯一
                 Nurse nurse1 = nurseMapper.checkPhoneUnique(nurse.getPhonenumber());
                 if (StringUtils.isNull(nurse1)) {

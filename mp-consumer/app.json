@@ -1,31 +1,27 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/ZLLR/ZLLR",
     "pages/login/login",
     "pages/CQBJ/CQBJ",
     "pages/CLQX/CLQX",
-    "pages/CQBJ_ddxq/CQBJ_ddxq",
-    "pages/CDBZQX_ddxq/CDBZQX_ddxq",
-    "pages/WSQJ_ddxq/WSQJ_ddxq",
     "pages/CDBZQX/CDBZQX",
     "pages/WSQJ/WSQJ",
     "pages/JJPH_order/JJPH_order",
     "pages/JJPH/JJPH",
+    "pages/JJPH_detail/JJPH_detail",
     "pages/YYPH/YYPH",
     "pages/YYPH_order/YYPH_order",
-
+    "pages/YYPH_detail/YYPH_detail",
+    "pages/JZFW_order/JZFW_detail",
     "pages/JZFW/JZFW",
     "pages/SQKP/SQKP",
     "pages/SQTK/SQTK",
     "pages/PJXQ/PJXQ",
-    "pages/PJ/PJ",
     "pages/DDXQ/DDXQ",
     "pages/HGXQ/HGXQ",
     "pages/HGLB/HGLB",
     "pages/JGRZ/JGRZ",
     "pages/QBDD/QBDD",
-    "pages/FWWC/FWWC",
     "pages/TKLB/TKLB",
     "pages/GRXX/GRXX",
     "pages/fail/fail",
@@ -81,6 +77,8 @@
     "i-checkbox": "./component/iView/checkbox/index",
     "i-cell-group": "./component/iView/cell-group/index",
     "i-cell": "./component/iView/cell/index",
-    "i-modal": "./component/iView/modal/index"
+    "i-modal": "./component/iView/modal/index",
+    "i-card": "./component/iView/card/index",
+    "i-divider": "./component/iView/divider/index"
   }
 }

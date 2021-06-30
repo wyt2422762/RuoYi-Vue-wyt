@@ -97,7 +97,7 @@
 			</i-row>
 			<i-row>
 				<i-col span="24" i-class="col-class">
-					<view class="LSPY">{{eva.text}}</view>
+					<view class="LSPY" wx:if="{{eva.text}}">{{eva.text}}</view>
 				</i-col>
 			</i-row>
 		</view>

@@ -1,0 +1,21 @@
+page {
+  background-color: #f4f9fd;
+}
+
+.icus {
+  margin-top: 35rpx!important;
+  margin-bottom: 35rpx!important;
+  background: #fff !important;
+}
+
+.icus .i-card-body {
+  padding: 0 16px !important;
+}
+
+.icus .i-card-footer {
+  margin-top: 0 !important;
+}
+
+.ic {
+  padding: 12px 0!important;
+}

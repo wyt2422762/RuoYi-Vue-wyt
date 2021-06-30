@@ -207,6 +207,10 @@ Page({
     if (meta && meta.length > 0) {
       that.data.order.meta = meta
     }
+    //处理押金
+    if(that.data.deposit) {
+      that.data.order.deposit = that.data.deposit
+    }
 
     //loading
     that.setData({

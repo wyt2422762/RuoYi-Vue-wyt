@@ -40,5 +40,13 @@ Page({
   goto(e) {
     let url = e.currentTarget.dataset.url
     gto.gotoIfLogin(url)
+  },
+  //跳转
+  goto1(e) {
+    let url = e.currentTarget.dataset.url
+    let typeid = e.currentTarget.dataset.typeid
+    let typename = e.currentTarget.dataset.typename
+    url = url + "?typeId=" + typeid + "&typeName=" + typename
+    gto.gotoIfLogin(url)
   }
 })

@@ -5,6 +5,8 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import com.ruoyi.common.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -1002,4 +1004,53 @@ public class Convert
         }
         return head + s.replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$", "零元整");
     }
+
+    /**
+     * 转换为List<br>
+     * 如果给定的值为空，或者转换失败，返回默认值<code>null</code><br>
+     * 转换失败不会报错
+     *
+     * @param value 被转换的值
+     * @return 结果
+     */
+    public static List toList(Object value)
+    {
+        return toList(value, null);
+    }
+
+    /**
+     * 转换为List<br>
+     * 如果给定的值为空，或者转换失败，返回默认值<br>
+     * 转换失败不会报错
+     *
+     * @param value 被转换的值
+     * @param defaultValue 转换错误时的默认值
+     * @return 结果
+     */
+    public static List toList(Object value, List defaultValue)
+    {
+        if (value == null)
+        {
+            return defaultValue;
+        }
+        if (value instanceof List)
+        {
+            return (List) value;
+        }
+
+        final String valueStr = toStr(value, null);
+        if (StringUtils.isBlank(valueStr))
+        {
+            return defaultValue;
+        }
+        try
+        {
+            return Arrays.asList(valueStr.trim().split(","));
+        }
+        catch (Exception e)
+        {
+            return defaultValue;
+        }
+    }
+
 }

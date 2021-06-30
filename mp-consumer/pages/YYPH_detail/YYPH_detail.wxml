@@ -1,0 +1,37 @@
+<view class="page">
+  
+  <i-card title="{{type.name}}" extra="服务项目" thumb="{{type.id==0?'/img/zllr.png':(type.id==1?'/img/jzlr.png':'/img/jhlr.png')}}" i-class="icus">
+    <view slot="content">
+      <i-cell-group>
+        <i-cell i-class="ic" title="1.对非禁食、药物无特殊要求患者，协助买饭、进食水、餐后整理"></i-cell>
+        <i-cell i-class="ic" title="2.负责/协助晨晚间护理工作，包括床单位整理、洗漱、梳头、泡脚"></i-cell>
+        <i-cell i-class="ic" title="3.负责/协助患者如厕或者使用便器，及时清理分泌物更换污染布草"></i-cell>
+        <i-cell i-class="ic" title="4.负责/协助患者擦浴、更衣、洗头、剪指/趾甲、入睡"></i-cell>
+        <i-cell i-class="ic" title="5.负责/协助患者翻身、叩背、按摩受压部位"></i-cell>
+        <i-cell i-class="ic" title="6.负责患者生活陪伴，安抚患者情绪"></i-cell>
+        <i-cell i-class="ic" title="7.负责看护患者输液，陪同患者做检查，配合使用轮椅、平车"></i-cell>
+        <i-cell i-class="ic" title="8.对于允许下床活动的患者，协助进行下床活动"></i-cell>
+        <i-cell i-class="ic" title="9.负责患者个人用品的整理，为患者购置、取送物品，协助和家属联络"></i-cell>
+        <i-cell i-class="ic" title="10.依据服务等级服务内容会有所增减"></i-cell>
+        <i-cell i-class="ic" title="注：以上所有服务项目在医护人员指导下，根据患者的情况提供具体服务"></i-cell>
+      </i-cell-group>
+    </view>
+    <view slot="footer">
+      <text>陪护服务边界</text>
+      <i-cell-group>
+        <i-cell i-class="ic" title="1.禁止经鼻饲给病员灌注食物、水或药物"></i-cell>
+        <i-cell i-class="ic" title="2.禁止给病员做超声雾化吸入"></i-cell>
+        <i-cell i-class="ic" title="3.禁止给病员做造瘘术后护理"></i-cell>
+        <i-cell i-class="ic" title="4.禁止为病员更换液体、调整输液速度、为病员拔出输液管道"></i-cell>
+        <i-cell i-class="ic" title="5.禁止代替护士为病员发口服药，但可辅助服药，如准备水、吸管"></i-cell>
+        <i-cell i-class="ic" title="6.禁止为病员调节氧气开关和流量"></i-cell>
+        <i-cell i-class="ic" title="7.禁止擅自为病员使用热水袋、冰袋，如需使用需遵医嘱、在护士指导下使用，防止意外发生"></i-cell>
+        <i-cell i-class="ic" title="8.禁止为病员吸痰"></i-cell>
+        <i-cell i-class="ic" title="9.未经护士、家属允许，禁止带病员出医院大门或抱婴儿离开病房"></i-cell>
+        <i-cell i-class="ic" title="10.禁止擅自处理呼吸机、输液泵、心电监测等仪器。如有仪器出现异常或报警，应立即报告值班护士处理"></i-cell>
+        <i-cell i-class="ic" title="11.可以协助护士做护理操作前的环境准备"></i-cell>
+        <i-cell i-class="ic" title="12.医护人员交给无法胜任或超出工作范围甚至法律范围的工作，可以拒绝"></i-cell>
+      </i-cell-group>
+    </view>
+  </i-card>
+</view>

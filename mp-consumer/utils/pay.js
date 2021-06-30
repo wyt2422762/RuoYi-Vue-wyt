@@ -20,8 +20,8 @@ export function pay(orderNo, money, successhandler, failHandler) {
       //openid
       openid: wx.getStorageSync('openid'),
       //金额
-      //totalFee: money * 100, //微信支付的单位是分
-      totalFee: 1, //微信支付的单位是分
+      totalFee: money * 100, //微信支付的单位是分
+      //totalFee: 1, //微信支付的单位是分
       //订单号
       outTradeNo: orderNo,
       //body

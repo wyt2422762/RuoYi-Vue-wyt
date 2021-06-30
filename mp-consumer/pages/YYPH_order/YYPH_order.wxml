@@ -13,7 +13,8 @@
 		</view>
 		<view class="introduce">
 			<view class="Self">{{type.name}}</view>
-			<view class="details">查看详情</view>
+			<!-- <view class="details">查看详情</view> -->
+			<navigator class="details" url="../YYPH_detail/YYPH_detail?typeId={{type.id}}&typeName={{type.name}}">查看详情</navigator>
 		</view>
 	</view>
 	<!-- 请选择服务开始时间 -->
