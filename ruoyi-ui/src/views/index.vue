@@ -1,9 +1,23 @@
 <template>
   <div class="app-container home">
-    <baidu-map class="bm-view" center="太谷县" ak="GRWnhWB3sn1ySFxRwkhXyxLc" :zoom="13" :scroll-wheel-zoom="true">
-      <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
-      <bm-polyline :path="polylinePath"  stroke-color="blue" :stroke-opacity="0.5" :stroke-weight="2" :editing="false"></bm-polyline>
-    </baidu-map>
+    <!--
+        amap-manager： 地图管理对象
+        vid：地图容器节点的ID
+        zooms： 地图显示的缩放级别范围，在PC上，默认范围[3,18]，取值范围[3-18]；在移动设备上，默认范围[3-19]，取值范围[3-19]
+        center： 地图中心点坐标值
+        plugin：地图使用的插件
+        events： 事件
+      -->
+    <el-amap
+      vid="amap"
+      :center="map.center"
+      :zoom="map.zoom"
+      class="amap-demo"
+      :plugin="map.plugin"
+      style="height:640px;"
+    >
+      <el-amap-polyline :strokeWeight="map.polyline.strokeWeight" editable="false" :path="map.polyline.path" :events="map.polyline.events"></el-amap-polyline>
+    </el-amap>
 
     <div class="nurseDiv" v-show="!showRight" @click="showRight = !showRight">
       护工轨迹查询
@@ -13,7 +27,6 @@
     <el-drawer
       title="护工轨迹查询"
       :visible.sync="showRight">
-
       <el-form class="serachForm" :model="queryParams" ref="queryForm" :inline="true" v-show="true" label-width="68px">
         <el-form-item label="护工姓名" prop="status">
           <el-select
@@ -32,7 +45,7 @@
               :key="item.nurseId"
               :label="item.name"
               :value="item"
-              >
+            >
               <span style="float: left">{{ item.name }}</span>
               <span style="float: right; color: #8492a6; font-size: 13px">{{ item.phonenumber }}</span>
             </el-option>
@@ -41,12 +54,15 @@
         <el-form-item label="日期" prop="status">
           <el-date-picker
             v-model="queryParams.time"
+            value-format="yyyy-MM-dd"
             type="date"
             placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="btnLoading" :disabled="nurse?false:true" type="primary" icon="el-icon-search" size="mini" @click="listPosition">查询轨迹</el-button>
+          <el-button :loading="btnLoading" :disabled="!nurse" type="primary" icon="el-icon-search" size="mini"
+                     @click="listPosition">查询轨迹
+          </el-button>
         </el-form-item>
       </el-form>
 
@@ -71,25 +87,17 @@
           </template>
         </el-table-column>
       </el-table>
-
     </el-drawer>
 
   </div>
 </template>
 
 <script>
-import BaiduMap from 'vue-baidu-map/components/map/Map.vue'
-import BmNavigation from 'vue-baidu-map/components/controls/Navigation'
-import BmControl from 'vue-baidu-map/components/controls/Control'
-import BmPolyline from 'vue-baidu-map/components/overlays/Polyline'
-
 import {listAllNurse, listPosition, clearPosition} from "@/api/bus/nurse";
 
 export default {
   name: "index",
-  components: {
-    BaiduMap, BmNavigation, BmControl, BmPolyline
-  },
+  components: {},
   data() {
     return {
       // 遮罩层
@@ -106,8 +114,36 @@ export default {
         time: null
       },
       //地图相关
-      //轨迹点
-      polylinePath: []
+      map:{
+        zoom: 13,
+        center: [112.551672, 37.420863],
+        polyline: {
+          strokeWeight: 1,
+          path: []
+        },
+        lng: 0,
+        lat: 0,
+        plugin: [
+          {
+            pName: 'Scale',
+            events: {
+              init(instance) {}
+            }
+          },
+          {
+            pName: 'OverView',
+            events: {
+              init(instance) {}
+            }
+          },
+          {
+            pName: 'ToolBar',
+            events: {
+              init(instance) {}
+            }
+          },
+        ]
+      },
     };
   },
   created() {
@@ -128,79 +164,34 @@ export default {
         this.nurseList = [];
       }
     },
-    selChange(e){
-      if(e){
+    selChange(e) {
+      if (e) {
         this.nurse = e
       } else {
         this.nurse = null;
       }
     },
-    toggle (name) {
-      this[name].editing = !this[name].editing
-    },
-    syncPolyline (e) {
-      if (!this.polyline.editing) {
-        return
-      }
-      const {paths} = this.polyline
-      if (!paths.length) {
-        return
-      }
-      const path = paths[paths.length - 1]
-      if (!path.length) {
-        return
-      }
-      if (path.length === 1) {
-        path.push(e.point)
-      }
-      this.$set(path, path.length - 1, e.point)
-    },
-    newPolyline (e) {
-      if (!this.polyline.editing) {
-        return
-      }
-      const {paths} = this.polyline
-      if(!paths.length) {
-        paths.push([])
-      }
-      const path = paths[paths.length - 1]
-      path.pop()
-      if (path.length) {
-        paths.push([])
-      }
-    },
-    paintPolyline (e) {
-      if (!this.polyline.editing) {
-        return
-      }
-      const {paths} = this.polyline
-      !paths.length && paths.push([])
-      paths[paths.length - 1].push(e.point)
-    },
     //查询轨迹
-    listPosition(){
+    listPosition() {
       this.queryParams.nurseId = this.nurse.nurseId
       this.btnLoading = true
+      debugger
       listPosition(this.queryParams).then(res => {
-        this.polylinePath = res.data;
+        this.map.polyline.path = res.data;
         this.btnLoading = false;
       }).catch(err => {
-        this.polylinePath = [];
+        this.map.polyline.path = [];
         this.btnLoading = false;
       })
     },
     //清空轨迹
-    clearPosition(e){
+    clearPosition(e) {
       clearPosition(e.nurseId).then(res => {
         this.msgSuccess("清空成功");
       }).catch(err => {
         this.msgError("清空失败")
       })
     },
-    //mouseMove
-    mouseMove(e){
-      console.log(e.Ag)
-    }
   },
 };
 </script>

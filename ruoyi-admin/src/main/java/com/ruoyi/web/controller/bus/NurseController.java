@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -195,7 +196,13 @@ public class NurseController extends BaseController
     @GetMapping("/listPosition")
     public AjaxResult listPostion(NursePosition nursePosition){
         List<NursePosition> nursePositions = nursePostionService.selectNursePositionList(nursePosition);
-        return AjaxResult.success("查询成功", nursePositions);
+        List<String[]> res = new ArrayList<>();
+        if(nursePositions != null && !nursePositions.isEmpty()){
+            for (NursePosition position : nursePositions) {
+                res.add(new String[]{position.getLng(), position.getLat()});
+            }
+        }
+        return AjaxResult.success("查询成功", res);
     }
 
     /**

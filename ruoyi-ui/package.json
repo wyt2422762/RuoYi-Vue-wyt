@@ -58,7 +58,7 @@
     "vue-router": "3.4.9",
     "vuedraggable": "2.24.3",
     "vuex": "3.6.0",
-    "vue-baidu-map": "0.21.22"
+    "vue-amap": "0.5.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",
