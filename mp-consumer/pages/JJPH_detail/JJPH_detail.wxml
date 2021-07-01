@@ -1,6 +1,6 @@
 <view class="page">
   
-  <i-card title="{{type.name}}" extra="服务项目" thumb="{{type.id==0?'/img/ZLX.png':(type.id==1?'/img/QHX.png':(type.id==2?'/img/ZHX.png':'/img/tzfw.png'))}}" i-class="icus">
+  <i-card title="{{type.name}}" extra="服务项目" thumb="{{type.id==0?'/img/zlx.png':(type.id==1?'/img/qhx.png':(type.id==2?'/img/zhx.png':'/img/tzfw.png'))}}" i-class="icus">
     <view slot="content">
       <i-cell-group>
         <!-- 自理型 -->

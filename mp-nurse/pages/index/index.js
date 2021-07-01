@@ -61,7 +61,7 @@ Page({
         })
         //获取当前的地理位置、速度
         wx.getLocation({
-            type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
+            type: 'gcj02', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
             success: function (res) {
                 //赋值经纬度
                 that.setData({
