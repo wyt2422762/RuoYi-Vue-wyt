@@ -13,10 +13,16 @@
       :center="map.center"
       :zoom="map.zoom"
       class="amap-demo"
+
+      view-mode="3D"
+      rotate-enable="true"
+      pitch-enable="true"
+
       :plugin="map.plugin"
       style="height:640px;"
     >
-      <el-amap-polyline :strokeWeight="map.polyline.strokeWeight" editable="false" :path="map.polyline.path" :events="map.polyline.events"></el-amap-polyline>
+      <el-amap-marker v-for="(mk, index) in map.marker.markers" :position="mk.position" :label="mk.label" :title="mk.title" :visible="map.marker.visible" :draggable="map.marker.draggable" :vid="index"></el-amap-marker>
+      <el-amap-polyline v-for="(value, key) in map.polyline.pathMap" :key="key" :stroke-color="map.polyline.strokeColor" :strokeWeight="map.polyline.strokeWeight" editable="false" :path="value"></el-amap-polyline>
     </el-amap>
 
     <div class="nurseDiv" v-show="!showRight" @click="showRight = !showRight">
@@ -116,10 +122,17 @@ export default {
       //地图相关
       map:{
         zoom: 13,
+        zooms:[3, 20],
         center: [112.551672, 37.420863],
         polyline: {
           strokeWeight: 1,
-          path: []
+          strokeColor: "red",
+          pathMap: {},
+        },
+        marker: {
+          visible: true,
+          draggable: false,
+          markers: [],
         },
         lng: 0,
         lat: 0,
@@ -147,6 +160,7 @@ export default {
     };
   },
   created() {
+    this.actPosition()
   },
   methods: {
     //搜索护工
@@ -169,18 +183,48 @@ export default {
         this.nurse = e
       } else {
         this.nurse = null;
+        this.queryParams.nurseId = null;
+        this.actPosition();
       }
     },
     //查询轨迹
     listPosition() {
-      this.queryParams.nurseId = this.nurse.nurseId
       this.btnLoading = true
-      debugger
+      this.actPosition()
+    },
+    //actPosition
+    actPosition() {
+      if(this.nurse) {
+        this.queryParams.nurseId = this.nurse.nurseId
+      } else {
+        this.queryParams.nurseId = null;
+      }
+      this.map.polyline.pathMap = {};
+      this.map.marker.markers = [];
       listPosition(this.queryParams).then(res => {
-        this.map.polyline.path = res.data;
         this.btnLoading = false;
+        let rr = {};
+        for(let i = 0; i< res.data.length; i++){
+          let d = res.data[i]
+          //处理线
+          if(!rr[d['nurseId']]){
+            rr[d['nurseId']] = [];
+          }
+          rr[d['nurseId']].push([d.lng, d.lat]);
+
+          //处理点
+          let mark = {};
+          mark.position = [d.lng, d.lat];
+          mark.offset = [-26, -13];
+          mark.label = {
+            content: "<span>" + d.nurse.name + "(" + d.nurse.phonenumber + ")" + "</span>",
+            offset: [-50, -30]
+          };
+          mark.title = d.nurse.name + "(" + d.nurse.phonenumber + ")";
+          this.map.marker.markers.push(mark);
+        }
+        this.map.polyline.pathMap = rr;
       }).catch(err => {
-        this.map.polyline.path = [];
         this.btnLoading = false;
       })
     },
@@ -188,6 +232,8 @@ export default {
     clearPosition(e) {
       clearPosition(e.nurseId).then(res => {
         this.msgSuccess("清空成功");
+        //重新加载页面
+        this.created();
       }).catch(err => {
         this.msgError("清空失败")
       })
@@ -227,6 +273,5 @@ export default {
   z-index: 40000;
   text-align: center;
 }
-
 </style>
 

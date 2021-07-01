@@ -100,5 +100,7 @@ App({
   globalData: {
     //是否登录
     isLogin: false,
+    //控制上报频率
+    uploadTimes: 0
   }
 })

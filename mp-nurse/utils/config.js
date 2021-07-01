@@ -27,7 +27,9 @@ const config = {
     //notifyUrl
     //notifyUrl: 'http://localhost:8082/wx/' + appId + '/pay/notify/order'
     notifyUrl: 'https://fdxmgl.fd.com.cn:8443/api/wx/' + appId + '/pay/notify/order'
-  }
+  },
+  //位置上传间隔
+  posUploadFreq: 60
 }
 
 module.exports = config

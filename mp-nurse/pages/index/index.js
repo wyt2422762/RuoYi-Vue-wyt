@@ -4,6 +4,10 @@ import {
     service
 } from '../../utils/request.js'
 
+const app = getApp()
+
+let config = require('../../utils/config.js')
+
 Page({
     /**
      * 页面的初始数据
@@ -80,9 +84,14 @@ Page({
         })
         //位置变化
         wx.onLocationChange(res => {
+            console.log(app.globalData.uploadTimes)
+            app.globalData.uploadTimes += 1
             if (that.data.longitude !== res.longitude || that.data.latitude !== res.latitude) {
-                //上报位置信息
-                that.uploadLocation(res.longitude, res.latitude)
+                if(app.globalData.uploadTimes >= config.posUploadFreq){
+                    that.uploadLocation(res.longitude, res.latitude)
+                    app.globalData.uploadTimes = 0
+                }
+
                 that.setData({
                     longitude: res.longitude, // 经度
                     latitude: res.latitude, //纬度
