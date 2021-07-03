@@ -53,7 +53,7 @@
 		</view>
 	</view>
 	<!-- 额外服务 -->
-	<view class="weui-cell">
+	<view class="weui-cell" wx:if="{{extraList && extraList.length > 0}}">
 		<i-panel title="额外服务" style="width: 100%;">
 			<i-checkbox-group current="{{extras}}" bindchange="extraChange">
 				<i-checkbox wx:for="{{extraList}}" wx:key="id" value="{{item.name}}" position="right">
