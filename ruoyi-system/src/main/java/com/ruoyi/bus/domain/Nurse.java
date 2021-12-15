@@ -28,7 +28,7 @@ public class Nurse extends BaseEntity {
     /**
      * 部门id
      */
-    @Excel(name = "部门id", type = Excel.Type.IMPORT)
+    //@Excel(name = "部门id", type = Excel.Type.IMPORT)
     private Long deptId;
 
     /**
@@ -60,13 +60,13 @@ public class Nurse extends BaseEntity {
     /**
      * 身份证号
      */
-    @Excel(name = "身份证号")
+    //@Excel(name = "身份证号")
     private String idNo;
 
     /**
      * 服务星级
      */
-    @Excel(name = "服务星级", dictType = "bus_workLevel")
+    @Excel(name = "服务星级", dictType = "bus_workLevel", type = Excel.Type.EXPORT)
     private String workLevel;
 
     /**
@@ -78,19 +78,19 @@ public class Nurse extends BaseEntity {
     /**
      * 标签
      */
-    @Excel(name = "标签", dictType = "bus_nurse_label", prompt = "如果多个用,分开")
+    @Excel(name = "标签", dictType = "bus_nurse_label", prompt = "如果多个用,分开", type = Excel.Type.EXPORT)
     private List<String> labels;
 
     /**
      * 能力
      */
-    @Excel(name = "能力", dictType = "bus_nurse_ability", prompt = "如果多个用,分开")
+    @Excel(name = "能力", dictType = "bus_nurse_ability", prompt = "如果多个用,分开", type = Excel.Type.EXPORT)
     private List<String> abilities;
 
     /**
      * 证书
      */
-    @Excel(name = "证书", dictType = "bus_nurse_certificate", prompt = "如果多个用,分开")
+    @Excel(name = "证书", dictType = "bus_nurse_certificate", prompt = "如果多个用,分开", type = Excel.Type.EXPORT)
     private List<String> certificates;
 
     /**

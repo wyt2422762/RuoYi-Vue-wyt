@@ -28,10 +28,9 @@
     "pages/TSXQ/TSXQ",
     "pages/TKXQ/TKXQ",
     "pages/My/My",
-
     "pages/Success/Success",
-    
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/YHXY/YHXY"
   ],
   "window": {
     "backgroundTextStyle": "light",

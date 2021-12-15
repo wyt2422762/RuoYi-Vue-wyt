@@ -100,7 +100,7 @@ public class Consumer extends BaseEntity {
     /**
      * 身份证号
      */
-    @Excel(name = "身份证号")
+    //@Excel(name = "身份证号")
     private String idNo;
 
     /**

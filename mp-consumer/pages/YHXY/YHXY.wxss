@@ -1,0 +1,8 @@
+page {
+  background-color: #f4f9fd;
+}
+
+.content {
+  padding: 20rpx;
+  text-indent: 2em;
+}
